@@ -23,6 +23,14 @@ const dx = 20;
 const dy = 20;
 
 /**
+ * Dibuja la comida
+ */
+function drawFood(food) {
+  fill(200, 20, 10);
+  ellipse(food.x * dx + 10, food.y * dy + 10, dx, dy);
+}
+
+/**
  * Esto se llama antes de iniciar el juego
  */
 function setup() {
@@ -36,7 +44,10 @@ function setup() {
       { x: 1, y: 1 },
     ],
     dir: { x: 1, y: 0 },
-    food: { x: 5, y: 5 },
+    food: {
+      x: Math.floor(Math.random() * (20 - 0) + 0),
+      y: Math.floor(Math.random() * (20 - 0) + 0),
+    },
   };
 }
 
@@ -44,6 +55,7 @@ function setup() {
 function drawGame(Mundo) {
   background(10, 200, 50);
   fill(240, 240, 240);
+  drawFood(Mundo.food);
 
   forEach(Mundo.snake, (s) => {
     rect(s.x * dx, s.y * dy, dx, dy);
@@ -62,7 +74,20 @@ function onTic(Mundo) {
     text("Has perdido", 20, 20);
     return update(Mundo, {});
   } else {
-    return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
+    if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
+      Mundo.snake.push({ x: 5, y: 5 });
+      return update(Mundo, {
+        snake: moveSnake(Mundo.snake, Mundo.dir),
+        food: {
+          x: Math.floor(Math.random() * (20 - 0) + 0),
+          y: Math.floor(Math.random() * (20 - 0) + 0),
+        }
+      });
+      
+    } else {
+      return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
+    }
+    //return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
   }
 }
 
