@@ -34,7 +34,7 @@ function drawFood(food) {
  * Esto se llama antes de iniciar el juego
  */
 function setup() {
-  frameRate(5);
+  frameRate(7);
   createCanvas(400, 400);
   background(15, 200, 50);
   Mundo = {
@@ -92,7 +92,7 @@ function onTic(Mundo) {
             y: Math.floor(Math.random() * (20 - 0) + 0),
           },
         });
-      
+
     } else {
       return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
     }
@@ -127,14 +127,14 @@ function keyDirection(dir, keyCode) {
       else return { y: 0, x: 1 };
       break;
     default:
-      
+
       return dir;
   }
 }
 
 function onKeyEvent(Mundo, keyCode) {
     return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode), moved: 0 });
-  
+
 }
 
 /**
