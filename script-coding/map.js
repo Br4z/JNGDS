@@ -64,7 +64,7 @@ function drawGame(Mundo) {
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
-  console.log(Mundo.snake[0].x); //Este se le puede borrar
+  console.log(xInSnake(Mundo));
   if (
     Mundo.snake[0].x > 19 ||
     Mundo.snake[0].y > 19 ||
@@ -75,14 +75,23 @@ function onTic(Mundo) {
     return update(Mundo, {});
   } else {
     if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
-      Mundo.snake.push({ x: 5, y: 5 });
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        food: {
-          x: Math.floor(Math.random() * (20 - 0) + 0),
-          y: Math.floor(Math.random() * (20 - 0) + 0),
-        }
-      });
+      if (Mundo.dir == {y: -1, x:0}) {
+        Mundo.snake.push({ x:xInSnake() , y: yInSnake() + 1 });
+      } else if (Mundo.dir == { y: 1, x: 0 }) {
+        Mundo.snake.push({x:xInSnake(), y: yInSnake() + 1});
+      } else if (Mundo.dir == { y: 0, x: -1 }) {
+        Mundo.snake.push({x:xInSnake() + 1, y: yInSnake()});
+      } else if (Mundo.dir == { y: 0, x: 1}) {
+        Mundo.snake.push({x:xInSnake() - 1, y: yInSnake()});
+      }
+        Mundo.snake.push({ x: 5, y: 5 });
+        return update(Mundo, {
+          snake: moveSnake(Mundo.snake, Mundo.dir),
+          food: {
+            x: Math.floor(Math.random() * (20 - 0) + 0),
+            y: Math.floor(Math.random() * (20 - 0) + 0),
+          },
+        });
       
     } else {
       return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
@@ -126,5 +135,19 @@ function keyDirection(dir, keyCode) {
 function onKeyEvent(Mundo, keyCode) {
     return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode), moved: 0 });
   
+}
+
+/**
+ * Nos retorna la posición x del último JSON de la lista Snake
+ */
+function xInSnake(Mundo){
+  return Mundo.snake[Mundo.snake.length - 1].x
+}
+
+/**
+ * Nos retorna la posición y del último JSON de la lista Snake
+ */
+function yInSnake(Mundo) {
+  return Mundo.snake[Mundo.snake.length - 1].y;
 }
 
