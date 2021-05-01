@@ -53,7 +53,7 @@ function setup() {
 
 // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
 function drawGame(Mundo) {
-  background(10, 200, 50);
+  background('#38A649');
   fill(240, 240, 240);
   drawFood(Mundo.food);
 
