@@ -66,10 +66,10 @@ function drawGame(Mundo) {
 function onTic(Mundo) {
   console.log(xInSnake(Mundo));
   if (
-    Mundo.snake[0].x > 19 ||
-    Mundo.snake[0].y > 19 ||
-    Mundo.snake[0].x < 0 ||
-    Mundo.snake[0].y < 0
+    Mundo.snake[0].x > 19-1 ||
+    Mundo.snake[0].y > 19-1 ||
+    Mundo.snake[0].x < 0+1 ||
+    Mundo.snake[0].y < 0+1
   ) {
     text("Has perdido", 20, 20);
     return update(Mundo, {});
