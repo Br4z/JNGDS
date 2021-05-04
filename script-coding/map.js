@@ -8,6 +8,21 @@ function update(data, attribute) {
 //////////////////////// Mundo inicial
 let Mundo = {};
 ////////////////////////
+
+// Constantes para las escalas
+const columnas = 20;
+const filas = 20;
+const lado = 20;
+const ancho_canvas = columnas * lado;
+const alto_canvas = filas * lado;
+let canvas;
+
+// Variables de Control
+let arriba;
+let abajo;
+let derecha;
+let izquierda;
+
 /**
  * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola
  */
@@ -19,15 +34,13 @@ function moveSnake(snake, dir) {
   );
 }
 
-const dx = 20;
-const dy = 20;
 
 /**
  * Dibuja la comida
  */
 function drawFood(food) {
-  fill(200, 20, 10);
-  ellipse(food.x * dx + 10, food.y * dy + 10, dx, dy);
+  fill("crimson");
+  rect(food.x * lado , food.y * lado, lado , lado);
 }
 
 /**
@@ -35,20 +48,39 @@ function drawFood(food) {
  */
 function setup() {
   frameRate(7);
-  createCanvas(400, 400);
+  createCanvas(ancho_canvas, alto_canvas);
+  // windowRezired();
   background(15, 200, 50);
+  abajo = createVector(0,1)
+  arriba = createVector(0, -1);
+  izquierda = createVector(-1, 0);
+  derecha = createVector(1, 0);
   Mundo = {
-    snake: [
-      { x: 3, y: 1 },
-      { x: 2, y: 1 },
-      { x: 1, y: 1 },
-    ],
-    dir: { x: 1, y: 0 },
-    food: {
-      x: Math.floor(Math.random() * (20 - 0) + 0),
-      y: Math.floor(Math.random() * (20 - 0) + 0),
+		snake: [
+			{ x: columnas / 2, y: filas / 2 },
+			{ x: (columnas / 2) - 1, y: (filas / 2)  },
+			{ x: (columnas / 2) - 2, y: (filas / 2)  },
+		],
+		dir:  derecha ,
+		food: {
+			x: (int(random(columnas))),
+			y: (int(random(filas))),
     },
-  };
+	};
+}
+
+function posicionarComida(){
+  comida = createVector(int(random(columnas)),int(random(filas)))
+}
+
+
+function windowRezired(){
+  let escala = windowWidth / width;
+  if (escala >= 1){
+    return
+  }
+  canvas.style("width",width*escala+"px")
+  canvas.style("height",height*escala+"px")
 }
 
 // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
@@ -58,7 +90,7 @@ function drawGame(Mundo) {
   drawFood(Mundo.food);
 
   forEach(Mundo.snake, (s) => {
-    rect(s.x * dx, s.y * dy, dx, dy);
+    rect(s.x * lado, s.y * lado, lado, lado);
   });
 }
 
@@ -66,12 +98,14 @@ function drawGame(Mundo) {
 function onTic(Mundo) {
   console.log(xInSnake(Mundo));
   if (
-    Mundo.snake[0].x > 19-1 ||
-    Mundo.snake[0].y > 19-1 ||
-    Mundo.snake[0].x < 0+1 ||
-    Mundo.snake[0].y < 0+1
+    Mundo.snake[0].x > columnas -1 ||
+    Mundo.snake[0].y > filas -1 ||
+    Mundo.snake[0].x < 0 ||
+    Mundo.snake[0].y < 0
   ) {
-    text("Has perdido", 20, 20);
+    textAlign(CENTER, CENTER)
+    textSize(50)
+    text(" Has perdido", width/2, height/2);
     return update(Mundo, {});
   } else {
     if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
@@ -108,28 +142,32 @@ function onMouseEvent(Mundo, event) {
 /**
  * Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo stado del mundo
  */
-function keyDirection(dir, keyCode) {
+function keyPressed(){
   switch (keyCode) {
-    case UP_ARROW:
-      if (dir.y == 1) return dir;
-      else return { y: -1, x: 0 };
-      break;
-    case DOWN_ARROW:
-      if (dir.y == -1) return dir;
-      else return { y: 1, x: 0 };
-      break;
-    case LEFT_ARROW:
-      if (dir.x == 1) return dir;
-      else return { y: 0, x: -1 };
-      break;
-    case RIGHT_ARROW:
-      if (dir.x == -1) return dir;
-      else return { y: 0, x: 1 };
-      break;
-    default:
-
-      return dir;
-  }
+		case UP_ARROW:
+      if (Mundo.dir == abajo) {
+        break }
+			if (Mundo.dir = arriba);
+			break;
+		case RIGHT_ARROW:
+      if (Mundo.dir == izquierda) {
+				break;
+			}
+			if (Mundo.dir = derecha);
+			brek;
+		case DOWN_ARROW:
+      if (Mundo.dir == arriba) {
+				break;
+			}
+			if (Mundo.dir = abajo);
+			brek;
+		case LEFT_ARROW:
+      if (Mundo.dir == derecha) {
+				break;
+			}
+			if (Mundo.dir = izquierda);
+			break;
+	}
 }
 
 function onKeyEvent(Mundo, keyCode) {
