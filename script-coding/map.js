@@ -1,3 +1,4 @@
+//Cambio xd
 let {  append,cons,first,isEmpty,isList,length,rest,map,forEach,} = functionalLight;
 
 // Actualiza los atributos del objeto y retorna una copia profunda
