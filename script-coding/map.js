@@ -56,17 +56,21 @@ function setup() {
   izquierda = createVector(-1, 0);
   derecha = createVector(1, 0);
   Mundo = {
-		snake: [
-			{ x: columnas / 2, y: filas / 2 },
-			{ x: (columnas / 2) - 1, y: (filas / 2)  },
-			{ x: (columnas / 2) - 2, y: (filas / 2)  },
-		],
-		dir:  derecha ,
-		food: {
-			x: (int(random(columnas))),
-			y: (int(random(filas))),
+    snake: [
+      { x: columnas / 2, y: filas / 2 },
+      { x: columnas / 2 - 1, y: filas / 2 },
+      { x: columnas / 2 - 2, y: filas / 2 },
+    ],
+    dir: derecha,
+    food: {
+      x: int(random(columnas)),
+      y: int(random(filas)),
     },
-	};
+    cuadradoFinal: {
+      x: 0,
+      y: 0,
+    },
+  };
 }
 
 function posicionarComida(){
@@ -96,7 +100,6 @@ function drawGame(Mundo) {
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
-  console.log(xInSnake(Mundo));
   if (
     Mundo.snake[0].x > columnas -1 ||
     Mundo.snake[0].y > filas -1 ||
@@ -106,18 +109,10 @@ function onTic(Mundo) {
     textAlign(CENTER, CENTER)
     textSize(50)
     text(" Has perdido", width/2, height/2);
+    rect(Mundo.cuadradoFinal.x * lado, Mundo.cuadradoFinal.y * lado, lado, lado);
     return update(Mundo, {});
   } else {
     if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
-      if (Mundo.dir == {y: -1, x:0}) {
-        Mundo.snake.push({ x:xInSnake() , y: yInSnake() + 1 });
-      } else if (Mundo.dir == { y: 1, x: 0 }) {
-        Mundo.snake.push({x:xInSnake(), y: yInSnake() + 1});
-      } else if (Mundo.dir == { y: 0, x: -1 }) {
-        Mundo.snake.push({x:xInSnake() + 1, y: yInSnake()});
-      } else if (Mundo.dir == { y: 0, x: 1}) {
-        Mundo.snake.push({x:xInSnake() - 1, y: yInSnake()});
-      }
         Mundo.snake.push({ x: 5, y: 5 });
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -128,7 +123,7 @@ function onTic(Mundo) {
         });
 
     } else {
-      return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
+      return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir), cuadradoFinal: {x: Mundo.snake[Mundo.snake.length - 1].x, y: Mundo.snake[Mundo.snake.length - 1].y}});
     }
     //return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
   }
@@ -173,19 +168,5 @@ function keyPressed(){
 function onKeyEvent(Mundo, keyCode) {
     return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode), moved: 0 });
 
-}
-
-/**
- * Nos retorna la posición x del último JSON de la lista Snake
- */
-function xInSnake(Mundo){
-  return Mundo.snake[Mundo.snake.length - 1].x
-}
-
-/**
- * Nos retorna la posición y del último JSON de la lista Snake
- */
-function yInSnake(Mundo) {
-  return Mundo.snake[Mundo.snake.length - 1].y;
 }
 
