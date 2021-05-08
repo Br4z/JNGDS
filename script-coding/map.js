@@ -80,6 +80,7 @@ function setup() {
       x: 0,
       y: 0,
     },
+    score: 0,
   };
 }
 
@@ -119,6 +120,7 @@ function onTic(Mundo) {
     textAlign(CENTER, CENTER);
     textSize(50);
     text(" Has perdido", width / 2, height / 2);
+    text(Mundo.score, width / 2, height / 1.5);
     rect(
       Mundo.cuadradoFinal.x * lado,
       Mundo.cuadradoFinal.y * lado,
@@ -135,6 +137,7 @@ function onTic(Mundo) {
           x: Math.floor(Math.random() * (20 - 0) + 0),
           y: Math.floor(Math.random() * (20 - 0) + 0),
         },
+        score: Mundo.score + 1,
       });
     } else {
       return update(Mundo, {
@@ -199,11 +202,13 @@ choqueSnake([{x:3, y:3},{x:3, y:4}], {x:3, y:2}) -> false
 choqueSnake([{x:3, y:3},{x:3, y:4}], {x:3, y:3}) -> true
 */
 
-
 function choqueSnake(snake, cabezaSnake) {
   if (isEmpty(snake) == true) {
     return false;
-  } else if ((first(snake).x == cabezaSnake.x) && (first(snake).y == cabezaSnake.y)) {
+  } else if (
+    first(snake).x == cabezaSnake.x &&
+    first(snake).y == cabezaSnake.y
+  ) {
     return true;
   } else {
     return choqueSnake(rest(snake), cabezaSnake);
