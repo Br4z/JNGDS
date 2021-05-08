@@ -21,8 +21,8 @@ let Mundo = {};
 ////////////////////////
 
 // Constantes para las escalas
-const columnas = 20;
-const filas = 20;
+const columnas = 28;
+const filas = 26;
 const lado = 20;
 const ancho_canvas = columnas * lado;
 const alto_canvas = filas * lado;
@@ -33,6 +33,9 @@ let arriba;
 let abajo;
 let derecha;
 let izquierda;
+
+//Imagen de Canvas
+let fondo ;
 
 /**
  * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola
@@ -58,6 +61,7 @@ function drawFood(food) {
  */
 function setup() {
   frameRate(7);
+  fondo = loadImage("/Backgrounds/blue.png")
   createCanvas(ancho_canvas, alto_canvas);
   // windowRezired();
   background(15, 200, 50);
@@ -99,7 +103,7 @@ function windowRezired() {
 
 // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
 function drawGame(Mundo) {
-  background("#38A649");
+  background(fondo);
   fill(240, 240, 240);
   drawFood(Mundo.food);
 
