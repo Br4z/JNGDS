@@ -70,6 +70,7 @@ function setup() {
       { x: columnas / 2, y: filas / 2 },
       { x: columnas / 2 - 1, y: filas / 2 },
       { x: columnas / 2 - 2, y: filas / 2 },
+      2,
     ],
     dir: derecha,
     food: {
@@ -131,12 +132,10 @@ function onTic(Mundo) {
   } else {
     if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
       Mundo.snake.push({ x: 5, y: 5 });
+
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
-        food: {
-          x: Math.floor(Math.random() * (20 - 0) + 0),
-          y: Math.floor(Math.random() * (20 - 0) + 0),
-        },
+        food: numeroRandomComida(Mundo.snake),
         score: Mundo.score + 1,
       });
     } else {
@@ -212,5 +211,48 @@ function choqueSnake(snake, cabezaSnake) {
     return true;
   } else {
     return choqueSnake(rest(snake), cabezaSnake);
+  }
+}
+
+/*
+Propósito: Retornar un conjunto de coordenadas agrupadas en el JSON 'comida´, y si las coordenadas coinciden con una de las partes del snake retorna un 0
+Contrato: listaDeItems, num, num -> JSON || num
+Prototipo: coordenadasComida(snake, coordenadaX, coordenadaY)
+Ejemplos:
+coordenadasComida([{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}], 0, 0) -> coordenadasComida([{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}], 6, 7) -> {x: 6, x: 7}
+coordenadasComida([{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}], 0, 0) -> coordenadasComida([{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}], 5, 1) -> 0
+*/
+
+function coordenadasComida(snake, coordenadaX, coordenadaY) {
+  if (coordenadaX == 0 && coordenadaY == 0) {
+    coordenadaX = Math.floor(Math.random() * (20 - 0) + 0);
+    coordenadaY = Math.floor(Math.random() * (20 - 0) + 0);
+  }
+  let comida = { x: coordenadaX, y: coordenadaY };
+
+  if (isEmpty(snake) == true) {
+    return comida;
+  } else if (first(snake).x == coordenadaX && first(snake).y == coordenadaY) {
+    return 0;
+  } else {
+    return coordenadasComida(rest(snake), coordenadaX, coordenadaY);
+  }
+}
+
+/*
+Propósito: Retornar un JSON aleatorio
+Contrato: listaDeItems -> JSON
+Prototipo: numeroRandomComida(snake)
+Ejemplos:
+coordenadasComida({[{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}]}) -> {x:7, y:5}
+coordenadasComida({[{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}]}) -> {x:17, y:2}
+*/
+
+function numeroRandomComida(snake) {
+  const num = coordenadasComida(snake, 0, 0);
+  if (num == 0) {
+    return numeroRandomComida(snake);
+  } else {
+    return num;
   }
 }
