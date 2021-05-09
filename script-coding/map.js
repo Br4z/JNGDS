@@ -64,7 +64,7 @@ function setup() {
   fondo = loadImage("/Backgrounds/blue.png")
   createCanvas(ancho_canvas, alto_canvas);
   // windowRezired();
-  background(15, 200, 50);
+  background(fondo);
   abajo = createVector(0, 1);
   arriba = createVector(0, -1);
   izquierda = createVector(-1, 0);
