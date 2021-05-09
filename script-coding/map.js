@@ -49,7 +49,7 @@ function moveSnake(snake, dir) {
 }
 
 /**
- * Dibuja la comida
+ * Dibuja la comida#671796
  */
 function drawFood(food) {
   fill("crimson");
