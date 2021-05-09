@@ -70,7 +70,6 @@ function setup() {
       { x: columnas / 2, y: filas / 2 },
       { x: columnas / 2 - 1, y: filas / 2 },
       { x: columnas / 2 - 2, y: filas / 2 },
-      2,
     ],
     dir: derecha,
     food: {
