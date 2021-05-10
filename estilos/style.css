@@ -1,3 +1,7 @@
+
+
+
+
 body {
 	background-image: url(/Backgrounds/7.jpg);
 	display: flex;
@@ -58,4 +62,13 @@ body {
 	right:0;
 	opacity: 1;
 	z-index:-1
+}
+
+.contenedorPrincipal{
+	display: flex;
+	flex-direction: row;
+}
+
+.txt-Neon{
+	font-family: monospace;
 }
