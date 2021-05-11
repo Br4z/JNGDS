@@ -81,9 +81,24 @@ function setup() {
       y: 0,
     },
     score: 0,
+    ñero: {
+      x: columnas / 1.15,
+      y: filas/ 2
+    }
   };
 }
 
+function drawÑero(ñero){
+  fill("blue");
+  rect(ñero.x * lado, ñero.y * lado, lado, lado);
+}
+
+function drawSnake(snake){
+  fill("white"),
+  forEach(snake, (s) => {
+    rect(s.x * lado, s.y * lado, lado, lado);
+  });
+}
 function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
 }
@@ -102,10 +117,9 @@ function drawGame(Mundo) {
   background("#38A649");
   fill(240, 240, 240);
   drawFood(Mundo.food);
-
-  forEach(Mundo.snake, (s) => {
-    rect(s.x * lado, s.y * lado, lado, lado);
-  });
+  fill("white");
+  drawÑero(Mundo.ñero)
+  drawSnake(Mundo.snake)
 }
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
