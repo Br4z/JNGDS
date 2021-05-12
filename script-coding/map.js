@@ -83,7 +83,7 @@ function setup() {
     score: 0,
     ñero: {
       x: columnas / 1.15,
-      y: filas/ 2
+      y: 10,
     }
   };
 }
@@ -112,6 +112,17 @@ function windowRezired() {
   canvas.style("height", height * escala + "px");
 }
 
+function ñeroMove(ñero) {
+  if (ñero.y >= 10) {
+    return update(Mundo, {ñero:{ x: columnas / 1.15, y: ñero.y + 1 }});
+  } else {
+    return update(Mundo, { ñero: { x: columnas / 1.15, y: ñero.y - 1 } });
+  }
+}
+
+function ñeroUpdate(){
+  
+}
 // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
 function drawGame(Mundo) {
   background("#38A649");
@@ -141,10 +152,12 @@ function onTic(Mundo) {
       lado,
       lado
     );
+    
     return update(Mundo, {});
   } else {
     if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
       Mundo.snake.push({ x: 5, y: 5 });
+      ñeroMove(Mundo.ñero);
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         food: {
@@ -154,13 +167,14 @@ function onTic(Mundo) {
         score: Mundo.score + 1,
       });
     } else {
+    
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         cuadradoFinal: {
           x: Mundo.snake[Mundo.snake.length - 1].x,
           y: Mundo.snake[Mundo.snake.length - 1].y,
         },
-      });
+      })
     }
     //return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
   }
@@ -193,7 +207,7 @@ function keyPressed() {
         break;
       }
       if ((Mundo.dir = abajo));
-      brek;
+      break;
     case LEFT_ARROW:
       if (Mundo.dir == derecha) {
         break;
@@ -204,7 +218,7 @@ function keyPressed() {
 }
 
 function onKeyEvent(Mundo, keyCode) {
-  return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode), moved: 0 });
+  return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode)});
 }
 
 /*
