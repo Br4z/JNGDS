@@ -114,9 +114,9 @@ function windowRezired() {
 
 function ñeroMove(ñero) {
   if (ñero.y >= 10) {
-    return update(Mundo, {ñero:{ x: columnas / 1.15, y: ñero.y + 1 }});
+    return { x: columnas / 1.15, y: ñero.y + 1 };
   } else {
-    return update(Mundo, { ñero: { x: columnas / 1.15, y: ñero.y - 1 } });
+    return { x: columnas / 1.15, y: ñero.y - 1 };
   }
 }
 
@@ -165,6 +165,7 @@ function onTic(Mundo) {
           y: Math.floor(Math.random() * (20 - 0) + 0),
         },
         score: Mundo.score + 1,
+        ñero: ñeroMove(Mundo.ñero)
       });
     } else {
     
