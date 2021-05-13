@@ -1,4 +1,4 @@
-//Cambio xd
+//Inicio de la rama Comodines (Sebastián Idrobo)
 let {
   append,
   cons,
