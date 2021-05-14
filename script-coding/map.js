@@ -28,6 +28,9 @@ const ancho_canvas = columnas * lado;
 const alto_canvas = filas * lado;
 let canvas;
 
+// ANCHO: 560
+// ALTO: 520
+
 // Variables de Control
 let arriba;
 let abajo;
@@ -36,6 +39,10 @@ let izquierda;
 
 //Imagen de Canvas
 let fondo ;
+
+// Variables de Juego
+let score ;
+let lives ;
 
 /**
  * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola
@@ -85,6 +92,8 @@ function setup() {
       y: 0,
     },
     score: 0,
+    lives: 3,
+    tipe : "juego"
   };
 }
 
@@ -104,13 +113,29 @@ function windowRezired() {
 // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
 function drawGame(Mundo) {
   background(fondo);
+  drawUi();
   fill(240, 240, 240);
+  stroke(10,10,10);
+	strokeWeight(4);
   drawFood(Mundo.food);
 
   forEach(Mundo.snake, (s) => {
     rect(s.x * lado, s.y * lado, lado, lado);
   });
 }
+
+// Funcion para dibujar lo que esta arriba del canvas, el puntaje.
+function drawUi(){
+  fill(255,255,255);
+  stroke(50,150,50);
+  strokeWeight(4);
+  textSize(30)
+  textAlign(LEFT);
+  text("SCORE: " + Mundo.score,20,45);
+  textAlign(RIGHT)
+  text("LIVES: " + Mundo.lives,540,45)
+}
+
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
