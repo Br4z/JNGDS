@@ -179,41 +179,46 @@ function onTic(Mundo) {
     tipe : "juego"
   };
     return Mundo;
-  } else if (Mundo.lives<1){
+  } if (
+		Mundo.snake[0].x > columnas - 1 ||
+		Mundo.snake[0].y > filas - 1 ||
+		Mundo.snake[0].x < 0 ||
+		Mundo.snake[0].y < 0 ||
+		(choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1)
+	) {
 		textAlign(CENTER, CENTER);
-			textSize(50);
-			text(' Has perdido', width / 2, height / 2);
-			text(Mundo.score, width / 2, height / 1.5);
-			rect(
-				Mundo.cuadradoFinal.x * lado,
-				Mundo.cuadradoFinal.y * lado,
-				lado,
-				lado
-			);
-			return update(Mundo, {});
+		textSize(50);
+		text(' Has perdido', width / 2, height / 2);
+		text(Mundo.score, width / 2, height / 1.5);
+		rect(
+			Mundo.cuadradoFinal.x * lado,
+			Mundo.cuadradoFinal.y * lado,
+			lado,
+			lado
+		);
+		return update(Mundo, {});
+	} else {
+		if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
+			Mundo.snake.push({ x: 5, y: 5 });
+			return update(Mundo, {
+				snake: moveSnake(Mundo.snake, Mundo.dir),
+				food: {
+					x: Math.floor(Math.random() * (20 - 0) + 0),
+					y: Math.floor(Math.random() * (20 - 0) + 0),
+				},
+				score: Mundo.score + 1,
+			});
+		} else {
+			return update(Mundo, {
+				snake: moveSnake(Mundo.snake, Mundo.dir),
+				cuadradoFinal: {
+					x: Mundo.snake[Mundo.snake.length - 1].x,
+					y: Mundo.snake[Mundo.snake.length - 1].y,
+				},
+			});
+		}
+		//return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
 	}
-  else {
-    if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
-      Mundo.snake.push({ x: 5, y: 5 });
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        food: {
-          x: Math.floor(Math.random() * (20 - 0) + 0),
-          y: Math.floor(Math.random() * (20 - 0) + 0),
-        },
-        score: Mundo.score + 1,
-      });
-    } else {
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        cuadradoFinal: {
-          x: Mundo.snake[Mundo.snake.length - 1].x,
-          y: Mundo.snake[Mundo.snake.length - 1].y,
-        },
-      });
-    }
-    //return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
-  }
 }
 
 //Implemente esta función si quiere que su programa reaccione a eventos del mouse
