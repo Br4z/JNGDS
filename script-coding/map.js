@@ -84,6 +84,7 @@ function setup() {
     ñero: {
       x: columnas / 1.15,
       y: 10,
+      dir: true,
     }
   };
 }
@@ -113,10 +114,15 @@ function windowRezired() {
 }
 
 function ñeroMove(ñero) {
-  if (ñero.y >= 10) {
-    return { x: columnas / 1.15, y: ñero.y + 1 };
+  if (ñero.dir==true && ñero.y!=18) {
+    return { x: columnas / 1.15, y: ñero.y + 1, dir: true };
+  } if (ñero.y == 18) {
+    return { x: columnas / 1.15, y: ñero.y - 1, dir: false };
+  }
+  if (ñero.dir == false && ñero.y != 1) {
+    return { x: columnas / 1.15, y: ñero.y - 1, dir: false };
   } else {
-    return { x: columnas / 1.15, y: ñero.y - 1 };
+    return { x: columnas / 1.15, y: ñero.y + 1, dir: true };
   }
 }
 
@@ -175,7 +181,8 @@ function onTic(Mundo) {
           x: Mundo.snake[Mundo.snake.length - 1].x,
           y: Mundo.snake[Mundo.snake.length - 1].y,
         },
-      })
+        ñero: ñeroMove(Mundo.ñero),
+      });
     }
     //return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
   }
