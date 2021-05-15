@@ -151,23 +151,13 @@ function drawUi(){
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
   if (
-    Mundo.snake[0].x > columnas - 1 ||
+    (Mundo.snake[0].x > columnas - 1 ||
     Mundo.snake[0].y > filas - 1 ||
     Mundo.snake[0].x < 0 ||
     Mundo.snake[0].y < 0 ||
-    choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true
+    choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) &&
+    Mundo.lives>=1
   ) {
-    // textAlign(CENTER, CENTER);
-    // textSize(50);
-    // text(" Has perdido", width / 2, height / 2);
-    // text(Mundo.score, width / 2, height / 1.5);
-    // rect(
-    //   Mundo.cuadradoFinal.x * lado,
-    //   Mundo.cuadradoFinal.y * lado,
-    //   lado,
-    //   lado
-    // );
-    // return update(Mundo, {});
     countLives = Mundo.lives - 1;
     Mundo = {
     snake: [
@@ -189,9 +179,20 @@ function onTic(Mundo) {
     tipe : "juego"
   };
     return Mundo;
-    // lives = lives -1;
-    // return update(Mundo, {});
-  } else {
+  } else if (Mundo.lives<1){
+		textAlign(CENTER, CENTER);
+			textSize(50);
+			text(' Has perdido', width / 2, height / 2);
+			text(Mundo.score, width / 2, height / 1.5);
+			rect(
+				Mundo.cuadradoFinal.x * lado,
+				Mundo.cuadradoFinal.y * lado,
+				lado,
+				lado
+			);
+			return update(Mundo, {});
+	}
+  else {
     if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
       Mundo.snake.push({ x: 5, y: 5 });
       return update(Mundo, {
