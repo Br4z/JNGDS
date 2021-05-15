@@ -40,9 +40,9 @@ let izquierda;
 //Imagen de Canvas
 let fondo ;
 
-// Variables de Juego
+// Constante de Juego
 let score ;
-let lives ;
+let countLives = 3 ;
 
 /**
  * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola
@@ -68,14 +68,9 @@ function drawFood(food) {
  */
 function setup() {
   frameRate(7);
-  fondo = loadImage("/Backgrounds/blue.png")
-  createCanvas(ancho_canvas, alto_canvas);
-  // windowRezired();
-  background(fondo);
-  abajo = createVector(0, 1);
-  arriba = createVector(0, -1);
-  izquierda = createVector(-1, 0);
-  derecha = createVector(1, 0);
+  drawfondo();
+  windowRezired();
+  direcciones();
   Mundo = {
     snake: [
       { x: columnas / 2, y: filas / 2 },
@@ -97,10 +92,27 @@ function setup() {
   };
 }
 
+// Funcion del Fondo
+function drawfondo(){
+  fondo = loadImage('/Backgrounds/blue.png');
+	createCanvas(ancho_canvas, alto_canvas);
+  background(fondo);
+}
+
+// Direccines
+function direcciones(){
+  abajo = createVector(0, 1);
+	arriba = createVector(0, -1);
+	izquierda = createVector(-1, 0);
+	derecha = createVector(1, 0);
+}
+
+// Posicionar comida
 function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
 }
 
+// Hacer que se vea bien en cualquier dimension
 function windowRezired() {
   let escala = windowWidth / width;
   if (escala >= 1) {
@@ -118,7 +130,6 @@ function drawGame(Mundo) {
   stroke(10,10,10);
 	strokeWeight(4);
   drawFood(Mundo.food);
-
   forEach(Mundo.snake, (s) => {
     rect(s.x * lado, s.y * lado, lado, lado);
   });
@@ -133,7 +144,7 @@ function drawUi(){
   textAlign(LEFT);
   text("SCORE: " + Mundo.score,20,45);
   textAlign(RIGHT)
-  text("LIVES: " + Mundo.lives,540,45)
+  text("LIVES: " + countLives,540,45)
 }
 
 
@@ -146,17 +157,40 @@ function onTic(Mundo) {
     Mundo.snake[0].y < 0 ||
     choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true
   ) {
-    textAlign(CENTER, CENTER);
-    textSize(50);
-    text(" Has perdido", width / 2, height / 2);
-    text(Mundo.score, width / 2, height / 1.5);
-    rect(
-      Mundo.cuadradoFinal.x * lado,
-      Mundo.cuadradoFinal.y * lado,
-      lado,
-      lado
-    );
-    return update(Mundo, {});
+    // textAlign(CENTER, CENTER);
+    // textSize(50);
+    // text(" Has perdido", width / 2, height / 2);
+    // text(Mundo.score, width / 2, height / 1.5);
+    // rect(
+    //   Mundo.cuadradoFinal.x * lado,
+    //   Mundo.cuadradoFinal.y * lado,
+    //   lado,
+    //   lado
+    // );
+    // return update(Mundo, {});
+    countLives = Mundo.lives - 1;
+    Mundo = {
+    snake: [
+      { x: columnas / 2, y: filas / 2 },
+      { x: columnas / 2 - 1, y: filas / 2 },
+      { x: columnas / 2 - 2, y: filas / 2 },
+    ],
+    dir: derecha,
+    food: {
+      x: int(random(columnas)),
+      y: int(random(filas)),
+    },
+    cuadradoFinal: {
+      x: 0,
+      y: 0,
+    },
+    score: 0,
+    lives: Mundo.lives-1,
+    tipe : "juego"
+  };
+    return Mundo;
+    // lives = lives -1;
+    // return update(Mundo, {});
   } else {
     if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
       Mundo.snake.push({ x: 5, y: 5 });
