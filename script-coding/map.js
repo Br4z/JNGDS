@@ -84,7 +84,8 @@ function setup() {
     ñero: {
       x: columnas / 18,
       y: 10,
-      dir: true,
+      dirx: true,
+      diry: true,
     }
   };
 }
@@ -114,18 +115,18 @@ function windowRezired() {
 }
 
 function ñeroMove(ñero) {
-  if (ñero.dir==true && ñero.y!=18 && ñero.y!=1) {
-    return { x: 18, y: ñero.y + 1, dir: true };
+  if ((ñero.dirx==true && ñero.y!=18 && ñero.diry==true)||(ñero.x==18 && ñero.diry==false)) {
+    return { x: 18, y: ñero.y + 1, dirx: true, diry:true };
   } if (ñero.y == 18) {
-    return { x: 18, y: ñero.y - 1, dir: false };
-  } if (ñero.dir == false && ñero.y != 1) {
-    return { x: 18, y: ñero.y - 1, dir: false };
-  } if (ñero.y == 1 && ñero.dir==false && ñero.x!=2) {
-    return { x: ñero.x-1, y: 1, dir: false };
-  } if (ñero.x== 2) {
-    return { x: ñero.x + 1, y: 1, dir: true };
-  } if (ñero.dir==true && nero.x!=2) {
-    return { x: ñero.x + 1, y: 1, dir: true };
+    return { x: 18, y: ñero.y - 1, dirx: false, diry: true };
+  } if (ñero.dirx== false && ñero.y != 1) {
+    return { x: 18, y: ñero.y - 1, dirx: false, diry: true };
+  } if (ñero.y == 1 && ñero.dirx==false && ñero.x!=1 && ñero.diry==true) {
+    return { x: ñero.x - 1, y: 1, dirx: false, diry: true };
+  } if (ñero.x== 1) {
+    return { x: ñero.x + 1, y: 1, dir: true, diry: false };
+  } if (ñero.diry==false && ñero.x!=1) {
+    return { x: ñero.x + 1, y: 1, dir: true, diry: false };
   }
 }
 
