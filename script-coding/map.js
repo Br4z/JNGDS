@@ -82,7 +82,7 @@ function setup() {
     },
     score: 0,
     ñero: {
-      x: columnas / 1.15,
+      x: columnas / 18,
       y: 10,
       dir: true,
     }
@@ -114,15 +114,18 @@ function windowRezired() {
 }
 
 function ñeroMove(ñero) {
-  if (ñero.dir==true && ñero.y!=18) {
-    return { x: columnas / 1.15, y: ñero.y + 1, dir: true };
+  if (ñero.dir==true && ñero.y!=18 && ñero.y!=1) {
+    return { x: 18, y: ñero.y + 1, dir: true };
   } if (ñero.y == 18) {
-    return { x: columnas / 1.15, y: ñero.y - 1, dir: false };
-  }
-  if (ñero.dir == false && ñero.y != 1) {
-    return { x: columnas / 1.15, y: ñero.y - 1, dir: false };
-  } else {
-    return { x: columnas / 1.15, y: ñero.y + 1, dir: true };
+    return { x: 18, y: ñero.y - 1, dir: false };
+  } if (ñero.dir == false && ñero.y != 1) {
+    return { x: 18, y: ñero.y - 1, dir: false };
+  } if (ñero.y == 1 && ñero.dir==false && ñero.x!=2) {
+    return { x: ñero.x-1, y: 1, dir: false };
+  } if (ñero.x== 2) {
+    return { x: ñero.x + 1, y: 1, dir: true };
+  } if (ñero.dir==true && nero.x!=2) {
+    return { x: ñero.x + 1, y: 1, dir: true };
   }
 }
 
