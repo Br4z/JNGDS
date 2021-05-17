@@ -72,6 +72,7 @@ function setup() {
       y: 0,
     },
     score: 0,
+    timer: millis(),
     ñero: {
       x: 18,
       y: 10,
@@ -157,7 +158,11 @@ function drawGame(Mundo) {
   fill("white");
   drawÑero(Mundo.ñero);
   drawSnake(Mundo.snake);
-  drawKnife(Mundo.knife)
+  drawKnife(Mundo.knife);
+  fill("white");
+  textSize(12);
+  text("Tiempo:",1,12);
+  text(Mundo.timer, 45, 12);
 }
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
@@ -174,6 +179,8 @@ function onTic(Mundo) {
     fill("white");
     text(" Has perdido", width / 2, height / 2);
     text(Mundo.score, width / 2, height / 1.5);
+    textSize(12);
+    textAlign(none);
     rect(
       Mundo.cuadradoFinal.x * lado,
       Mundo.cuadradoFinal.y * lado,
@@ -204,6 +211,7 @@ function onTic(Mundo) {
           y: Mundo.snake[Mundo.snake.length - 1].y,
         },
         ñero: ñeroMove(Mundo.ñero),
+        timer: int(millis()/1000)
       });
     }
     //return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
