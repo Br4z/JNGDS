@@ -1,4 +1,4 @@
-//Cambio xd
+//Libreria
 let {
   append,
   cons,
@@ -20,7 +20,7 @@ function update(data, attribute) {
 let Mundo = {};
 ////////////////////////
 
-// Constantes para las escalas
+// Constantes para las escalas del canvas
 const columnas = 28;
 const filas = 26;
 const lado = 20;
@@ -28,47 +28,33 @@ const ancho_canvas = columnas * lado;
 const alto_canvas = filas * lado;
 let canvas;
 
-// Variables de Control
+//Medidas Actuales
+// ANCHO: 560
+// ALTO: 520
+
+// Constantes de Control
 let arriba;
 let abajo;
 let derecha;
 let izquierda;
 
-//Imagen de Canvas
-let fondo ;
+// Constante de Juego
+ //--> El puntaje del personaje
+let score ;
+//-->Contador de Vidas
+let countLives = 3 ;
+//-->Imagen de Fondo del Canvas
+let fondo;
 
-/**
- * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola
- */
-function moveSnake(snake, dir) {
-  const head = first(snake);
-  return cons(
-    { x: head.x + dir.x, y: head.y + dir.y },
-    snake.slice(0, length(snake) - 1)
-  );
-}
-
-/**
- * Dibuja la comida#671796
- */
-function drawFood(food) {
-  fill("crimson");
-  rect(food.x * lado, food.y * lado, lado, lado);
-}
 
 /**
  * Esto se llama antes de iniciar el juego
  */
 function setup() {
   frameRate(7);
-  fondo = loadImage("/Backgrounds/blue.png")
-  createCanvas(ancho_canvas, alto_canvas);
-  // windowRezired();
-  background(fondo);
-  abajo = createVector(0, 1);
-  arriba = createVector(0, -1);
-  izquierda = createVector(-1, 0);
-  derecha = createVector(1, 0);
+  drawfondo();
+  windowRezired();
+  direcciones();
   Mundo = {
     snake: [
       { x: columnas / 2, y: filas / 2 },
@@ -85,13 +71,64 @@ function setup() {
       y: 0,
     },
     score: 0,
+    lives: 3,
+    tipe : "juego"
   };
 }
 
+// Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
+function drawGame(Mundo) {
+  background(fondo);
+  drawUi();
+  fill(240, 240, 240);
+  stroke(10,10,10);
+	strokeWeight(4);
+  drawFood(Mundo.food);
+  forEach(Mundo.snake, (s) => {
+    rect(s.x * lado, s.y * lado, lado, lado);
+  });
+}
+
+/*
+ * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola *
+ */
+function moveSnake(snake, dir) {
+  const head = first(snake);
+  return cons(
+    { x: head.x + dir.x, y: head.y + dir.y },
+    snake.slice(0, length(snake) - 1)
+  );
+}
+
+/**
+ * Dibuja la comida #671796
+ */
+function drawFood(food) {
+  fill("crimson");
+  rect(food.x * lado, food.y * lado, lado, lado);
+}
+
+// Funcion del Fondo
+function drawfondo(){
+  fondo = loadImage('/Backgrounds/blue.png');
+	createCanvas(ancho_canvas, alto_canvas);
+  background(fondo);
+}
+
+// Direccines
+function direcciones(){
+  abajo = createVector(0, 1);
+	arriba = createVector(0, -1);
+	izquierda = createVector(-1, 0);
+	derecha = createVector(1, 0);
+}
+
+// Posicionar comida
 function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
 }
 
+// Hacer que se vea bien en cualquier dimension
 function windowRezired() {
   let escala = windowWidth / width;
   if (escala >= 1) {
@@ -101,57 +138,89 @@ function windowRezired() {
   canvas.style("height", height * escala + "px");
 }
 
-// Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
-function drawGame(Mundo) {
-  background(fondo);
-  fill(240, 240, 240);
-  drawFood(Mundo.food);
-
-  forEach(Mundo.snake, (s) => {
-    rect(s.x * lado, s.y * lado, lado, lado);
-  });
+// Funcion para dibujar lo que esta arriba del canvas, el puntaje.
+function drawUi(){
+  fill(255,255,255);
+  stroke(50,150,50);
+  strokeWeight(4);
+  textSize(30)
+  textAlign(LEFT);
+  text("SCORE: " + Mundo.score,20,45);
+  textAlign(RIGHT)
+  text("LIVES: " + countLives,540,45)
 }
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
   if (
-    Mundo.snake[0].x > columnas - 1 ||
+    (Mundo.snake[0].x > columnas - 1 ||
     Mundo.snake[0].y > filas - 1 ||
     Mundo.snake[0].x < 0 ||
     Mundo.snake[0].y < 0 ||
-    choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true
+    choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) &&
+    Mundo.lives>=1
   ) {
-    textAlign(CENTER, CENTER);
-    textSize(50);
-    text(" Has perdido", width / 2, height / 2);
-    text(Mundo.score, width / 2, height / 1.5);
-    rect(
-      Mundo.cuadradoFinal.x * lado,
-      Mundo.cuadradoFinal.y * lado,
-      lado,
-      lado
-    );
-    return update(Mundo, {});
-  } else {
-    if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
-      Mundo.snake.push({ x: 5, y: 5 });
-
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        food: numeroRandomComida(Mundo.snake),
-        score: Mundo.score + 1,
-      });
-    } else {
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        cuadradoFinal: {
-          x: Mundo.snake[Mundo.snake.length - 1].x,
-          y: Mundo.snake[Mundo.snake.length - 1].y,
-        },
-      });
-    }
-    //return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
-  }
+    countLives = Mundo.lives - 1;
+    Mundo = {
+    snake: [
+      { x: columnas / 2, y: filas / 2 },
+      { x: columnas / 2 - 1, y: filas / 2 },
+      { x: columnas / 2 - 2, y: filas / 2 },
+    ],
+    dir: derecha,
+    food: {
+      x: int(random(columnas)),
+      y: int(random(filas)),
+    },
+    cuadradoFinal: {
+      x: 0,
+      y: 0,
+    },
+    score: 0,
+    lives: Mundo.lives-1,
+    tipe : "juego"
+  };
+    return Mundo;
+  } else if (
+		Mundo.snake[0].x > columnas - 1 ||
+		Mundo.snake[0].y > filas - 1 ||
+		Mundo.snake[0].x < 0 ||
+		Mundo.snake[0].y < 0 ||
+		(choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1)
+	) {
+		textAlign(CENTER, CENTER);
+		textSize(50);
+		text(' Has perdido', width / 2, height / 2);
+		text(Mundo.score, width / 2, height / 1.5);
+		rect(
+			Mundo.cuadradoFinal.x * lado,
+			Mundo.cuadradoFinal.y * lado,
+			lado,
+			lado
+		);
+		return update(Mundo, {});
+	} else {
+		if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
+			Mundo.snake.push({ x: 5, y: 5 });
+			return update(Mundo, {
+				snake: moveSnake(Mundo.snake, Mundo.dir),
+          food: {
+            x: Math.floor(Math.random() * (20 - 0) + 0),
+            y: Math.floor(Math.random() * (20 - 0) + 0),
+          },
+				score: Mundo.score + 1,
+			});
+		} else {
+			return update(Mundo, {
+				snake: moveSnake(Mundo.snake, Mundo.dir),
+				cuadradoFinal: {
+					x: Mundo.snake[Mundo.snake.length - 1].x,
+					y: Mundo.snake[Mundo.snake.length - 1].y,
+				},
+			});
+		}
+		//return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
+	}
 }
 
 //Implemente esta función si quiere que su programa reaccione a eventos del mouse
@@ -195,6 +264,7 @@ function onKeyEvent(Mundo, keyCode) {
   return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode), moved: 0 });
 }
 
+
 /*
 Propósito: Retornar si la cabeza del Snake tiene la misma posición de uno de las posiciones de su cuerpo
 Contrato: listaDeItems, JSON -> boolean
@@ -217,45 +287,3 @@ function choqueSnake(snake, cabezaSnake) {
   }
 }
 
-/*
-Propósito: Retornar un conjunto de coordenadas agrupadas en el JSON 'comida´, y si las coordenadas coinciden con una de las partes del snake retorna un 0
-Contrato: listaDeItems, num, num -> JSON || num
-Prototipo: coordenadasComida(snake, coordenadaX, coordenadaY)
-Ejemplos:
-coordenadasComida([{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}], 0, 0) -> coordenadasComida([{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}], 6, 7) -> {x: 6, x: 7}
-coordenadasComida([{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}], 0, 0) -> coordenadasComida([{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}], 5, 1) -> 0
-*/
-
-function coordenadasComida(snake, coordenadaX, coordenadaY) {
-  if (coordenadaX == 0 && coordenadaY == 0) {
-    coordenadaX = Math.floor(Math.random() * (20 - 0) + 0);
-    coordenadaY = Math.floor(Math.random() * (20 - 0) + 0);
-  }
-  let comida = { x: coordenadaX, y: coordenadaY };
-
-  if (isEmpty(snake) == true) {
-    return comida;
-  } else if (first(snake).x == coordenadaX && first(snake).y == coordenadaY) {
-    return 0;
-  } else {
-    return coordenadasComida(rest(snake), coordenadaX, coordenadaY);
-  }
-}
-
-/*
-Propósito: Retornar un JSON aleatorio
-Contrato: listaDeItems -> JSON
-Prototipo: numeroRandomComida(snake)
-Ejemplos:
-coordenadasComida({[{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}]}) -> {x:7, y:5}
-coordenadasComida({[{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}]}) -> {x:17, y:2}
-*/
-
-function numeroRandomComida(snake) {
-  const num = coordenadasComida(snake, 0, 0);
-  if (num == 0) {
-    return numeroRandomComida(snake);
-  } else {
-    return num;
-  }
-}
