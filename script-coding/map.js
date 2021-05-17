@@ -1,15 +1,6 @@
 //Cambio xd
-let {
-  append,
-  cons,
-  first,
-  isEmpty,
-  isList,
-  length,
-  rest,
-  map,
-  forEach,
-} = functionalLight;
+let { append, cons, first, isEmpty, isList, length, rest, map, forEach } =
+  functionalLight;
 
 // Actualiza los atributos del objeto y retorna una copia profunda
 function update(data, attribute) {
@@ -82,24 +73,40 @@ function setup() {
     },
     score: 0,
     ñero: {
-      x: columnas / 18,
+      x: 18,
       y: 10,
       dirx: true,
       diry: true,
-    }
+    },
+    knife: {
+      x: 18,
+      y: 10,
+    },
   };
 }
 
-function drawÑero(ñero){
+function drawKnife(knife) {
+  fill("green");
+  triangle(
+    knife.x * lado+10,
+    knife.y * lado,
+    knife.x * lado ,
+    knife.y * lado+10,
+    knife.x * lado +10,
+    knife.y * lado +20,
+  );
+}
+
+function drawÑero(ñero) {
   fill("blue");
   rect(ñero.x * lado, ñero.y * lado, lado, lado);
 }
 
-function drawSnake(snake){
+function drawSnake(snake) {
   fill("white"),
-  forEach(snake, (s) => {
-    rect(s.x * lado, s.y * lado, lado, lado);
-  });
+    forEach(snake, (s) => {
+      rect(s.x * lado, s.y * lado, lado, lado);
+    });
 }
 function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
@@ -115,32 +122,42 @@ function windowRezired() {
 }
 
 function ñeroMove(ñero) {
-  if ((ñero.dirx==true && ñero.y!=18 && ñero.diry==true)||(ñero.x==18 && ñero.diry==false)) {
-    return { x: 18, y: ñero.y + 1, dirx: true, diry:true };
-  } if (ñero.y == 18) {
+  if (
+    (ñero.dirx == true && ñero.y != 18 && ñero.diry == true) ||
+    (ñero.x == 18 && ñero.diry == false)
+  ) {
+    return { x: 18, y: ñero.y + 1, dirx: true, diry: true };
+  }
+  if (ñero.y == 18) {
     return { x: 18, y: ñero.y - 1, dirx: false, diry: true };
-  } if (ñero.dirx== false && ñero.y != 1) {
+  }
+  if (ñero.dirx == false && ñero.y != 1) {
     return { x: 18, y: ñero.y - 1, dirx: false, diry: true };
-  } if (ñero.y == 1 && ñero.dirx==false && ñero.x!=1 && ñero.diry==true) {
+  }
+  if (ñero.y == 1 && ñero.dirx == false && ñero.x != 1 && ñero.diry == true) {
     return { x: ñero.x - 1, y: 1, dirx: false, diry: true };
-  } if (ñero.x== 1) {
+  }
+  if (ñero.x == 1) {
     return { x: ñero.x + 1, y: 1, dir: true, diry: false };
-  } if (ñero.diry==false && ñero.x!=1) {
+  }
+  if (ñero.diry == false && ñero.x != 1) {
     return { x: ñero.x + 1, y: 1, dir: true, diry: false };
   }
 }
 
-function ñeroUpdate(){
-  
+function moveKnife(knife) {
+  return {x: knife.x-1,y:knife.y}
 }
+function ñeroUpdate() {}
 // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
 function drawGame(Mundo) {
   background("#38A649");
   fill(240, 240, 240);
   drawFood(Mundo.food);
   fill("white");
-  drawÑero(Mundo.ñero)
-  drawSnake(Mundo.snake)
+  drawÑero(Mundo.ñero);
+  drawSnake(Mundo.snake);
+  drawKnife(Mundo.knife)
 }
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
@@ -154,6 +171,7 @@ function onTic(Mundo) {
   ) {
     textAlign(CENTER, CENTER);
     textSize(50);
+    fill("white");
     text(" Has perdido", width / 2, height / 2);
     text(Mundo.score, width / 2, height / 1.5);
     rect(
@@ -162,7 +180,7 @@ function onTic(Mundo) {
       lado,
       lado
     );
-    
+
     return update(Mundo, {});
   } else {
     if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
@@ -175,10 +193,10 @@ function onTic(Mundo) {
           y: Math.floor(Math.random() * (20 - 0) + 0),
         },
         score: Mundo.score + 1,
-        ñero: ñeroMove(Mundo.ñero)
+        ñero: ñeroMove(Mundo.ñero),
+        knife: moveKnife(Mundo.knife)
       });
     } else {
-    
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         cuadradoFinal: {
@@ -230,7 +248,7 @@ function keyPressed() {
 }
 
 function onKeyEvent(Mundo, keyCode) {
-  return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode)});
+  return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode) });
 }
 
 /*
