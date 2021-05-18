@@ -1,15 +1,6 @@
 //Inicio de la rama Comodines (Sebastián Idrobo)
-let {
-  append,
-  cons,
-  first,
-  isEmpty,
-  isList,
-  length,
-  rest,
-  map,
-  forEach,
-} = functionalLight;
+let { append, cons, first, isEmpty, isList, length, rest, map, forEach } =
+  functionalLight;
 
 // Actualiza los atributos del objeto y retorna una copia profunda
 function update(data, attribute) {
@@ -35,7 +26,7 @@ let derecha;
 let izquierda;
 
 //Imagen de Canvas
-let fondo ;
+let fondo;
 
 /**
  * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola
@@ -56,12 +47,25 @@ function drawFood(food) {
   rect(food.x * lado, food.y * lado, lado, lado);
 }
 
+function drawSnake(snake) {
+  fill("white");
+  forEach(snake, (s) => {
+    rect(s.x * lado, s.y * lado, lado, lado);
+  });
+}
+
+function drawComodin1(comodin1) {
+  fill("blue");
+  rect(comodin1.x * lado, comodin1.y * lado, lado, lado);
+}
+
 /**
  * Esto se llama antes de iniciar el juego
  */
 function setup() {
-  frameRate(7);
-  fondo = loadImage("/Backgrounds/blue.png")
+  
+
+  fondo = loadImage("/Backgrounds/blue.png");
   createCanvas(ancho_canvas, alto_canvas);
   // windowRezired();
   background(fondo);
@@ -85,8 +89,19 @@ function setup() {
       y: 0,
     },
     score: 0,
+    comodin1: {
+      x: int(random(columnas)),
+      y: int(random(columnas)),
+    },
+    tiempo: {
+      tiempoVelocidadAccionado: 0,
+      tiempoVelocidadActivo: tiempoRandom(30,50),
+      tiempoVelocidadDesactivo: tiempoRandom(40,70),
+    }
   };
 }
+
+tiempoVelocidad
 
 function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
@@ -102,18 +117,37 @@ function windowRezired() {
 }
 
 // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
+var rate;
 function drawGame(Mundo) {
   background(fondo);
   fill(240, 240, 240);
   drawFood(Mundo.food);
 
+  if (Mundo.tiempo.tiempoVelocidadActivo > 0) {
+    drawComodin1(Mundo.comodin1);
+  }
+
+  drawSnake(Mundo.snake);
+
   forEach(Mundo.snake, (s) => {
     rect(s.x * lado, s.y * lado, lado, lado);
   });
+
+  frameRate(rate);
+  
+  if (Mundo.tiempo.tiempoVelocidadAccionado == 0) {
+    rate = 8;
+  } else {
+    rate = 5;
+    Mundo.tiempo.tiempoVelocidadAccionado = Mundo.tiempo.tiempoVelocidadAccionado - 1;
+    
+  }
 }
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
+
+  // Si Snake se choca con la pared o con ella misma
   if (
     Mundo.snake[0].x > columnas - 1 ||
     Mundo.snake[0].y > filas - 1 ||
@@ -132,26 +166,46 @@ function onTic(Mundo) {
       lado
     );
     return update(Mundo, {});
+    // Si Snake come la comida
+  } else if (
+    Mundo.snake[0].x == Mundo.food.x &&
+    Mundo.snake[0].y == Mundo.food.y
+  ) {
+    Mundo.snake.push({ x: 5, y: 5 });
+    return update(Mundo, {
+      snake: moveSnake(Mundo.snake, Mundo.dir),
+      food: numeroRandomComida(Mundo.snake),
+      score: Mundo.score + 1,
+    });
+  // Si Snake come comodin de velocidad
+  } else if (
+    Mundo.snake[0].x == Mundo.comodin1.x &&
+    Mundo.snake[0].y == Mundo.comodin1.y
+  ) {
+    Mundo.comodin1.tiempo = 40;
+    return update(Mundo, {
+      snake: moveSnake(Mundo.snake, Mundo.dir),
+      cuadradoFinal: {
+        x: Mundo.snake[Mundo.snake.length - 1].x,
+        y: Mundo.snake[Mundo.snake.length - 1].y,
+      },
+      comodin1: numeroRandomComida(Mundo.snake),
+      tiempo: {
+        tiempoVelocidadAccionado: 40
+      }
+      
+    })
+  // Movimiento normal de Snake
   } else {
-    if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
-      Mundo.snake.push({ x: 5, y: 5 });
-
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        food: numeroRandomComida(Mundo.snake),
-        score: Mundo.score + 1,
-      });
-    } else {
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        cuadradoFinal: {
-          x: Mundo.snake[Mundo.snake.length - 1].x,
-          y: Mundo.snake[Mundo.snake.length - 1].y,
-        },
-      });
-    }
-    //return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
+    return update(Mundo, {
+      snake: moveSnake(Mundo.snake, Mundo.dir),
+      cuadradoFinal: {
+        x: Mundo.snake[Mundo.snake.length - 1].x,
+        y: Mundo.snake[Mundo.snake.length - 1].y,
+      },
+    });
   }
+  //return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
 }
 
 //Implemente esta función si quiere que su programa reaccione a eventos del mouse
@@ -259,3 +313,9 @@ function numeroRandomComida(snake) {
     return num;
   }
 }
+
+
+function tiempoRandom(inicial,final) {
+  return Math.floor(Math.random() * (final - inicial) + inicial);
+}
+
