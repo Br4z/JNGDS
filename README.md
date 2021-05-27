@@ -12,13 +12,13 @@ Nuestro código base se encuentra en este orden: script-coding -> map.js. Este c
 Considerando estas funciones como aquellas que no deben de ser modificadas en ningún momento por cumplir tareas básicas pero base del código, tenemos:
 
 **Function update():**
-```
+```javascript
 function update(data, attribute) {
   return Object.assign({}, data, attribute);
 }
 ```
 Su función es retornar y actualizar los datos del mundo, poniendo como primer atributo nuestro mundo y de segundo atributo los elementos que deseamos cambiar y por que dato cambiarlo:
-```
+```javascript
 //Un ejemplo de Update
 return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -28,7 +28,7 @@ return update(Mundo, {
 ```
 
 **Function moveSnake()**
-```
+```javascript
 function moveSnake(snake, dir) {
   const head = first(snake);
   return cons(
@@ -44,7 +44,7 @@ Su función es actualizar las posiciones de cada "parte" o "cuadrado" del Snake,
 3. La siguiente parte retorna el cuerpo completo del Snake que se tenía con excepción de la última parte, borrandolo con slice
 
 **Mundo**
-```
+```javascript
 let Mundo = {};
 ```
 Su función es inicializar el mundo para usarlo después, es declarada como un *let* para así utilizarla globalmente en nuestro código.
@@ -53,7 +53,7 @@ Su función es inicializar el mundo para usarlo después, es declarada como un *
 Considerando estas funciones como aquellas que también cumplen tareas básicas de nuestro juego pero que aun así podemos modificar para que estas realicen una determinada función dependiendo de que función modifiquemos, tenemos:
 
 **Function setup()**
-```
+```javascript
 function setup() {
   frameRate(7);
   createCanvas(ancho_canvas, alto_canvas);
@@ -89,7 +89,7 @@ Dentro de esta función configuramos:
 De la misma manera, es dentro de esta función donde modificamos todos los aspectos relacionados con la configuración de nuestro código.
 
 **Function drawGame()**
-```
+```javascript
 function drawGame(Mundo) {
   background("#38A649");
   fill(240, 240, 240);
@@ -104,7 +104,7 @@ function drawGame(Mundo) {
 Dentro de esta función configuramos todos los aspectos gráficos del código, como lo son el background, o tambien incluyendo las funciones encargadas de dibujar los elementos gráficos del videojuego.
 
 **Function onTic**
-```
+```javascript
 function onTic(Mundo) {
   [...]
 }
@@ -112,7 +112,7 @@ function onTic(Mundo) {
 Esta función se actualizará constantemente a la velocidad que hallamos establecido en el frameRate. Dentro de esta se ejecutaran todas las funciones o acciones que se encuentren dentro de ellas constantemente mientras corre el código.
 
 **Function onKeyEvent()**
-```
+```javascript
 function onKeyEvent(Mundo, keyCode) {
   return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode), moved: 0 });
 }
@@ -121,7 +121,7 @@ function onKeyEvent(Mundo, keyCode) {
 Esta función ejecutará todas las acciones relaccionadas a la interacción del teclado.
 
 **Function onMouseEvent()**
-```
+```javascript
 function onMouseEvent(Mundo, event) {
   [...]
 }
