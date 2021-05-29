@@ -90,84 +90,65 @@ function setup() {
       y: 0,
     },
     score: 0,
-    comodines: {
-      velocidad: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-      },
-      invencibilidad: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-      },
-      regeneracion: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-      },
-      vidaMas: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-      },
-      inversion: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-      },
-      tombos: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-      },
-      reduccionPuntos: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-      },
-      golpeAccionado: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-      },
+    velocidad: {
+      x: int(random(columnas)),
+      y: int(random(columnas)),
+      tiempoAccionado: 0,
+      tiempoActivo: tiempoRandom(30,50),
+      tiempoDesactivo: tiempoRandom(30,50),
     },
-    tiempos: {
-      velocidad: {
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30,50),
-        tiempoDesactivo: tiempoRandom(30,50),
-      },
-      invencibilidad: {
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30,50),
-        tiempoDesactivo: tiempoRandom(30,50),
-      },
-      regeneracion: {
-        tiempoActivo: tiempoRandom(30,50),
-        tiempoDesactivo: tiempoRandom(30,50),
-      },
-      vidaMas : {
-        tiempoActivo: tiempoRandom(30,50),
-        tiempoDesactivo: tiempoRandom(30,50),
-      },
-      inversion: {
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30,50),
-        tiempoDesactivo: tiempoRandom(30,50),
-      },
-      tombos: {
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30,50),
-        tiempoDesactivo: tiempoRandom(30,50),
-      },
-      reduccionPuntos: {
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30,50),
-        tiempoDesactivo: tiempoRandom(30,50),
-      },
-      golpeAccionado: {
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30,50),
-        tiempoDesactivo: tiempoRandom(30,50),
-      }
-    }
+    invencibilidad: {
+      x: int(random(columnas)),
+      y: int(random(columnas)),
+      tiempoAccionado: 0,
+      tiempoActivo: tiempoRandom(30,50),
+      tiempoDesactivo: tiempoRandom(30,50),
+    },
+    regeneracion: {
+      x: int(random(columnas)),
+      y: int(random(columnas)),
+      tiempoActivo: tiempoRandom(30,50),
+      tiempoDesactivo: tiempoRandom(30,50),
+    },
+    vidaMas: {
+      x: int(random(columnas)),
+      y: int(random(columnas)),
+      tiempoActivo: tiempoRandom(30,50),
+      tiempoDesactivo: tiempoRandom(30,50),
+    },
+    inversion: {
+      x: int(random(columnas)),
+      y: int(random(columnas)),
+      tiempoAccionado: 0,
+      tiempoActivo: tiempoRandom(30,50),
+      tiempoDesactivo: tiempoRandom(30,50),
+    },
+    tombos: {
+      x: int(random(columnas)),
+      y: int(random(columnas)),
+      tiempoAccionado: 0,
+      tiempoActivo: tiempoRandom(30,50),
+      tiempoDesactivo: tiempoRandom(30,50),
+    },
+    reduccionPuntos: {
+      x: int(random(columnas)),
+      y: int(random(columnas)),
+      tiempoAccionado: 0,
+      tiempoActivo: tiempoRandom(30,50),
+      tiempoDesactivo: tiempoRandom(30,50),
+    },
+    golpeAccionado: {
+      x: int(random(columnas)),
+      y: int(random(columnas)),
+      tiempoAccionado: 0,
+      tiempoActivo: tiempoRandom(30,50),
+      tiempoDesactivo: tiempoRandom(30,50),
+    } 
+    
   }
 }
 
-//Mundo.tiempo
+//Mundo.tiempos
 
 function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
@@ -189,7 +170,7 @@ function drawGame(Mundo) {
   fill(240, 240, 240);
   drawFood(Mundo.food);
 
-  if (Mundo.tiempos.velocidad.tiempoActivo > 0) {
+  if (Mundo.velocidad.tiempoActivo > 0) {
     drawComodin1(Mundo.comodines.velocidad);
   }
 
@@ -201,7 +182,7 @@ function drawGame(Mundo) {
 
   frameRate(rate);
   
-  if (Mundo.tiempos.velocidad.tiempoActivo == 0) {
+  if (Mundo.velocidad.tiempoActivo == 0) {
     rate = 8;
   } else {
     rate = 5;
@@ -248,27 +229,18 @@ function onTic(Mundo) {
     });
 
   // Si Snake come un comodín
-  } else if (
-    (Mundo.snake[0].x == Mundo.comodines.velocidad.x &&
-      Mundo.snake[0].y == Mundo.comodines.velocidad.y) ||
-    (Mundo.snake[0].x == Mundo.comodines.invencibilidad.x &&
-      Mundo.snake[0].y == Mundo.comodines.invencibilidad.y) ||
-    (Mundo.snake[0].x == Mundo.comodines.regeneracion.x &&
-      Mundo.snake[0].y == Mundo.comodines.regeneracion.y) ||
-    (Mundo.snake[0].x == Mundo.comodines.vidaMas.x &&
-      Mundo.snake[0].y == Mundo.comodines.vidaMas.y) ||
-    (Mundo.snake[0].x == Mundo.comodines.inversion.x &&
-      Mundo.snake[0].y == Mundo.comodines.inversion.y) ||
-    (Mundo.snake[0].x == Mundo.comodines.tombos.x &&
-      Mundo.snake[0].y == Mundo.comodines.tombos.y) ||
-    (Mundo.snake[0].x == Mundo.comodines.reduccionPuntos.x &&
-      Mundo.snake[0].y == Mundo.comodines.reduccionPuntos.y) ||
-    (Mundo.snake[0].x == Mundo.comodines.golpeAccionado.x &&
-      Mundo.snake[0].y == Mundo.comodines.golpeAccionado.y)
+  } else if (comerItem(Mundo.snake, Mundo.velocidad) == true ||
+  comerItem(Mundo.snake, Mundo.invencibilidad) == true ||
+  comerItem(Mundo.snake, Mundo.regeneracion) == true ||
+  comerItem(Mundo.snake, Mundo.vidaMas) == true ||
+  comerItem(Mundo.snake, Mundo.inversion) == true ||
+  comerItem(Mundo.snake, Mundo.tombos) == true ||
+  comerItem(Mundo.snake, Mundo.reduccionPuntos) == true ||
+  comerItem(Mundo.snake, Mundo.golpeAccionado) == true
   ) {
     
     //Si Snake come el comodín de velocidad
-    if (comerItem(Mundo.snake,Mundo.comodines.velocidad) == true) {
+    if (comerItem(Mundo.snake,Mundo.velocidad) == true) {
         
         return update (Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -276,15 +248,10 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          comodin: {
-            velocidad: numeroRandomComida(Mundo.snake),
-          },
-          tiempos: {
-            velocidad: retornarTiempos(tiempoRandom(30,50),0,90),
-          }
+          velocidad: retornarComodin(true,tiempoRandom(30,50),0,90,Mundo,Mundo.velocidad),
         })
 
-      } else if (comerItem(Mundo.snake,Mundo.comodines.invencibilidad) == true) {
+      } else if (comerItem(Mundo.snake,Mundo.invencibilidad) == true) {
 
         return update (Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -292,15 +259,10 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          comodin: {
-            invencibilidad: numeroRandomComida(Mundo.snake),
-          },
-          tiempos: {
-            invencibilidad: retornarTiempos(0,0,0),
-          }
+          invencibilidad: retornarComodin(true,tiempoRandom(0,0),0,0,Mundo,Mundo.invencibilidad),
         })
 
-      } else if (comerItem(Mundo.snake,Mundo.comodines.regeneracion) == true) {
+      } else if (comerItem(Mundo.snake,Mundo.regeneracion) == true) {
 
         return update (Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -308,15 +270,10 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          comodin: {
-            regeneracion: numeroRandomComida(Mundo.snake),
-          },
-          tiempos: {
-            regeneracion: retornarTiempos(0,0,0),
-          }
+          invencibilidad: retornarComodin(true,tiempoRandom(0,0),0,0,Mundo,Mundo.regeneracion),
         })
 
-      } else if (comerItem(Mundo.snake, Mundo.comodines.vidaMas) == true){
+      } else if (comerItem(Mundo.snake, Mundo.vidaMas) == true){
 
         return update (Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -324,15 +281,10 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          comodin: {
-            vidaMas: numeroRandomComida(Mundo.snake),
-          },
-          tiempos: {
-            vidaMas: retornarTiempos(0,0,0),
-          }
+          invencibilidad: retornarComodin(true,tiempoRandom(0,0),0,0,Mundo,Mundo.vidaMas),
         })
 
-      } else if (comerItem(Mundo.snake, Mundo.comodines.inversion) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.inversion) == true) {
 
         return update (Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -340,15 +292,10 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          comodin: {
-            inversion: numeroRandomComida(Mundo.snake),
-          },
-          tiempos: {
-            inversion: retornarTiempos(0,0,0),
-          }
+          invencibilidad: retornarComodin(true,tiempoRandom(0,0),0,0,Mundo,Mundo.inversion),
         })
 
-      } else if (comerItem(Mundo.snake, Mundo.comodines.tombos) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.tombos) == true) {
 
         return update (Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -356,15 +303,10 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          comodin: {
-            tombos: numeroRandomComida(Mundo.snake),
-          },
-          tiempos: {
-            tombos: retornarTiempos(0,0,0),
-          }
+          invencibilidad: retornarComodin(true,tiempoRandom(0,0),0,0,Mundo,Mundo.tombos),
         })
 
-      } else if (comerItem(Mundo.snake, Mundo.comodines.reduccionPuntos) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.reduccionPuntos) == true) {
 
         return update (Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -372,15 +314,10 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          comodin: {
-            reduccionPuntos: numeroRandomComida(Mundo.snake),
-          },
-          tiempos: {
-            reduccionPuntos: retornarTiempos(0,0,0),
-          }
+          invencibilidad: retornarComodin(true,tiempoRandom(0,0),0,0,Mundo,Mundo.reduccionPuntos),
         })
 
-      } else if (comerItem(Mundo.snake, Mundo.comodines.golpeAccionado) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.golpeAccionado) == true) {
         
         return update (Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -388,26 +325,21 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          comodin: {
-            golpeAccionado: numeroRandomComida(Mundo.snake),
-          },
-          tiempos: {
-            golpeAccionado: retornarTiempos(0,0,0),
-          }
+          invencibilidad: retornarComodin(true,tiempoRandom(0,0),0,0,Mundo,Mundo.golpeAccionado),
         })
 
       }
 
   // Si el tiempo Accionado de un comodín se encuentra diferente de 0
-  } else if (Mundo.tiempos.velocidad.tiempoAccionado != 0 ||
-    Mundo.tiempos.invencibilidad.tiempoAccionado != 0 ||
-    Mundo.tiempos.inversion.tiempoAccionado != 0 ||
-    Mundo.tiempos.tombos.tiempoAccionado != 0 ||
-    Mundo.tiempos.reduccionPuntos.tiempoAccionado != 0 ||
-    Mundo.tiempos.golpeAccionado.tiempoAccionado != 0){
+  } else if (Mundo.velocidad.tiempoAccionado != 0 ||
+    Mundo.invencibilidad.tiempoAccionado != 0 ||
+    Mundo.inversion.tiempoAccionado != 0 ||
+    Mundo.tombos.tiempoAccionado != 0 ||
+    Mundo.reduccionPuntos.tiempoAccionado != 0 ||
+    Mundo.golpeAccionado.tiempoAccionado != 0){
     
       //Tiempo accionado de Velocidad
-      if (Mundo.tiempos.velocidad.tiempoAccionado > 0) {
+      if (Mundo.velocidad.tiempoAccionado > 0) {
 
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -415,13 +347,11 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          tiempos: {
-            
-          }
+          velocidad: retornarComodin(false,tiempoAccionado - 1, 0, tiempoRandom(70-90)),
         });
 
       //Tiempo accionado de invencibilidad
-      } else if (Mundo.tiempos.invencibilidad.tiempoAccionado > 0) {
+      } else if (Mundo.invencibilidad.tiempoAccionado > 0) {
 
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -429,17 +359,11 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          tiempos: {
-            invencibilidad: {
-              tiempoAccionado: Mundo.tiempos.invencibilidad.tiempoAccionado - 1,
-              tiempoActivo: 0,
-              tiempoDesactivo: tiempoRandom(30,60) + Mundo.tiempos.velocidad.tiempoDesactivo + Mundo.tiempos.regeneracion.tiempoDesactivo + Mundo.tiempos.vidaMas.tiempoDesactivo + Mundo.tiempos.inversion.tiempoDesactivo + Mundo.tiempos.tombos.tiempoDesactivo + Mundo.tiempos.reduccionPuntos.tiempoDesactivo + Mundo.tiempos.golpeAccionado.tiempoDesactivo,
-            }
-          }
+          invencibilidad: retornarComodin(false,tiempoAccionado - 1, 0, tiempoRandom(70-90)),
         });
 
       //Tiempo accionado de inversion
-      } else if (Mundo.tiempos.inversion.tiempoAccionado > 0) {
+      } else if (Mundo.inversion.tiempoAccionado > 0) {
 
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -447,17 +371,11 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          tiempos: {
-            inversion: {
-              tiempoAccionado: Mundo.tiempos.inversion.tiempoAccionado - 1,
-              tiempoActivo: 0,
-              tiempoDesactivo: tiempoRandom(30,60) + Mundo.tiempos.invencibilidad.tiempoDesactivo + Mundo.tiempos.regeneracion.tiempoDesactivo + Mundo.tiempos.vidaMas.tiempoDesactivo + Mundo.tiempos.velocidad.tiempoDesactivo + Mundo.tiempos.tombos.tiempoDesactivo + Mundo.tiempos.reduccionPuntos.tiempoDesactivo + Mundo.tiempos.golpeAccionado.tiempoDesactivo,
-            }
-          }
+          inversion: retornarComodin(false,tiempoAccionado - 1, 0, tiempoRandom(70-90)),
         });
 
       //Tiempo accionado de tombos
-      } else if (Mundo.tiempos.tombos.tiempoAccionado > 0) {
+      } else if (Mundo.tombos.tiempoAccionado > 0) {
 
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -465,17 +383,11 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          tiempos: {
-            tombos: {
-              tiempoAccionado: Mundo.tiempos.tombos.tiempoAccionado - 1,
-              tiempoActivo: 0,
-              tiempoDesactivo: tiempoRandom(30,60) + Mundo.tiempos.invencibilidad.tiempoDesactivo + Mundo.tiempos.regeneracion.tiempoDesactivo + Mundo.tiempos.vidaMas.tiempoDesactivo + Mundo.tiempos.velocidad.tiempoDesactivo + Mundo.tiempos.velocidad.tiempoDesactivo + Mundo.tiempos.reduccionPuntos.tiempoDesactivo + Mundo.tiempos.golpeAccionado.tiempoDesactivo,
-            }
-          }
+          tombos: retornarComodin(false,tiempoAccionado - 1, 0, tiempoRandom(70-90)),
         });
 
       //Tiempo accionado de reduccionPuntos
-      } else if (Mundo.tiempos.reduccionPuntos.tiempoAccionado > 0) {
+      } else if (Mundo.reduccionPuntos.tiempoAccionado > 0) {
 
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -483,17 +395,11 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          tiempos: {
-            reduccionPuntos: {
-              tiempoAccionado: Mundo.tiempos.reduccionPuntos.tiempoAccionado - 1,
-              tiempoActivo: 0,
-              tiempoDesactivo: tiempoRandom(30,60) + Mundo.tiempos.invencibilidad.tiempoDesactivo + Mundo.tiempos.regeneracion.tiempoDesactivo + Mundo.tiempos.vidaMas.tiempoDesactivo + Mundo.tiempos.velocidad.tiempoDesactivo + Mundo.tiempos.tombos.tiempoDesactivo + Mundo.tiempos.velocidad.tiempoDesactivo + Mundo.tiempos.golpeAccionado.tiempoDesactivo,
-            }
-          }
+          reduccionPuntos: retornarComodin(false,tiempoAccionado - 1, 0, tiempoRandom(70-90)),
         });
 
       //Tiempo accionado de golpeAccionado
-      } else if (Mundo.tiempos.golpeAccionado.tiempoAccionado > 0) {
+      } else if (Mundo.golpeAccionado.tiempoAccionado > 0) {
 
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -501,13 +407,7 @@ function onTic(Mundo) {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          tiempos: {
-            inversion: {
-              tiempoAccionado: Mundo.tiempos.golpeAccionado.tiempoAccionado - 1,
-              tiempoActivo: 0,
-              tiempoDesactivo: tiempoRandom(30,60) + Mundo.tiempos.invencibilidad.tiempoDesactivo + Mundo.tiempos.regeneracion.tiempoDesactivo + Mundo.tiempos.vidaMas.tiempoDesactivo + Mundo.tiempos.velocidad.tiempoDesactivo + Mundo.tiempos.tombos.tiempoDesactivo + Mundo.tiempos.reduccionPuntos.tiempoDesactivo + Mundo.tiempos.velocidad.tiempoDesactivo,
-            }
-          }
+          golpeAccionado: retornarComodin(false,tiempoAccionado - 1, 0, tiempoRandom(70-90)),
         });
 
       }
@@ -671,14 +571,33 @@ Ejemplos:
 
 */
 
-function retornarTiempos(tiempoAccionado, tiempoActivo, tiempoDesactivo) {
-  let tiempo = {
+function retornarComodin(condicionPosiciones,tiempoAccionado,tiempoActivo,tiempoDesactivo,Mundo,comodin) {
+
+  if (condicionPosiciones == true) {
+    let item1 = numeroRandomComida(Mundo.snake)
+    
+
+    let item2 = {
     tiempoAccionado: tiempoAccionado,
     tiempoActivo: tiempoActivo,
     tiempoDesactivo: tiempoDesactivo,
-  }
+    }
 
-  return (tiempo);
+    return (update(item1,item2));
+
+  } else if (condicionPosiciones == false) {
+
+    item = {
+      x: comodin.x,
+      y: comodin.y,
+      tiempoAccionado: tiempoAccionado,
+      tiempoActivo: tiempoActivo,
+      tiempoDesactivo: tiempoDesactivo,
+    }
+
+    return (item);
+
+  }
 }
 
 /*
