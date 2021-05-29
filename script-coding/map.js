@@ -66,8 +66,8 @@ function setup() {
     tipe : "juego",
     timer: millis(),
     ñero: {
-      x: 18,
-      y: 10,
+      x: 26,
+      y: 13,
       dirx: true,
       diry: true,
     },
@@ -93,10 +93,7 @@ function setup() {
 	fill('white');
 	drawÑero(Mundo.ñero);
 	drawKnife(Mundo.knife);
-	fill('white');
-	textSize(12);
-	text('Tiempo:', 1, 12);
-	text(Mundo.timer, 45, 12);
+	
 }
 
 
@@ -180,19 +177,23 @@ function drawUi(){
   textAlign(LEFT);
   text("SCORE: " + Mundo.score,20,45);
   textAlign(RIGHT)
-  text("LIVES: " + countLives,540,45)
+  text("LIVES: " + countLives,540,45);
+  textSize(30);
+  text("Tiempo: " + Mundo.timer, 350, 45);
+  
+}
 function ñeroMove(ñero) {
   if (
-    (ñero.dirx == true && ñero.y != 18 && ñero.diry == true) ||
-    (ñero.x == 18 && ñero.diry == false)
+    (ñero.dirx == true && ñero.y != 24 && ñero.diry == true) ||
+    (ñero.x == 26 && ñero.diry == false)
   ) {
-    return { x: 18, y: ñero.y + 1, dirx: true, diry: true };
+    return { x: ñero.x, y: ñero.y + 1, dirx: true, diry: true };
   }
-  if (ñero.y == 18) {
-    return { x: 18, y: ñero.y - 1, dirx: false, diry: true };
+  if (ñero.y == 24) {
+    return { x: ñero.x, y: ñero.y - 1, dirx: false, diry: true };
   }
   if (ñero.dirx == false && ñero.y != 1) {
-    return { x: 18, y: ñero.y - 1, dirx: false, diry: true };
+    return { x: ñero.x, y: ñero.y - 1, dirx: false, diry: true };
   }
   if (ñero.y == 1 && ñero.dirx == false && ñero.x != 1 && ñero.diry == true) {
     return { x: ñero.x - 1, y: 1, dirx: false, diry: true };
@@ -204,7 +205,7 @@ function ñeroMove(ñero) {
     return { x: ñero.x + 1, y: 1, dir: true, diry: false };
   }
 }
-}
+
 
 function moveKnife(knife) {
   return {x: knife.x-1,y:knife.y}
@@ -254,6 +255,8 @@ function onTic(Mundo) {
 		textSize(50);
 		text(' Has perdido', width / 2, height / 2);
 		text(Mundo.score, width / 2, height / 1.5);
+    textSize(12);
+    textAlign(none);
 		rect(
 			Mundo.cuadradoFinal.x * lado,
 			Mundo.cuadradoFinal.y * lado,
@@ -271,8 +274,8 @@ function onTic(Mundo) {
 					y: Math.floor(Math.random() * (20 - 0) + 0),
 				},
 				score: Mundo.score + 1,
-				// ñero: ñeroMove(Mundo.ñero),
-				// knife: moveKnife(Mundo.knife)
+				ñero: ñeroMove(Mundo.ñero),
+				knife: moveKnife(Mundo.knife)
 			});
 		} else {
 			return update(Mundo, {
@@ -281,8 +284,8 @@ function onTic(Mundo) {
 					x: Mundo.snake[Mundo.snake.length - 1].x,
 					y: Mundo.snake[Mundo.snake.length - 1].y,
 				},
-				// ñero: ñeroMove(Mundo.ñero),
-				// timer: int(millis()/1000)
+				ñero: ñeroMove(Mundo.ñero),
+				timer: int(millis()/1000)
 			});
 		}
 		// return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
