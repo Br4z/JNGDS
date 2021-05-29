@@ -1,4 +1,5 @@
 //Inicio de la rama Comodines (Sebastián Idrobo)
+//Mundo.comodines
 let { append, cons, first, isEmpty, isList, length, rest, map, forEach } =
   functionalLight;
 
@@ -212,6 +213,7 @@ function drawGame(Mundo) {
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
 
+  console.log(Mundo.tiempos);
   // Si Snake se choca con la pared o con ella misma
   if (
     Mundo.snake[0].x > columnas - 1 ||
@@ -291,10 +293,10 @@ function onTic(Mundo) {
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           comodin: {
-            velocidad: numeroRandomComida(Mundo.snake),
+            invencibilidad: numeroRandomComida(Mundo.snake),
           },
           tiempos: {
-            velocidad: retornarTiempos(0,0,0),
+            invencibilidad: retornarTiempos(0,0,0),
           }
         })
 
@@ -307,10 +309,10 @@ function onTic(Mundo) {
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           comodin: {
-            velocidad: numeroRandomComida(Mundo.snake),
+            regeneracion: numeroRandomComida(Mundo.snake),
           },
           tiempos: {
-            velocidad: retornarTiempos(0,0,0),
+            regeneracion: retornarTiempos(0,0,0),
           }
         })
 
@@ -323,10 +325,10 @@ function onTic(Mundo) {
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           comodin: {
-            velocidad: numeroRandomComida(Mundo.snake),
+            vidaMas: numeroRandomComida(Mundo.snake),
           },
           tiempos: {
-            velocidad: retornarTiempos(0,0,0),
+            vidaMas: retornarTiempos(0,0,0),
           }
         })
 
@@ -339,10 +341,10 @@ function onTic(Mundo) {
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           comodin: {
-            velocidad: numeroRandomComida(Mundo.snake),
+            inversion: numeroRandomComida(Mundo.snake),
           },
           tiempos: {
-            velocidad: retornarTiempos(0,0,0),
+            inversion: retornarTiempos(0,0,0),
           }
         })
 
@@ -355,10 +357,10 @@ function onTic(Mundo) {
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           comodin: {
-            velocidad: numeroRandomComida(Mundo.snake),
+            tombos: numeroRandomComida(Mundo.snake),
           },
           tiempos: {
-            velocidad: retornarTiempos(0,0,0),
+            tombos: retornarTiempos(0,0,0),
           }
         })
 
@@ -371,10 +373,10 @@ function onTic(Mundo) {
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           comodin: {
-            velocidad: numeroRandomComida(Mundo.snake),
+            reduccionPuntos: numeroRandomComida(Mundo.snake),
           },
           tiempos: {
-            velocidad: retornarTiempos(0,0,0),
+            reduccionPuntos: retornarTiempos(0,0,0),
           }
         })
 
@@ -387,10 +389,10 @@ function onTic(Mundo) {
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           comodin: {
-            velocidad: numeroRandomComida(Mundo.snake),
+            golpeAccionado: numeroRandomComida(Mundo.snake),
           },
           tiempos: {
-            velocidad: retornarTiempos(0,0,0),
+            golpeAccionado: retornarTiempos(0,0,0),
           }
         })
 
@@ -402,8 +404,8 @@ function onTic(Mundo) {
     Mundo.tiempos.inversion.tiempoAccionado != 0 ||
     Mundo.tiempos.tombos.tiempoAccionado != 0 ||
     Mundo.tiempos.reduccionPuntos.tiempoAccionado != 0 ||
-    Mundo.tiempos.golpeAccionado != 0){
-
+    Mundo.tiempos.golpeAccionado.tiempoAccionado != 0){
+    
       //Tiempo accionado de Velocidad
       if (Mundo.tiempos.velocidad.tiempoAccionado > 0) {
 
@@ -414,11 +416,7 @@ function onTic(Mundo) {
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           tiempos: {
-            velocidad: {
-              tiempoAccionado: Mundo.tiempos.velocidad.tiempoAccionado - 1,
-              tiempoActivo: 0,
-              tiempoDesactivo: tiempoRandom(30,60) + Mundo.tiempos.invencibilidad.tiempoDesactivo + Mundo.tiempos.regeneracion.tiempoDesactivo + Mundo.tiempos.vidaMas.tiempoDesactivo + Mundo.tiempos.inversion.tiempoDesactivo + Mundo.tiempos.tombos.tiempoDesactivo + Mundo.tiempos.reduccionPuntos.tiempoDesactivo + Mundo.tiempos.golpeAccionado.tiempoDesactivo,
-            }
+            
           }
         });
 
@@ -674,13 +672,13 @@ Ejemplos:
 */
 
 function retornarTiempos(tiempoAccionado, tiempoActivo, tiempoDesactivo) {
-  let comida = {
+  let tiempo = {
     tiempoAccionado: tiempoAccionado,
     tiempoActivo: tiempoActivo,
     tiempoDesactivo: tiempoDesactivo,
   }
 
-  return (comida);
+  return (tiempo);
 }
 
 /*
