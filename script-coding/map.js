@@ -1,5 +1,5 @@
 //Inicio de la rama Comodines (Sebastián Idrobo)
-//Mundo.comodines
+//Mundo.comodines console.log
 let { append, cons, first, isEmpty, isList, length, rest, map, forEach } =
   functionalLight;
 
@@ -171,7 +171,7 @@ function drawGame(Mundo) {
   drawFood(Mundo.food);
 
   if (Mundo.velocidad.tiempoActivo > 0) {
-    drawComodin1(Mundo.comodines.velocidad);
+    drawComodin1(Mundo.velocidad);
   }
 
   drawSnake(Mundo.snake);
@@ -182,10 +182,10 @@ function drawGame(Mundo) {
 
   frameRate(rate);
   
-  if (Mundo.velocidad.tiempoActivo == 0) {
-    rate = 8;
-  } else {
+  if (Mundo.velocidad.tiempoAccionado == 0) {
     rate = 5;
+  } else {
+    rate = 8;
 
     //Mundo.tiempo.tiempoVelocidadAccionado = Mundo.tiempo.tiempoVelocidadAccionado - 1;
   }
@@ -193,8 +193,7 @@ function drawGame(Mundo) {
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
-
-  console.log(Mundo.tiempos);
+console.log(Mundo.velocidad);
   // Si Snake se choca con la pared o con ella misma
   if (
     Mundo.snake[0].x > columnas - 1 ||
@@ -220,7 +219,6 @@ function onTic(Mundo) {
     Mundo.snake[0].x == Mundo.food.x &&
     Mundo.snake[0].y == Mundo.food.y
   ) {
-    console.log(Mundo.comodines)
     Mundo.snake.push({ x: 5, y: 5 });
     return update(Mundo, {
       snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -340,14 +338,14 @@ function onTic(Mundo) {
     
       //Tiempo accionado de Velocidad
       if (Mundo.velocidad.tiempoAccionado > 0) {
-
+        console.log(Mundo)
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           cuadradoFinal: {
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          velocidad: retornarComodin(false,tiempoAccionado - 1, 0, tiempoRandom(70-90)),
+          velocidad: retornarComodin(false,Mundo.velocidad.tiempoAccionado - 1, 0, tiempoRandom(70-90),Mundo,Mundo.velocidad),
         });
 
       //Tiempo accionado de invencibilidad
@@ -552,7 +550,6 @@ Propósito: Retornar si las posiciones 'x' y 'y' coinciden con la cabeza de Snak
 Contrato: listaDeItems, JSON -> boolean
 Prototipo: comerItem(snake,item)
 Ejemplos:
-
 */
 
 function comerItem(snake,item) {
@@ -568,15 +565,12 @@ Propósito: Retornar en una sola variable los parámetros introducidos por el us
 Contrato: number,number,number -> JSON
 Prototipo: retortarTiempos(tiempoAccionado, tiempoActivo, tiempoDesactivo)
 Ejemplos:
-
 */
 
 function retornarComodin(condicionPosiciones,tiempoAccionado,tiempoActivo,tiempoDesactivo,Mundo,comodin) {
 
   if (condicionPosiciones == true) {
     let item1 = numeroRandomComida(Mundo.snake)
-    
-
     let item2 = {
     tiempoAccionado: tiempoAccionado,
     tiempoActivo: tiempoActivo,
@@ -605,7 +599,4 @@ Propósito:
 Contrato: 
 Prototipo: 
 Ejemplos:
-
 */
-
-
