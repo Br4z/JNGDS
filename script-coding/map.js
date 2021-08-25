@@ -154,7 +154,7 @@ function setup() {
     },    
     lives: 3,
     tipe : "juego",
-    timer: millis(),
+    timer: int(millis()/1000),
     ñero: {
       x: 26,
       y: 13,
@@ -347,7 +347,7 @@ console.log(Mundo.velocidad);
         x: 0,
         y: 0,
       },
-      score: 0,
+      score: Mundo.score,
       velocidad: {
         x: int(random(columnas)),
         y: int(random(columnas)),
@@ -451,7 +451,7 @@ console.log(Mundo.velocidad);
 				ñero: ñeroMove(Mundo.ñero),
 				knife: moveKnife(Mundo.knife)
 			});
-		 } else if (comerItem(Mundo.snake, Mundo.velocidad) == true ||
+		} else if (comerItem(Mundo.snake, Mundo.velocidad) == true ||
   comerItem(Mundo.snake, Mundo.invencibilidad) == true ||
   comerItem(Mundo.snake, Mundo.regeneracion) == true ||
   comerItem(Mundo.snake, Mundo.vidaMas) == true ||
