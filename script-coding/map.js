@@ -30,8 +30,6 @@ let derecha;
 let izquierda;
 
 
-//Imagen de Canvas
-let fondo;
 
 /**
  * Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola
@@ -70,7 +68,7 @@ function drawSnake(snake) {
 }
 
 function drawComodin1(comodin1) {
-  fill("blue");
+  fill("yellow");
   rect(comodin1.x * lado, comodin1.y * lado, lado, lado);
 }
 
@@ -154,10 +152,6 @@ function setup() {
       tiempoActivo: tiempoRandom(30,50),
       tiempoDesactivo: tiempoRandom(30,50),
     },    
-  
-
-
-
     lives: 3,
     tipe : "juego",
     timer: millis(),
@@ -172,9 +166,11 @@ function setup() {
       y: 10,
     },
   };
+};
 
 
 // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
+var rate
   function drawGame(Mundo) {
   background(fondo);
   drawUi();
@@ -188,6 +184,7 @@ function setup() {
 	fill('white');
 	drawÑero(Mundo.ñero);
 	drawKnife(Mundo.knife);
+  drawComodin1(Mundo.velocidad);
 	
   frameRate(rate);
   
@@ -325,6 +322,7 @@ function ñeroUpdate() {}
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo) {
+console.log(Mundo.velocidad);
 	if (
 		(Mundo.snake[0].x > columnas - 1 ||
 			Mundo.snake[0].y > filas - 1 ||
@@ -334,26 +332,91 @@ function onTic(Mundo) {
 		Mundo.lives >= 1
 	) {
 		countLives = Mundo.lives - 1;
-		Mundo = {
-			snake: [
-				{ x: columnas / 2, y: filas / 2 },
-				{ x: columnas / 2 - 1, y: filas / 2 },
-				{ x: columnas / 2 - 2, y: filas / 2 },
-			],
-			dir: derecha,
-			food: {
-				x: int(random(columnas)),
-				y: int(random(filas)),
-			},
-			cuadradoFinal: {
-				x: 0,
-				y: 0,
-			},
-			score: 0,
-			lives: Mundo.lives - 1,
-			tipe: 'juego',
-		};
-		return Mundo;
+    return update(Mundo, {
+      snake: [
+        { x: columnas / 2, y: filas / 2 },
+        { x: columnas / 2 - 1, y: filas / 2 },
+        { x: columnas / 2 - 2, y: filas / 2 },
+      ],
+      dir: derecha,
+      food: {
+        x: int(random(columnas)),
+        y: int(random(filas)),
+      },
+      cuadradoFinal: {
+        x: 0,
+        y: 0,
+      },
+      score: 0,
+      velocidad: {
+        x: int(random(columnas)),
+        y: int(random(columnas)),
+        tiempoAccionado: 0,
+        tiempoActivo: tiempoRandom(30,50),
+        tiempoDesactivo: tiempoRandom(30,50),
+      },
+      invencibilidad: {
+        x: int(random(columnas)),
+        y: int(random(columnas)),
+        tiempoAccionado: 0,
+        tiempoActivo: tiempoRandom(30,50),
+        tiempoDesactivo: tiempoRandom(30,50),
+      },
+      regeneracion: {
+        x: int(random(columnas)),
+        y: int(random(columnas)),
+        tiempoActivo: tiempoRandom(30,50),
+        tiempoDesactivo: tiempoRandom(30,50),
+      },
+      vidaMas: {
+        x: int(random(columnas)),
+        y: int(random(columnas)),
+        tiempoActivo: tiempoRandom(30,50),
+        tiempoDesactivo: tiempoRandom(30,50),
+      },
+      inversion: {
+        x: int(random(columnas)),
+        y: int(random(columnas)),
+        tiempoAccionado: 0,
+        tiempoActivo: tiempoRandom(30,50),
+        tiempoDesactivo: tiempoRandom(30,50),
+      },
+      tombos: {
+        x: int(random(columnas)),
+        y: int(random(columnas)),
+        tiempoAccionado: 0,
+        tiempoActivo: tiempoRandom(30,50),
+        tiempoDesactivo: tiempoRandom(30,50),
+      },
+      reduccionPuntos: {
+        x: int(random(columnas)),
+        y: int(random(columnas)),
+        tiempoAccionado: 0,
+        tiempoActivo: tiempoRandom(30,50),
+        tiempoDesactivo: tiempoRandom(30,50),
+      },
+      golpeAccionado: {
+        x: int(random(columnas)),
+        y: int(random(columnas)),
+        tiempoAccionado: 0,
+        tiempoActivo: tiempoRandom(30,50),
+        tiempoDesactivo: tiempoRandom(30,50),
+      },    
+      lives: Mundo.lives -1,
+      tipe : "juego",
+      timer: millis(),
+      ñero: {
+        x: 26,
+        y: 13,
+        dirx: true,
+        diry: true,
+      },
+      knife: {
+        x: 18,
+        y: 10,
+      },
+    });
+
 	} else if (
 		Mundo.snake[0].x > columnas - 1 ||
 		Mundo.snake[0].y > filas - 1 ||
