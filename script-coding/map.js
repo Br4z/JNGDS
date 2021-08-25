@@ -186,7 +186,6 @@ function drawGame(Mundo) {
     rate = 5;
   } else {
     rate = 8;
-
     //Mundo.tiempo.tiempoVelocidadAccionado = Mundo.tiempo.tiempoVelocidadAccionado - 1;
   }
 }
@@ -345,7 +344,7 @@ console.log(Mundo.velocidad);
             x: Mundo.snake[Mundo.snake.length - 1].x,
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
-          velocidad: retornarComodin(false,Mundo.velocidad.tiempoAccionado - 1, 0, tiempoRandom(70-90),Mundo,Mundo.velocidad),
+          velocidad: retornarComodin(false,Mundo.velocidad.tiempoAccionado - 1, 0, Mundo.velocidad.tiempoDesactivo,Mundo,Mundo.velocidad),
         });
 
       //Tiempo accionado de invencibilidad
@@ -410,9 +409,8 @@ console.log(Mundo.velocidad);
 
       }
     
-
-  //Snake normal
-  } else {
+//Snake normal
+} else if ((Mundo.velocidad.tiempoActivo != 0)) {
 
     return update(Mundo, {
       snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -420,8 +418,17 @@ console.log(Mundo.velocidad);
         x: Mundo.snake[Mundo.snake.length - 1].x,
         y: Mundo.snake[Mundo.snake.length - 1].y,
       },
+      velocidad: retornarComodin(false, Mundo.velocidad.tiempoAccionado, Mundo.velocidad.tiempoActivo - 1, Mundo.velocidad.tiempoDesactivo, Mundo, Mundo.velocidad),
     });
 
+  } else {
+    return update(Mundo, {
+      snake: moveSnake(Mundo.snake, Mundo.dir),
+      cuadradoFinal: {
+        x: Mundo.snake[Mundo.snake.length - 1].x,
+        y: Mundo.snake[Mundo.snake.length - 1].y,
+      },
+    });
   }
 }
 
