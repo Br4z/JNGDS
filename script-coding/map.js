@@ -447,6 +447,7 @@ console.log(Mundo.velocidad);
 					y: Math.floor(Math.random() * (20 - 0) + 0),
 				},
 				score: Mundo.score + 1,
+        timer: int(millis()/1000),
 				ñero: ñeroMove(Mundo.ñero),
 				knife: moveKnife(Mundo.knife)
 			});
@@ -470,6 +471,7 @@ console.log(Mundo.velocidad);
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           velocidad: retornarComodin(true,tiempoRandom(30,50),0,90,Mundo,Mundo.velocidad),
+          timer: int(millis()/1000)
         })
 
       } else if (comerItem(Mundo.snake,Mundo.invencibilidad) == true) {
@@ -569,6 +571,7 @@ console.log(Mundo.velocidad);
             y: Mundo.snake[Mundo.snake.length - 1].y,
           },
           velocidad: retornarComodin(false,Mundo.velocidad.tiempoAccionado - 1, 0, Mundo.velocidad.tiempoDesactivo,Mundo,Mundo.velocidad),
+          timer: int(millis()/1000)
         });
 
       //Tiempo accionado de invencibilidad
@@ -643,6 +646,7 @@ console.log(Mundo.velocidad);
         y: Mundo.snake[Mundo.snake.length - 1].y,
       },
       velocidad: retornarComodin(false, Mundo.velocidad.tiempoAccionado, Mundo.velocidad.tiempoActivo - 1, Mundo.velocidad.tiempoDesactivo, Mundo, Mundo.velocidad),
+      timer: int(millis()/1000)
     });
 
   }
