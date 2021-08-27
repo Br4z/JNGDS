@@ -1,0 +1,101 @@
+/* llamar a la fuente */
+
+@font-face {
+  font-family: "mister-pixel";
+  src: url("mister-pixel.ttf");
+}
+
+/* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-image: url(/backgrounds/FondoP.png); /* Fondo principal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+}
+
+.canvas {
+  height: 100px;
+  border: 4px solid black;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Esta es la animacion del boton base */
+
+.btn-neon {
+  margin: 10px;
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  color: #fff;
+  letter-spacing: 4px;
+  font-size: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.btn-neon:hover {
+  background: rgb(187, 187, 8);
+  box-shadow: 0 0 10px rgb(187, 187, 8), 0 0 40px rgb(187, 187, 8), 0 0 80px rgb(187, 187, 8);
+  transition-delay: 0.4s;
+}
+
+.btn-neon span {
+  position: absolute;
+  display: block;
+}
+
+.span {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, rgb(187, 187, 8));
+}
+
+.btn-neon:hover .span {
+  right: 100%;
+  transition: 1s;
+}
+
+/* Con la ayuda de id's y clases logro reciclar la animacion anterior, pero con diferentes colores */
+
+/* Boton azul */
+#azul:hover {
+  background: rgb(7, 31, 161);
+  box-shadow: 0 0 10px rgb(7, 31, 161), 0 0 40px rgb(7, 31, 161), 0 0 80px rgb(7, 31, 161);
+}
+
+#spanAzul {
+  background: linear-gradient(270deg, transparent, rgb(7, 31, 161));
+}
+
+/* Boton rojo */
+
+#rojo:hover {
+  background: rgb(156, 20, 20);
+  box-shadow: 0 0 10px rgb(156, 20, 20), 0 0 40px rgb(156, 20, 20), 0 0 80px rgb(156, 20, 20);
+}
+
+#spanRojo {
+  background: linear-gradient(270deg, transparent, rgb(156, 20, 20));
+}
+
+.contenedorPrincipal {
+  display: flex;
+  flex-direction: row;
+}
