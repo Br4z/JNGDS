@@ -62,14 +62,6 @@ let countLives = 3 ;
 let fondo;
 
 
-
-function drawSnake(snake) {
-fill("white");
-forEach(snake, (s) => {
-  rect(s.x * lado, s.y * lado, lado, lado);
-});
-}
-
 function drawComodin1(comodin1) {
 fill("yellow");
 rect(comodin1.x * lado, comodin1.y * lado, lado, lado);
@@ -164,10 +156,11 @@ Mundo = {
     dirx: true,
     diry: true,
   },
-  knife: {
+  knife:[
+  {
     x: 18,
     y: 10,
-  },
+  }],
 };
 };
 
@@ -182,9 +175,11 @@ fill(240, 240, 240);
 stroke(10, 10, 10);
 strokeWeight(4);
 drawFood(Mundo.food);
+//esta funcion dibuja al snake
 forEach(Mundo.snake, (s) => {
   rect(s.x * lado, s.y * lado, lado, lado);
 });
+//
 fill('white');
 drawÑero(Mundo.ñero);
 drawKnife(Mundo.knife);
@@ -200,28 +195,6 @@ if (Mundo.velocidad.tiempoAccionado == 0) {
 }
 }
 
-
-
-
-// Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
-
-function moveSnake(snake, dir) {
-const head = first(snake);
-return cons(
-  { x: head.x + dir.x, y: head.y + dir.y },
-  snake.slice(0, length(snake) - 1)
-);
-}
-
-
-
-// Dibuja la comida.
-
-
-function drawFood(food) {
-fill("crimson");
-rect(food.x * lado, food.y * lado, lado, lado);
-}
 
 // Funcion del Fondo.
 
