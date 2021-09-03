@@ -264,33 +264,9 @@ function setup() {
   };
 }
 
-var color;
+var color = '#3b3b63';
 //Funciones Importantes
-function recorrerListaFuncional(list, indice) {
-  if (indice != list.length) {
-    if (list[indice] == 0) {
-      color = '#03fc7b';
-    }
-    if (list[indice] == 1) {
-      color = '#03fc7b';
-    }
-    if (list[indice] == 2) {
-      color = '#03fc7b';
-    }
-    strokeWeight(0.1);
-    stroke(color);
-    rect(x * lado, y * lado, lado, lado);
-    recorrerListaFuncional(list, indice + 1);
-  }
-}
-
-// Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar.
-
-var rate;
-function drawGame(Mundo) {
-  background(fondo);
-  drawUi();
-  // escenario.forEach((element) => recorrerListaFuncional(element, 0));
+function dibujaCuadricula() {
   for (y = 0; y < escenario.length; y++) {
     for (x = 0; x < escenario[y].length; x++) {
       if (escenario[y][x] == 0) {
@@ -304,10 +280,19 @@ function drawGame(Mundo) {
       }
       strokeWeight(0.1);
       stroke(color);
-      // fill(51);
-      rect(x*lado, y*lado, lado, lado);
+      fill(51);
+      rect(x * lado, y * lado, lado, lado);
     }
   }
+}
+
+// Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar.
+
+var rate;
+function drawGame(Mundo) {
+  background(fondo);
+  drawUi();
+  // dibujaCuadricula();
 
   fill(240, 240, 240);
   stroke(10, 10, 10);
