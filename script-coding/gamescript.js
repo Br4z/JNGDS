@@ -1,144 +1,54 @@
-let { append, cons, first, isEmpty, isList, length, rest, map, forEach } =
-  functionalLight;
+/*INTRODUCCION*/
+
+// Importar Funcional Light
+let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = functionalLight;
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
-
 function update(data, attribute) {
   return Object.assign({}, data, attribute);
 }
 
-//////////////////////// Mundo inicial
+// Mundo inicial
 let Mundo = {};
-////////////////////////
-// Constantes para las escalas del canvas:
 
+// Constantes para las escalas del canvas
 const columnas = 28;
 const filas = 26;
 const lado = 20;
 const ancho_canvas = columnas * lado;
 const alto_canvas = filas * lado;
-let canvas;
+//let canvas; TODO DEBERIA BORRARSE?
 
 // Medidas Actuales:
-// ANCHO: 560
-// ALTO: 520
+// ANCHO: 560  -------  // ALTO: 520
 
 // Constantes de control.
-
 let arriba;
 let abajo;
 let derecha;
 let izquierda;
 
-//Escenario
-const escenario = [
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-];
+/* Constante de juego: */
+//El puntaje del personaje:
+let score;
+//Contador de vidas:
+let countLives = 3;
+//Imagen de fondo del canvas:
+let fondo;
 
-// Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
+
+/*COSAS DEL SNAKE*/
+
+// TODO Movimiento de la serpiente
+function moveSnake(snake, dir) {
+  const head = first(snake);
+  return cons(
+    { x: head.x + dir.x, y: head.y + dir.y },
+    snake.slice(0, length(snake) - 1)
+  );
+}
+
+// TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
 
 function moveSnake(snake, dir) {
   const head = first(snake);
@@ -148,27 +58,19 @@ function moveSnake(snake, dir) {
   );
 }
 
-// Dibuja la comida.
-
+// TODO Dibujar la comida
 function drawFood(food) {
   fill('crimson');
   rect(food.x * lado, food.y * lado, lado, lado);
 }
 
-// Constante de juego:
-//--> El puntaje del personaje:
-let score;
-//--> Contador de vidas:
-let countLives = 3;
-//--> Imagen de fondo del canvas:
-let fondo;
-
+// TODO Dibujar el Comodin #1
 function drawComodin1(comodin1) {
   fill('yellow');
   rect(comodin1.x * lado, comodin1.y * lado, lado, lado);
 }
 
-// Esto se llama antes de iniciar el juego
+/* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
 
 function setup() {
   frameRate(7);
@@ -176,22 +78,41 @@ function setup() {
   windowRezired();
   direcciones();
 
+  //Actualizar el Mundo, colocando lo que va a tener una vez se inicie el Juego
   Mundo = {
+    //Determinar la  posicion que aparecera el Snake
     snake: [
       { x: columnas / 2, y: filas / 2 },
       { x: columnas / 2 - 1, y: filas / 2 },
       { x: columnas / 2 - 2, y: filas / 2 },
     ],
+    //Direccion por la que empieza el Snake
     dir: derecha,
+    //Posicion de la Comida (Será Random)
     food: {
       x: int(random(columnas)),
       y: int(random(filas)),
     },
+    //TODO SE PODRA BORRAR? PARA QUE SIRVE?
     cuadradoFinal: {
       x: 0,
       y: 0,
     },
+    //Puntacion Inicial
     score: 0,
+
+    /* FUNCIONAMIENTO DE COMODIN
+      nombreComodin: {
+        x: PosX;
+        y: PosY;
+        tiempoAccionado: Tiempo que dibujar
+        tiempoActivo: Tiempo que dura en el mapa
+        TiempoDesactivo: Tiempo en el cual no esta en el mapa
+      }
+     */
+
+    /* COMODINES POSITIVOS */
+    // Comodin de Velocidad
     velocidad: {
       x: int(random(columnas)),
       y: int(random(columnas)),
@@ -199,6 +120,7 @@ function setup() {
       tiempoActivo: tiempoRandom(30, 50),
       tiempoDesactivo: tiempoRandom(30, 50),
     },
+    //Comodin de invencibilidad
     invencibilidad: {
       x: int(random(columnas)),
       y: int(random(columnas)),
@@ -206,18 +128,23 @@ function setup() {
       tiempoActivo: tiempoRandom(30, 50),
       tiempoDesactivo: tiempoRandom(30, 50),
     },
+    //Comodin de regeneracion
     regeneracion: {
       x: int(random(columnas)),
       y: int(random(columnas)),
       tiempoActivo: tiempoRandom(30, 50),
       tiempoDesactivo: tiempoRandom(30, 50),
     },
+    //Comodin para tener una vida más
     vidaMas: {
       x: int(random(columnas)),
       y: int(random(columnas)),
       tiempoActivo: tiempoRandom(30, 50),
       tiempoDesactivo: tiempoRandom(30, 50),
     },
+
+    /* COMODINES MALOS */
+    //Comodin para Inversion ( Invertir las teclas )
     inversion: {
       x: int(random(columnas)),
       y: int(random(columnas)),
@@ -225,6 +152,7 @@ function setup() {
       tiempoActivo: tiempoRandom(30, 50),
       tiempoDesactivo: tiempoRandom(30, 50),
     },
+    //Comodin de Tombos (Crear varias snakes que ataquen al snake)
     tombos: {
       x: int(random(columnas)),
       y: int(random(columnas)),
@@ -232,6 +160,7 @@ function setup() {
       tiempoActivo: tiempoRandom(30, 50),
       tiempoDesactivo: tiempoRandom(30, 50),
     },
+    //Comodin para reducir los Puntos
     reduccionPuntos: {
       x: int(random(columnas)),
       y: int(random(columnas)),
@@ -239,6 +168,7 @@ function setup() {
       tiempoActivo: tiempoRandom(30, 50),
       tiempoDesactivo: tiempoRandom(30, 50),
     },
+    //Comodin que aparece con el jefe y te mata instantaneamente
     golpeAccionado: {
       x: int(random(columnas)),
       y: int(random(columnas)),
@@ -246,15 +176,19 @@ function setup() {
       tiempoActivo: tiempoRandom(30, 50),
       tiempoDesactivo: tiempoRandom(30, 50),
     },
+
+    //Numero de vidas inicial
     lives: 3,
-    tipe: 'juego',
+    //El tiempo
     timer: int(millis() / 1000),
+    //Jefe Ñero
     ñero: {
       x: 26,
       y: 13,
       dirx: true,
       diry: true,
     },
+    //Ataque de Ñero
     knife: [
       {
         x: 18,
@@ -264,48 +198,66 @@ function setup() {
   };
 }
 
-var color = '#3b3b63';
+/* TABLERO O ESCENARIO */
 //Funciones Importantes
 function dibujaCuadricula() {
   for (y = 0; y < escenario.length; y++) {
     for (x = 0; x < escenario[y].length; x++) {
       if (escenario[y][x] == 0) {
-        color = '#3b3b63';
-      }
+        strokeWeight(0.1);
+        stroke('#03fc7b');
+        fill(51);
+        rect(x * lado, y * lado, lado, lado);
       if (escenario[y][x] == 1) {
-        color = '#03fc7b';
+        strokeWeight(0.1);
+        stroke('#03fc7b');
+        fill(51);
+        rect(x * lado, y * lado, lado, lado);
       }
       if (escenario[y][x] == 2) {
-        color = '#03fc7b';
+        strokeWeight(0.1);
+        stroke('#03fc7b');
+        fill(51);
+        rect(x * lado, y * lado, lado, lado);
       }
-      strokeWeight(0.1);
-      stroke(color);
-      fill(51);
-      rect(x * lado, y * lado, lado, lado);
     }
   }
 }
+}
 
-// Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar.
+/* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 
+//TODO Es mejor borrar esta vaina del rate ome.
 var rate;
-function drawGame(Mundo) {
-  background(fondo);
-  drawUi();
-  // dibujaCuadricula();
 
+function drawGame(Mundo) {
+  //Definir el background del Canvas
+  background(fondo);
+  //Llamar a drawUi
+  drawUi();
+  //Dibujar la Cuadricula
+  dibujaCuadricula();
+
+  //Fill => Color de relleno
   fill(240, 240, 240);
+  //Stroke => color de los bordes
   stroke(10, 10, 10);
+  //StrokeWeight => Define el ancho
   strokeWeight(4);
+  //Dibuja la comida en una posicion random
   drawFood(Mundo.food);
-  //esta funcion dibuja al snake
+  //Esta funcion dibuja al snake
   forEach(Mundo.snake, (s) => {
     rect(s.x * lado, s.y * lado, lado, lado);
   });
-  //
+
+  //TODO REVISAR ESTE FILL
   fill('white');
+  //Dibujar a Ñero
   drawÑero(Mundo.ñero);
+  //Dibujar Knife
   drawKnife(Mundo.knife);
+  //Dibujar Comodin #!
   drawComodin1(Mundo.velocidad);
 
   frameRate(rate);
@@ -318,15 +270,34 @@ function drawGame(Mundo) {
   }
 }
 
-// Funcion del Fondo.
+/*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
+function drawUi() {
+  //fill => color de relleno del texto
+  fill(255, 255, 255);
+  //stroke => color del borde del texto
+  stroke(50, 150, 50);
+  //strokeWeight => anchura del borde del texto
+  strokeWeight(4);
+  //textSize => tamaño de la fuente
+  textSize(30);
+  //textAlign => alineacion del texto
+  textAlign(LEFT);
+  text('SCORE: ' + Mundo.score, 20, 45);//texto en el que se muestra conteo de la puntuacion
+  textAlign(RIGHT);//alineacion del texto que muestra el score
+  text('LIVES: ' + countLives, 540, 45);//texto en el que se muestra el contador de vidas
+  textSize(30);//tamaño de la fuente
+  text('Tiempo: ' + Mundo.timer, 350, 45);//temporizador
+}
 
+/* DRAW FONDO : DIBUJA EL FONDO DEL CANVAS */
 function drawfondo() {
-  fondo = loadImage('/backgrounds/FondoS.jpg');
+  fondo = loadImage('/backgrounds/FondoS.jpg');//añadimos la imagen
   createCanvas(ancho_canvas, alto_canvas);
   background(fondo);
 }
 
-// Direcciones.
+
+/* TODO DIRECCIONES DEL SNAKE */
 function direcciones() {
   abajo = createVector(0, 1);
   arriba = createVector(0, -1);
@@ -334,14 +305,13 @@ function direcciones() {
   derecha = createVector(1, 0);
 }
 
-// Posicionar comida.
 
+/* POSICIONAR LA COMIDA DE FORMA ALEATORIA */
 function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
 }
 
-// Hacer que se vea bien en cualquier dimension.
-
+/* WINDOWREZIRED: MEJORAR COMO SE VE EN LA PANTALLA EN CUANTO A ESCALAS */
 function windowRezired() {
   let escala = windowWidth / width;
   if (escala >= 1) {
@@ -351,6 +321,8 @@ function windowRezired() {
   canvas.style('height', height * escala + 'px');
 }
 
+
+//Dibuja el arma que utiliza el enemigo 'ñero' en este caso un cuchillo(knife)
 function drawKnife(knife) {
   fill('green');
   triangle(
@@ -363,28 +335,18 @@ function drawKnife(knife) {
   );
 }
 
+//Funcion para dibujar a uno de los enemigos, en este caso 'el ñero'
 function drawÑero(ñero) {
   fill('blue');
   rect(ñero.x * lado, ñero.y * lado, lado, lado);
 }
 
-// Funcion para dibujar lo que esta arriba del canvas, el puntaje.
 
-function drawUi() {
-  fill(255, 255, 255);
-  stroke(50, 150, 50);
-  strokeWeight(4);
-  textSize(30);
-  textAlign(LEFT);
-  text('SCORE: ' + Mundo.score, 20, 45);
-  textAlign(RIGHT);
-  text('LIVES: ' + countLives, 540, 45);
-  textSize(30);
-  text('Tiempo: ' + Mundo.timer, 350, 45);
-}
+
+/*TODO Funcion del movimiento del ñero*/
 function ñeroMove(ñero) {
   // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
-
+  //
   if (
     (ñero.dirx == true && ñero.y != 24 && ñero.diry == true) ||
     (ñero.x == 26 && ñero.diry == false)
@@ -408,16 +370,21 @@ function ñeroMove(ñero) {
   }
 }
 
+//TODO Funcion que se encarga del movimiento de el cuchillo
 function moveKnife(knife) {
   return { x: knife.x - 1, y: knife.y };
 }
+
+//Actualiza los atributos del ñero conforme el juego va avanzando
 function ñeroUpdate() {}
 
-// Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones.
 
+/* ONTIC */
+//OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
-  console.log(Mundo.velocidad);
-  if (
+  //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
+
+  if (   //Cordinas el movimiento de la serpiente.
     (Mundo.snake[0].x > columnas - 1 ||
       Mundo.snake[0].y > filas - 1 ||
       Mundo.snake[0].x < 0 ||
@@ -510,7 +477,7 @@ function onTic(Mundo) {
         y: 10,
       },
     });
-  } else if (
+  } else if ( // Comprobar si la serpiente esta tiesa.
     Mundo.snake[0].x > columnas - 1 ||
     Mundo.snake[0].y > filas - 1 ||
     Mundo.snake[0].x < 0 ||
@@ -519,7 +486,7 @@ function onTic(Mundo) {
   ) {
     textAlign(CENTER, CENTER);
     textSize(50);
-    text(' Has perdido', width / 2, height / 2);
+    text(' Has perdido', width / 2, height / 2);//advertencia que se muestra en pantalla en caso de que la serpiente se choque.
     text(Mundo.score, width / 2, height / 1.5);
     textSize(12);
     rect(
@@ -530,7 +497,7 @@ function onTic(Mundo) {
     );
     return update(Mundo, {});
   } else {
-    if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) {
+    if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) { // Saber si la serpiente se periquea.
       Mundo.snake.push({ x: 5, y: 5 });
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -553,8 +520,7 @@ function onTic(Mundo) {
       comerItem(Mundo.snake, Mundo.reduccionPuntos) == true ||
       comerItem(Mundo.snake, Mundo.golpeAccionado) == true
     ) {
-      //Si Snake come el comodín de velocidad
-      if (comerItem(Mundo.snake, Mundo.velocidad) == true) {
+      if (comerItem(Mundo.snake, Mundo.velocidad) == true) { //Si Snake come el comodín de velocidad
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           cuadradoFinal: {
@@ -571,7 +537,7 @@ function onTic(Mundo) {
           ),
           timer: int(millis() / 1000),
         });
-      } else if (comerItem(Mundo.snake, Mundo.invencibilidad) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.invencibilidad) == true) { //Si Snake come el comodín de invencibilidad
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           cuadradoFinal: {
@@ -587,7 +553,8 @@ function onTic(Mundo) {
             Mundo.invencibilidad
           ),
         });
-      } else if (comerItem(Mundo.snake, Mundo.regeneracion) == true) {
+        ///OT
+      } else if (comerItem(Mundo.snake, Mundo.regeneracion) == true) { //Si Snake come el comodín de regeneración
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           cuadradoFinal: {
@@ -603,7 +570,7 @@ function onTic(Mundo) {
             Mundo.regeneracion
           ),
         });
-      } else if (comerItem(Mundo.snake, Mundo.vidaMas) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.vidaMas) == true) { //Si Snake come el item vidaMas
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           cuadradoFinal: {
@@ -619,7 +586,7 @@ function onTic(Mundo) {
             Mundo.vidaMas
           ),
         });
-      } else if (comerItem(Mundo.snake, Mundo.inversion) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.inversion) == true) { //Si Snake come el comodín inversion
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           cuadradoFinal: {
@@ -635,7 +602,7 @@ function onTic(Mundo) {
             Mundo.inversion
           ),
         });
-      } else if (comerItem(Mundo.snake, Mundo.tombos) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.tombos) == true) { //Si Snake come el comodín tombos
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           cuadradoFinal: {
@@ -651,7 +618,7 @@ function onTic(Mundo) {
             Mundo.tombos
           ),
         });
-      } else if (comerItem(Mundo.snake, Mundo.reduccionPuntos) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.reduccionPuntos) == true) { //Si Snake come el comodín reduccionPuntos
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           cuadradoFinal: {
@@ -667,7 +634,7 @@ function onTic(Mundo) {
             Mundo.reduccionPuntos
           ),
         });
-      } else if (comerItem(Mundo.snake, Mundo.golpeAccionado) == true) {
+      } else if (comerItem(Mundo.snake, Mundo.golpeAccionado) == true) { //Si Snake come el comodín golpeAccionado
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           cuadradoFinal: {
@@ -686,7 +653,7 @@ function onTic(Mundo) {
       }
 
       // Si el tiempo Accionado de un comodín se encuentra diferente de 0
-    } else if (
+    } else if ( //TODO se puede comprimir en un const.
       Mundo.velocidad.tiempoAccionado != 0 ||
       Mundo.invencibilidad.tiempoAccionado != 0 ||
       Mundo.inversion.tiempoAccionado != 0 ||
@@ -694,7 +661,8 @@ function onTic(Mundo) {
       Mundo.reduccionPuntos.tiempoAccionado != 0 ||
       Mundo.golpeAccionado.tiempoAccionado != 0
     ) {
-      //Tiempo accionado de Velocidad
+
+      //Activa el tiempo accionado del comodín Velocidad
       if (Mundo.velocidad.tiempoAccionado > 0) {
         console.log(Mundo);
         return update(Mundo, {
@@ -714,7 +682,7 @@ function onTic(Mundo) {
           timer: int(millis() / 1000),
         });
 
-        //Tiempo accionado de invencibilidad
+        //Activa el tiempo accionado del comodín invencibilidad
       } else if (Mundo.invencibilidad.tiempoAccionado > 0) {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -730,7 +698,7 @@ function onTic(Mundo) {
           ),
         });
 
-        //Tiempo accionado de inversion
+        //Activa el tiempo accionado del comodín inversion
       } else if (Mundo.inversion.tiempoAccionado > 0) {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -746,7 +714,7 @@ function onTic(Mundo) {
           ),
         });
 
-        //Tiempo accionado de tombos
+        //Activa el tiempo accionado del comodín tombos
       } else if (Mundo.tombos.tiempoAccionado > 0) {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -762,7 +730,7 @@ function onTic(Mundo) {
           ),
         });
 
-        //Tiempo accionado de reduccionPuntos
+        //Activa el tiempo accionado del comodín reduccionPuntos
       } else if (Mundo.reduccionPuntos.tiempoAccionado > 0) {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -778,7 +746,7 @@ function onTic(Mundo) {
           ),
         });
 
-        //Tiempo accionado de golpeAccionado
+        //Activa el tiempo accionado del comodín golpeAccionado
       } else if (Mundo.golpeAccionado.tiempoAccionado > 0) {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -795,7 +763,9 @@ function onTic(Mundo) {
         });
       }
 
-      //Snake normal
+      //TODO El tiempoActivo debe de afectar a todos los comodines, es decir, restarselos a los comodínes -Solo se encuentra implementado el del comodín velocidad-
+
+      //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle 1 por cada Tic.
     } else if (Mundo.velocidad.tiempoActivo != 0) {
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -813,6 +783,8 @@ function onTic(Mundo) {
         ),
         timer: int(millis() / 1000),
       });
+
+      //Movimiento normal del Snake junto al del ñero.
     } else {
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -828,12 +800,14 @@ function onTic(Mundo) {
   }
 }
 
+
 //Implemente esta función si quiere que su programa reaccione a eventos del mouse
 function onMouseEvent(Mundo, event) {
   return update(Mundo, {});
 }
 
-// Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo stado del mundo
+
+// Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo estado del mundo.
 
 function keyPressed() {
   switch (keyCode) {
@@ -863,7 +837,7 @@ function keyPressed() {
       break;
   }
 }
-
+///TODO Registra las teclas precionadas
 function onKeyEvent(Mundo, keyCode) {
   return update(Mundo, { dir: keyDirection(Mundo.dir, keyCode) });
 }
@@ -952,6 +926,8 @@ Propósito: Retornar si las posiciones 'x' y 'y' coinciden con la cabeza de Snak
 Contrato: listaDeItems, JSON -> boolean
 Prototipo: comerItem(snake,item)
 Ejemplos:
+comerItem(([5,5], [5,4], [5,3], [5,2]), [5,2]) -> true
+comerItem(([5,5], [5,4], [5,3], [5,2]), [0,1]) -> false
 */
 
 function comerItem(snake, item) {
@@ -967,6 +943,15 @@ Propósito: Retornar en una sola variable los parámetros introducidos por el us
 Contrato: number,number,number -> JSON
 Prototipo: retortarTiempos(tiempoAccionado, tiempoActivo, tiempoDesactivo)
 Ejemplos:
+function retornarComodin(true, 0, 0, 0, [Mundo], [comodin]) -> [
+        x: 5,
+        y: 3,
+        tiempoAccionado: 0,
+        tiempoActivo: 0,
+        tiempoDesactivo: 0,
+        ]
+
+
 */
 
 function retornarComodin(
@@ -977,6 +962,8 @@ function retornarComodin(
   Mundo,
   comodin
 ) {
+
+  //TODO ¿Corrijo ese "== true"? Porque creo que es inútil...
   if (condicionPosiciones == true) {
     let item1 = numeroRandomComida(Mundo.snake);
     let item2 = {
@@ -999,9 +986,3 @@ function retornarComodin(
   }
 }
 
-/*
-Propósito:
-Contrato:
-Prototipo:
-Ejemplos:
-*/
