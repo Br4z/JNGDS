@@ -200,30 +200,7 @@ function setup() {
 
 /* TABLERO O ESCENARIO */
 //Funciones Importantes
-function dibujaCuadricula() {
-  for (y = 0; y < escenario.length; y++) {
-    for (x = 0; x < escenario[y].length; x++) {
-      if (escenario[y][x] == 0) {
-        strokeWeight(0.5);
-        stroke('#3c3731');
         fill('#45B39D');
-        rect(x * lado, y * lado, lado, lado);
-      if (escenario[y][x] == 1) {
-        strokeWeight(0.3);
-        stroke('#03fc7b');
-        fill(51);
-        rect(x * lado, y * lado, lado, lado);
-      }
-      if (escenario[y][x] == 2) {
-        strokeWeight(0.3);
-        stroke('#03fc7b');
-        fill(51);
-        rect(x * lado, y * lado, lado, lado);
-      }
-    }
-  }
-}
-}
 
 //Escenario
 const escenario = [
@@ -345,7 +322,7 @@ function drawGame(Mundo) {
   //Llamar a drawUi
   drawUi();
   //Dibujar la Cuadricula
-  dibujaCuadricula();
+  // dibujaCuadricula();
 
   //Fill => Color de relleno
   fill(240, 240, 240);
