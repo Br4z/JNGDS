@@ -4,6 +4,7 @@
 let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = functionalLight;
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
+//TODO Se puede modificar el update a traves del attribute
 function update(data, attribute) {
   return Object.assign({}, data, attribute);
 }
@@ -963,8 +964,7 @@ function retornarComodin(
   comodin
 ) {
 
-  //TODO ¿Corrijo ese "== true"? Porque creo que es inútil...
-  if (condicionPosiciones == true) {
+  if (condicionPosiciones) {
     let item1 = numeroRandomComida(Mundo.snake);
     let item2 = {
       tiempoAccionado: tiempoAccionado,
@@ -986,3 +986,144 @@ function retornarComodin(
   }
 }
 
+/*
+Propósito: Abstraer el retorno del update en onTic()
+Contrato: JSON -> JSON
+Prototipo: retorno(snake, comodines, ñero)
+Ejemplos:
+retorno({food: {
+          x: Math.floor(Math.random() * (20 - 0) + 0),
+          y: Math.floor(Math.random() * (20 - 0) + 0),
+        }),
+        score: Mundo.score + 1,
+        )
+        ---------------------->
+        (Inserte el Mundo con las cosas necesarias)
+*/
+
+function retorno(Mundo, cambios){
+  /*
+  Datos que se utilizan siempre:
+  - snake: moveSnake(Mundo.snake)
+  - Comodines en general
+  - timer: int(millis() / 1000)
+  - Ñero en general
+  - Cuadrado final
+  */
+
+
+  const indispensables = {
+    snake: moveSnake(Mundo.snake, Mundo.dir),
+    cuadradoFinal: {
+      x: Mundo.snake[Mundo.snake.length - 1].x,
+      y: Mundo.snake[Mundo.snake.length - 1].y,
+    },
+    timer: int(millis() / 1000),
+    ñero: ñeroMove(Mundo.ñero)
+  }
+
+  function tiempoComodin(tiempo){
+    if (tiempo == 0){
+      return 0;
+
+    } else if (tiempo > 0){
+      return (tiempo - 1);
+      
+    }
+  }
+
+  function tiempoActivo(tiempo){
+    if (tiempo.tiempoActivo > 0){
+      return true;
+
+    } else {
+      return false;
+
+    }
+  }
+
+  function posicionComodin(posicion){
+    if ( (comerItem(Mundo.snake, Mundo.velocidad) == true && tiempoActivo(Mundo.velocidad)) ||
+      (comerItem(Mundo.snake, Mundo.invencibilidad) == true && tiempoActivo(Mundo.invencibilidad)) ||
+      (comerItem(Mundo.snake, Mundo.regeneracion) == true && tiempoActivo(Mundo.regeneracion)) ||
+      (comerItem(Mundo.snake, Mundo.vidaMas) == true) && tiempoActivo(Mundo.vidaMas) ||
+      (comerItem(Mundo.snake, Mundo.inversion) == true) && tiempoActivo(Mundo.inversion) ||
+      (comerItem(Mundo.snake, Mundo.tombos) == true) && tiempoActivo(Mundo.tombos) ||
+      (comerItem(Mundo.snake, Mundo.reduccionPuntos) == true) && tiempoActivo(Mundo.reduccionPuntos) ||
+      (comerItem(Mundo.snake, Mundo.golpeAccionado) == true)  && tiempoActivo(Mundo.golpeAccionado) ){
+
+        return (int(random(columnas)));
+
+    } else {
+      return posicion;
+
+    }
+  }
+
+
+  const indispensablesComodines = {
+    velocidad: {
+      x: posicionComodin(Mundo.velocidad.x),
+      y: posicionComodin(Mundo.velocidad.y),
+      tiempoAccionado: tiempoComodin(Mundo.velocidad.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.velocidad.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.velocidad.tiempoDesactivo),
+    },
+    invencibilidad: {
+      x: posicionComodin(Mundo.invencibilidad.x),
+      y: posicionComodin(Mundo.invencibilidad.y),
+      tiempoAccionado: tiempoComodin(Mundo.invencibilidad.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.invencibilidad.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.invencibilidad.tiempoDesactivo),
+    },
+    //Comodin de regeneracion
+    regeneracion: {
+      x: posicionComodin(Mundo.regeneracion.x),
+      y: posicionComodin(Mundo.regeneracion.y)),
+      tiempoActivo: tiempoComodin(Mundo.regeneracion.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.regeneracion.tiempoDesactivo),
+    },
+    //Comodin para tener una vida más
+    vidaMas: {
+      x: posicionComodin(Mundo.vidaMas.x),
+      y: posicionComodin(Mundo.vidaMas.y)),
+      tiempoActivo: tiempoComodin(Mundo.vidaMas.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.vidaMas.tiempoDesactivo),
+    },
+
+    /* COMODINES MALOS */
+    //Comodin para Inversion ( Invertir las teclas )
+    inversion: {
+      x: posicionComodin(Mundo.inversion.x),
+      y: posicionComodin(Mundo.inversion.y),
+      tiempoAccionado: tiempoComodin(Mundo.inversion.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.inversion.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.inversion.tiempoDesactivo),
+    },
+    //Comodin de Tombos (Crear varias snakes que ataquen al snake)
+    tombos: {
+      x: posicionComodin(Mundo.inversion.x),
+      y: posicionComodin(Mundo.inversion.y),
+      tiempoAccionado: tiempoComodin(Mundo.tombos.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.tombos.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.tombos.tiempoDesactivo),
+    },
+    //Comodin para reducir los Puntos
+    reduccionPuntos: {
+      x: posicionComodin(Mundo.reduccionPuntos.x),
+      y: posicionComodin(Mundo.reduccionPuntos.y),
+      tiempoAccionado: tiempoComodin(Mundo.reduccionPuntos.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.reduccionPuntos.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.reduccionPuntos.tiempoDesactivo),
+    },
+    //Comodin que aparece con el jefe y te mata instantaneamente
+    golpeAccionado: {
+      x: posicionComodin(Mundo.golpeAccionado.x),
+      y: posicionComodin(Mundo.golpeAccionado.y),
+      tiempoAccionado: tiempoComodin(Mundo.golpeAccionado.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.golpeAccionado.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.golpeAccionado.tiempoDesactivo),
+    }
+  }
+  
+}
