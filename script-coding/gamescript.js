@@ -4,7 +4,135 @@
 let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = functionalLight;
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
+//TODO Se puede modificar el update a traves del parámetro "atribute"
 function update(data, attribute) {
+
+  //----------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+  Datos que se utilizan siempre:
+  - snake: moveSnake(Mundo.snake)
+  - Comodines en general
+  - timer: int(millis() / 1000)
+  - Ñero en general
+  - Cuadrado final
+  */
+
+ 
+
+
+  const indispensables = {
+    snake: moveSnake(Mundo.snake, Mundo.dir),
+    cuadradoFinal: {
+      x: Mundo.snake[Mundo.snake.length - 1].x,
+      y: Mundo.snake[Mundo.snake.length - 1].y,
+    },
+    timer: int(millis() / 1000),
+    ñero: ñeroMove(Mundo.ñero)
+  }
+
+  function tiempoComodin(tiempo){
+    if (tiempo == 0){
+      return 0;
+
+    } else if (tiempo > 0){
+      return (tiempo - 1);
+      
+    }
+  }
+
+  function tiempoActivo(tiempo){
+    if (tiempo.tiempoActivo > 0){
+      return true;
+
+    } else {
+      return false;
+
+    }
+  }
+
+  function posicionComodin(posicion){
+    if ( (comerItem(Mundo.snake, Mundo.velocidad) == true && tiempoActivo(Mundo.velocidad)) ||
+      (comerItem(Mundo.snake, Mundo.invencibilidad) == true && tiempoActivo(Mundo.invencibilidad)) ||
+      (comerItem(Mundo.snake, Mundo.regeneracion) == true && tiempoActivo(Mundo.regeneracion)) ||
+      (comerItem(Mundo.snake, Mundo.vidaMas) == true) && tiempoActivo(Mundo.vidaMas) ||
+      (comerItem(Mundo.snake, Mundo.inversion) == true) && tiempoActivo(Mundo.inversion) ||
+      (comerItem(Mundo.snake, Mundo.tombos) == true) && tiempoActivo(Mundo.tombos) ||
+      (comerItem(Mundo.snake, Mundo.reduccionPuntos) == true) && tiempoActivo(Mundo.reduccionPuntos) ||
+      (comerItem(Mundo.snake, Mundo.golpeAccionado) == true)  && tiempoActivo(Mundo.golpeAccionado) ){
+
+        return (int(random(columnas)));
+
+    } else {
+      return posicion;
+
+    }
+  }
+
+
+  const indispensablesComodines = {
+    velocidad: {
+      x: posicionComodin(Mundo.velocidad.x),
+      y: posicionComodin(Mundo.velocidad.y),
+      tiempoAccionado: tiempoComodin(Mundo.velocidad.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.velocidad.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.velocidad.tiempoDesactivo),
+    },
+    invencibilidad: {
+      x: posicionComodin(Mundo.invencibilidad.x),
+      y: posicionComodin(Mundo.invencibilidad.y),
+      tiempoAccionado: tiempoComodin(Mundo.invencibilidad.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.invencibilidad.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.invencibilidad.tiempoDesactivo),
+    },
+    regeneracion: {
+      x: posicionComodin(Mundo.regeneracion.x),
+      y: posicionComodin(Mundo.regeneracion.y),
+      tiempoActivo: tiempoComodin(Mundo.regeneracion.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.regeneracion.tiempoDesactivo),
+    },
+    vidaMas: {
+      x: posicionComodin(Mundo.vidaMas.x),
+      y: posicionComodin(Mundo.vidaMas.y),
+      tiempoActivo: tiempoComodin(Mundo.vidaMas.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.vidaMas.tiempoDesactivo),
+    },
+
+    inversion: {
+      x: posicionComodin(Mundo.inversion.x),
+      y: posicionComodin(Mundo.inversion.y),
+      tiempoAccionado: tiempoComodin(Mundo.inversion.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.inversion.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.inversion.tiempoDesactivo),
+    },
+    tombos: {
+      x: posicionComodin(Mundo.inversion.x),
+      y: posicionComodin(Mundo.inversion.y),
+      tiempoAccionado: tiempoComodin(Mundo.tombos.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.tombos.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.tombos.tiempoDesactivo),
+    },
+    reduccionPuntos: {
+      x: posicionComodin(Mundo.reduccionPuntos.x),
+      y: posicionComodin(Mundo.reduccionPuntos.y),
+      tiempoAccionado: tiempoComodin(Mundo.reduccionPuntos.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.reduccionPuntos.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.reduccionPuntos.tiempoDesactivo),
+    },
+    golpeAccionado: {
+      x: posicionComodin(Mundo.golpeAccionado.x),
+      y: posicionComodin(Mundo.golpeAccionado.y),
+      tiempoAccionado: tiempoComodin(Mundo.golpeAccionado.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.golpeAccionado.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.golpeAccionado.tiempoDesactivo),
+    }
+  }
+
+  //--------------------------------------------------------------------------
+
+  const indispensables1 = Object.assign(indispensables, indispensablesComodines);
+  attribute = Object.assign(attribute, indispensables1);
+
   return Object.assign({}, data, attribute);
 }
 
@@ -200,116 +328,30 @@ function setup() {
 
 /* TABLERO O ESCENARIO */
 //Funciones Importantes
-        fill('#45B39D');
-
-//Escenario
-const escenario = [
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-];
-
+// function dibujaCuadricula() {
+//   for (y = 0; y < escenario.length; y++) {
+//     for (x = 0; x < escenario[y].length; x++) {
+//       if (escenario[y][x] == 0) {
+//         strokeWeight(0.1);
+//         stroke('#03fc7b');
+//         fill(51);
+//         rect(x * lado, y * lado, lado, lado);
+//       if (escenario[y][x] == 1) {
+//         strokeWeight(0.1);
+//         stroke('#03fc7b');
+//         fill(51);
+//         rect(x * lado, y * lado, lado, lado);
+//       }
+//       if (escenario[y][x] == 2) {
+//         strokeWeight(0.1);
+//         stroke('#03fc7b');
+//         fill(51);
+//         rect(x * lado, y * lado, lado, lado);
+//       }
+//     }
+//   }
+// }
+// }
 
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 
@@ -344,16 +386,12 @@ function drawGame(Mundo) {
   //Dibujar Knife
   drawKnife(Mundo.knife);
   //Dibujar Comodin #!
-  drawComodin1(Mundo.velocidad);
-
-  frameRate(rate);
-
-  if (Mundo.velocidad.tiempoAccionado == 0) {
-    rate = 5;
-  } else {
-    rate = 8;
-    //Mundo.tiempo.tiempoVelocidadAccionado = Mundo.tiempo.tiempoVelocidadAccionado - 1;
+  if (Mundo.velocidad.tiempoActivo > 0) {
+    drawComodin1(Mundo.velocidad);
   }
+  
+
+  
 }
 
 /*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
@@ -469,7 +507,7 @@ function ñeroUpdate() {}
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
-
+  console.log(Mundo.snake);
   if (   //Cordinas el movimiento de la serpiente.
     (Mundo.snake[0].x > columnas - 1 ||
       Mundo.snake[0].y > filas - 1 ||
@@ -490,65 +528,7 @@ function onTic(Mundo) {
         x: int(random(columnas)),
         y: int(random(filas)),
       },
-      cuadradoFinal: {
-        x: 0,
-        y: 0,
-      },
       score: Mundo.score,
-      velocidad: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30, 50),
-        tiempoDesactivo: tiempoRandom(30, 50),
-      },
-      invencibilidad: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30, 50),
-        tiempoDesactivo: tiempoRandom(30, 50),
-      },
-      regeneracion: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-        tiempoActivo: tiempoRandom(30, 50),
-        tiempoDesactivo: tiempoRandom(30, 50),
-      },
-      vidaMas: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-        tiempoActivo: tiempoRandom(30, 50),
-        tiempoDesactivo: tiempoRandom(30, 50),
-      },
-      inversion: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30, 50),
-        tiempoDesactivo: tiempoRandom(30, 50),
-      },
-      tombos: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30, 50),
-        tiempoDesactivo: tiempoRandom(30, 50),
-      },
-      reduccionPuntos: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30, 50),
-        tiempoDesactivo: tiempoRandom(30, 50),
-      },
-      golpeAccionado: {
-        x: int(random(columnas)),
-        y: int(random(columnas)),
-        tiempoAccionado: 0,
-        tiempoActivo: tiempoRandom(30, 50),
-        tiempoDesactivo: tiempoRandom(30, 50),
-      },
       lives: Mundo.lives - 1,
       tipe: 'juego',
       timer: millis(),
@@ -581,297 +561,22 @@ function onTic(Mundo) {
       lado,
       lado
     );
-    return update(Mundo, {});
+    return update();
   } else {
     if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) { // Saber si la serpiente se periquea.
       Mundo.snake.push({ x: 5, y: 5 });
       return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
         food: {
           x: Math.floor(Math.random() * (20 - 0) + 0),
           y: Math.floor(Math.random() * (20 - 0) + 0),
         },
         score: Mundo.score + 1,
-        timer: int(millis() / 1000),
-        ñero: ñeroMove(Mundo.ñero),
         knife: moveKnife(Mundo.knife),
       });
-    } else if (
-      comerItem(Mundo.snake, Mundo.velocidad) == true ||
-      comerItem(Mundo.snake, Mundo.invencibilidad) == true ||
-      comerItem(Mundo.snake, Mundo.regeneracion) == true ||
-      comerItem(Mundo.snake, Mundo.vidaMas) == true ||
-      comerItem(Mundo.snake, Mundo.inversion) == true ||
-      comerItem(Mundo.snake, Mundo.tombos) == true ||
-      comerItem(Mundo.snake, Mundo.reduccionPuntos) == true ||
-      comerItem(Mundo.snake, Mundo.golpeAccionado) == true
-    ) {
-      if (comerItem(Mundo.snake, Mundo.velocidad) == true) { //Si Snake come el comodín de velocidad
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          velocidad: retornarComodin(
-            true,
-            tiempoRandom(30, 50),
-            0,
-            90,
-            Mundo,
-            Mundo.velocidad
-          ),
-          timer: int(millis() / 1000),
-        });
-      } else if (comerItem(Mundo.snake, Mundo.invencibilidad) == true) { //Si Snake come el comodín de invencibilidad
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          invencibilidad: retornarComodin(
-            true,
-            tiempoRandom(0, 0),
-            0,
-            0,
-            Mundo,
-            Mundo.invencibilidad
-          ),
-        });
-        ///OT
-      } else if (comerItem(Mundo.snake, Mundo.regeneracion) == true) { //Si Snake come el comodín de regeneración
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          invencibilidad: retornarComodin(
-            true,
-            tiempoRandom(0, 0),
-            0,
-            0,
-            Mundo,
-            Mundo.regeneracion
-          ),
-        });
-      } else if (comerItem(Mundo.snake, Mundo.vidaMas) == true) { //Si Snake come el item vidaMas
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          invencibilidad: retornarComodin(
-            true,
-            tiempoRandom(0, 0),
-            0,
-            0,
-            Mundo,
-            Mundo.vidaMas
-          ),
-        });
-      } else if (comerItem(Mundo.snake, Mundo.inversion) == true) { //Si Snake come el comodín inversion
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          invencibilidad: retornarComodin(
-            true,
-            tiempoRandom(0, 0),
-            0,
-            0,
-            Mundo,
-            Mundo.inversion
-          ),
-        });
-      } else if (comerItem(Mundo.snake, Mundo.tombos) == true) { //Si Snake come el comodín tombos
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          invencibilidad: retornarComodin(
-            true,
-            tiempoRandom(0, 0),
-            0,
-            0,
-            Mundo,
-            Mundo.tombos
-          ),
-        });
-      } else if (comerItem(Mundo.snake, Mundo.reduccionPuntos) == true) { //Si Snake come el comodín reduccionPuntos
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          invencibilidad: retornarComodin(
-            true,
-            tiempoRandom(0, 0),
-            0,
-            0,
-            Mundo,
-            Mundo.reduccionPuntos
-          ),
-        });
-      } else if (comerItem(Mundo.snake, Mundo.golpeAccionado) == true) { //Si Snake come el comodín golpeAccionado
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          invencibilidad: retornarComodin(
-            true,
-            tiempoRandom(0, 0),
-            0,
-            0,
-            Mundo,
-            Mundo.golpeAccionado
-          ),
-        });
-      }
+    } 
 
-      // Si el tiempo Accionado de un comodín se encuentra diferente de 0
-    } else if ( //TODO se puede comprimir en un const.
-      Mundo.velocidad.tiempoAccionado != 0 ||
-      Mundo.invencibilidad.tiempoAccionado != 0 ||
-      Mundo.inversion.tiempoAccionado != 0 ||
-      Mundo.tombos.tiempoAccionado != 0 ||
-      Mundo.reduccionPuntos.tiempoAccionado != 0 ||
-      Mundo.golpeAccionado.tiempoAccionado != 0
-    ) {
-
-      //Activa el tiempo accionado del comodín Velocidad
-      if (Mundo.velocidad.tiempoAccionado > 0) {
-        console.log(Mundo);
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          velocidad: retornarComodin(
-            false,
-            Mundo.velocidad.tiempoAccionado - 1,
-            0,
-            Mundo.velocidad.tiempoDesactivo,
-            Mundo,
-            Mundo.velocidad
-          ),
-          timer: int(millis() / 1000),
-        });
-
-        //Activa el tiempo accionado del comodín invencibilidad
-      } else if (Mundo.invencibilidad.tiempoAccionado > 0) {
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          invencibilidad: retornarComodin(
-            false,
-            tiempoAccionado - 1,
-            0,
-            tiempoRandom(70 - 90)
-          ),
-        });
-
-        //Activa el tiempo accionado del comodín inversion
-      } else if (Mundo.inversion.tiempoAccionado > 0) {
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          inversion: retornarComodin(
-            false,
-            tiempoAccionado - 1,
-            0,
-            tiempoRandom(70 - 90)
-          ),
-        });
-
-        //Activa el tiempo accionado del comodín tombos
-      } else if (Mundo.tombos.tiempoAccionado > 0) {
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          tombos: retornarComodin(
-            false,
-            tiempoAccionado - 1,
-            0,
-            tiempoRandom(70 - 90)
-          ),
-        });
-
-        //Activa el tiempo accionado del comodín reduccionPuntos
-      } else if (Mundo.reduccionPuntos.tiempoAccionado > 0) {
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          reduccionPuntos: retornarComodin(
-            false,
-            tiempoAccionado - 1,
-            0,
-            tiempoRandom(70 - 90)
-          ),
-        });
-
-        //Activa el tiempo accionado del comodín golpeAccionado
-      } else if (Mundo.golpeAccionado.tiempoAccionado > 0) {
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          cuadradoFinal: {
-            x: Mundo.snake[Mundo.snake.length - 1].x,
-            y: Mundo.snake[Mundo.snake.length - 1].y,
-          },
-          golpeAccionado: retornarComodin(
-            false,
-            tiempoAccionado - 1,
-            0,
-            tiempoRandom(70 - 90)
-          ),
-        });
-      }
-
-      //TODO El tiempoActivo debe de afectar a todos los comodines, es decir, restarselos a los comodínes -Solo se encuentra implementado el del comodín velocidad-
-
-      //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle 1 por cada Tic.
-    } else if (Mundo.velocidad.tiempoActivo != 0) {
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        cuadradoFinal: {
-          x: Mundo.snake[Mundo.snake.length - 1].x,
-          y: Mundo.snake[Mundo.snake.length - 1].y,
-        },
-        velocidad: retornarComodin(
-          false,
-          Mundo.velocidad.tiempoAccionado,
-          Mundo.velocidad.tiempoActivo - 1,
-          Mundo.velocidad.tiempoDesactivo,
-          Mundo,
-          Mundo.velocidad
-        ),
-        timer: int(millis() / 1000),
-      });
-
-      //Movimiento normal del Snake junto al del ñero.
-    } else {
+      
+      else {
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         cuadradoFinal: {
@@ -1049,8 +754,7 @@ function retornarComodin(
   comodin
 ) {
 
-  //TODO ¿Corrijo ese "== true"? Porque creo que es inútil...
-  if (condicionPosiciones == true) {
+  if (condicionPosiciones) {
     let item1 = numeroRandomComida(Mundo.snake);
     let item2 = {
       tiempoAccionado: tiempoAccionado,
@@ -1072,3 +776,143 @@ function retornarComodin(
   }
 }
 
+/*
+Propósito: Abstraer el retorno del update en onTic()
+Contrato: JSON -> JSON
+Prototipo: retorno(snake, comodines, ñero)
+Ejemplos:
+retorno({food: {
+          x: Math.floor(Math.random() * (20 - 0) + 0),
+          y: Math.floor(Math.random() * (20 - 0) + 0),
+        }),
+        score: Mundo.score + 1,
+        )
+        ---------------------->
+        (Inserte el Mundo con las cosas necesarias)
+*/
+
+/*
+function retorno(Mundo, cambios){
+  /*
+  Datos que se utilizan siempre:
+  - snake: moveSnake(Mundo.snake)
+  - Comodines en general
+  - timer: int(millis() / 1000)
+  - Ñero en general
+  - Cuadrado final
+  */
+
+/*
+  const indispensables = {
+    snake: moveSnake(Mundo.snake, Mundo.dir),
+    cuadradoFinal: {
+      x: Mundo.snake[Mundo.snake.length - 1].x,
+      y: Mundo.snake[Mundo.snake.length - 1].y,
+    },
+    timer: int(millis() / 1000),
+    ñero: ñeroMove(Mundo.ñero)
+  }
+
+  function tiempoComodin(tiempo){
+    if (tiempo == 0){
+      return 0;
+
+    } else if (tiempo > 0){
+      return (tiempo - 1);
+      
+    }
+  }
+
+  function tiempoActivo(tiempo){
+    if (tiempo.tiempoActivo > 0){
+      return true;
+
+    } else {
+      return false;
+
+    }
+  }
+
+  function posicionComodin(posicion){
+    if ( (comerItem(Mundo.snake, Mundo.velocidad) == true && tiempoActivo(Mundo.velocidad)) ||
+      (comerItem(Mundo.snake, Mundo.invencibilidad) == true && tiempoActivo(Mundo.invencibilidad)) ||
+      (comerItem(Mundo.snake, Mundo.regeneracion) == true && tiempoActivo(Mundo.regeneracion)) ||
+      (comerItem(Mundo.snake, Mundo.vidaMas) == true) && tiempoActivo(Mundo.vidaMas) ||
+      (comerItem(Mundo.snake, Mundo.inversion) == true) && tiempoActivo(Mundo.inversion) ||
+      (comerItem(Mundo.snake, Mundo.tombos) == true) && tiempoActivo(Mundo.tombos) ||
+      (comerItem(Mundo.snake, Mundo.reduccionPuntos) == true) && tiempoActivo(Mundo.reduccionPuntos) ||
+      (comerItem(Mundo.snake, Mundo.golpeAccionado) == true)  && tiempoActivo(Mundo.golpeAccionado) ){
+
+        return (int(random(columnas)));
+
+    } else {
+      return posicion;
+
+    }
+  }
+
+
+  const indispensablesComodines = {
+    velocidad: {
+      x: posicionComodin(Mundo.velocidad.x),
+      y: posicionComodin(Mundo.velocidad.y),
+      tiempoAccionado: tiempoComodin(Mundo.velocidad.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.velocidad.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.velocidad.tiempoDesactivo),
+    },
+    invencibilidad: {
+      x: posicionComodin(Mundo.invencibilidad.x),
+      y: posicionComodin(Mundo.invencibilidad.y),
+      tiempoAccionado: tiempoComodin(Mundo.invencibilidad.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.invencibilidad.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.invencibilidad.tiempoDesactivo),
+    },
+    //Comodin de regeneracion
+    regeneracion: {
+      x: posicionComodin(Mundo.regeneracion.x),
+      y: posicionComodin(Mundo.regeneracion.y),
+      tiempoActivo: tiempoComodin(Mundo.regeneracion.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.regeneracion.tiempoDesactivo),
+    },
+    //Comodin para tener una vida más
+    vidaMas: {
+      x: posicionComodin(Mundo.vidaMas.x),
+      y: posicionComodin(Mundo.vidaMas.y),
+      tiempoActivo: tiempoComodin(Mundo.vidaMas.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.vidaMas.tiempoDesactivo),
+    },
+
+    inversion: {
+      x: posicionComodin(Mundo.inversion.x),
+      y: posicionComodin(Mundo.inversion.y),
+      tiempoAccionado: tiempoComodin(Mundo.inversion.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.inversion.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.inversion.tiempoDesactivo),
+    },
+    //Comodin de Tombos (Crear varias snakes que ataquen al snake)
+    tombos: {
+      x: posicionComodin(Mundo.inversion.x),
+      y: posicionComodin(Mundo.inversion.y),
+      tiempoAccionado: tiempoComodin(Mundo.tombos.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.tombos.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.tombos.tiempoDesactivo),
+    },
+    //Comodin para reducir los Puntos
+    reduccionPuntos: {
+      x: posicionComodin(Mundo.reduccionPuntos.x),
+      y: posicionComodin(Mundo.reduccionPuntos.y),
+      tiempoAccionado: tiempoComodin(Mundo.reduccionPuntos.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.reduccionPuntos.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.reduccionPuntos.tiempoDesactivo),
+    },
+    //Comodin que aparece con el jefe y te mata instantaneamente
+    golpeAccionado: {
+      x: posicionComodin(Mundo.golpeAccionado.x),
+      y: posicionComodin(Mundo.golpeAccionado.y),
+      tiempoAccionado: tiempoComodin(Mundo.golpeAccionado.tiempoAccionado),
+      tiempoActivo: tiempoComodin(Mundo.golpeAccionado.tiempoActivo),
+      tiempoDesactivo: tiempoComodin(Mundo.golpeAccionado.tiempoDesactivo),
+    }
+  }
+}
+*/

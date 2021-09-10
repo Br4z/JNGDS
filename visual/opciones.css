@@ -1,12 +1,3 @@
-/* llamar a la fuente */
-
-@font-face {
-  font-family: "mister-pixel";
-  src: url("mister-pixel.ttf");
-}
-
-/* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
-
 * {
   margin: 0px;
   padding: 0px;
@@ -19,8 +10,4 @@ body {
   align-items: center;
   min-height: 100vh;
   background-size: cover;
-}
-
-.menu {
-  text-align: center;
 }
