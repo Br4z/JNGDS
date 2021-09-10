@@ -13,12 +13,22 @@
 }
 
 body {
-  background-image: url(/backgrounds/FondoP.png); /* Fondo principal */
+  background-image: url(/backgrounds/FondoP.jpg); /* Fondo principal */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-size: cover;
+}
+
+.canvaas {
+
+  margin: auto;
+  
+}
+
+#volver{
+  position: relative;
 }
 
 
