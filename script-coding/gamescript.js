@@ -339,15 +339,17 @@ function windowRezired() {
 
 //Dibuja el arma que utiliza el enemigo 'ñero' en este caso un cuchillo(knife)
 function drawKnife(knife) {
-  fill('green');
-  triangle(
-    knife.x * lado + 10,
-    knife.y * lado,
-    knife.x * lado,
-    knife.y * lado + 10,
-    knife.x * lado + 10,
-    knife.y * lado + 20
-  );
+  forEach(knife, (k) => {
+    fill("green");
+    triangle(
+      k.x * lado + 10,
+      k.y * lado,
+      k.x * lado,
+      k.y * lado + 10,
+      k.x * lado + 10,
+      k.y * lado + 20
+    );
+  });
 }
 
 //Funcion para dibujar a uno de los enemigos, en este caso 'el ñero'
@@ -433,10 +435,10 @@ function onTic(Mundo) {
         dirx: true,
         diry: true,
       },
-      knife: {
+      knife: [{
         x: 18,
         y: 10,
-      },
+      },],
     });
   } else if ( // Comprobar si la serpiente esta tiesa.
     Mundo.snake[0].x > columnas - 1 ||
@@ -469,7 +471,7 @@ function onTic(Mundo) {
         score: Mundo.score + 1,
         timer: int(millis() / 1000),
         ñero: ñeroMove(Mundo.ñero),
-        knife: moveKnife(Mundo.knife),
+        //knife: moveKnife(Mundo.knife),
       });
       //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle 
       //Movimiento normal del Snake junto al del ñero.
