@@ -60,6 +60,24 @@ const velocidad = new comodinVelocidad();
 velocidad
  */
 
+const comodin = function(x,y){
+  this.x = x;
+  this.y = y;
+
+  this.tiempoActivo = tiempoRandom(30, 50);
+  this.tiempoAccionado = tiempoRandom(30, 50);
+  this.tiempoDesactivo = tiempoRandom(30, 50);
+}
+
+const comodinVelocidad = new comodin(1,1);
+const comodinInvencibilidad = new comodin(2,2);
+const comodinRegeneracion = new comodin(3,3);
+const comodinVidaMas = new comodin(4,4);
+const comodinInversion = new comodin(5,5);
+const comodinTombos = new comodin(6,6);
+const comodinReduccionPuntos = new comodin(7,7);
+const comodinGolpeAccionado = new comodin(8,8);
+
   /*COSAS DEL SNAKE*/
 
   // TODO Movimiento de la serpiente
@@ -133,7 +151,6 @@ function setup() {
         TiempoDesactivo: Tiempo en el cual no esta en el mapa
       }
      */
-
 
     //Numero de vidas inicial
     lives: 3,
