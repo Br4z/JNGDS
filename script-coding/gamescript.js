@@ -346,14 +346,9 @@ function drawGame(Mundo) {
   //Dibujar Comodin #!
   drawComodin1(Mundo.velocidad);
 
-  frameRate(rate);
+  frameRate(7);
 
-  if (Mundo.velocidad.tiempoAccionado == 0) {
-    rate = 5;
-  } else {
-    rate = 8;
-    //Mundo.tiempo.tiempoVelocidadAccionado = Mundo.tiempo.tiempoVelocidadAccionado - 1;
-  }
+
 }
 
 /*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
