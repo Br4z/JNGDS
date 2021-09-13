@@ -37,15 +37,38 @@ let countLives = 3;
 let fondo;
 
 
-/*COSAS DEL SNAKE*/
+/**COSAS DE COMODINES
+ *
+ */
 
-// TODO Movimiento de la serpiente
-function moveSnake(snake, dir) {
-  const head = first(snake);
-  return cons(
-    { x: head.x + dir.x, y: head.y + dir.y },
-    snake.slice(0, length(snake) - 1)
-  );
+// const comodinVelocidad = function(x,y){
+//   this.x = x;
+//   this.y = y;
+
+
+//   this.nombreFuncion = function(){
+//     return 0;
+//   }
+//   //ejemplo para llamarla al onTic
+//   //Mundo.comodinVelocidad.nombreFuncion() 
+// }
+/* INICIALIZARLA 
+const velocidad = new comodinVelocidad();
+*/
+
+/** para ponerlo en el setup
+velocidad
+ */
+
+  /*COSAS DEL SNAKE*/
+
+  // TODO Movimiento de la serpiente
+  function moveSnake(snake, dir) {
+    const head = first(snake);
+    return cons(
+      { x: head.x + dir.x, y: head.y + dir.y },
+      snake.slice(0, length(snake) - 1)
+    );
 }
 
 // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
@@ -95,7 +118,7 @@ function setup() {
     },
     //TODO SE PODRA BORRAR? PARA QUE SIRVE?
     cuadradoFinal: {
-      x: 0,
+      x: 0, 
       y: 0,
     },
     //Puntacion Inicial
@@ -248,8 +271,6 @@ const escenario = [
 
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 
-//TODO Es mejor borrar esta vaina del rate ome.
-var rate;
 
 function drawGame(Mundo) {
   //Definir el background del Canvas
@@ -428,7 +449,7 @@ function onTic(Mundo) {
       score: Mundo.score,
       lives: Mundo.lives - 1,
       tipe: 'juego',
-      timer: millis(),
+      timer: int(millis() / 1000),
       ñero: {
         x: 26,
         y: 13,
