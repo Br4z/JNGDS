@@ -37,15 +37,56 @@ let countLives = 3;
 let fondo;
 
 
-/*COSAS DEL SNAKE*/
+/**COSAS DE COMODINES
+ *
+ */
 
-// TODO Movimiento de la serpiente
-function moveSnake(snake, dir) {
-  const head = first(snake);
-  return cons(
-    { x: head.x + dir.x, y: head.y + dir.y },
-    snake.slice(0, length(snake) - 1)
-  );
+// const comodinVelocidad = function(x,y){
+//   this.x = x;
+//   this.y = y;
+
+
+//   this.nombreFuncion = function(){
+//     return 0;
+//   }
+//   //ejemplo para llamarla al onTic
+//   //Mundo.comodinVelocidad.nombreFuncion()
+// }
+/* INICIALIZARLA
+const velocidad = new comodinVelocidad();
+*/
+
+/** para ponerlo en el setup
+velocidad
+ */
+
+const comodin = function(x,y){
+  this.x = x;
+  this.y = y;
+
+  this.tiempoActivo = tiempoRandom(30, 50);
+  this.tiempoAccionado = tiempoRandom(30, 50);
+  this.tiempoDesactivo = tiempoRandom(30, 50);
+}
+
+const comodinVelocidad = new comodin(1,1);
+const comodinInvencibilidad = new comodin(2,2);
+const comodinRegeneracion = new comodin(3,3);
+const comodinVidaMas = new comodin(4,4);
+const comodinInversion = new comodin(5,5);
+const comodinTombos = new comodin(6,6);
+const comodinReduccionPuntos = new comodin(7,7);
+const comodinGolpeAccionado = new comodin(8,8);
+
+  /*COSAS DEL SNAKE*/
+
+  // TODO Movimiento de la serpiente
+  function moveSnake(snake, dir) {
+    const head = first(snake);
+    return cons(
+      { x: head.x + dir.x, y: head.y + dir.y },
+      snake.slice(0, length(snake) - 1)
+    );
 }
 
 // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
@@ -111,7 +152,6 @@ function setup() {
       }
      */
 
-
     //Numero de vidas inicial
     lives: 3,
     //El tiempo
@@ -140,16 +180,16 @@ function setup() {
 //Escenario
 const escenario = [
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2,
   ],
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2,
   ],
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2,
   ],
   [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -246,19 +286,44 @@ const escenario = [
 ];
 
 
+//FUNCIONES PARA DIBUJAR TABLERO
+function forEach2(l, f, index = 0) {
+  if (!isEmpty(l)) {
+    f(first(l), index);
+    forEach2(rest(l), f, index + 1);
+  }
+}
+
+
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 
-//TODO Es mejor borrar esta vaina del rate ome.
-var rate;
 
 function drawGame(Mundo) {
   //Definir el background del Canvas
-  background(fondo);
+  // background(fondo);
   //Llamar a drawUi
   drawUi();
-  //Dibujar la Cuadricula
-  // dibujaCuadricula();
+  forEach2(escenario, (row, i) => {
+    forEach2(row, (cell, j) => {
+      if (cell == 1) {
+        strokeWeight(0.5);
+        stroke('#3c3731');
+        fill('#45B39D');
+        rect(j * lado, i * lado, lado, lado);
+        //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
+      }
+      if (cell == 0) {
+        strokeWeight(0.5);
+        stroke('#3c3731');
+        fill('#45B39D');
+        rect(j * lado, i * lado, lado, lado);
+        //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
+      }
+      if (cell == 2) {
 
+      }
+    });
+  });
   //Fill => Color de relleno
   fill(240, 240, 240);
   //Stroke => color de los bordes
@@ -272,6 +337,10 @@ function drawGame(Mundo) {
     rect(s.x * lado, s.y * lado, lado, lado);
   });
 
+  //Dibujar la Cuadricula
+
+
+
   //TODO REVISAR ESTE FILL
   fill('white');
   //Dibujar a Ñero
@@ -279,10 +348,7 @@ function drawGame(Mundo) {
   //Dibujar Knife
   drawKnife(Mundo.knife);
 
-
   frameRate(7);
-
-
 }
 
 /*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
@@ -428,7 +494,7 @@ function onTic(Mundo) {
       score: Mundo.score,
       lives: Mundo.lives - 1,
       tipe: 'juego',
-      timer: millis(),
+      timer: int(millis() / 1000),
       ñero: {
         x: 26,
         y: 13,
@@ -473,7 +539,7 @@ function onTic(Mundo) {
         ñero: ñeroMove(Mundo.ñero),
         //knife: moveKnife(Mundo.knife),
       });
-      //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle 
+      //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
       //Movimiento normal del Snake junto al del ñero.
     } else {
       return update(Mundo, {
