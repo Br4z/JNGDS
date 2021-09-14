@@ -180,16 +180,16 @@ function setup() {
 //Escenario
 const escenario = [
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2,
   ],
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2,
   ],
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2,
   ],
   [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -286,17 +286,44 @@ const escenario = [
 ];
 
 
+//FUNCIONES PARA DIBUJAR TABLERO
+function forEach2(l, f, index = 0) {
+  if (!isEmpty(l)) {
+    f(first(l), index);
+    forEach2(rest(l), f, index + 1);
+  }
+}
+
+
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 
 
 function drawGame(Mundo) {
   //Definir el background del Canvas
-  background(fondo);
+  // background(fondo);
   //Llamar a drawUi
   drawUi();
-  //Dibujar la Cuadricula
-  // dibujaCuadricula();
+  forEach2(escenario, (row, i) => {
+    forEach2(row, (cell, j) => {
+      if (cell == 1) {
+        strokeWeight(0.5);
+        stroke('#3c3731');
+        fill('#45B39D');
+        rect(j * lado, i * lado, lado, lado);
+        //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
+      }
+      if (cell == 0) {
+        strokeWeight(0.5);
+        stroke('#3c3731');
+        fill('#45B39D');
+        rect(j * lado, i * lado, lado, lado);
+        //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
+      }
+      if (cell == 2) {
 
+      }
+    });
+  });
   //Fill => Color de relleno
   fill(240, 240, 240);
   //Stroke => color de los bordes
@@ -310,6 +337,10 @@ function drawGame(Mundo) {
     rect(s.x * lado, s.y * lado, lado, lado);
   });
 
+  //Dibujar la Cuadricula
+
+
+
   //TODO REVISAR ESTE FILL
   fill('white');
   //Dibujar a Ñero
@@ -317,10 +348,7 @@ function drawGame(Mundo) {
   //Dibujar Knife
   drawKnife(Mundo.knife);
 
-
   frameRate(7);
-
-
 }
 
 /*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
@@ -511,7 +539,7 @@ function onTic(Mundo) {
         ñero: ñeroMove(Mundo.ñero),
         //knife: moveKnife(Mundo.knife),
       });
-      //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle 
+      //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
       //Movimiento normal del Snake junto al del ñero.
     } else {
       return update(Mundo, {
