@@ -61,12 +61,13 @@ velocidad
  */
 
 const comodin = function(x,y){
-  this.x = x;
-  this.y = y;
+  this.x = 15;
+  this.y = 13;
 
   this.tiempoActivo = tiempoRandom(30, 50);
   this.tiempoAccionado = tiempoRandom(30, 50);
   this.tiempoDesactivo = tiempoRandom(30, 50);
+  //this.ordenAleatorio = tiempoRandom(1,8)
 }
 
 const comodinVelocidad = new comodin(1,1);
@@ -105,6 +106,16 @@ function moveSnake(snake, dir) {
   );
 }
 
+function moveSnake2(snake, dir) {
+  const head = first(snake);
+  head.x = head.x-0.5;
+  head.y = head.y-0.5;
+  return cons(
+    { x: head.x + dir.x, y: head.y + dir.y },
+    snake.slice(0, length(snake) - 1)
+  );
+}
+
 // TODO Dibujar la comida
 function drawFood(food) {
   fill('crimson');
@@ -120,7 +131,7 @@ function drawComodin1(comodin1) {
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
 
 function setup() {
-  frameRate(7);
+  frameRate(2);
   drawfondo();
   windowRezired();
   direcciones();
@@ -489,7 +500,28 @@ function compruebaColisionTexto(x){
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
+  //console.log(Mundo.snake[0]);
+  //console.log(Mundo.food);
   drawUi();
+  if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
+    //debugger;
+    accionVelocidad();
+  } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){
+
+  } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){
+
+  } else if (comerItem(Mundo.snake, Mundo.comodines[3]) || Mundo.comodines[3].tiempoAccionado > 0){
+
+  } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){
+
+  } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
+
+  } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){
+
+  } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
+
+  } 
+
   if (   //Cordinas el movimiento de la serpiente.
     (Mundo.snake[0].x > columnas - 1 ||
       Mundo.snake[0].y > filas - 1 ||
@@ -550,7 +582,8 @@ function onTic(Mundo) {
     );
     return update(Mundo, {});
   } else {
-    if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) { // Saber si la serpiente come
+    // Saber si la serpiente come
+    if (comerItem(Mundo.snake, Mundo.food)) { 
       Mundo.snake.push({ x: 5, y: 5 });
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -712,58 +745,26 @@ comerItem(([5,5], [5,4], [5,3], [5,2]), [0,1]) -> false
 */
 
 function comerItem(snake, item) {
-  if (snake[0].x == item.x && snake[0].y == item.y) {
+  if (snake[0].x == item.x && snake[0].y == item.y || snake[1].x == item.x && snake[1].y == item.y) {
     return true;
   } else {
     return false;
   }
 }
 
-/*
-Propósito: Retornar en una sola variable los parámetros introducidos por el usuario en un JSON
-Contrato: number,number,number -> JSON
-Prototipo: retortarTiempos(tiempoAccionado, tiempoActivo, tiempoDesactivo)
-Ejemplos:
-function retornarComodin(true, 0, 0, 0, [Mundo], [comodin]) -> [
-        x: 5,
-        y: 3,
-        tiempoAccionado: 0,
-        tiempoActivo: 0,
-        tiempoDesactivo: 0,
-        ]
+function accionVelocidad(){
+  update(Mundo, Mundo.snake = moveSnake2(Mundo.snake, Mundo.dir));
+  if (Mundo.comodines[0].tiempoAccionado == 0){
+    update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
 
-
-*/
-
-function retornarComodin(
-  condicionPosiciones,
-  tiempoAccionado,
-  tiempoActivo,
-  tiempoDesactivo,
-  Mundo,
-  comodin
-) {
-
-  //TODO ¿Corrijo ese "== true"? Porque creo que es inútil...
-  if (condicionPosiciones == true) {
-    let item1 = numeroRandomComida(Mundo.snake);
-    let item2 = {
-      tiempoAccionado: tiempoAccionado,
-      tiempoActivo: tiempoActivo,
-      tiempoDesactivo: tiempoDesactivo,
-    };
-
-    return update(item1, item2);
-  } else if (condicionPosiciones == false) {
-    item = {
-      x: comodin.x,
-      y: comodin.y,
-      tiempoAccionado: tiempoAccionado,
-      tiempoActivo: tiempoActivo,
-      tiempoDesactivo: tiempoDesactivo,
-    };
-
-    return item;
+  } else {
+    update(Mundo, Mundo.comodines[0].tiempoAccionado--)
   }
 }
+
+/*----------------------------------------------------------------
+ x: int(getRandom(0,28)) ,  //28
+            y: int(getRandom(4,26)), //26
+*/
+
 
