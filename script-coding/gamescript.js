@@ -567,6 +567,7 @@ function onTic(Mundo) {
     restaTiempo(0);
 
     if (Mundo.comodines[0].tiempoActivo == 1){
+      console.log("Hola")
       posicionInactiva(0);
 
     }
@@ -576,6 +577,7 @@ function onTic(Mundo) {
     restaTiempo(1);
 
     if (Mundo.comodines[1].tiempoActivo == 1){
+      console.log("Hola");
       posicionInactiva(1);
 
     }
@@ -585,6 +587,7 @@ function onTic(Mundo) {
     restaTiempo(2);
 
     if (Mundo.comodines[2].tiempoActivo == 1){
+      console.log("Hola");
       posicionInactiva(2);
 
     }
@@ -594,6 +597,7 @@ function onTic(Mundo) {
     restaTiempo(3);
 
     if (Mundo.comodines[3].tiempoActivo == 1){
+      console.log("Hola");
       posicionInactiva(3);
 
     }
@@ -603,6 +607,7 @@ function onTic(Mundo) {
     restaTiempo(4);
 
     if (Mundo.comodines[4].tiempoActivo == 1){
+      console.log("Hola");
       posicionInactiva(4);
 
     }
@@ -612,6 +617,7 @@ function onTic(Mundo) {
     restaTiempo(5);
 
     if (Mundo.comodines[5].tiempoActivo == 1){
+      console.log("Hola");
       posicionInactiva(5);
 
     }
@@ -621,6 +627,7 @@ function onTic(Mundo) {
     restaTiempo(6);
 
     if (Mundo.comodines[6].tiempoActivo == 1){
+      console.log("Hola");
       posicionInactiva(6);
 
     }
@@ -630,6 +637,7 @@ function onTic(Mundo) {
     restaTiempo(7);
 
     if (Mundo.comodines[7].tiempoActivo == 1){
+      console.log("Hola");
       posicionInactiva(7);
 
     }
@@ -869,10 +877,13 @@ function comerItem(snake, item) {
 
 function accionVelocidad(){
   update(Mundo, Mundo.snake = moveSnake(Mundo.snake, Mundo.dir));
-  update(Mundo, Mundo.comodines[0].tiempoActivo = 1);
+  update(Mundo, Mundo.comodines[0].tiempoActivo = 0)
   if (Mundo.comodines[0].tiempoAccionado == 0){
     update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
-
+    const numeroComodin = getRandom(0,8)
+    update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
+    update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
+    update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
   } else {
     update(Mundo, Mundo.comodines[0].tiempoAccionado--)
   }
@@ -893,5 +904,4 @@ function posicionInactiva(nComodin){
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
-  console.log(Mundo.comodines);
 }
