@@ -753,7 +753,7 @@ function comerItem(snake, item) {
 }
 
 function accionVelocidad(){
-  update(Mundo, Mundo.snake = moveSnake2(Mundo.snake, Mundo.dir));
+  update(Mundo, Mundo.snake = moveSnake(Mundo.snake, Mundo.dir));
   if (Mundo.comodines[0].tiempoAccionado == 0){
     update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
 
@@ -766,5 +766,3 @@ function accionVelocidad(){
  x: int(getRandom(0,28)) ,  //28
             y: int(getRandom(4,26)), //26
 */
-
-
