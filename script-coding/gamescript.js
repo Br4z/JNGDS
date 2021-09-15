@@ -60,11 +60,15 @@ const velocidad = new comodinVelocidad();
 velocidad
  */
 
-const comodin = function(x,y){
+const comodin = function(x,y, tiempoActivo){
   this.x = x;
   this.y = y;
 
-  this.tiempoActivo = 40;
+  if (tiempoActivo == null){
+    tiempoActivo == 0;
+  }
+
+  this.tiempoActivo = tiempoActivo;
   this.tiempoAccionado = 0;
   this.tiempoDesactivo = tiempoRandom(30, 50);
   //this.ordenAleatorio = tiempoRandom(1,8)
@@ -74,7 +78,7 @@ x: int(getRandom(0,28)) ,  //28
 y: int(getRandom(4,26)), //26
 */
 
-const comodinVelocidad = new comodin(getRandom(0,28),getRandom(4,26));
+const comodinVelocidad = new comodin(getRandom(0,28),getRandom(4,26),40);
 const comodinInvencibilidad = new comodin(getRandom(0,28),getRandom(4,26));
 const comodinRegeneracion = new comodin(getRandom(0,28),getRandom(4,26));
 const comodinVidaMas = new comodin(getRandom(0,28),getRandom(4,26));
