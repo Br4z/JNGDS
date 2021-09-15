@@ -206,7 +206,7 @@ function setup() {
         y: 10,
       },
     ],
-    retrasoComodines: 20,
+    retrasoComodines: 80,
   };
 }
 
@@ -544,6 +544,18 @@ function onTic(Mundo) {
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
   //console.log(Mundo.comodines[0]);
+
+  if (Mundo.retrasoComodines > 0){
+    console.log(1)
+    restaRetraso();
+
+  } else if (Mundo.retrasoComodines == 0){
+    console.log(2);
+    nuevosComodines();
+    nuevoRetraso();
+
+  }
+
   drawUi();
   if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
     accionVelocidad();
@@ -564,11 +576,12 @@ function onTic(Mundo) {
 
   } 
 
+  
   if (Mundo.comodines[0].tiempoActivo > 0){
     restaTiempo(0);
 
     if (Mundo.comodines[0].tiempoActivo == 1){
-      console.log("Hola")
+      //console.log("Hola");
       posicionInactiva(0);
 
     }
@@ -578,7 +591,7 @@ function onTic(Mundo) {
     restaTiempo(1);
 
     if (Mundo.comodines[1].tiempoActivo == 1){
-      console.log("Hola");
+      //console.log("Hola");
       posicionInactiva(1);
 
     }
@@ -588,7 +601,7 @@ function onTic(Mundo) {
     restaTiempo(2);
 
     if (Mundo.comodines[2].tiempoActivo == 1){
-      console.log("Hola");
+      //console.log("Hola");
       posicionInactiva(2);
 
     }
@@ -598,7 +611,7 @@ function onTic(Mundo) {
     restaTiempo(3);
 
     if (Mundo.comodines[3].tiempoActivo == 1){
-      console.log("Hola");
+      //console.log("Hola");
       posicionInactiva(3);
 
     }
@@ -608,7 +621,7 @@ function onTic(Mundo) {
     restaTiempo(4);
 
     if (Mundo.comodines[4].tiempoActivo == 1){
-      console.log("Hola");
+      //console.log("Hola");
       posicionInactiva(4);
 
     }
@@ -618,7 +631,7 @@ function onTic(Mundo) {
     restaTiempo(5);
 
     if (Mundo.comodines[5].tiempoActivo == 1){
-      console.log("Hola");
+      //console.log("Hola");
       posicionInactiva(5);
 
     }
@@ -628,7 +641,7 @@ function onTic(Mundo) {
     restaTiempo(6);
 
     if (Mundo.comodines[6].tiempoActivo == 1){
-      console.log("Hola");
+      //console.log("Hola");
       posicionInactiva(6);
 
     }
@@ -638,11 +651,13 @@ function onTic(Mundo) {
     restaTiempo(7);
 
     if (Mundo.comodines[7].tiempoActivo == 1){
-      console.log("Hola");
+      //console.log("Hola");
       posicionInactiva(7);
 
     }
   }
+
+  
 
   
 
@@ -881,7 +896,8 @@ function accionVelocidad(){
   update(Mundo, Mundo.comodines[0].tiempoActivo = 0)
   if (Mundo.comodines[0].tiempoAccionado == 0){
     update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
-    nuevosComodines();
+    //nuevosComodines();
+    update(Mundo, Mundo.retrasoComodines = 80);
   } else {
     update(Mundo, Mundo.comodines[0].tiempoAccionado--)
   }
@@ -898,7 +914,8 @@ function posicionInactiva(nComodin){
   update(Mundo, Mundo.comodines[nComodin].x = -1);
   update(Mundo, Mundo.comodines[nComodin].y = -1);
 
-  nuevosComodines();
+  //nuevosComodines();
+  update(Mundo, Mundo.retrasoComodines = 80);
 }
 
 function nuevosComodines(){
@@ -906,4 +923,12 @@ function nuevosComodines(){
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
+}
+
+function restaRetraso(){
+  update(Mundo, Mundo.retrasoComodines--);
+}
+
+function nuevoRetraso(){
+  update(Mundo, Mundo.retrasoComodines = 80);
 }
