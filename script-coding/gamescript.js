@@ -158,6 +158,17 @@ function setup() {
       }
      */
 
+    comodines: [
+      comodinVelocidad, 
+      comodinInvencibilidad,
+      comodinRegeneracion, 
+      comodinVidaMas, 
+      comodinInversion,
+      comodinTombos,
+      comodinReduccionPuntos,
+      comodinGolpeAccionado,
+    ],
+
     //Numero de vidas inicial
     lives: 3,
     //El tiempo
