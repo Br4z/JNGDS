@@ -389,7 +389,7 @@ function drawGame(Mundo) {
   if (Mundo.comodines[1].tiempoActivo > 0){
     drawComodin(Mundo.comodines[1], "purple"); 
   }
-  /*
+  
   if (Mundo.comodines[2].tiempoActivo > 0){
     drawComodin(Mundo.comodines[2], "orange"); 
   }
@@ -408,7 +408,7 @@ function drawGame(Mundo) {
   if (Mundo.comodines[7].tiempoActivo > 0){
     drawComodin(Mundo.comodines[7], "gray"); 
   }
-  */
+  
 
   
 
@@ -538,7 +538,7 @@ function compruebaColisionTexto(x){
 function onTic(Mundo) {
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
-  console.log(Mundo.comodines[0]);
+  //console.log(Mundo.comodines[0]);
   drawUi();
   if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
     accionVelocidad();
@@ -865,6 +865,7 @@ function comerItem(snake, item) {
 
 function accionVelocidad(){
   update(Mundo, Mundo.snake = moveSnake(Mundo.snake, Mundo.dir));
+  update(Mundo, Mundo.comodines[0].tiempoActivo = 1);
   if (Mundo.comodines[0].tiempoAccionado == 0){
     update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
 
@@ -883,5 +884,10 @@ function restaTiempo(nComodin){
 function posicionInactiva(nComodin){
   update(Mundo, Mundo.comodines[nComodin].x = -1);
   update(Mundo, Mundo.comodines[nComodin].y = -1);
-  update(Mundo, Mundo.comodines[getRandom(0,8)].tiempoActivo = getRandom(30,50));
+
+  const numeroComodin = getRandom(0,8)
+  update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
+  update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
+  update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
+  console.log(Mundo.comodines);
 }
