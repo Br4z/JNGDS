@@ -64,7 +64,7 @@ const comodin = function(x,y){
   this.x = x;
   this.y = y;
 
-  this.tiempoActivo = tiempoRandom(30, 50);
+  this.tiempoActivo = 40;
   this.tiempoAccionado = 0;
   this.tiempoDesactivo = tiempoRandom(30, 50);
   //this.ordenAleatorio = tiempoRandom(1,8)
@@ -127,8 +127,8 @@ function drawFood(food) {
 }
 
 // TODO Dibujar el Comodin #1
-function drawComodinVelocidad(comodin) {
-  fill('yellow');
+function drawComodin(comodin, color) {
+  fill(color);
   rect(comodin.x * lado, comodin.y * lado, lado, lado);
 }
 
@@ -382,7 +382,38 @@ function drawGame(Mundo) {
 
   frameRate(7);
 
-  drawComodinVelocidad(Mundo.comodines[0]);
+  //DIBUJA COMODINES
+  if (Mundo.comodines[0].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[0], "yellow"); 
+  }
+  if (Mundo.comodines[1].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[1], "purple"); 
+  }
+  /*
+  if (Mundo.comodines[2].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[2], "orange"); 
+  }
+  if (Mundo.comodines[3].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[3], "black"); 
+  }
+  if (Mundo.comodines[4].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[4], "white"); 
+  }
+  if (Mundo.comodines[5].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[5], "brown"); 
+  }
+  if (Mundo.comodines[6].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[6], "pink"); 
+  }
+  if (Mundo.comodines[7].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[7], "gray"); 
+  }
+  */
+
+  
+
+  
+ 
 }
 
 /*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
@@ -507,7 +538,7 @@ function compruebaColisionTexto(x){
 function onTic(Mundo) {
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
-  //console.log(Mundo.food);
+  console.log(Mundo.comodines[0]);
   drawUi();
   if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
     accionVelocidad();
@@ -527,6 +558,80 @@ function onTic(Mundo) {
   } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
 
   } 
+
+  if (Mundo.comodines[0].tiempoActivo > 0){
+    restaTiempo(0);
+
+    if (Mundo.comodines[0].tiempoActivo == 1){
+      posicionInactiva(0);
+
+    }
+  }
+
+  if (Mundo.comodines[1].tiempoActivo > 0){
+    restaTiempo(1);
+
+    if (Mundo.comodines[1].tiempoActivo == 1){
+      posicionInactiva(1);
+
+    }
+  }
+
+  if (Mundo.comodines[2].tiempoActivo > 0){
+    restaTiempo(2);
+
+    if (Mundo.comodines[2].tiempoActivo == 1){
+      posicionInactiva(2);
+
+    }
+  }
+
+  if (Mundo.comodines[3].tiempoActivo > 0){
+    restaTiempo(3);
+
+    if (Mundo.comodines[3].tiempoActivo == 1){
+      posicionInactiva(3);
+
+    }
+  }
+
+  if (Mundo.comodines[4].tiempoActivo > 0){
+    restaTiempo(4);
+
+    if (Mundo.comodines[4].tiempoActivo == 1){
+      posicionInactiva(4);
+
+    }
+  }
+
+  if (Mundo.comodines[5].tiempoActivo > 0){
+    restaTiempo(5);
+
+    if (Mundo.comodines[5].tiempoActivo == 1){
+      posicionInactiva(5);
+
+    }
+  }
+
+  if (Mundo.comodines[6].tiempoActivo > 0){
+    restaTiempo(6);
+
+    if (Mundo.comodines[6].tiempoActivo == 1){
+      posicionInactiva(6);
+
+    }
+  }
+
+  if (Mundo.comodines[7].tiempoActivo > 0){
+    restaTiempo(7);
+
+    if (Mundo.comodines[7].tiempoActivo == 1){
+      posicionInactiva(7);
+
+    }
+  }
+
+  
 
   if (   //Cordinas el movimiento de la serpiente.
     (Mundo.snake[0].x > columnas - 1 ||
@@ -766,9 +871,17 @@ function accionVelocidad(){
   } else {
     update(Mundo, Mundo.comodines[0].tiempoAccionado--)
   }
+
+
 }
 
-/*----------------------------------------------------------------
- x: int(getRandom(0,28)) ,  //28
-            y: int(getRandom(4,26)), //26
-*/
+function restaTiempo(nComodin){
+  update(Mundo, Mundo.comodines[nComodin].tiempoActivo--);
+
+}
+
+function posicionInactiva(nComodin){
+  update(Mundo, Mundo.comodines[nComodin].x = -1);
+  update(Mundo, Mundo.comodines[nComodin].y = -1);
+  update(Mundo, Mundo.comodines[getRandom(0,8)].tiempoActivo = getRandom(30,50));
+}
