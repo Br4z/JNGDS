@@ -89,6 +89,12 @@ const comodinGolpeAccionado = new comodin(8,8);
     );
 }
 
+
+//
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
 
 function moveSnake(snake, dir) {
@@ -131,8 +137,8 @@ function setup() {
     dir: derecha,
     //Posicion de la Comida (Será Random)
     food: {
-      x: int(random(columnas)),
-      y: int(random(filas)),
+      x: int(getRandom(0,28)) ,  //28
+      y: int(getRandom(4,26)), //26
     },
     //TODO SE PODRA BORRAR? PARA QUE SIRVE?
     cuadradoFinal: {
@@ -192,8 +198,8 @@ const escenario = [
     0, 0, 0,
   ],
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1,
   ],
   [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -307,8 +313,8 @@ function drawGame(Mundo) {
     forEach2(row, (cell, j) => {
       if (cell == 1) {
         strokeWeight(0.5);
-        stroke('#3c3731');
-        fill('#45B39D');
+        stroke('#81a832');
+        fill('#81a832');
         rect(j * lado, i * lado, lado, lado);
         //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
       }
@@ -439,17 +445,17 @@ function ñeroMove(ñero) {
   if (ñero.y == 24) {
     return { x: ñero.x, y: ñero.y - 1, dirx: false, diry: true };
   }
-  if (ñero.dirx == false && ñero.y != 1) {
+  if (ñero.dirx == false && ñero.y != 6) {
     return { x: ñero.x, y: ñero.y - 1, dirx: false, diry: true };
   }
-  if (ñero.y == 1 && ñero.dirx == false && ñero.x != 1 && ñero.diry == true) {
-    return { x: ñero.x - 1, y: 1, dirx: false, diry: true };
+  if (ñero.y == 6 && ñero.dirx == false && ñero.x != 1 && ñero.diry == true) {
+    return { x: ñero.x - 1, y: 6, dirx: false, diry: true };
   }
   if (ñero.x == 1) {
-    return { x: ñero.x + 1, y: 1, dir: true, diry: false };
+    return { x: ñero.x + 1, y: 6, dir: true, diry: false };
   }
   if (ñero.diry == false && ñero.x != 1) {
-    return { x: ñero.x + 1, y: 1, dir: true, diry: false };
+    return { x: ñero.x + 1, y: 6, dir: true, diry: false };
   }
 }
 
@@ -460,6 +466,12 @@ function moveKnife(knife) {
 
 //Actualiza los atributos del ñero conforme el juego va avanzando
 function ñeroUpdate() {}
+
+function compruebaColisionTexto(x){
+  if(x == escenario){
+
+  }
+} 
 
 
 /* ONTIC */
@@ -472,8 +484,9 @@ function onTic(Mundo) {
       Mundo.snake[0].y > filas - 1 ||
       Mundo.snake[0].x < 0 ||
       Mundo.snake[0].y < 0 ||
-      choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) &&
-    Mundo.lives >= 1
+      (choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) &&
+    Mundo.lives >= 1) ||
+    escenario[Mundo.snake[0].y][0] == 1
   ) {
     countLives = Mundo.lives - 1;
     return update(Mundo, {
@@ -484,8 +497,8 @@ function onTic(Mundo) {
       ],
       dir: derecha,
       food: {
-        x: int(random(columnas)),
-        y: int(random(filas)),
+        x: int(getRandom(0,28)) ,  //28
+        y: int(getRandom(4,26)),
       },
       cuadradoFinal: {
         x: 0,
@@ -526,13 +539,13 @@ function onTic(Mundo) {
     );
     return update(Mundo, {});
   } else {
-    if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) { // Saber si la serpiente se periquea.
+    if (Mundo.snake[0].x == Mundo.food.x && Mundo.snake[0].y == Mundo.food.y) { // Saber si la serpiente come
       Mundo.snake.push({ x: 5, y: 5 });
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         food: {
-          x: Math.floor(Math.random() * (20 - 0) + 0),
-          y: Math.floor(Math.random() * (20 - 0) + 0),
+            x: int(getRandom(0,28)) ,  //28
+            y: int(getRandom(4,26)), //26
         },
         score: Mundo.score + 1,
         timer: int(millis() / 1000),
