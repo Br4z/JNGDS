@@ -206,6 +206,7 @@ function setup() {
         y: 10,
       },
     ],
+    retrasoComodines: 20,
   };
 }
 
@@ -880,10 +881,7 @@ function accionVelocidad(){
   update(Mundo, Mundo.comodines[0].tiempoActivo = 0)
   if (Mundo.comodines[0].tiempoAccionado == 0){
     update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
-    const numeroComodin = getRandom(0,8)
-    update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
-    update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
-    update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
+    nuevosComodines();
   } else {
     update(Mundo, Mundo.comodines[0].tiempoAccionado--)
   }
@@ -900,6 +898,10 @@ function posicionInactiva(nComodin){
   update(Mundo, Mundo.comodines[nComodin].x = -1);
   update(Mundo, Mundo.comodines[nComodin].y = -1);
 
+  nuevosComodines();
+}
+
+function nuevosComodines(){
   const numeroComodin = getRandom(0,8)
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
