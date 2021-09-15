@@ -61,23 +61,27 @@ velocidad
  */
 
 const comodin = function(x,y){
-  this.x = 15;
-  this.y = 13;
+  this.x = x;
+  this.y = y;
 
   this.tiempoActivo = tiempoRandom(30, 50);
-  this.tiempoAccionado = tiempoRandom(30, 50);
+  this.tiempoAccionado = 0;
   this.tiempoDesactivo = tiempoRandom(30, 50);
   //this.ordenAleatorio = tiempoRandom(1,8)
 }
+/*
+x: int(getRandom(0,28)) ,  //28
+y: int(getRandom(4,26)), //26
+*/
 
-const comodinVelocidad = new comodin(1,1);
-const comodinInvencibilidad = new comodin(2,2);
-const comodinRegeneracion = new comodin(3,3);
-const comodinVidaMas = new comodin(4,4);
-const comodinInversion = new comodin(5,5);
-const comodinTombos = new comodin(6,6);
-const comodinReduccionPuntos = new comodin(7,7);
-const comodinGolpeAccionado = new comodin(8,8);
+const comodinVelocidad = new comodin(getRandom(0,28),getRandom(4,26));
+const comodinInvencibilidad = new comodin(getRandom(0,28),getRandom(4,26));
+const comodinRegeneracion = new comodin(getRandom(0,28),getRandom(4,26));
+const comodinVidaMas = new comodin(getRandom(0,28),getRandom(4,26));
+const comodinInversion = new comodin(getRandom(0,28),getRandom(4,26));
+const comodinTombos = new comodin(getRandom(0,28),getRandom(4,26));
+const comodinReduccionPuntos = new comodin(getRandom(0,28),getRandom(4,26));
+const comodinGolpeAccionado = new comodin(getRandom(0,28),getRandom(4,26));
 
   /*COSAS DEL SNAKE*/
 
@@ -93,7 +97,7 @@ const comodinGolpeAccionado = new comodin(8,8);
 
 //
 function getRandom(min, max) {
-  return Math.random() * (max - min) + min;
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
@@ -123,9 +127,9 @@ function drawFood(food) {
 }
 
 // TODO Dibujar el Comodin #1
-function drawComodin1(comodin1) {
+function drawComodinVelocidad(comodin) {
   fill('yellow');
-  rect(comodin1.x * lado, comodin1.y * lado, lado, lado);
+  rect(comodin.x * lado, comodin.y * lado, lado, lado);
 }
 
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
@@ -377,6 +381,8 @@ function drawGame(Mundo) {
   drawKnife(Mundo.knife);
 
   frameRate(7);
+
+  drawComodinVelocidad(Mundo.comodines[0]);
 }
 
 /*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
@@ -504,8 +510,8 @@ function onTic(Mundo) {
   //console.log(Mundo.food);
   drawUi();
   if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
-    //debugger;
     accionVelocidad();
+    
   } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){
