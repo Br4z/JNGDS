@@ -657,6 +657,7 @@ function onTic(Mundo) {
 
   }
 
+  countLives = Mundo.lives;
   drawUi();
   if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
     accionVelocidad();
@@ -1066,15 +1067,10 @@ function accionInvencibilidad(){
 
 function accionVidaMas(){
   update(Mundo, Mundo.comodines[3].tiempoActivo = 0)
-  //if (Mundo.comodines[3].tiempoAccionado == 0){
-    //debugger;
-    posicionInactiva(3);
-    update(Mundo, Mundo.comodines[3].tiempoAccionado = 0);
-    //nuevosComodines();
-    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
-    update(Mundo, Mundo.lives++);
-    update(Mundo, Mundo.countLives = Mundo.lives)
-  //} else {
-    
-  //}
+  posicionInactiva(3);
+  update(Mundo, Mundo.comodines[3].tiempoAccionado = 0);
+  //nuevosComodines();
+  update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+  update(Mundo, Mundo.lives++);
+  //update(Mundo, Mundo.countLives = Mundo.lives)
 }
