@@ -22,6 +22,86 @@ const alto_canvas = filas * lado;
 // Medidas Actuales:
 // ANCHO: 560  -------  // ALTO: 520
 
+
+/* ENEMIGO */
+const enemigo = function(x,y){
+  this.x = x;
+  this.y = y;
+  this.contador = 0
+  this.direccion = randomr(1,3);
+
+  this.retraso = 0;
+  this.fotograma = 0;
+
+  this.dibujaMalo = function(){
+    fill("blue");
+    rect(this.x*dx,this.y*dy,dx,dy);
+  }
+
+  this.compruebaColision = function(x,y){
+    colisiona = false;
+    if (x==ancho-1 || x==1 || y==alto-1 || y==1){
+      colisiona = true
+    }
+    return colisiona
+  }
+
+  this.mueveMalo = function(){
+    if(this.contador < this.retraso){
+        this.contador=this.contador+1;
+    }
+      else{
+        this.contador = 0;
+        //ARRIBA
+        if(this.direccion == 0){
+          if(this.compruebaColision(this.x, this.y - 1)==false){
+            this.y=this.y-1;
+          }
+          else{
+            this.direccion = randomr(1, 3);
+          }
+        }
+
+
+        //ABAJO
+        if(this.direccion == 1){
+          if(this.compruebaColision(this.x, this.y + 1)==false){
+            this.y=this.y+1;
+          }
+          else{
+            this.direccion = randomr(1, 3);
+          }
+        }
+
+        //IZQUIERDA
+        if(this.direccion == 2){
+          if(this.compruebaColision(this.x-1, this.y)==false){
+            this.x-=this.x-1;
+          }
+          else{
+            this.direccion = randomr(1, 3);
+          }
+        }
+
+        //IZQUIERDA
+        if(this.direccion == 3){
+          if(this.compruebaColision(this.x+1, this.y)==false){
+            this.x=this.x+1;
+          }
+          else{
+            this.direccion = randomr(1, 3);
+          }
+        }
+      }
+
+    }
+}
+
+
+
+
+
+
 // Constantes de control.
 let arriba;
 let abajo;
@@ -50,9 +130,9 @@ let fondo;
 //     return 0;
 //   }
 //   //ejemplo para llamarla al onTic
-//   //Mundo.comodinVelocidad.nombreFuncion() 
+//   //Mundo.comodinVelocidad.nombreFuncion()
 // }
-/* INICIALIZARLA 
+/* INICIALIZARLA
 const velocidad = new comodinVelocidad();
 */
 
@@ -161,7 +241,7 @@ function setup() {
     },
     //TODO SE PODRA BORRAR? PARA QUE SIRVE?
     cuadradoFinal: {
-      x: 0, 
+      x: 0,
       y: 0,
     },
     //Puntacion Inicial
@@ -178,10 +258,10 @@ function setup() {
      */
 
     comodines: [
-      comodinVelocidad, 
+      comodinVelocidad,
       comodinInvencibilidad,
-      comodinRegeneracion, 
-      comodinVidaMas, 
+      comodinRegeneracion,
+      comodinVidaMas,
       comodinInversion,
       comodinTombos,
       comodinReduccionPuntos,
@@ -217,108 +297,108 @@ function setup() {
 //Escenario
 const escenario = [
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2,
   ],
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2,
   ],
   [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2,
+  ],
+  [
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
+  ],
+  [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1,
   ],
   [
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
-  ],
-  [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0,
   ],
 ];
 
@@ -344,8 +424,8 @@ function drawGame(Mundo) {
     forEach2(row, (cell, j) => {
       if (cell == 1) {
         strokeWeight(0.5);
-        stroke('#81a832');
-        fill('#81a832');
+        stroke('#379985');
+        fill('#379985');
         rect(j * lado, i * lado, lado, lado);
         //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
       }
@@ -357,7 +437,10 @@ function drawGame(Mundo) {
         //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
       }
       if (cell == 2) {
-
+        strokeWeight(0.5);
+        stroke('#379985');
+        fill('#379985');
+        rect(j * lado, i * lado, lado, lado);
       }
     });
   });
@@ -389,36 +472,36 @@ function drawGame(Mundo) {
 
   //DIBUJA COMODINES
   if (Mundo.comodines[0].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[0], "yellow"); 
+    drawComodin(Mundo.comodines[0], "yellow");
   }
   if (Mundo.comodines[1].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[1], "purple"); 
+    drawComodin(Mundo.comodines[1], "purple");
   }
-  
+
   if (Mundo.comodines[2].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[2], "orange"); 
+    drawComodin(Mundo.comodines[2], "orange");
   }
   if (Mundo.comodines[3].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[3], "black"); 
+    drawComodin(Mundo.comodines[3], "black");
   }
   if (Mundo.comodines[4].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[4], "white"); 
+    drawComodin(Mundo.comodines[4], "white");
   }
   if (Mundo.comodines[5].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[5], "brown"); 
+    drawComodin(Mundo.comodines[5], "brown");
   }
   if (Mundo.comodines[6].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[6], "pink"); 
+    drawComodin(Mundo.comodines[6], "pink");
   }
   if (Mundo.comodines[7].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[7], "gray"); 
+    drawComodin(Mundo.comodines[7], "gray");
   }
-  
 
-  
 
-  
- 
+
+
+
+
 }
 
 /*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
@@ -535,7 +618,17 @@ function compruebaColisionTexto(x){
   if(x == escenario){
 
   }
-} 
+}
+
+  function margenes(x, y) {
+    /*const*/colision = false;
+
+    if (escenario[y][x] == 1 || escenario[y][x]==2) {
+      colision = true;
+    }
+
+    return colision;
+  };
 
 
 /* ONTIC */
@@ -559,7 +652,7 @@ function onTic(Mundo) {
   drawUi();
   if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
     accionVelocidad();
-    
+
   } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){
@@ -574,9 +667,9 @@ function onTic(Mundo) {
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
 
-  } 
+  }
 
-  
+
   if (Mundo.comodines[0].tiempoActivo > 0){
     restaTiempo(0);
 
@@ -657,9 +750,9 @@ function onTic(Mundo) {
     }
   }
 
-  
+// console.log(Mundo.snake[0].x)
 
-  
+
 
   if (   //Cordinas el movimiento de la serpiente.
     (Mundo.snake[0].x > columnas - 1 ||
@@ -668,7 +761,9 @@ function onTic(Mundo) {
       Mundo.snake[0].y < 0 ||
       (choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) &&
     Mundo.lives >= 1) ||
-    escenario[Mundo.snake[0].y][0] == 1
+    //margenes(Mundo.snake[0].x,Mundo.sanke[0].y)==true
+    escenario[Mundo.snake[0].y][0] == 2 //||
+    //escenario[Mundo.snake[0]][Mundo.snake[0].y] == 1
   ) {
     countLives = Mundo.lives - 1;
     return update(Mundo, {
@@ -679,7 +774,7 @@ function onTic(Mundo) {
       ],
       dir: derecha,
       food: {
-        x: int(getRandom(0,28)) ,  //28
+        x: int(getRandom(2,28)) ,  //28
         y: int(getRandom(4,26)),
       },
       cuadradoFinal: {
@@ -722,7 +817,7 @@ function onTic(Mundo) {
     return update(Mundo, {});
   } else {
     // Saber si la serpiente come
-    if (comerItem(Mundo.snake, Mundo.food)) { 
+    if (comerItem(Mundo.snake, Mundo.food)) {
       Mundo.snake.push({ x: 5, y: 5 });
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
