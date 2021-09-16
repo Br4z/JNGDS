@@ -236,8 +236,8 @@ function setup() {
     dir: derecha,
     //Posicion de la Comida (Será Random)
     food: {
-      x: int(getRandom(0,28)) ,  //28
-      y: int(getRandom(4,26)), //26
+      x: int(getRandom(2,27)) ,  //28
+      y: int(getRandom(4,25)), //26
     },
     //TODO SE PODRA BORRAR? PARA QUE SIRVE?
     cuadradoFinal: {
@@ -571,6 +571,9 @@ function drawKnife(knife) {
   });
 }
 
+
+
+
 //Funcion para dibujar a uno de los enemigos, en este caso 'el ñero'
 function drawÑero(ñero) {
   fill('blue');
@@ -616,6 +619,11 @@ function moveKnife(knife) {
     return cons({ x: head.x - 1, y: head.y }, moveKnife(rest(knife)));
   }
 }
+
+function duplicarKnife(knife, ñero) {
+  return cons({ x: ñero.x, y: ñero.y }, knife);
+}
+
 
 //Actualiza los atributos del ñero conforme el juego va avanzando
 function ñeroUpdate() {}
@@ -785,8 +793,8 @@ function onTic(Mundo) {
       ],
       dir: derecha,
       food: {
-        x: int(getRandom(2,28)) ,  //28
-        y: int(getRandom(4,26)),
+        x: int(getRandom(2,27)) ,  //28
+        y: int(getRandom(4,25)),
       },
       cuadradoFinal: {
         x: 0,
@@ -840,7 +848,7 @@ function onTic(Mundo) {
         timer: int(millis() / 1000),
         ñero: ñeroMove(Mundo.ñero),
         //knife: moveKnife(Mundo.knife),
-        knife: moveKnife(Mundo.knife),
+        knife: duplicarKnife(Mundo.knife,Mundo.ñero),
       });
       //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
       //Movimiento normal del Snake junto al del ñero.
