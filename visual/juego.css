@@ -1,8 +1,8 @@
 /* llamar a la fuente */
 
 @font-face {
-  font-family: "mister-pixel";
-  src: url("mister-pixel.ttf");
+  font-family: "ARCADE CLASSIC";
+  src: url("../fonts/ARCADECLASSIC.TTF");
 }
 
 /* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
@@ -21,14 +21,47 @@ body {
   background-size: cover;
 }
 
-.canvaas {
-
-  margin: auto;
-  
+.contenedorPrincipal {
+  display: flex;
+  flex-direction: row;
 }
 
-#volver{
+/* Esta es la animacion del boton */
+
+.btn-neon {
+  margin: 10px;
   position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  color: rgb(197, 193, 193);
+  letter-spacing: 4px;
+  font-size: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.2s;
+  font-family: "ARCADE CLASSIC", "Arial";
 }
 
+.btn-neon:hover {
+  background: #f6ed9f;
+  box-shadow: 0 0 10px #f6ed9f, 0 0 40px #f6ed9f, 0 0 80px #f6ed9f;
+  transition-delay: 0.4s;
+}
 
+.btn-neon span {
+  position: absolute;
+  display: block;
+}
+
+.span {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #f6ed9f);
+}
+
+.btn-neon:hover .span {
+  right: 100%;
+  transition: 1s;
+}

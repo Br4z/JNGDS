@@ -642,7 +642,8 @@ function compruebaColisionTexto(x){
 function onTic(Mundo) {
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
-  console.log(Mundo.comodines[0]);
+  //console.log(Mundo.comodines[0]);
+  let invencibilidad = true;
   // console.log(Mundo.snake[0].y,"jswjsj",Mundo.snake[0].x)
 
   if (Mundo.retrasoComodines > 0){
@@ -656,17 +657,18 @@ function onTic(Mundo) {
 
   }
 
+  countLives = Mundo.lives;
   drawUi();
   if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
     accionVelocidad();
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){
-    var invencibilidad = accionInvencibilidad();
+    invencibilidad = accionInvencibilidad();
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[3]) || Mundo.comodines[3].tiempoAccionado > 0){
-
+    accionVidaMas();
   } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
@@ -759,6 +761,9 @@ function onTic(Mundo) {
   }
 
 
+  console.log(((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) && invencibilidad == true) &&
+  Mundo.lives >= 1)
+
   if (   //Cordinas el movimiento de la serpiente.
     // (Mundo.snake[0].x > columnas - 1 ||
     //   Mundo.snake[0].y > filas - 1 ||
@@ -766,8 +771,8 @@ function onTic(Mundo) {
     //   Mundo.snake[0].y < 0 ||
     // escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 1 ||
     escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 ||
-    ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad) &&
-    Mundo.lives >= 1
+    (((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) && invencibilidad == true) &&
+  Mundo.lives >= 1)
     //margenes(Mundo.snake[0].x,Mundo.sanke[0].y)==true
     // escenario[Mundo.snake[0].y][0] == 2 ||
   ) {
@@ -807,7 +812,7 @@ function onTic(Mundo) {
     Mundo.snake[0].y > filas - 1 ||
     Mundo.snake[0].x < 0 ||
     Mundo.snake[0].y < 0 ||
-    ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad)
+    ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad == true)
   ) {
     textAlign(CENTER, CENTER);
     textSize(50);
@@ -1009,7 +1014,7 @@ function posicionInactiva(nComodin){
 
 function nuevosComodines(){
   //const numeroComodin = getRandom(0,8)
-  const numeroComodin = 1;
+  const numeroComodin = 3;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
@@ -1052,10 +1057,20 @@ function accionInvencibilidad(){
 
   }
 
-  if (Mundo.comodines[1].tiempoAccionado > 0){
+  if (Mundo.comodines[1].tiempoAccionado > 2){
     return false;
 
   } else {
     return true;
   }
+}
+
+function accionVidaMas(){
+  update(Mundo, Mundo.comodines[3].tiempoActivo = 0)
+  posicionInactiva(3);
+  update(Mundo, Mundo.comodines[3].tiempoAccionado = 0);
+  //nuevosComodines();
+  update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+  update(Mundo, Mundo.lives++);
+  //update(Mundo, Mundo.countLives = Mundo.lives)
 }

@@ -20,25 +20,3 @@ body {
   min-height: 100vh;
   background-size: cover;
 }
-
-/* Efecto blur */
-#container {
-  height: 400px;
-  border-radius: 6px;
-  box-shadow: 0 10px 30px #000;
-  margin: 50px auto;
-  border: 1px solid #ffffff40;
-  text-align: center;
-  font-family: 'Francois One', sans-serif;
-}
-
-.blur {
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  background-color: rgba(243, 243, 243, 0.2);
-}
-
-.menu {
-  text-align: center;
-  padding: 40px;
-}

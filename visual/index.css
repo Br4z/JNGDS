@@ -1,8 +1,8 @@
 /* llamar a la fuente */
 
 @font-face {
-  font-family: "mister-pixel";
-  src: url("mister-pixel.ttf");
+  font-family: "ARCADE CLASSIC";
+  src: url("../fonts/ARCADECLASSIC.TTF");
 }
 
 /* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
@@ -19,8 +19,7 @@ body {
   overflow: hidden;
 }
 /* Efecto blur */
-#container{
-
+#container {
   width: 400px;
   height: 20%;
   border-radius: 6px;
@@ -28,17 +27,14 @@ body {
   margin: 50px auto;
   border: 1px solid #ffffff40;
   text-align: center;
-  font-family: "mister-pixel", "Arial";
+  font-family: "ARCADE CLASSIC", "Arial";
 }
 
 .blur {
-
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  background-color: rgba(243,243,243,0.2);
-
+  background-color: rgba(243, 243, 243, 0.2);
 }
-
 
 /* Esta es la animacion del boton base */
 
@@ -122,7 +118,6 @@ body {
   background: url(/visual/LogoJNGS.png);
   background-size: cover;
   border-radius: 50%;
-
 }
 
 .text {
