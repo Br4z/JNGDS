@@ -667,7 +667,7 @@ function onTic(Mundo) {
   } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[3]) || Mundo.comodines[3].tiempoAccionado > 0){
-
+    accionVidaMas();
   } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
@@ -1013,7 +1013,7 @@ function posicionInactiva(nComodin){
 
 function nuevosComodines(){
   //const numeroComodin = getRandom(0,8)
-  const numeroComodin = 1;
+  const numeroComodin = 3;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
@@ -1062,4 +1062,19 @@ function accionInvencibilidad(){
   } else {
     return true;
   }
+}
+
+function accionVidaMas(){
+  update(Mundo, Mundo.comodines[3].tiempoActivo = 0)
+  //if (Mundo.comodines[3].tiempoAccionado == 0){
+    //debugger;
+    posicionInactiva(3);
+    update(Mundo, Mundo.comodines[3].tiempoAccionado = 0);
+    //nuevosComodines();
+    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+    update(Mundo, Mundo.lives++);
+    update(Mundo, Mundo.countLives = Mundo.lives)
+  //} else {
+    
+  //}
 }
