@@ -642,7 +642,7 @@ function compruebaColisionTexto(x){
 function onTic(Mundo) {
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
-  //console.log(Mundo.comodines[0]);
+  console.log(Mundo.comodines[0]);
   // console.log(Mundo.snake[0].y,"jswjsj",Mundo.snake[0].x)
 
   if (Mundo.retrasoComodines > 0){
@@ -661,6 +661,7 @@ function onTic(Mundo) {
     accionVelocidad();
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){
+    var invencibilidad = accionInvencibilidad();
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){
 
@@ -681,7 +682,7 @@ function onTic(Mundo) {
     restaTiempo(0);
 
     if (Mundo.comodines[0].tiempoActivo == 1){
-      //console.log("Hola");
+      console.log("Hola");
       posicionInactiva(0);
 
     }
@@ -765,7 +766,7 @@ function onTic(Mundo) {
     //   Mundo.snake[0].y < 0 ||
     // escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 1 ||
     escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 ||
-    (choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) &&
+    ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad) &&
     Mundo.lives >= 1
     //margenes(Mundo.snake[0].x,Mundo.sanke[0].y)==true
     // escenario[Mundo.snake[0].y][0] == 2 ||
@@ -806,7 +807,7 @@ function onTic(Mundo) {
     Mundo.snake[0].y > filas - 1 ||
     Mundo.snake[0].x < 0 ||
     Mundo.snake[0].y < 0 ||
-    (choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1)
+    ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad)
   ) {
     textAlign(CENTER, CENTER);
     textSize(50);
@@ -992,20 +993,7 @@ function comerItem(snake, item) {
   }
 }
 
-function accionVelocidad(){
-  update(Mundo, Mundo.snake = moveSnake(Mundo.snake, Mundo.dir));
-  update(Mundo, Mundo.comodines[0].tiempoActivo = 0)
-  if (Mundo.comodines[0].tiempoAccionado == 0){
-    update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
-    //nuevosComodines();
-    update(Mundo, Mundo.retrasoComodines = 80);
-  } else {
-    update(Mundo, Mundo.comodines[0].tiempoAccionado--)
-  }
-
-
-}
-
+//FUNCIONES DE LOS COMODINES EN GENERAL
 function restaTiempo(nComodin){
   update(Mundo, Mundo.comodines[nComodin].tiempoActivo--);
 
@@ -1016,11 +1004,12 @@ function posicionInactiva(nComodin){
   update(Mundo, Mundo.comodines[nComodin].y = -1);
 
   //nuevosComodines();
-  update(Mundo, Mundo.retrasoComodines = 80);
+  update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
 }
 
 function nuevosComodines(){
-  const numeroComodin = getRandom(0,8)
+  //const numeroComodin = getRandom(0,8)
+  const numeroComodin = 1;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
@@ -1031,5 +1020,42 @@ function restaRetraso(){
 }
 
 function nuevoRetraso(){
-  update(Mundo, Mundo.retrasoComodines = 80);
+  update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+}
+
+const tiempoRetraso = 80
+
+//ACCIONES DE LOS COMODINES
+function accionVelocidad(){
+  update(Mundo, Mundo.snake = moveSnake(Mundo.snake, Mundo.dir));
+  update(Mundo, Mundo.comodines[0].tiempoActivo = 0)
+  if (Mundo.comodines[0].tiempoAccionado == 0){
+    posicionInactiva(0);
+    update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
+    //nuevosComodines();
+    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+  } else {
+    update(Mundo, Mundo.comodines[0].tiempoAccionado--)
+  }
+}
+
+function accionInvencibilidad(){
+  update(Mundo, Mundo.comodines[1].tiempoActivo = 0)
+  if (Mundo.comodines[1].tiempoAccionado == 0){
+    posicionInactiva(1);
+    update(Mundo, Mundo.comodines[1].tiempoAccionado = 40);
+    //nuevosComodines();
+    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+
+  } else {
+    update(Mundo, Mundo.comodines[1].tiempoAccionado--);
+
+  }
+
+  if (Mundo.comodines[1].tiempoAccionado > 0){
+    return false;
+
+  } else {
+    return true;
+  }
 }
