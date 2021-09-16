@@ -608,7 +608,12 @@ function ñeroMove(ñero) {
 
 //TODO Funcion que se encarga del movimiento de el cuchillo
 function moveKnife(knife) {
-  return { x: knife.x - 1, y: knife.y };
+  const head = first(knife);
+  if (isEmpty(rest(knife))) {
+    return [{ x: head.x - 1, y: head.y }];
+  } else {
+    return cons({ x: head.x - 1, y: head.y }, moveKnife(rest(knife)));
+  }
 }
 
 //Actualiza los atributos del ñero conforme el juego va avanzando
@@ -828,7 +833,7 @@ function onTic(Mundo) {
         score: Mundo.score + 1,
         timer: int(millis() / 1000),
         ñero: ñeroMove(Mundo.ñero),
-        //knife: moveKnife(Mundo.knife),
+        knife: moveKnife(Mundo.knife),
       });
       //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
       //Movimiento normal del Snake junto al del ñero.
