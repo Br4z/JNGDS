@@ -701,7 +701,6 @@ function onTic(Mundo) {
     accionReduccionPuntos();
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
-    
     golpeAccionado = accionGolpeAccionado();
   }
 
@@ -1035,8 +1034,8 @@ function posicionInactiva(nComodin){
 }
 
 function nuevosComodines(){
-  //const numeroComodin = getRandom(0,8)
-  const numeroComodin = 7;
+  const numeroComodin = getRandom(0,8)
+  //const numeroComodin = 7;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
