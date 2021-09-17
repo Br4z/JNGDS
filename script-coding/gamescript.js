@@ -22,86 +22,6 @@ const alto_canvas = filas * lado;
 // Medidas Actuales:
 // ANCHO: 560  -------  // ALTO: 520
 
-
-/* ENEMIGO */
-const enemigo = function(x,y){
-  this.x = x;
-  this.y = y;
-  this.contador = 0
-  this.direccion = randomr(1,3);
-
-  this.retraso = 0;
-  this.fotograma = 0;
-
-  this.dibujaMalo = function(){
-    fill("blue");
-    rect(this.x*dx,this.y*dy,dx,dy);
-  }
-
-  this.compruebaColision = function(x,y){
-    colisiona = false;
-    if (x==ancho-1 || x==1 || y==alto-1 || y==1){
-      colisiona = true
-    }
-    return colisiona
-  }
-
-  this.mueveMalo = function(){
-    if(this.contador < this.retraso){
-        this.contador=this.contador+1;
-    }
-      else{
-        this.contador = 0;
-        //ARRIBA
-        if(this.direccion == 0){
-          if(this.compruebaColision(this.x, this.y - 1)==false){
-            this.y=this.y-1;
-          }
-          else{
-            this.direccion = randomr(1, 3);
-          }
-        }
-
-
-        //ABAJO
-        if(this.direccion == 1){
-          if(this.compruebaColision(this.x, this.y + 1)==false){
-            this.y=this.y+1;
-          }
-          else{
-            this.direccion = randomr(1, 3);
-          }
-        }
-
-        //IZQUIERDA
-        if(this.direccion == 2){
-          if(this.compruebaColision(this.x-1, this.y)==false){
-            this.x-=this.x-1;
-          }
-          else{
-            this.direccion = randomr(1, 3);
-          }
-        }
-
-        //IZQUIERDA
-        if(this.direccion == 3){
-          if(this.compruebaColision(this.x+1, this.y)==false){
-            this.x=this.x+1;
-          }
-          else{
-            this.direccion = randomr(1, 3);
-          }
-        }
-      }
-
-    }
-}
-
-
-
-
-
-
 // Constantes de control.
 let arriba;
 let abajo;
@@ -136,9 +56,7 @@ let fondo;
 const velocidad = new comodinVelocidad();
 */
 
-/** para ponerlo en el setup
-velocidad
- */
+
 
 const comodin = function(x,y, tiempoActivo){
   this.x = x;
@@ -158,7 +76,7 @@ x: int(getRandom(0,28)) ,  //28
 y: int(getRandom(4,26)), //26
 */
 
-const comodinVelocidad = new comodin(getRandom(0,28),getRandom(4,26),40);
+const comodinVelocidad = new comodin(getRandom(2,26),getRandom(4,25),40);
 const comodinInvencibilidad = new comodin(-1, -1);
 const comodinRegeneracion = new comodin(-1, -1);
 const comodinVidaMas = new comodin(-1, -1);
@@ -167,25 +85,10 @@ const comodinTombos = new comodin(-1, -1);
 const comodinReduccionPuntos = new comodin(-1, -1);
 const comodinGolpeAccionado = new comodin(-1, -1);
 
+
   /*COSAS DEL SNAKE*/
-
   // TODO Movimiento de la serpiente
-  function moveSnake(snake, dir) {
-    const head = first(snake);
-    return cons(
-      { x: head.x + dir.x, y: head.y + dir.y },
-      snake.slice(0, length(snake) - 1)
-    );
-}
-
-
-//
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-// TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
-
+  // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
 function moveSnake(snake, dir) {
   const head = first(snake);
   return cons(
@@ -193,7 +96,7 @@ function moveSnake(snake, dir) {
     snake.slice(0, length(snake) - 1)
   );
 }
-
+//TODO Movimiento 2
 function moveSnake2(snake, dir) {
   const head = first(snake);
   head.x = head.x-0.5;
@@ -232,11 +135,15 @@ function setup() {
       { x: columnas / 2 - 1, y: filas / 2 },
       { x: columnas / 2 - 2, y: filas / 2 },
     ],
+    //Escenario
+    escenario : escenario1,
     //Direccion por la que empieza el Snake
     dir: derecha,
+    //Enermigos
+    listaEnemigos,
     //Posicion de la Comida (Será Random)
     food: {
-      x: int(getRandom(2,27)) ,  //28
+      x: int(getRandom(2,26)) ,  //28
       y: int(getRandom(4,25)), //26
     },
     //TODO SE PODRA BORRAR? PARA QUE SIRVE?
@@ -287,164 +194,36 @@ function setup() {
       },
     ],
     retrasoComodines: 80,
-    scoreMas: 1
+    scoreMas: 1,
   };
 }
 
-/* TABLERO O ESCENARIO */
-//Funciones Importantes
-//        fill('#45B39D');
 
-//Escenario
-const escenario = [
-  [
-    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-    2, 2, 2,
-  ],
-  [
-    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-    2, 2, 2,
-  ],
-  [
-    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-    2, 2, 2,
-  ],
-  [
-    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-    2, 2, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-    0, 1, 2,
-  ],
-  [
-    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-    2, 2, 2,
-  ],
-];
+//----------------------------------------------
+//LISTA DE MINIENEMIGOS
+/*const*/ enemigo1 = new enemigo(getRandom(2,26),getRandom(5,25));
+/*const*/ enemigo2 = new enemigo(getRandom(2,26),getRandom(5,25));
+/*const*/ enemigo3 = new enemigo(getRandom(2,26),getRandom(5,25));
+/*const*/ listaEnemigos = [];
+listaEnemigos = actualizaLista(listaEnemigos,enemigo1);
+listaEnemigos = actualizaLista(listaEnemigos,enemigo2);
+listaEnemigos = actualizaLista(listaEnemigos,enemigo3);
 
-
-//FUNCIONES PARA DIBUJAR TABLERO
-function forEach2(l, f, index = 0) {
-  if (!isEmpty(l)) {
-    f(first(l), index);
-    forEach2(rest(l), f, index + 1);
-  }
-}
-
-
+//--------------------------------------------
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
-
-
 function drawGame(Mundo) {
   //Definir el background del Canvas
-  // background(fondo);
+  background(fondo);
   //Llamar a drawUi
   drawUi();
-  forEach2(escenario, (row, i) => {
+  forEach2(Mundo.escenario, (row, i) => {
     forEach2(row, (cell, j) => {
-      if (cell == 1) {
-        strokeWeight(0.5);
-        stroke('#3c3731');
-        fill('#379985');
-        rect(j * lado, i * lado, lado, lado);
-        //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
-      }
-      if (cell == 0) {
-        strokeWeight(0.5);
-        stroke('#3c3731');
-        fill('#45B39D');
-        rect(j * lado, i * lado, lado, lado);
-        //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
-      }
-      if (cell == 2) {
-        strokeWeight(0.5);
-        stroke('#3b7861');
-        fill('#3b7861');
-        rect(j * lado, i * lado, lado, lado);
-      }
+      coloreaTablero1(i,cell,j);
     });
   });
+
+  //Enemigos
+  // dibujaEnemigo(Mundo.listaEnemigos)
   //Fill => Color de relleno
   fill(240, 240, 240);
   //Stroke => color de los bordes
@@ -457,10 +236,6 @@ function drawGame(Mundo) {
   forEach(Mundo.snake, (s) => {
     rect(s.x * lado, s.y * lado, lado, lado);
   });
-
-  //Dibujar la Cuadricula
-
-
 
   //TODO REVISAR ESTE FILL
   fill('white');
@@ -505,33 +280,6 @@ function drawGame(Mundo) {
 
 }
 
-/*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
-function drawUi() {
-  //fill => color de relleno del texto
-  fill(255, 255, 255);
-  //stroke => color del borde del texto
-  stroke(50, 150, 50);
-  //strokeWeight => anchura del borde del texto
-  strokeWeight(4);
-  //textSize => tamaño de la fuente
-  textSize(30);
-  //textAlign => alineacion del texto
-  textAlign(LEFT);
-  text('SCORE: ' + Mundo.score, 20, 45);//texto en el que se muestra conteo de la puntuacion
-  textAlign(RIGHT);//alineacion del texto que muestra el score
-  text('LIVES: ' + countLives, 540, 45);//texto en el que se muestra el contador de vidas
-  textSize(30);//tamaño de la fuente
-  text('Tiempo: ' + Mundo.timer, 350, 45);//temporizador
-}
-
-/* DRAW FONDO : DIBUJA EL FONDO DEL CANVAS */
-function drawfondo() {
-  fondo = loadImage('/backgrounds/FondoS.jpg');//añadimos la imagen
-  createCanvas(ancho_canvas, alto_canvas);
-  background(fondo);
-}
-
-
 /* TODO DIRECCIONES DEL SNAKE */
 function direcciones() {
   abajo = createVector(0, 1);
@@ -545,17 +293,6 @@ function direcciones() {
 function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
 }
-
-/* WINDOWREZIRED: MEJORAR COMO SE VE EN LA PANTALLA EN CUANTO A ESCALAS */
-function windowRezired() {
-  let escala = windowWidth / width;
-  if (escala >= 1) {
-    return;
-  }
-  canvas.style('width', width * escala + 'px');
-  canvas.style('height', height * escala + 'px');
-}
-
 
 //Dibuja el arma que utiliza el enemigo 'ñero' en este caso un cuchillo(knife)
 function drawKnife(knife) {
@@ -572,15 +309,11 @@ function drawKnife(knife) {
   });
 }
 
-
-
-
 //Funcion para dibujar a uno de los enemigos, en este caso 'el ñero'
 function drawÑero(ñero) {
   fill('blue');
   rect(ñero.x * lado, ñero.y * lado, lado, lado);
 }
-
 
 
 /*TODO Funcion del movimiento del ñero*/
@@ -629,32 +362,33 @@ function duplicarKnife(knife, ñero) {
 //Actualiza los atributos del ñero conforme el juego va avanzando
 function ñeroUpdate() {}
 
-function compruebaColisionTexto(x){
-  if(x == escenario){
-
-  }
-}
-
-  function margenes(x, y) {
-    /*const*/colision = false;
-
-    if (escenario[y][x] == 1 || escenario[y][x]==2) {
-      colision = true;
-    }
-
-    return colision;
-  };
 
 
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
+
+  //ENEMIGOS
+  // mueveEnemigo(Mundo.listaEnemigos)
+
+
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
-  console.log(Mundo.lives);
   let invencibilidad = true;
   let golpeAccionado = false;
   // console.log(Mundo.snake[0].y,"jswjsj",Mundo.snake[0].x)
+  if (Mundo.comodines[4].tiempoAccionado > 0){
+    abajo = createVector(0, -1);
+    arriba = createVector(0, 1);
+    izquierda = createVector(1, 0);
+    derecha = createVector(-1, 0);
+
+  } else {
+    abajo = createVector(0, 1);
+    arriba = createVector(0, -1);
+    izquierda = createVector(-1, 0);
+    derecha = createVector(1, 0);
+  }
 
   if (Mundo.comodines[4].tiempoAccionado > 0){
     abajo = createVector(0, -1);
@@ -694,12 +428,10 @@ function onTic(Mundo) {
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){
     accionInversion();
-
   } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){
     accionReduccionPuntos();
-
   } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
     golpeAccionado = accionGolpeAccionado();
   }
@@ -791,7 +523,7 @@ function onTic(Mundo) {
     //   Mundo.snake[0].x < 0 ||
     //   Mundo.snake[0].y < 0 ||
     // escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 1 ||
-    escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 ||
+    Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 ||
     (((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) && invencibilidad == true) &&
   Mundo.lives >= 1)
     //margenes(Mundo.snake[0].x,Mundo.sanke[0].y)==true
@@ -806,7 +538,7 @@ function onTic(Mundo) {
       ],
       dir: derecha,
       food: {
-        x: int(getRandom(2,27)) ,  //28
+        x: int(getRandom(2,26)) ,  //28
         y: int(getRandom(4,25)),
       },
       cuadradoFinal: {
@@ -854,8 +586,8 @@ function onTic(Mundo) {
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         food: {
-            x: int(getRandom(0,28)) ,  //28
-            y: int(getRandom(4,26)), //26
+            x: int(getRandom(2,26)) ,  //28
+            y: int(getRandom(4,25)), //26
         },
         score: Mundo.score + Mundo.scoreMas,
         timer: int(millis() / 1000),
@@ -1037,8 +769,8 @@ function nuevosComodines(){
   const numeroComodin = getRandom(0,8)
   //const numeroComodin = 7;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
-  update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
-  update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
+  update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(2,26));
+  update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,25));
 }
 
 function restaRetraso(){
@@ -1106,7 +838,6 @@ function accionInversion(){
 
   } else {
     update(Mundo, Mundo.comodines[4].tiempoAccionado--);
-    
   }
 }
 
@@ -1130,24 +861,21 @@ function accionReduccionPuntos(){
   }
 }
 
-function accionGolpeAccionado(){
-  update(Mundo, Mundo.comodines[7].tiempoActivo = 0)
-  if (Mundo.comodines[7].tiempoAccionado == 0){
+function accionGolpeAccionado() {
+  update(Mundo, (Mundo.comodines[7].tiempoActivo = 0));
+  if (Mundo.comodines[7].tiempoAccionado == 0) {
     window.vidasOficial = Mundo.lives;
     posicionInactiva(7);
-    update(Mundo, Mundo.comodines[7].tiempoAccionado = 40);
+    update(Mundo, (Mundo.comodines[7].tiempoAccionado = 40));
     //nuevosComodines();
-    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
-
+    update(Mundo, (Mundo.retrasoComodines = tiempoRetraso));
   } else {
     update(Mundo, Mundo.comodines[7].tiempoAccionado--);
-
   }
 
-  if (Mundo.comodines[7].tiempoAccionado > 2){
-    update(Mundo, Mundo.lives = 0);
-
+  if (Mundo.comodines[7].tiempoAccionado > 2) {
+    update(Mundo, (Mundo.lives = 0));
   } else {
-    update(Mundo, Mundo.lives = window.vidasOficial)
+    update(Mundo, (Mundo.lives = window.vidasOficial));
   }
 }
