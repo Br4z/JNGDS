@@ -654,6 +654,20 @@ function onTic(Mundo) {
   let invencibilidad = true;
   // console.log(Mundo.snake[0].y,"jswjsj",Mundo.snake[0].x)
 
+  if (Mundo.comodines[4].tiempoAccionado > 0){
+    abajo = createVector(0, -1);
+    arriba = createVector(0, 1);
+    izquierda = createVector(1, 0);
+    derecha = createVector(-1, 0);
+
+  } else {
+    abajo = createVector(0, 1);
+    arriba = createVector(0, -1);
+    izquierda = createVector(-1, 0);
+    derecha = createVector(1, 0);
+  }
+
+
   if (Mundo.retrasoComodines > 0){
     console.log(1)
     restaRetraso();
@@ -677,7 +691,9 @@ function onTic(Mundo) {
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[3]) || Mundo.comodines[3].tiempoAccionado > 0){
     accionVidaMas();
+
   } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){
+    accionInversion();
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
 
@@ -1022,7 +1038,7 @@ function posicionInactiva(nComodin){
 
 function nuevosComodines(){
   //const numeroComodin = getRandom(0,8)
-  const numeroComodin = 3;
+  const numeroComodin = 4;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
@@ -1081,4 +1097,18 @@ function accionVidaMas(){
   update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
   update(Mundo, Mundo.lives++);
   //update(Mundo, Mundo.countLives = Mundo.lives)
+}
+
+function accionInversion(){
+  update(Mundo, Mundo.comodines[4].tiempoActivo = 0)
+  if (Mundo.comodines[4].tiempoAccionado == 0){
+    posicionInactiva(4);
+    update(Mundo, Mundo.comodines[4].tiempoAccionado = 40);
+    //nuevosComodines();
+    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+
+  } else {
+    update(Mundo, Mundo.comodines[4].tiempoAccionado--);
+    
+  }
 }
