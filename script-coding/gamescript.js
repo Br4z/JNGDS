@@ -195,16 +195,17 @@ function setup() {
     ],
     retrasoComodines: 80,
     scoreMas: 1,
+    activosMiniEnemigos: false,
   };
 }
 
 
 //----------------------------------------------
 //LISTA DE MINIENEMIGOS
-/*const*/ enemigo1 = new enemigo(getRandom(2,26),getRandom(5,25));
-/*const*/ enemigo2 = new enemigo(getRandom(2,26),getRandom(5,25));
-/*const*/ enemigo3 = new enemigo(getRandom(2,26),getRandom(5,25));
-/*const*/ listaEnemigos = [];
+const enemigo1 = new enemigo(getRandom(2,26),getRandom(5,25));
+const enemigo2 = new enemigo(getRandom(2,26),getRandom(5,25));
+const enemigo3 = new enemigo(getRandom(2,26),getRandom(5,25));
+listaEnemigos = [];
 listaEnemigos = actualizaLista(listaEnemigos,enemigo1);
 listaEnemigos = actualizaLista(listaEnemigos,enemigo2);
 listaEnemigos = actualizaLista(listaEnemigos,enemigo3);
@@ -221,9 +222,6 @@ function drawGame(Mundo) {
       coloreaTablero1(i,cell,j);
     });
   });
-
-  //Enemigos
-  // dibujaEnemigo(Mundo.listaEnemigos)
   //Fill => Color de relleno
   fill(240, 240, 240);
   //Stroke => color de los bordes
@@ -369,8 +367,6 @@ function ñeroUpdate() {}
 function onTic(Mundo) {
 
   //ENEMIGOS
-  // mueveEnemigo(Mundo.listaEnemigos)
-
 
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
@@ -429,7 +425,7 @@ function onTic(Mundo) {
   } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){
     accionInversion();
   } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
-
+    accionTombos();
   } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){
     accionReduccionPuntos();
   } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
@@ -766,8 +762,8 @@ function posicionInactiva(nComodin){
 }
 
 function nuevosComodines(){
-  const numeroComodin = getRandom(0,8)
-  //const numeroComodin = 7;
+  //const numeroComodin = getRandom(0,8)
+  const numeroComodin = 5;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(2,26));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,25));
@@ -781,7 +777,7 @@ function nuevoRetraso(){
   update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
 }
 
-const tiempoRetraso = 80
+const tiempoRetraso = 40;
 
 //ACCIONES DE LOS COMODINES
 function accionVelocidad(){
@@ -838,6 +834,22 @@ function accionInversion(){
 
   } else {
     update(Mundo, Mundo.comodines[4].tiempoAccionado--);
+  }
+}
+
+function accionTombos(){
+  update(Mundo, Mundo.comodines[5].tiempoActivo = 0)
+  if (Mundo.comodines[5].tiempoAccionado == 0){
+    posicionInactiva(5);
+    update(Mundo, Mundo.comodines[5].tiempoAccionado = 40);
+    //nuevosComodines();
+    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+  } else {
+    console.log("Hola");
+    dibujaEnemigo(Mundo.listaEnemigos)
+    console.log(Mundo.activosMiniEnemigos)
+    mueveEnemigo(Mundo.listaEnemigos)
+    update(Mundo, Mundo.comodines[5].tiempoAccionado--)
   }
 }
 
