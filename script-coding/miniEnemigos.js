@@ -22,7 +22,7 @@ const enemigo = function (x, y) {
 
   this.compruebaColision = function (x, y) {
     colisiona = false;
-    if (escenario[y][x] == 2) {
+    if (Mundo.escenario[y][x] == 2) {
       colisiona = true;
     }
     return colisiona;

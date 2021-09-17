@@ -15,16 +15,16 @@ function drawUi() {
   textSize(30);
   //textAlign => alineacion del texto
   textAlign(LEFT);
-  text('SCORE: ' + Mundo.score, 20, 45);//texto en el que se muestra conteo de la puntuacion
-  textAlign(RIGHT);//alineacion del texto que muestra el score
-  text('LIVES: ' + countLives, 540, 45);//texto en el que se muestra el contador de vidas
-  textSize(30);//tamaño de la fuente
-  text('Tiempo: ' + Mundo.timer, 350, 45);//temporizador
+  text('SCORE: ' + Mundo.score, 20, 45); //texto en el que se muestra conteo de la puntuacion
+  textAlign(RIGHT); //alineacion del texto que muestra el score
+  text('LIVES: ' + countLives, 540, 45); //texto en el que se muestra el contador de vidas
+  textSize(30); //tamaño de la fuente
+  text('Tiempo: ' + Mundo.timer, 350, 45); //temporizador
 }
 
 /* DRAW FONDO : DIBUJA EL FONDO DEL CANVAS */
 function drawfondo() {
-  fondo = loadImage('/backgrounds/FondoS.jpg');//añadimos la imagen
+  fondo = loadImage('/backgrounds/FondoS.jpg'); //añadimos la imagen
   createCanvas(ancho_canvas, alto_canvas);
   background(fondo);
 }
