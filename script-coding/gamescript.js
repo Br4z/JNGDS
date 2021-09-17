@@ -287,6 +287,7 @@ function setup() {
       },
     ],
     retrasoComodines: 80,
+    scoreMas: 1
   };
 }
 
@@ -669,11 +670,9 @@ function onTic(Mundo) {
 
 
   if (Mundo.retrasoComodines > 0){
-    console.log(1)
     restaRetraso();
 
   } else if (Mundo.retrasoComodines == 0){
-    console.log(2);
     nuevosComodines();
     nuevoRetraso();
 
@@ -698,6 +697,7 @@ function onTic(Mundo) {
   } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){
+    reduccionPuntos();
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
 
@@ -708,7 +708,6 @@ function onTic(Mundo) {
     restaTiempo(0);
 
     if (Mundo.comodines[0].tiempoActivo == 1){
-      console.log("Hola");
       posicionInactiva(0);
 
     }
@@ -785,9 +784,6 @@ function onTic(Mundo) {
   }
 
 
-  console.log(((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) && invencibilidad == true) &&
-  Mundo.lives >= 1)
-
   if (   //Cordinas el movimiento de la serpiente.
     // (Mundo.snake[0].x > columnas - 1 ||
     //   Mundo.snake[0].y > filas - 1 ||
@@ -860,7 +856,7 @@ function onTic(Mundo) {
             x: int(getRandom(0,28)) ,  //28
             y: int(getRandom(4,26)), //26
         },
-        score: Mundo.score + 1,
+        score: Mundo.score + Mundo.scoreMas,
         timer: int(millis() / 1000),
         ñero: ñeroMove(Mundo.ñero),
         //knife: moveKnife(Mundo.knife),
@@ -1038,7 +1034,7 @@ function posicionInactiva(nComodin){
 
 function nuevosComodines(){
   //const numeroComodin = getRandom(0,8)
-  const numeroComodin = 4;
+  const numeroComodin = 6;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
@@ -1109,6 +1105,26 @@ function accionInversion(){
 
   } else {
     update(Mundo, Mundo.comodines[4].tiempoAccionado--);
+    
+  }
+}
+
+function reduccionPuntos(){
+  update(Mundo, Mundo.comodines[6].tiempoActivo = 0);
+  console.log(Mundo.comodines[6].tiempoAccionado);
+  if (Mundo.comodines[6].tiempoAccionado == 0){
+    posicionInactiva(6);
+    update(Mundo, Mundo.comodines[6].tiempoAccionado = 40);
+    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+    update(Mundo, Mundo.scoreMas = 0.5);
+
+  } else if (Mundo.comodines[6].tiempoAccionado == 1){
+    console.log("Hola");
+    update(Mundo, Mundo.scoreMas = 1);
+    update(Mundo, Mundo.comodines[6].tiempoAccionado--);
+
+  } else {
+    update(Mundo, Mundo.comodines[6].tiempoAccionado--);
     
   }
 }
