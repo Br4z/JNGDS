@@ -159,13 +159,13 @@ y: int(getRandom(4,26)), //26
 */
 
 const comodinVelocidad = new comodin(getRandom(0,28),getRandom(4,26),40);
-const comodinInvencibilidad = new comodin(getRandom(0,28),getRandom(4,26));
-const comodinRegeneracion = new comodin(getRandom(0,28),getRandom(4,26));
-const comodinVidaMas = new comodin(getRandom(0,28),getRandom(4,26));
-const comodinInversion = new comodin(getRandom(0,28),getRandom(4,26));
-const comodinTombos = new comodin(getRandom(0,28),getRandom(4,26));
-const comodinReduccionPuntos = new comodin(getRandom(0,28),getRandom(4,26));
-const comodinGolpeAccionado = new comodin(getRandom(0,28),getRandom(4,26));
+const comodinInvencibilidad = new comodin(-1, -1);
+const comodinRegeneracion = new comodin(-1, -1);
+const comodinVidaMas = new comodin(-1, -1);
+const comodinInversion = new comodin(-1, -1);
+const comodinTombos = new comodin(-1, -1);
+const comodinReduccionPuntos = new comodin(-1, -1);
+const comodinGolpeAccionado = new comodin(-1, -1);
 
   /*COSAS DEL SNAKE*/
 
@@ -651,8 +651,9 @@ function compruebaColisionTexto(x){
 function onTic(Mundo) {
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
-  //console.log(Mundo.comodines[0]);
+  console.log(Mundo.lives);
   let invencibilidad = true;
+  let golpeAccionado = false;
   // console.log(Mundo.snake[0].y,"jswjsj",Mundo.snake[0].x)
 
   if (Mundo.comodines[4].tiempoAccionado > 0){
@@ -697,10 +698,11 @@ function onTic(Mundo) {
   } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){
-    reduccionPuntos();
+    accionReduccionPuntos();
 
   } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
-
+    
+    golpeAccionado = accionGolpeAccionado();
   }
 
 
@@ -767,7 +769,7 @@ function onTic(Mundo) {
     restaTiempo(6);
 
     if (Mundo.comodines[6].tiempoActivo == 1){
-      //console.log("Hola");
+      console.log("Hola");
       posicionInactiva(6);
 
     }
@@ -1034,7 +1036,7 @@ function posicionInactiva(nComodin){
 
 function nuevosComodines(){
   //const numeroComodin = getRandom(0,8)
-  const numeroComodin = 6;
+  const numeroComodin = 7;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(0,28));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,26));
@@ -1109,7 +1111,7 @@ function accionInversion(){
   }
 }
 
-function reduccionPuntos(){
+function accionReduccionPuntos(){
   update(Mundo, Mundo.comodines[6].tiempoActivo = 0);
   console.log(Mundo.comodines[6].tiempoAccionado);
   if (Mundo.comodines[6].tiempoAccionado == 0){
@@ -1125,6 +1127,28 @@ function reduccionPuntos(){
 
   } else {
     update(Mundo, Mundo.comodines[6].tiempoAccionado--);
-    
+
+  }
+}
+
+function accionGolpeAccionado(){
+  update(Mundo, Mundo.comodines[7].tiempoActivo = 0)
+  if (Mundo.comodines[7].tiempoAccionado == 0){
+    window.vidasOficial = Mundo.lives;
+    posicionInactiva(7);
+    update(Mundo, Mundo.comodines[7].tiempoAccionado = 40);
+    //nuevosComodines();
+    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+
+  } else {
+    update(Mundo, Mundo.comodines[7].tiempoAccionado--);
+
+  }
+
+  if (Mundo.comodines[7].tiempoAccionado > 2){
+    update(Mundo, Mundo.lives = 0);
+
+  } else {
+    update(Mundo, Mundo.lives = window.vidasOficial)
   }
 }
