@@ -47,13 +47,20 @@ function ThiefMove(Thief) {
 }
 
 //TODO Funcion que se encarga del movimiento de el cuchillo
-function moveKnife(knife,) {
-  //return { x: knife.x - 1, y: knife.y };
+function moveKnife(knife, Thief) {
   const head = first(knife);
-  if (isEmpty(rest(knife))) {
-    return [{ x: head.x - 1, y: head.y }];
+  if (Thief?.y == 6) {
+    if (isEmpty(rest(knife))) {
+      return [{ x: head.x, y: head.y + 1 }];
+    } else {
+      return cons({ x: head.x, y: head.y + 1 }, moveKnife(rest(knife)));
+    }
   } else {
-    return cons({ x: head.x - 1, y: head.y }, moveKnife(rest(knife)));
+    if (isEmpty(rest(knife))) {
+      return [{ x: head.x - 1, y: head.y }];
+    } else {
+      return cons({ x: head.x - 1, y: head.y }, moveKnife(rest(knife)));
+    }
   }
 }
 

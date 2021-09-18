@@ -531,7 +531,7 @@ function onTic(Mundo) {
         },
         Thief: ThiefMove(Mundo.Thief),
         timer: int(millis() / 1000),
-        knife: moveKnife(Mundo.knife)
+        knife: moveKnife(Mundo.knife,Mundo.Thief)
       });
     }
     // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
