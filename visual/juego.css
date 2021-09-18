@@ -24,12 +24,13 @@ body {
 .contenedorPrincipal {
   display: flex;
   flex-direction: row;
+  position: absolute;
 }
 
 /* Esta es la animacion del boton */
 
 .btn-neon {
-  margin: 10px;
+  margin: 0px 80px;
   position: relative;
   display: inline-block;
   padding: 15px 30px;
@@ -40,6 +41,8 @@ body {
   overflow: hidden;
   transition: 0.2s;
   font-family: "ARCADE CLASSIC", "Arial";
+  top: 325px;
+  right: 5px;
 }
 
 .btn-neon:hover {
@@ -65,3 +68,4 @@ body {
   right: 100%;
   transition: 1s;
 }
+
