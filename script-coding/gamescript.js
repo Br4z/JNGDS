@@ -211,17 +211,31 @@ listaEnemigos = actualizaLista(listaEnemigos,enemigo2);
 listaEnemigos = actualizaLista(listaEnemigos,enemigo3);
 
 //--------------------------------------------
+function compruebaTablero(){
+  if ((Mundo.escenario == escenario1)) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero1(i, cell, j);
+      });
+    });
+  } else if ((Mundo.escenario == escenario2)) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero2(i, cell, j);
+      });
+    });
+  } else {
+    return null;
+  }
+}
+//--------------------------------------------
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 function drawGame(Mundo) {
   //Definir el background del Canvas
   background(fondo);
   //Llamar a drawUi
   drawUi();
-  forEach2(Mundo.escenario, (row, i) => {
-    forEach2(row, (cell, j) => {
-      coloreaTablero1(i,cell,j);
-    });
-  });
+  compruebaTablero();
 
   //Enemigos
   // dibujaEnemigo(Mundo.listaEnemigos)
@@ -290,13 +304,22 @@ function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
 }
 
+//------------------------------------
+function cambioTablero() {
+  if (Mundo.score == 10) {
+    update(Mundo, (Mundo.escenario = escenario2));
+  }
+}
+//------------------------------------
+
+
 
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
 
-  //ENEMIGOS
-  // mueveEnemigo(Mundo.listaEnemigos)
+  //Tablero
+  cambioTablero();  
 
 
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
