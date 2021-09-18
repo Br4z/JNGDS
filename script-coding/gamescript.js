@@ -191,6 +191,7 @@ function setup() {
       {
         x: 18,
         y: 10,
+        pos:false,
       },
     ],
     retrasoComodines: 80,
@@ -484,6 +485,7 @@ function onTic(Mundo) {
       knife: [{
         x: 18,
         y: 10,
+        pos: false,
       },],
     });
   } else if ( // Comprobar si la serpiente esta tiesa.
@@ -531,7 +533,7 @@ function onTic(Mundo) {
         },
         Thief: ThiefMove(Mundo.Thief),
         timer: int(millis() / 1000),
-        knife: moveKnife(Mundo.knife,Mundo.Thief)
+        knife: moveKnife(Mundo.knife)
       });
     }
     // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
