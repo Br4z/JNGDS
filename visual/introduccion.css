@@ -1,3 +1,10 @@
+/* llamar a la fuente */
+
+@font-face {
+  font-family: "ARCADE CLASSIC";
+  src: url("../fonts/ARCADECLASSIC.TTF");
+}
+
 /* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
 
 * {
@@ -16,13 +23,11 @@ body {
 
 /* Efecto blur */
 #container {
-  height: 400px;
+  height: 470px;
+  width: 500px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
-  margin: 50px auto;
   border: 1px solid #ffffff40;
-  text-align: center;
-  font-family: "Francois One", sans-serif;
 }
 
 .blur {
@@ -31,7 +36,66 @@ body {
   background-color: rgba(243, 243, 243, 0.2);
 }
 
-.historia {
-  text-align: center;
-  padding: 40px;
+h1 {
+  text-align: left;
+  padding-left: 10px;
+  color: #e2e2e2;
+  font-family: "Francois One", sans-serif;
+}
+
+p {
+  padding-left: 10px;
+  padding-right: 5px;
+  padding-top: 5px;
+  color: #00030f;
+  font-family: 'Ropa Sans', sans-serif;
+  font-weight: 500px;
+  font-size: larger;
+}
+
+img {
+  width: 50%;
+}
+
+a {
+  margin: 150px 0px 20px 80px ;
+  position: absolute;
+}
+
+/* Boton */
+
+.btn {
+  /* Para <button> */
+  font-size: inherit;
+  border: none;
+  cursor: pointer;
+  font-family: "ARCADE CLASSIC", "Arial";
+
+}
+
+.btn-bootstrap:hover,
+.btn-bootstrap:focus {
+  background-color: #0069d9;
+}
+
+.btn-bootstrap:active {
+  background-color: #0062cc;
+}
+
+.btn-bootstrap {
+  padding: 10px 20px 10px 20px;
+  border-radius: 0.25rem;
+  letter-spacing: 4px;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.btn-bootstrap:hover,
+.btn-bootstrap:focus {
+  background-color: #0069d9;
+}
+
+.btn-bootstrap:active {
+  background-color: #0062cc;
 }
