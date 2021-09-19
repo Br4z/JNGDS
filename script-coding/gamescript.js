@@ -521,7 +521,7 @@ function onTic(Mundo) {
       },],
     });
   } else if ( // Comprobar si la serpiente esta tiesa.
-    ((Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2) && (Mundo.lives < 1)) || 
+    ((Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2) && (Mundo.lives < 1)) ||
     ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad == true)
   ) {
     textAlign(CENTER, CENTER);
@@ -796,10 +796,11 @@ function accionTombos(){
     //nuevosComodines();
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
   } else {
-    console.log("Hola");
+    // console.log("Hola");
     dibujaEnemigo(Mundo.listaEnemigos)
     console.log(Mundo.activosMiniEnemigos)
     mueveEnemigo(Mundo.listaEnemigos)
+    compMiniEnemigos(Mundo.listaEnemigos)
     update(Mundo, Mundo.comodines[5].tiempoAccionado--)
   }
 }
