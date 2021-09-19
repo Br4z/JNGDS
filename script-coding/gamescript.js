@@ -336,6 +336,8 @@ function onTic(Mundo) {
   //Tablero
   cambioTablero();
 
+  //Enemigo
+  // mueveEnemigo(Mundo.listaEnemigos);
 
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
@@ -488,7 +490,7 @@ function onTic(Mundo) {
     //   Mundo.snake[0].x < 0 ||
     //   Mundo.snake[0].y < 0 ||
     // escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 1 ||
-    Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 ||
+    Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 /*|| (compMiniEnemigos(Mundo.listaEnemigos))==0 */||
     (((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) && invencibilidad == true) &&
   Mundo.lives >= 1)
     //margenes(Mundo.snake[0].x,Mundo.sanke[0].y)==true
