@@ -524,6 +524,7 @@ function onTic(Mundo) {
     ((Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2) && (Mundo.lives < 1)) ||
     ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad == true)
   ) {
+    window.vidasOficial = 0;
     textAlign(CENTER, CENTER);
     textSize(50);
     text(' Has perdido', width / 2, height / 2);//advertencia que se muestra en pantalla en caso de que la serpiente se choque.
@@ -714,7 +715,7 @@ function posicionInactiva(nComodin){
 
 function nuevosComodines(){
   //const numeroComodin = getRandom(0,8)
-  const numeroComodin = 5;
+  const numeroComodin = 7;
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(2,26));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,25));
