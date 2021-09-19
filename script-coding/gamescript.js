@@ -548,12 +548,47 @@ function onTic(Mundo) {
       });
       //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
       //Movimiento normal del Snake junto al del Thief.
+    } else if (hitHead(Mundo.snake, Mundo.knife)) {
+      countLives = Mundo.lives - 1;
+      return update(Mundo, {
+        snake: [
+          { x: columnas / 2, y: filas / 2 },
+          { x: columnas / 2 - 1, y: filas / 2 },
+          { x: columnas / 2 - 2, y: filas / 2 },
+        ],
+        dir: derecha,
+        food: {
+          x: int(getRandom(2, 26)), //28
+          y: int(getRandom(4, 25)),
+        },
+        cuadradoFinal: {
+          x: 0,
+          y: 0,
+        },
+        score: Mundo.score,
+        lives: Mundo.lives - 1,
+        tipe: "juego",
+        timer: int(millis() / 1000),
+        Thief: {
+          x: 26,
+          y: 13,
+          dirx: true,
+          diry: true,
+        },
+        knife: [
+          {
+            x: 18,
+            y: 10,
+            pos: false,
+          },
+        ],
+      });
     } else {
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         Thief: ThiefMove(Mundo.Thief),
         timer: int(millis() / 1000),
-        knife: moveKnife(Mundo.knife)
+        knife: moveKnife(Mundo.knife),
       });
     }
     // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });

@@ -63,7 +63,7 @@ function moveKnife(knife) {
     }
   }
 }
-
+//TODO Funcion que duplica a knife
 function duplicarKnife(knife, Thief) {
   if (Thief?.y == 6) {
     return cons({ x: Thief.x, y: Thief.y, pos: true}, knife);
@@ -71,4 +71,35 @@ function duplicarKnife(knife, Thief) {
     return cons({ x: Thief.x, y: Thief.y, pos: false }, knife);
   }
   
+}
+
+//TODO Funcion que se encarga del golpe 
+function hitHead(snake,knife) {
+  const head = first(knife);
+ /*  if ((snake[0].x == head.x && snake[0].y == head.y) ||(snake[1].x == head.x && snake[1].y == head.y)) {
+    return true
+  } else {
+    return false
+  }
+ */
+  if (isEmpty(rest(knife))) {
+    if (
+      (snake[0].x == head.x && snake[0].y == head.y) ||
+      (snake[1].x == head.x && snake[1].y == head.y)
+    ) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    if (
+      (snake[0].x == head.x && snake[0].y == head.y) ||
+      (snake[1].x == head.x && snake[1].y == head.y)
+    ) {
+      return true
+    } else {
+      return hitHead(snake,rest(knife))
+    }
+    
+  }
 }
