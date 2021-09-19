@@ -31,6 +31,7 @@ body {
   background-color: rgba(243, 243, 243, 0.2);
 }
 
+/* Sistema de cartas */
 
 .conteinerCards{
   position:relative;
@@ -47,7 +48,7 @@ body {
 .swiper-container {
   width: 100%;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 40px;
 }
 
 .swiper-slide {
@@ -69,7 +70,7 @@ body {
   position:relative;
   width:100%;
   padding:18%;
-  padding-top: 190px;
+  padding-top: 120px; /* Tamaño de la carta */
   color:#999;
 }
 
