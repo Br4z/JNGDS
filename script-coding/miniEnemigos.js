@@ -39,6 +39,8 @@ function actualizaLista(lista, enemigo) {
 //DIBUJAR AL ENEMICO
 function dibujaEnemigo(lista) {
   forEach(lista, (element) => {
+    strokeWeight(0.5);
+    stroke('blue')
     fill('blue');
     rect(element.x * lado, element.y * lado, lado, lado);
   });
@@ -102,7 +104,7 @@ function mueveEnemigo(lista) {
 
       //IZQUIERDA
       if (Mundo.listaEnemigos[x].direccion == 3) {
-        if (
+        if (  
           Mundo.listaEnemigos[x].compruebaColision(
             Mundo.listaEnemigos[x].x + 1,
             Mundo.listaEnemigos[x].y
