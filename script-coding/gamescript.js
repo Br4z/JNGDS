@@ -179,18 +179,19 @@ function setup() {
     lives: 3,
     //El tiempo
     timer: int(millis() / 1000),
-    //Jefe Ñero
-    ñero: {
+    //Jefe Thief
+    Thief: {
       x: 26,
       y: 13,
       dirx: true,
       diry: true,
     },
-    //Ataque de Ñero
+    //Ataque de Thief
     knife: [
       {
         x: 18,
         y: 10,
+        pos:false,
       },
     ],
     retrasoComodines: 80,
@@ -211,17 +212,45 @@ listaEnemigos = actualizaLista(listaEnemigos,enemigo2);
 listaEnemigos = actualizaLista(listaEnemigos,enemigo3);
 
 //--------------------------------------------
+function compruebaTablero(){
+  if ((Mundo.escenario == escenario1)) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero1(i, cell, j);
+      });
+    });
+  } else if ((Mundo.escenario == escenario2)) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero2(i, cell, j);
+      });
+    });
+  }else if ((Mundo.escenario == escenario3)) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero3(i, cell, j);
+      });
+    });}
+    else if ((Mundo.escenario == escenario4)) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero4(i, cell, j);
+      });
+    });}else {
+    return null;
+  }
+}
+//--------------------------------------------
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 function drawGame(Mundo) {
   //Definir el background del Canvas
   background(fondo);
   //Llamar a drawUi
   drawUi();
-  forEach2(Mundo.escenario, (row, i) => {
-    forEach2(row, (cell, j) => {
-      coloreaTablero1(i,cell,j);
-    });
-  });
+  compruebaTablero();
+
+  //Enemigos
+  // dibujaEnemigo(Mundo.listaEnemigos)
   //Fill => Color de relleno
   fill(240, 240, 240);
   //Stroke => color de los bordes
@@ -237,8 +266,8 @@ function drawGame(Mundo) {
 
   //TODO REVISAR ESTE FILL
   fill('white');
-  //Dibujar a Ñero
-  drawÑero(Mundo.ñero);
+  //Dibujar a thief
+  drawThief(Mundo.Thief);
   //Dibujar Knife
   drawKnife(Mundo.knife);
 
@@ -271,11 +300,6 @@ function drawGame(Mundo) {
     drawComodin(Mundo.comodines[7], "gray");
   }
 
-
-
-
-
-
 }
 
 /* TODO DIRECCIONES DEL SNAKE */
@@ -292,73 +316,17 @@ function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
 }
 
-//Dibuja el arma que utiliza el enemigo 'ñero' en este caso un cuchillo(knife)
-function drawKnife(knife) {
-  forEach(knife, (k) => {
-    fill("green");
-    triangle(
-      k.x * lado + 10,
-      k.y * lado,
-      k.x * lado,
-      k.y * lado + 10,
-      k.x * lado + 10,
-      k.y * lado + 20
-    );
-  });
-}
-
-//Funcion para dibujar a uno de los enemigos, en este caso 'el ñero'
-function drawÑero(ñero) {
-  fill('blue');
-  rect(ñero.x * lado, ñero.y * lado, lado, lado);
-}
-
-
-/*TODO Funcion del movimiento del ñero*/
-function ñeroMove(ñero) {
-  // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
-  //
-  if (
-    (ñero.dirx == true && ñero.y != 24 && ñero.diry == true) ||
-    (ñero.x == 26 && ñero.diry == false)
-  ) {
-    return { x: ñero.x, y: ñero.y + 1, dirx: true, diry: true };
-  }
-  if (ñero.y == 24) {
-    return { x: ñero.x, y: ñero.y - 1, dirx: false, diry: true };
-  }
-  if (ñero.dirx == false && ñero.y != 6) {
-    return { x: ñero.x, y: ñero.y - 1, dirx: false, diry: true };
-  }
-  if (ñero.y == 6 && ñero.dirx == false && ñero.x != 1 && ñero.diry == true) {
-    return { x: ñero.x - 1, y: 6, dirx: false, diry: true };
-  }
-  if (ñero.x == 1) {
-    return { x: ñero.x + 1, y: 6, dir: true, diry: false };
-  }
-  if (ñero.diry == false && ñero.x != 1) {
-    return { x: ñero.x + 1, y: 6, dir: true, diry: false };
+//------------------------------------
+function cambioTablero() {
+  if (Mundo.score == 10) {
+    update(Mundo, (Mundo.escenario = escenario2));
+  }if(Mundo.score == 15){
+    update(Mundo,(Mundo.escenario = escenario3));
+  }if (Mundo.score == 20) {
+    update(Mundo, (Mundo.escenario = escenario4));
   }
 }
-
-//TODO Funcion que se encarga del movimiento de el cuchillo
-function moveKnife(knife) {
-  //return { x: knife.x - 1, y: knife.y };
-  const head = first(knife);
-  if (isEmpty(rest(knife))) {
-    return [{ x: head.x - 1, y: head.y }];
-  } else {
-    return cons({ x: head.x - 1, y: head.y }, moveKnife(rest(knife)));
-  }
-}
-
-function duplicarKnife(knife, ñero) {
-  return cons({ x: ñero.x, y: ñero.y }, knife);
-}
-
-
-//Actualiza los atributos del ñero conforme el juego va avanzando
-function ñeroUpdate() {}
+//------------------------------------
 
 
 
@@ -366,7 +334,11 @@ function ñeroUpdate() {}
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
 
-  //ENEMIGOS
+  //Tablero
+  cambioTablero();
+
+  //Enemigo
+  // mueveEnemigo(Mundo.listaEnemigos);
 
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
   //console.log(Mundo.snake[0]);
@@ -519,7 +491,7 @@ function onTic(Mundo) {
     //   Mundo.snake[0].x < 0 ||
     //   Mundo.snake[0].y < 0 ||
     // escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 1 ||
-    Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 ||
+    Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 /*|| (compMiniEnemigos(Mundo.listaEnemigos))==0 */||
     (((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) && invencibilidad == true) &&
   Mundo.lives >= 1)
     //margenes(Mundo.snake[0].x,Mundo.sanke[0].y)==true
@@ -545,7 +517,7 @@ function onTic(Mundo) {
       lives: Mundo.lives - 1,
       tipe: 'juego',
       timer: int(millis() / 1000),
-      ñero: {
+      Thief: {
         x: 26,
         y: 13,
         dirx: true,
@@ -554,6 +526,7 @@ function onTic(Mundo) {
       knife: [{
         x: 18,
         y: 10,
+        pos: false,
       },],
     });
   } else if ( // Comprobar si la serpiente esta tiesa.
@@ -587,12 +560,11 @@ function onTic(Mundo) {
         },
         score: Mundo.score + Mundo.scoreMas,
         timer: int(millis() / 1000),
-        ñero: ñeroMove(Mundo.ñero),
-        //knife: moveKnife(Mundo.knife),
-        knife: duplicarKnife(Mundo.knife,Mundo.ñero),
+        Thief: ThiefMove(Mundo.Thief),
+        knife: duplicarKnife(Mundo.knife,Mundo.Thief),
       });
       //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
-      //Movimiento normal del Snake junto al del ñero.
+      //Movimiento normal del Snake junto al del Thief.
     } else {
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -600,8 +572,9 @@ function onTic(Mundo) {
           x: Mundo.snake[Mundo.snake.length - 1].x,
           y: Mundo.snake[Mundo.snake.length - 1].y,
         },
-        ñero: ñeroMove(Mundo.ñero),
+        Thief: ThiefMove(Mundo.Thief),
         timer: int(millis() / 1000),
+        knife: moveKnife(Mundo.knife)
       });
     }
     // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
@@ -891,3 +864,4 @@ function accionGolpeAccionado() {
     update(Mundo, (Mundo.lives = window.vidasOficial));
   }
 }
+

@@ -1,67 +1,145 @@
-/* llamar a la fuente */
+@media (max-height: 950px) {
+  /* llamar a la fuente */ @font-face {
+    font-family: 'ARCADE CLASSIC';
+    src: url('../fonts/ARCADECLASSIC.TTF');
+  }
 
-@font-face {
-  font-family: "ARCADE CLASSIC";
-  src: url("../fonts/ARCADECLASSIC.TTF");
+  /* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
+
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  body {
+    background-image: url(/backgrounds/FondoP.jpg); /* Fondo principal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+  }
+
+  .contenedorPrincipal {
+    position: absolute;
+  }
+
+  /* Esta es la animacion del boton */
+
+  .btn-neon {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: rgb(193, 197, 197);
+    letter-spacing: 4px;
+    font-size: 20px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: 0.2s;
+    font-family: 'ARCADE CLASSIC', 'Arial';
+    top: 290px;
+    right: 5px;
+  }
+
+  .btn-neon:hover {
+    background: #b41b16;
+    box-shadow: 0 0 10px #b41b16, 0 0 40px #b41b16, 0 0 80px #b41b16;
+    transition-delay: 0.4s;
+  }
+
+  .btn-neon span {
+    position: absolute;
+    display: block;
+  }
+
+  .span {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #f6ed9f);
+  }
+
+  .btn-neon:hover .span {
+    right: 100%;
+    transition: 1s;
+  }
 }
 
-/* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
+@media (min-height: 951px) {
+  /* llamar a la fuente */
 
-* {
-  margin: 0px;
-  padding: 0px;
-}
+  @font-face {
+    font-family: 'ARCADE CLASSIC';
+    src: url('../fonts/ARCADECLASSIC.TTF');
+  }
 
-body {
-  background-image: url(/backgrounds/FondoP.jpg); /* Fondo principal */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-size: cover;
-}
+  /* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
 
-.contenedorPrincipal {
-  display: flex;
-  flex-direction: row;
-}
+  * {
+    margin: 0px;
+    padding: 0px;
+    max-height: 100vh;
+  }
 
-/* Esta es la animacion del boton */
+  body {
+    background-image: url(/backgrounds/FondoP.jpg); /* Fondo principal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+  }
 
-.btn-neon {
-  margin: 10px;
-  position: relative;
-  display: inline-block;
-  padding: 15px 30px;
-  color: rgb(197, 193, 193);
-  letter-spacing: 4px;
-  font-size: 20px;
-  text-decoration: none;
-  overflow: hidden;
-  transition: 0.2s;
-  font-family: "ARCADE CLASSIC", "Arial";
-}
+  .contenedorPrincipal {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+  }
 
-.btn-neon:hover {
-  background: #f6ed9f;
-  box-shadow: 0 0 10px #f6ed9f, 0 0 40px #f6ed9f, 0 0 80px #f6ed9f;
-  transition-delay: 0.4s;
-}
+  /* Esta es la animacion del boton */
 
-.btn-neon span {
-  position: absolute;
-  display: block;
-}
+  .btn-neon {
+    margin: 0px 80px;
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    color: rgb(197, 193, 193);
+    letter-spacing: 4px;
+    font-size: 20px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: 0.2s;
+    font-family: 'ARCADE CLASSIC', 'Arial';
+    top: 325px;
+    right: 5px;
+  }
 
-.span {
-  bottom: 0;
-  right: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #f6ed9f);
-}
+  .btn-neon:hover {
+    background: #f6ed9f;
+    box-shadow: 0 0 10px #f6ed9f, 0 0 40px #f6ed9f, 0 0 80px #f6ed9f;
+    transition-delay: 0.4s;
+  }
 
-.btn-neon:hover .span {
-  right: 100%;
-  transition: 1s;
+  .btn-neon span {
+    position: absolute;
+    display: block;
+  }
+
+  .span {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #f6ed9f);
+  }
+
+  .btn-neon:hover .span {
+    right: 100%;
+    transition: 1s;
+  }
+
+  .canvas {
+    margin-top: 10px;
+  }
 }

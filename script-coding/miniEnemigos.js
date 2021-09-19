@@ -9,6 +9,8 @@ const enemigo = function (x, y) {
   this.x = x;
   this.y = y;
   this.contador = 0;
+  this.contadorEne = 0;
+  this.retrasoEne = 3;
   // UN NUMERO ALEATORIO ENTRE 0,3
   this.direccion = getRandom(0, 4);
 
@@ -115,5 +117,37 @@ function mueveEnemigo(lista) {
         }
       }
     }
+  });
+}
+
+
+/*
+function compMiniEnemigos(lista){
+  forEach(lista, (element) => {
+    forEach(Mundo.snake, (elementD) => {
+      if(element.x==elementD.x && element.y==elementD.y){
+        // console.log("alv");
+        // update(Mundo,Mundo.lives-=1);
+        return 0;
+      }
+    });
+  });
+}*/
+
+function compMiniEnemigos(lista) {
+  forEach(lista, (element) => {
+    forEach(Mundo.snake, (elementD) => {
+      x = lookupx(Mundo.listaEnemigos, element);
+      if (element.x == elementD.x && element.y == elementD.y) {
+        if(element.contadorEne<element.retrasoEne){
+          console.log("OHH")
+          update(Mundo,(listaEnemigos[x].contadorEne = listaEnemigos[x].contadorEne+1))
+        }else{
+          console.log("AYY")
+          update(Mundo,(listaEnemigos[x].contadorEne = 0))
+          update(Mundo,(Mundo.lives = Mundo.lives-1))
+        }
+      }
+    });
   });
 }

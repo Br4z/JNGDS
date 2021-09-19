@@ -33,7 +33,7 @@ body {
 .blur {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  background-color: rgba(243, 243, 243, 0.2);
+  background-color: rgba(73, 72, 72, 0.2);
 }
 
 /* Esta es la animacion del boton base */

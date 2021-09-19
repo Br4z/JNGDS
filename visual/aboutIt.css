@@ -23,10 +23,10 @@ body {
 
 /* Efecto blur */
 #container {
-  height: 400px;
+  height: 500px;
+  width: 300px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
-  margin: 50px auto;
   border: 1px solid #ffffff40;
   text-align: center;
   font-family: 'Francois One', sans-serif;
