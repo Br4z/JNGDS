@@ -84,6 +84,7 @@ const comodinInversion = new comodin(-1, -1);
 const comodinTombos = new comodin(-1, -1);
 const comodinReduccionPuntos = new comodin(-1, -1);
 const comodinGolpeAccionado = new comodin(-1, -1);
+const comodinAleatorio = new comodin(-1, -1);
 
 
   /*COSAS DEL SNAKE*/
@@ -168,6 +169,7 @@ function setup() {
       comodinTombos,
       comodinReduccionPuntos,
       comodinGolpeAccionado,
+      comodinAleatorio,
     ],
 
     //Numero de vidas inicial
@@ -294,6 +296,9 @@ function drawGame(Mundo) {
   if (Mundo.comodines[7].tiempoActivo > 0){
     drawComodin(Mundo.comodines[7], "gray");
   }
+  if (Mundo.comodines[8].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[8], "#eb34d8");
+  }
 
 }
 
@@ -378,27 +383,30 @@ function onTic(Mundo) {
 
   countLives = Mundo.lives;
   drawUi();
-  if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
+  if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){ //Bueno (yellow)
     accionVelocidad();
 
-  } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){ //Bueno (purple)
     invencibilidad = accionInvencibilidad();
 
-  } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){ //Bueno (orange)
 
-  } else if (comerItem(Mundo.snake, Mundo.comodines[3]) || Mundo.comodines[3].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[3]) || Mundo.comodines[3].tiempoAccionado > 0){ //bueno (black)
     accionVidaMas();
 
-  } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){ // (white)
     accionInversion();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){ // (browm)
     accionTombos();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){ // (pink)
     accionReduccionPuntos();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){ //(gray)
     golpeAccionado = accionGolpeAccionado();
+  } else if ((comerItem(Mundo.snake, Mundo.comodines[8]) || Mundo.comodines[8].tiempoAccionado > 0)){ //(Hexadecimal xd)
+    accionAleatorio();
   }
 
+  //[4,5,7,0,1,2,3,0,1,2,3,4,5,7,4,5,7,4,5,7,4,5,7]
 
   if (Mundo.comodines[0].tiempoActivo > 0){
     restaTiempo(0);
@@ -475,6 +483,16 @@ function onTic(Mundo) {
     if (Mundo.comodines[7].tiempoActivo == 1){
       //console.log("Hola");
       posicionInactiva(7);
+
+    }
+  }
+
+  if (Mundo.comodines[8].tiempoActivo > 0){
+    restaTiempo(8);
+
+    if (Mundo.comodines[8].tiempoActivo == 1){
+      //console.log("Hola");
+      posicionInactiva(8);
 
     }
   }
@@ -749,8 +767,10 @@ function posicionInactiva(nComodin){
 }
 
 function nuevosComodines(){
-  //const numeroComodin = getRandom(0,8)
-  const numeroComodin = 7;
+  const numeroComodin = 8;
+  //const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
+  //const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
+  //const numeroComodin[getRandom(0,)]
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(2,26));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,25));
@@ -802,13 +822,11 @@ function accionInvencibilidad(){
 }
 
 function accionVidaMas(){
-  update(Mundo, Mundo.comodines[3].tiempoActivo = 0)
+  update(Mundo, Mundo.comodines[3].tiempoActivo = 0);
   posicionInactiva(3);
   update(Mundo, Mundo.comodines[3].tiempoAccionado = 0);
-  //nuevosComodines();
   update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
   update(Mundo, Mundo.lives++);
-  //update(Mundo, Mundo.countLives = Mundo.lives)
 }
 
 function accionInversion(){
@@ -877,6 +895,31 @@ function accionGolpeAccionado() {
     update(Mundo, (Mundo.lives = 0));
   } else {
     update(Mundo, (Mundo.lives = window.vidasOficial));
+  }
+}
+
+ //:D
+function accionAleatorio(){
+  update(Mundo, Mundo.comodines[8].tiempoActivo = 0);
+  posicionInactiva(8);
+  update(Mundo, Mundo.comodines[8].tiempoAccionado = 0);
+  update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+  const listaAleatoriaPuntos = [1,0,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,0,1,0,1,0,1,0,0,1];
+  const ProbabilidadComodines = listaAleatoriaPuntos[getRandom(0,length(listaAleatoriaPuntos))]
+  switch (ProbabilidadComodines) {
+    case 0:
+      if(Mundo.score>20){
+        update(Mundo,Mundo.score = Mundo.score-20);
+      }else{
+        update(Mundo,Mundo.score = 0);
+      }
+      break;
+    case 1:
+        update(Mundo,Mundo.score = Mundo.score+20);
+      break;
+    default:
+      return null;
+      break;
   }
 }
 
