@@ -146,11 +146,6 @@ function setup() {
       x: int(getRandom(2,26)) ,  //28
       y: int(getRandom(4,25)), //26
     },
-    //TODO SE PODRA BORRAR? PARA QUE SIRVE?
-    cuadradoFinal: {
-      x: 0,
-      y: 0,
-    },
     //Puntacion Inicial
     score: 0,
 
@@ -509,10 +504,6 @@ function onTic(Mundo) {
         x: int(getRandom(2,26)) ,  //28
         y: int(getRandom(4,25)),
       },
-      cuadradoFinal: {
-        x: 0,
-        y: 0,
-      },
       score: Mundo.score,
       lives: Mundo.lives - 1,
       tipe: 'juego',
@@ -538,12 +529,6 @@ function onTic(Mundo) {
     text(' Has perdido', width / 2, height / 2);//advertencia que se muestra en pantalla en caso de que la serpiente se choque.
     text(Mundo.score, width / 2, height / 1.5);
     textSize(12);
-    rect(
-      Mundo.cuadradoFinal.x * lado,
-      Mundo.cuadradoFinal.y * lado,
-      lado,
-      lado
-    );
     return update(Mundo, {});
   } else {
     // Saber si la serpiente come
@@ -565,10 +550,6 @@ function onTic(Mundo) {
     } else {
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
-        cuadradoFinal: {
-          x: Mundo.snake[Mundo.snake.length - 1].x,
-          y: Mundo.snake[Mundo.snake.length - 1].y,
-        },
         Thief: ThiefMove(Mundo.Thief),
         timer: int(millis() / 1000),
         knife: moveKnife(Mundo.knife)
