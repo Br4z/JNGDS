@@ -104,7 +104,7 @@ function mueveEnemigo(lista) {
 
       //IZQUIERDA
       if (Mundo.listaEnemigos[x].direccion == 3) {
-        if (  
+        if (
           Mundo.listaEnemigos[x].compruebaColision(
             Mundo.listaEnemigos[x].x + 1,
             Mundo.listaEnemigos[x].y
@@ -140,12 +140,12 @@ function compMiniEnemigos(lista) {
       x = lookupx(Mundo.listaEnemigos, element);
       if (element.x == elementD.x && element.y == elementD.y) {
         if(element.contadorEne<element.retrasoEne){
-          console.log("OHH")
+          // console.log("OHH")
           update(Mundo,(listaEnemigos[x].contadorEne = listaEnemigos[x].contadorEne+1))
         }else{
-          console.log("AYY")
+          // console.log("AYY")
           update(Mundo,(listaEnemigos[x].contadorEne = 0))
-          update(Mundo,(Mundo.lives = Mundo.lives-1))
+          update(Mundo,(Mundo.score = Mundo.score-2))
         }
       }
     });
