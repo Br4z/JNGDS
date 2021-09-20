@@ -107,6 +107,10 @@ function juegoNuevo(){
       x: int(getRandom(2, 26)), //28
       y: int(getRandom(4, 25)), //26
     },
+    cuadradoFinal: {
+      x: 0,
+      y: 0,
+    },
     //Puntacion Inicial
     score: 0,
 
@@ -158,7 +162,22 @@ function juegoNuevo(){
   loop()
 }
 //JUEGO TERMINADO
+function cuadradoFinal(){
+    // fill(240, 240, 240);
+    // //Stroke => color de los bordes
+    // stroke(10, 10, 10);
+    // //StrokeWeight => Define el ancho
+    // strokeWeight(4);
+    rect(
+			Mundo.cuadradoFinal.x * lado,
+			Mundo.cuadradoFinal.y * lado,
+			lado,
+			lado
+		);
+}
 function juegoTerminado(){
+    // stroke('none');
+    // fill('none');
     window.vidasOficial = 0;
     textAlign(CENTER, CENTER);
     textSize(50);
@@ -173,16 +192,6 @@ function juegoTerminado(){
   // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
 function moveSnake(snake, dir) {
   const head = first(snake);
-  return cons(
-    { x: head.x + dir.x, y: head.y + dir.y },
-    snake.slice(0, length(snake) - 1)
-  );
-}
-//TODO Movimiento 2
-function moveSnake2(snake, dir) {
-  const head = first(snake);
-  head.x = head.x-0.5;
-  head.y = head.y-0.5;
   return cons(
     { x: head.x + dir.x, y: head.y + dir.y },
     snake.slice(0, length(snake) - 1)
@@ -204,7 +213,7 @@ function drawComodin(comodin, color) {
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
 
 function setup() {
-  frameRate(2);
+  frameRate(3);
   drawfondo();
   windowRezired();
   direcciones();
@@ -227,6 +236,10 @@ function setup() {
     food: {
       x: int(getRandom(2,26)) ,  //28
       y: int(getRandom(4,25)), //26
+    },
+    cuadradoFinal: {
+      x: 0,
+      y: 0,
     },
     //Puntacion Inicial
     score: 0,
@@ -419,7 +432,7 @@ function cambioTablero() {
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
-
+  // console.log(Mundo.dir)
   //Tablero
   cambioTablero();
 
@@ -605,8 +618,12 @@ function onTic(Mundo) {
       ],
       dir: derecha,
       food: {
-        x: int(getRandom(2,26)) ,  //28
-        y: int(getRandom(4,25)),
+        x: int(getRandom(2, 26)), //28
+        y: int(getRandom(4, 25)),
+      },
+      cuadradoFinal: {
+        x: 0,
+        y: 0,
       },
       score: Mundo.score,
       lives: Mundo.lives - 1,
@@ -618,17 +635,19 @@ function onTic(Mundo) {
         dirx: true,
         diry: true,
       },
-      knife: [{
-        x: 18,
-        y: 10,
-        pos: false,
-      },],
+      knife: [
+        {
+          x: 18,
+          y: 10,
+          pos: false,
+        },
+      ],
     });
   } else if ( // Comprobar si la serpiente esta tiesa.
     ((Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2) && (Mundo.lives < 1)) ||
     ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad == true)
   ) {
-
+    cuadradoFinal();
     juegoTerminado();
     // return update(Mundo, {});
   } else {
@@ -638,13 +657,17 @@ function onTic(Mundo) {
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         food: {
-            x: int(getRandom(2,26)) ,  //28
-            y: int(getRandom(4,25)), //26
+          x: int(getRandom(2, 26)), //28
+          y: int(getRandom(4, 25)), //26
+        },
+        cuadradoFinal: {
+          x: 0,
+          y: 0,
         },
         score: Mundo.score + Mundo.scoreMas,
         timer: int(millis() / 1000),
         Thief: ThiefMove(Mundo.Thief),
-        knife: duplicarKnife(Mundo.knife,Mundo.Thief),
+        knife: duplicarKnife(Mundo.knife, Mundo.Thief),
       });
       //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
       //Movimiento normal del Snake junto al del Thief.
@@ -689,6 +712,10 @@ function onTic(Mundo) {
         Thief: ThiefMove(Mundo.Thief),
         timer: int(millis() / 1000),
         knife: moveKnife(Mundo.knife),
+        cuadradoFinal: {
+					x: Mundo.snake[Mundo.snake.length - 1].x,
+					y: Mundo.snake[Mundo.snake.length - 1].y,
+				},
       });
     }
     // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
@@ -709,32 +736,32 @@ function keyPressed() {
   if(!isLooping()){
     juegoNuevo()
   }
-  switch (keyCode) {
-    case UP_ARROW:
-      if (Mundo.dir == abajo) {
+    switch (keyCode) {
+      case UP_ARROW:
+        if (Mundo.dir == abajo) {
+          break;
+        }
+        if ((Mundo.dir = arriba));
         break;
-      }
-      if ((Mundo.dir = arriba));
-      break;
-    case RIGHT_ARROW:
-      if (Mundo.dir == izquierda) {
+      case RIGHT_ARROW:
+        if (Mundo.dir == izquierda) {
+          break;
+        }
+        if ((Mundo.dir = derecha));
         break;
-      }
-      if ((Mundo.dir = derecha));
-      break;
-    case DOWN_ARROW:
-      if (Mundo.dir == arriba) {
+      case DOWN_ARROW:
+        if (Mundo.dir == arriba) {
+          break;
+        }
+        if ((Mundo.dir = abajo));
         break;
-      }
-      if ((Mundo.dir = abajo));
-      break;
-    case LEFT_ARROW:
-      if (Mundo.dir == derecha) {
+      case LEFT_ARROW:
+        if (Mundo.dir == derecha) {
+          break;
+        }
+        if ((Mundo.dir = izquierda));
         break;
-      }
-      if ((Mundo.dir = izquierda));
-      break;
-  }
+    }
 }
 ///TODO Registra las teclas precionadas
 function onKeyEvent(Mundo, keyCode) {
