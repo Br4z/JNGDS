@@ -258,7 +258,12 @@ function drawGame(Mundo) {
   drawFood(Mundo.food);
   //Esta funcion dibuja al snake
   forEach(Mundo.snake, (s) => {
-    rect(s.x * lado, s.y * lado, lado, lado);
+    rect(
+        constrain(s.x,1,columnas-2) * lado,
+        constrain(s.y,4,filas-2 )* lado,
+      lado,
+      lado
+      );
   });
 
   //TODO REVISAR ESTE FILL
