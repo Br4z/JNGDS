@@ -84,50 +84,11 @@ const comodinInversion = new comodin(-1, -1);
 const comodinTombos = new comodin(-1, -1);
 const comodinReduccionPuntos = new comodin(-1, -1);
 const comodinGolpeAccionado = new comodin(-1, -1);
+const comodinAleatorio = new comodin(-1, -1);
 
 
-  /*COSAS DEL SNAKE*/
-  // TODO Movimiento de la serpiente
-  // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
-function moveSnake(snake, dir) {
-  const head = first(snake);
-  return cons(
-    { x: head.x + dir.x, y: head.y + dir.y },
-    snake.slice(0, length(snake) - 1)
-  );
-}
-//TODO Movimiento 2
-function moveSnake2(snake, dir) {
-  const head = first(snake);
-  head.x = head.x-0.5;
-  head.y = head.y-0.5;
-  return cons(
-    { x: head.x + dir.x, y: head.y + dir.y },
-    snake.slice(0, length(snake) - 1)
-  );
-}
-
-// TODO Dibujar la comida
-function drawFood(food) {
-  fill('crimson');
-  rect(food.x * lado, food.y * lado, lado, lado);
-}
-
-// TODO Dibujar el Comodin #1
-function drawComodin(comodin, color) {
-  fill(color);
-  rect(comodin.x * lado, comodin.y * lado, lado, lado);
-}
-
-/* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
-
-function setup() {
-  frameRate(2);
-  drawfondo();
-  windowRezired();
-  direcciones();
-
-  //Actualizar el Mundo, colocando lo que va a tener una vez se inicie el Juego
+//Juego nuevo
+function juegoNuevo(){
   Mundo = {
     //Determinar la  posicion que aparecera el Snake
     snake: [
@@ -136,15 +97,19 @@ function setup() {
       { x: columnas / 2 - 2, y: filas / 2 },
     ],
     //Escenario
-    escenario : escenario1,
+    escenario: escenario1,
     //Direccion por la que empieza el Snake
     dir: derecha,
     //Enermigos
     listaEnemigos,
     //Posicion de la Comida (Será Random)
     food: {
-      x: int(getRandom(2,26)) ,  //28
-      y: int(getRandom(4,25)), //26
+      x: int(getRandom(2, 26)), //28
+      y: int(getRandom(4, 25)), //26
+    },
+    cuadradoFinal: {
+      x: 0,
+      y: 0,
     },
     //Puntacion Inicial
     score: 0,
@@ -168,6 +133,137 @@ function setup() {
       comodinTombos,
       comodinReduccionPuntos,
       comodinGolpeAccionado,
+      comodinAleatorio,
+    ],
+
+    //Numero de vidas inicial
+    lives: 3,
+    //El tiempo
+    timer: int(millis() / 1000),
+    //Jefe Thief
+    Thief: {
+      x: 26,
+      y: 13,
+      dirx: true,
+      diry: true,
+    },
+    //Ataque de Thief
+    knife: [
+      {
+        x: 18,
+        y: 10,
+        pos: false,
+      },
+    ],
+    retrasoComodines: 80,
+    scoreMas: 1,
+    activosMiniEnemigos: false,
+  };
+  loop()
+}
+//JUEGO TERMINADO
+function cuadradoFinal(){
+    // fill(240, 240, 240);
+    // //Stroke => color de los bordes
+    // stroke(10, 10, 10);
+    // //StrokeWeight => Define el ancho
+    // strokeWeight(4);
+    rect(
+			Mundo.cuadradoFinal.x * lado,
+			Mundo.cuadradoFinal.y * lado,
+			lado,
+			lado
+		);
+}
+function juegoTerminado(){
+    // stroke('none');
+    // fill('none');
+    window.vidasOficial = 0;
+    textAlign(CENTER, CENTER);
+    textSize(50);
+    text(' Has perdido', width / 2, height / 2);//advertencia que se muestra en pantalla en caso de que la serpiente se choque.
+    text(Mundo.score, width / 2, height / 1.5);
+    textSize(12);
+    noLoop()
+}
+
+  /*COSAS DEL SNAKE*/
+  // TODO Movimiento de la serpiente
+  // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
+function moveSnake(snake, dir) {
+  const head = first(snake);
+  return cons(
+    { x: head.x + dir.x, y: head.y + dir.y },
+    snake.slice(0, length(snake) - 1)
+  );
+}
+
+// TODO Dibujar la comida
+function drawFood(food) {
+  fill('crimson');
+  rect(food.x * lado, food.y * lado, lado, lado);
+}
+
+// TODO Dibujar el Comodin #1
+function drawComodin(comodin, color) {
+  fill(color);
+  rect(comodin.x * lado, comodin.y * lado, lado, lado);
+}
+
+/* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
+
+function setup() {
+  frameRate(3);
+  drawfondo();
+  windowRezired();
+  direcciones();
+
+  //Actualizar el Mundo, colocando lo que va a tener una vez se inicie el Juego
+  Mundo = {
+    //Determinar la  posicion que aparecera el Snake
+    snake: [
+      { x: columnas / 2, y: filas / 2 },
+      { x: columnas / 2 - 1, y: filas / 2 },
+      { x: columnas / 2 - 2, y: filas / 2 },
+    ],
+    //Escenario
+    escenario : escenario1,
+    //Direccion por la que empieza el Snake
+    dir: derecha,
+    //Enermigos
+    listaEnemigos,
+    //Posicion de la Comida (Será Random)
+    food: {
+      x: int(getRandom(2,26)) ,  //28
+      y: int(getRandom(4,25)), //26
+    },
+    cuadradoFinal: {
+      x: 0,
+      y: 0,
+    },
+    //Puntacion Inicial
+    score: 0,
+
+    /* FUNCIONAMIENTO DE COMODIN
+      nombreComodin: {
+        x: PosX;
+        y: PosY;
+        tiempoAccionado: Tiempo que dibujar
+        tiempoActivo: Tiempo que dura en el mapa
+        TiempoDesactivo: Tiempo en el cual no esta en el mapa
+      }
+     */
+
+    comodines: [
+      comodinVelocidad,
+      comodinInvencibilidad,
+      comodinRegeneracion,
+      comodinVidaMas,
+      comodinInversion,
+      comodinTombos,
+      comodinReduccionPuntos,
+      comodinGolpeAccionado,
+      comodinAleatorio,
     ],
 
     //Numero de vidas inicial
@@ -201,10 +297,16 @@ function setup() {
 const enemigo1 = new enemigo(getRandom(2,26),getRandom(5,25));
 const enemigo2 = new enemigo(getRandom(2,26),getRandom(5,25));
 const enemigo3 = new enemigo(getRandom(2,26),getRandom(5,25));
+const enemigo4 = new enemigo(getRandom(2,26),getRandom(5,25));
+const enemigo5 = new enemigo(getRandom(2,26),getRandom(5,25));
+const enemigo6 = new enemigo(getRandom(2,26),getRandom(5,25));
 listaEnemigos = [];
 listaEnemigos = actualizaLista(listaEnemigos,enemigo1);
 listaEnemigos = actualizaLista(listaEnemigos,enemigo2);
 listaEnemigos = actualizaLista(listaEnemigos,enemigo3);
+listaEnemigos = actualizaLista(listaEnemigos,enemigo4);
+listaEnemigos = actualizaLista(listaEnemigos,enemigo5);
+listaEnemigos = actualizaLista(listaEnemigos,enemigo6);
 
 //--------------------------------------------
 function compruebaTablero(){
@@ -256,7 +358,12 @@ function drawGame(Mundo) {
   drawFood(Mundo.food);
   //Esta funcion dibuja al snake
   forEach(Mundo.snake, (s) => {
-    rect(s.x * lado, s.y * lado, lado, lado);
+    rect(
+        constrain(s.x,1,columnas-2) * lado,
+        constrain(s.y,4,filas-2 )* lado,
+      lado,
+      lado
+      );
   });
 
   //TODO REVISAR ESTE FILL
@@ -294,6 +401,9 @@ function drawGame(Mundo) {
   if (Mundo.comodines[7].tiempoActivo > 0){
     drawComodin(Mundo.comodines[7], "gray");
   }
+  if (Mundo.comodines[8].tiempoActivo > 0){
+    drawComodin(Mundo.comodines[8], "#eb34d8");
+  }
 
 }
 
@@ -328,7 +438,7 @@ function cambioTablero() {
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
-
+  // console.log(Mundo.dir)
   //Tablero
   cambioTablero();
 
@@ -378,27 +488,30 @@ function onTic(Mundo) {
 
   countLives = Mundo.lives;
   drawUi();
-  if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){
+  if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){ //Bueno (yellow)
     accionVelocidad();
 
-  } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){ //Bueno (purple)
     invencibilidad = accionInvencibilidad();
 
-  } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){ //Bueno (orange)
 
-  } else if (comerItem(Mundo.snake, Mundo.comodines[3]) || Mundo.comodines[3].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[3]) || Mundo.comodines[3].tiempoAccionado > 0){ //bueno (black)
     accionVidaMas();
 
-  } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){ // (white)
     accionInversion();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){ // (browm)
     accionTombos();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){ // (pink)
     accionReduccionPuntos();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){
+  } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){ //(gray)
     golpeAccionado = accionGolpeAccionado();
+  } else if ((comerItem(Mundo.snake, Mundo.comodines[8]) || Mundo.comodines[8].tiempoAccionado > 0)){ //(Hexadecimal xd)
+    accionAleatorio();
   }
 
+  //[4,5,7,0,1,2,3,0,1,2,3,4,5,7,4,5,7,4,5,7,4,5,7]
 
   if (Mundo.comodines[0].tiempoActivo > 0){
     restaTiempo(0);
@@ -479,6 +592,16 @@ function onTic(Mundo) {
     }
   }
 
+  if (Mundo.comodines[8].tiempoActivo > 0){
+    restaTiempo(8);
+
+    if (Mundo.comodines[8].tiempoActivo == 1){
+      //console.log("Hola");
+      posicionInactiva(8);
+
+    }
+  }
+
 
   if (   //Cordinas el movimiento de la serpiente.
     // (Mundo.snake[0].x > columnas - 1 ||
@@ -501,8 +624,12 @@ function onTic(Mundo) {
       ],
       dir: derecha,
       food: {
-        x: int(getRandom(2,26)) ,  //28
-        y: int(getRandom(4,25)),
+        x: int(getRandom(2, 26)), //28
+        y: int(getRandom(4, 25)),
+      },
+      cuadradoFinal: {
+        x: 0,
+        y: 0,
       },
       score: Mundo.score,
       lives: Mundo.lives - 1,
@@ -514,22 +641,21 @@ function onTic(Mundo) {
         dirx: true,
         diry: true,
       },
-      knife: [{
-        x: 18,
-        y: 10,
-        pos: false,
-      },],
+      knife: [
+        {
+          x: 18,
+          y: 10,
+          pos: false,
+        },
+      ],
     });
   } else if ( // Comprobar si la serpiente esta tiesa.
     ((Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2) && (Mundo.lives < 1)) ||
     ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad == true)
   ) {
-    textAlign(CENTER, CENTER);
-    textSize(50);
-    text(' Has perdido', width / 2, height / 2);//advertencia que se muestra en pantalla en caso de que la serpiente se choque.
-    text(Mundo.score, width / 2, height / 1.5);
-    textSize(12);
-    return update(Mundo, {});
+    cuadradoFinal();
+    juegoTerminado();
+    // return update(Mundo, {});
   } else {
     // Saber si la serpiente come
     if (comerItem(Mundo.snake, Mundo.food)) {
@@ -537,13 +663,17 @@ function onTic(Mundo) {
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         food: {
-            x: int(getRandom(2,26)) ,  //28
-            y: int(getRandom(4,25)), //26
+          x: int(getRandom(2, 26)), //28
+          y: int(getRandom(4, 25)), //26
+        },
+        cuadradoFinal: {
+          x: 0,
+          y: 0,
         },
         score: Mundo.score + Mundo.scoreMas,
         timer: int(millis() / 1000),
         Thief: ThiefMove(Mundo.Thief),
-        knife: duplicarKnife(Mundo.knife,Mundo.Thief),
+        knife: duplicarKnife(Mundo.knife, Mundo.Thief),
       });
       //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
       //Movimiento normal del Snake junto al del Thief.
@@ -594,6 +724,10 @@ function onTic(Mundo) {
         Thief: ThiefMove(Mundo.Thief),
         timer: int(millis() / 1000),
         knife: moveKnife(Mundo.knife),
+        cuadradoFinal: {
+					x: Mundo.snake[Mundo.snake.length - 1].x,
+					y: Mundo.snake[Mundo.snake.length - 1].y,
+				},
       });
     }
     // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
@@ -611,32 +745,35 @@ function onMouseEvent(Mundo, event) {
 // Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo estado del mundo.
 
 function keyPressed() {
-  switch (keyCode) {
-    case UP_ARROW:
-      if (Mundo.dir == abajo) {
-        break;
-      }
-      if ((Mundo.dir = arriba));
-      break;
-    case RIGHT_ARROW:
-      if (Mundo.dir == izquierda) {
-        break;
-      }
-      if ((Mundo.dir = derecha));
-      break;
-    case DOWN_ARROW:
-      if (Mundo.dir == arriba) {
-        break;
-      }
-      if ((Mundo.dir = abajo));
-      break;
-    case LEFT_ARROW:
-      if (Mundo.dir == derecha) {
-        break;
-      }
-      if ((Mundo.dir = izquierda));
-      break;
+  if(!isLooping()){
+    juegoNuevo()
   }
+    switch (keyCode) {
+      case UP_ARROW:
+        if (Mundo.dir == abajo) {
+          break;
+        }
+        if ((Mundo.dir = arriba));
+        break;
+      case RIGHT_ARROW:
+        if (Mundo.dir == izquierda) {
+          break;
+        }
+        if ((Mundo.dir = derecha));
+        break;
+      case DOWN_ARROW:
+        if (Mundo.dir == arriba) {
+          break;
+        }
+        if ((Mundo.dir = abajo));
+        break;
+      case LEFT_ARROW:
+        if (Mundo.dir == derecha) {
+          break;
+        }
+        if ((Mundo.dir = izquierda));
+        break;
+    }
 }
 ///TODO Registra las teclas precionadas
 function onKeyEvent(Mundo, keyCode) {
@@ -754,8 +891,11 @@ function posicionInactiva(nComodin){
 }
 
 function nuevosComodines(){
-  //const numeroComodin = getRandom(0,8)
-  const numeroComodin = 5;
+  //Comodines Aqui
+  // const numeroComodin = 5;
+  const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
+  const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
+  //const numeroComodin[getRandom(0,)]
   update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
   update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(2,26));
   update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,25));
@@ -807,13 +947,11 @@ function accionInvencibilidad(){
 }
 
 function accionVidaMas(){
-  update(Mundo, Mundo.comodines[3].tiempoActivo = 0)
+  update(Mundo, Mundo.comodines[3].tiempoActivo = 0);
   posicionInactiva(3);
   update(Mundo, Mundo.comodines[3].tiempoAccionado = 0);
-  //nuevosComodines();
   update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
   update(Mundo, Mundo.lives++);
-  //update(Mundo, Mundo.countLives = Mundo.lives)
 }
 
 function accionInversion(){
@@ -882,6 +1020,31 @@ function accionGolpeAccionado() {
     update(Mundo, (Mundo.lives = 0));
   } else {
     update(Mundo, (Mundo.lives = window.vidasOficial));
+  }
+}
+
+ //:D
+function accionAleatorio(){
+  update(Mundo, Mundo.comodines[8].tiempoActivo = 0);
+  posicionInactiva(8);
+  update(Mundo, Mundo.comodines[8].tiempoAccionado = 0);
+  update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+  const listaAleatoriaPuntos = [1,0,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,0,1,0,1,0,1,0,0,1];
+  const ProbabilidadComodines = listaAleatoriaPuntos[getRandom(0,length(listaAleatoriaPuntos))]
+  switch (ProbabilidadComodines) {
+    case 0:
+      if(Mundo.score>20){
+        update(Mundo,Mundo.score = Mundo.score-20);
+      }else{
+        update(Mundo,Mundo.score = 0);
+      }
+      break;
+    case 1:
+        update(Mundo,Mundo.score = Mundo.score+20);
+      break;
+    default:
+      return null;
+      break;
   }
 }
 
