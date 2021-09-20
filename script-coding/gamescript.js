@@ -582,7 +582,13 @@ function onTic(Mundo) {
           },
         ],
       });
-    } else {
+    } else if (knifeOut(Mundo.knife)) {
+      return update(Mundo, {
+        snake: moveSnake(Mundo.snake, Mundo.dir),
+        knife: despawnKnife(Mundo.knife),
+        timer: int(millis() / 1000),
+      });
+    }else{
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
         Thief: ThiefMove(Mundo.Thief),
