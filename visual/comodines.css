@@ -1,8 +1,8 @@
 @font-face {
-  font-family: myFirstFont;
-  src: url('/fonts/JosefinSans-Italic-VariableFont_wght.ttf');
-  font-family: mySecontFont;
-  src: url('/fonts/ARCADECLASSIC.TTF');
+  font-family: "myFirstFont";
+  src: url('../fonts/JosefinSans-Italic-VariableFont_wght.ttf');
+  font-family: "ARCADE CLASSIC";
+  src: url('/fonts/ARCADE.TTF');
 }
 
 
@@ -11,7 +11,7 @@
   padding: 0px;
   box-sizing:border-box;
   font-size: 18px;
-  font-family: myFirstFont;
+  font-family: "myFirstFont";
   font-style: italic;
   font-weight: 300;
 }
@@ -153,9 +153,10 @@ body {
 }
 
 .textocont{
-  font-family: mySecondFont;
-  font-style: none;
-  color:#2196f3;
+  font-family: "ARCADE CLASSIC", "Arial";
+  color:#22d3cb;
   font-size:40px;
-  /* font-weight:700; */
+  font-style: normal;
+  font-weight: bold; 
+  margin-top: 15px;
 }
