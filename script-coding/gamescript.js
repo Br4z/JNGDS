@@ -824,15 +824,18 @@ function posicionInactiva(nComodin){
   update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
 }
 
-function nuevosComodines(){
+function nuevosComodines() {
   //Comodines Aqui
+  // const numeroComodin = 5;
   const numeroComodin = 4;
   //const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
   //const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
-  //const numeroComodin[getRandom(0,)]
-  update(Mundo, Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30,50));
-  update(Mundo, Mundo.comodines[numeroComodin].x = getRandom(2,26));
-  update(Mundo, Mundo.comodines[numeroComodin].y = getRandom(4,25));
+  update(
+    Mundo,
+    (Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30, 50))
+  );
+  update(Mundo, (Mundo.comodines[numeroComodin].x = getRandom(2, 26)));
+  update(Mundo, (Mundo.comodines[numeroComodin].y = getRandom(4, 25)));
 }
 
 function restaRetraso(){
