@@ -37,9 +37,20 @@ function preload() {
     );
     cola_politico = loadImage('../Snake_Images/cola_politico.png');
 
-  myFont = loadFont('../fonts/ARCADE.TTF')
+  myFont = loadFont('../fonts/ARCADE.TTF');
   myFontTwo = loadFont('../fonts/ARCADECLASSIC.TTF');
-  gameOverImage = loadImage('../backgrounds/gameOver.png')
+  gameOverImage = loadImage('../backgrounds/gameOver.png');
+
+  velocidad = loadImage('../visual/comodines/Potenciador_velocidad.png');
+  invencibilidad = loadImage('../visual/comodines/Invencibilidad.png');
+  aumentoPuntos =loadImage('../visual/comodines/Multiplicador_de_damage.png');
+  aumentoVida = loadImage('../visual/comodines/Vida.png');
+  tombos = loadImage('../visual/comodines/Aparecen_enemigos.png');
+  reduccionPuntos = loadImage('../visual/comodines/Reductor_de_puntos.png');
+  //golpeAccionado = loadImage('../visual/comodines/.png');
+  invertir = loadImage('../visual/comodines/invertir_controles.png');
+  comodinMasPuntos =  loadImage('../visual/comodines/Multiplicador_de_damage.png');
+  aleatorio = loadImage('../visual/comodines/Comodin_aleatorio.png')
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -299,32 +310,87 @@ function drawGame(Mundo) {
 
   //DIBUJA COMODINES
   if (Mundo.comodines[0].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[0], "yellow");
+    image(
+      velocidad,
+      Mundo.comodines[0].x *20,
+      Mundo.comodines[0].y *20,
+      lado,//weight
+      lado,//height
+    )
   }
   if (Mundo.comodines[1].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[1], "purple");
+    image(
+      invencibilidad,
+      Mundo.comodines[1].x *20,
+      Mundo.comodines[1].y *20,
+      lado,
+      lado,
+    )
   }
 
   if (Mundo.comodines[2].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[2], "orange");
+    image(
+      aumentoPuntos,
+      Mundo.comodines[2].x *20,
+      Mundo.comodines[2].y *20,
+      lado,
+      lado,
+    )
   }
   if (Mundo.comodines[3].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[3], "black");
+    image(
+      aumentoVida,
+      Mundo.comodines[3].x *20,
+      Mundo.comodines[3].y *20,
+      lado,
+      lado,
+    )
   }
   if (Mundo.comodines[4].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[4], "white");
+    image(
+      invertir,
+      Mundo.comodines[4].x *20,
+      Mundo.comodines[4].y *20,
+      lado,
+      lado,
+    )
   }
   if (Mundo.comodines[5].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[5], "brown");
+    image(
+      tombos,
+      Mundo.comodines[5].x *20,
+      Mundo.comodines[5].y *20,
+      lado,
+      lado,
+    )
   }
   if (Mundo.comodines[6].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[6], "pink");
+    image(
+      reduccionPuntos,
+      Mundo.comodines[6].x *20,
+      Mundo.comodines[6].y *20,
+      lado,
+      lado,
+    )
   }
   if (Mundo.comodines[7].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[7], "gray");
+    /*NO ESTA
+    image(
+      aumentoPuntos,
+      Mundo.comodines[7].x *20,
+      Mundo.comodines[7].y *20,
+      lado,
+      lado,
+    )*/
   }
   if (Mundo.comodines[8].tiempoActivo > 0){
-    drawComodin(Mundo.comodines[8], "#eb34d8");
+    image(
+      aleatorio,
+      Mundo.comodines[8].x *20,
+      Mundo.comodines[8].y *20,
+      lado,//wei
+      lado,//hei
+    )
   }
 
 }
@@ -827,9 +893,8 @@ function posicionInactiva(nComodin){
 function nuevosComodines() {
   //Comodines Aqui
   // const numeroComodin = 5;
-  const numeroComodin = 4;
-  //const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
-  //const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
+  const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
+  const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
   update(
     Mundo,
     (Mundo.comodines[numeroComodin].tiempoActivo = getRandom(30, 50))

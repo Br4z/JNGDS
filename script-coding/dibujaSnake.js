@@ -4,7 +4,7 @@
 function dibujaCabeza(){
   image(
       Mundo.imagenActualCabeza,
-      Mundo.snake[x].x * 20,
+      Mundo.snake[x].x * 20,//posicion multiplicar por 20 porque si XD
       Mundo.snake[x].y * 20,
       lado,
       lado,
