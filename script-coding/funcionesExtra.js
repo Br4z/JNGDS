@@ -10,16 +10,17 @@ function drawUi() {
   //stroke => color del borde del texto
   stroke(50, 150, 50);
   //strokeWeight => anchura del borde del texto
-  strokeWeight(4);
+  // strokeWeight(4);
   //textSize => tamaño de la fuente
-  textSize(30);
+  textSize(50);
+  textFont(myFont)
   //textAlign => alineacion del texto
   textAlign(LEFT);
-  text('SCORE: ' + Mundo.score, 20, 45); //texto en el que se muestra conteo de la puntuacion
+  text('SCORE: ' + Mundo.score, 20, 50); //texto en el que se muestra conteo de la puntuacion
   textAlign(RIGHT); //alineacion del texto que muestra el score
-  text('LIVES: ' + countLives, 540, 45); //texto en el que se muestra el contador de vidas
-  textSize(30); //tamaño de la fuente
-  text('Tiempo: ' + Mundo.timer, 350, 45); //temporizador
+  text('LIVES: ' + countLives, 540, 50); //texto en el que se muestra el contador de vidas
+  // textSize(30); //tamaño de la fuente
+  // text('Tiempo: ' + Mundo.timer, 350, 45); //temporizador
 }
 
 /* DRAW FONDO : DIBUJA EL FONDO DEL CANVAS */

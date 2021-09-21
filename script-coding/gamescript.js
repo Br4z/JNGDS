@@ -36,6 +36,8 @@ function preload() {
       '../Snake_Images/cabeza_izquierda_politico.png'
     );
     cola_politico = loadImage('../Snake_Images/cola_politico.png');
+
+  myFont = loadFont('../fonts/ARCADE.TTF')
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
