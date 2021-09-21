@@ -254,7 +254,7 @@ function drawGame(Mundo) {
   //Enemigos
   // dibujaEnemigo(Mundo.listaEnemigos)
 
-  
+
   //Stroke => color de los bordes
 
   //StrokeWeight => Define el ancho
@@ -268,15 +268,6 @@ function drawGame(Mundo) {
     dibujaCabeza()
     }if(x!=0){
     dibujaCola()
-    // fill('#EAD04E');
-    // stroke('#C2B53E');
-    // strokeWeight(4);
-    // rect(
-    //     constrain(s.x,1,columnas-2) * lado,
-    //     constrain(s.y,4,filas-2 )* lado,
-    //   lado,
-    //   lado
-    //   );
     }
   });
     fill(240, 240, 240);
@@ -367,8 +358,8 @@ function cambioTablero() {
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
   // console.log(Mundo.dir)
-  cambiaCabeza()
-  cambiaCola()
+  cambiaCabezaCola()
+  // cambiaCola()
   //Tablero
   cambioTablero();
 
