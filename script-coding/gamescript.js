@@ -262,6 +262,12 @@ function drawGame(Mundo) {
   //Dibuja la comida en una posicion random
   drawFood(Mundo.food);
   //Esta funcion dibuja al snake
+  // //rect(
+  //       constrain(s.x,1,columnas-2) * lado,
+  //       constrain(s.y,4,filas-2 )* lado,
+  //     lado,
+  //     lado
+  //     );
   forEach(Mundo.snake, (s) => {
     x = lookupx(Mundo.snake, s);
     if(x==0){

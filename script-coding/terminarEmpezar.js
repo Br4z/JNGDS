@@ -75,6 +75,11 @@ function juegoNuevo(){
     imagenActualCola: cola_normal,
     retrasoCola: 3,
     contadorCola: 3,
+    normalActivo: true,
+    vendedorActivo: false,
+    neroActivo: false,
+    policiaActivo: false,
+    politicoActivo: false,
   };
   loop()
 }
