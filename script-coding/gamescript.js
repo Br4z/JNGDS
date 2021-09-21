@@ -253,10 +253,10 @@ function drawGame(Mundo) {
 
   //Enemigos
   // dibujaEnemigo(Mundo.listaEnemigos)
-  //Fill => Color de relleno
-  fill(240, 240, 240);
+
+  
   //Stroke => color de los bordes
-  stroke(10, 10, 10);
+
   //StrokeWeight => Define el ancho
   strokeWeight(4);
   //Dibuja la comida en una posicion random
