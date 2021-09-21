@@ -527,6 +527,8 @@ function coloreaTablero4(i, cell, j) {
     rect(j * lado, i * lado, lado, lado);
   }
 }
+
+//----------------------------------
 //FUNCIONES PARA DIBUJAR TABLERO
 function forEach2(l, f, index = 0) {
   if (!isEmpty(l)) {
@@ -534,5 +536,34 @@ function forEach2(l, f, index = 0) {
     forEach2(rest(l), f, index + 1);
   }
 }
-
+//-------------------------------------
+function compruebaTablero() {
+  if (Mundo.escenario == escenario1) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero1(i, cell, j);
+      });
+    });
+  } else if (Mundo.escenario == escenario2) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero2(i, cell, j);
+      });
+    });
+  } else if (Mundo.escenario == escenario3) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero3(i, cell, j);
+      });
+    });
+  } else if (Mundo.escenario == escenario4) {
+    forEach2(Mundo.escenario, (row, i) => {
+      forEach2(row, (cell, j) => {
+        coloreaTablero4(i, cell, j);
+      });
+    });
+  } else {
+    return null;
+  }
+}
 

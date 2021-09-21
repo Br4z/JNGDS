@@ -11,6 +11,7 @@ function preload() {
   cabeza_abajo_normal = loadImage('../Snake_Images/cabeza_abajo_normal.png')
   // cola_normal = loadImage('../Snake_Images/cola_normal_cuadrado')
   cola_normal = loadImage('../Snake_Images/cola_normal_cuadrado.png')
+  cola_normal_opuesto = loadImage('../Snake_Images/cola_normal_cuadrado_opuesto.png');
 
 }
 
@@ -97,119 +98,6 @@ const comodinReduccionPuntos = new comodin(-1, -1);
 const comodinGolpeAccionado = new comodin(-1, -1);
 const comodinAleatorio = new comodin(-1, -1);
 
-
-//Juego nuevo
-function juegoNuevo(){
-  Mundo = {
-    //Determinar la  posicion que aparecera el Snake
-    snake: [
-      { x: columnas / 2, y: filas / 2 },
-      { x: columnas / 2 - 1, y: filas / 2 },
-      { x: columnas / 2 - 2, y: filas / 2 },
-    ],
-    //Escenario
-    escenario: escenario1,
-    //Direccion por la que empieza el Snake
-    dir: derecha,
-    //Enermigos
-    listaEnemigos,
-    //Posicion de la Comida (Será Random)
-    food: {
-      x: int(getRandom(2, 26)), //28
-      y: int(getRandom(4, 25)), //26
-    },
-    // cuadradoFinal: {
-    //   x: 0,
-    //   y: 0,
-    // },
-    //Puntacion Inicial
-    score: 0,
-
-    /* FUNCIONAMIENTO DE COMODIN
-      nombreComodin: {
-        x: PosX;
-        y: PosY;
-        tiempoAccionado: Tiempo que dibujar
-        tiempoActivo: Tiempo que dura en el mapa
-        TiempoDesactivo: Tiempo en el cual no esta en el mapa
-      }
-     */
-
-    comodines: [
-      comodinVelocidad,
-      comodinInvencibilidad,
-      comodinRegeneracion,
-      comodinVidaMas,
-      comodinInversion,
-      comodinTombos,
-      comodinReduccionPuntos,
-      comodinGolpeAccionado,
-      comodinAleatorio,
-    ],
-
-    //Numero de vidas inicial
-    lives: 3,
-    //El tiempo
-    timer: int(millis() / 1000),
-    //Jefe Thief
-    Thief: {
-      x: 26,
-      y: 13,
-      dirx: true,
-      diry: true,
-    },
-    //Ataque de Thief
-    knife: [
-      {
-        x: 18,
-        y: 10,
-        pos: false,
-      },
-    ],
-    retrasoComodines: 80,
-    scoreMas: 1,
-    activosMiniEnemigos: false,
-    imagenActualCabeza: cabeza_derecha_normal,
-    imagenActualCola: cola_normal,
-  };
-  loop()
-}
-//JUEGO TERMINADO
-// function cuadradoFinal(){
-//     // fill(240, 240, 240);
-//     // //Stroke => color de los bordes
-//     // stroke(10, 10, 10);
-//     // //StrokeWeight => Define el ancho
-//     // strokeWeight(4);
-//     rect(
-// 			Mundo.cuadradoFinal.x * lado,
-// 			Mundo.cuadradoFinal.y * lado,
-// 			lado,
-// 			lado
-// 		);
-// }
-function juegoTerminado(){
-    // stroke('none');
-    // fill('none');
-    window.vidasOficial = 0;
-    textAlign(CENTER, CENTER);
-    textSize(50);
-    text(' Has perdido', width / 2, height / 2);//advertencia que se muestra en pantalla en caso de que la serpiente se choque.
-    text(Mundo.score, width / 2, height / 1.5);
-    textSize(12);
-    noLoop()
-}
-
-  /*COSAS DEL SNAKE*/
-  // TODO Movimiento de la serpiente
-  // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
-function moveSnake(snake, dir) {
-  const head = first(snake);
-  return cons(
-    { x: head.x + dir.x, y: head.y + dir.y },
-    snake.slice(0, length(snake) - 1)
-  );
-}
 
 // TODO Dibujar la comida
 function drawFood(food) {
@@ -303,6 +191,8 @@ function setup() {
     activosMiniEnemigos: false,
     imagenActualCabeza: cabeza_derecha_normal,
     imagenActualCola : cola_normal,
+    retrasoCola:3,
+    contadorCola: 3,
   };
 }
 
@@ -322,78 +212,6 @@ listaEnemigos = actualizaLista(listaEnemigos,enemigo3);
 listaEnemigos = actualizaLista(listaEnemigos,enemigo4);
 listaEnemigos = actualizaLista(listaEnemigos,enemigo5);
 listaEnemigos = actualizaLista(listaEnemigos,enemigo6);
-
-//--------------------------------------------
-function compruebaTablero(){
-  if ((Mundo.escenario == escenario1)) {
-    forEach2(Mundo.escenario, (row, i) => {
-      forEach2(row, (cell, j) => {
-        coloreaTablero1(i, cell, j);
-      });
-    });
-  } else if ((Mundo.escenario == escenario2)) {
-    forEach2(Mundo.escenario, (row, i) => {
-      forEach2(row, (cell, j) => {
-        coloreaTablero2(i, cell, j);
-      });
-    });
-  }else if ((Mundo.escenario == escenario3)) {
-    forEach2(Mundo.escenario, (row, i) => {
-      forEach2(row, (cell, j) => {
-        coloreaTablero3(i, cell, j);
-      });
-    });}
-    else if ((Mundo.escenario == escenario4)) {
-    forEach2(Mundo.escenario, (row, i) => {
-      forEach2(row, (cell, j) => {
-        coloreaTablero4(i, cell, j);
-      });
-    });}else {
-    return null;
-  }
-}
-//--------------------------------------------
-function cambiaCabeza(){
-  if(Mundo.dir==abajo){
-    update(Mundo,Mundo.imagenActualCabeza=cabeza_abajo_normal)
-  }else if(Mundo.dir==arriba){
-    update(Mundo,Mundo.imagenActualCabeza=cabeza_arriba_normal)
-  }if(Mundo.dir==derecha){
-    update(Mundo,Mundo.imagenActualCabeza=cabeza_derecha_normal)
-  }if(Mundo.dir==izquierda){
-    update(Mundo,Mundo.imagenActualCabeza=cabeza_izquierda_normal)
-  }else{
-    return null
-  }
-}
-
-function dibujaCabeza(){
-  image(
-      Mundo.imagenActualCabeza,
-      Mundo.snake[x].x * 20,
-      Mundo.snake[x].y * 20,
-      lado,
-      lado,
-      0,
-      0,
-      20,
-      20
-    );
-}
-
-function dibujaCola(){
-  image(
-      Mundo.imagenActualCola,
-      Mundo.snake[x].x * 20,
-      Mundo.snake[x].y * 20,
-      lado,
-      lado,
-      0,
-      0,
-      20,
-      20
-    );
-}
 
 //--------------------------------------------
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
@@ -511,6 +329,7 @@ function cambioTablero() {
 function onTic(Mundo) {
   // console.log(Mundo.dir)
   cambiaCabeza()
+  cambiaCola()
   //Tablero
   cambioTablero();
 
