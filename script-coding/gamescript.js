@@ -39,7 +39,7 @@ function preload() {
 
   myFont = loadFont('../fonts/ARCADE.TTF')
   myFontTwo = loadFont('../fonts/ARCADECLASSIC.TTF');
-
+  gameOverImage = loadImage('../backgrounds/gameOver.png')
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
