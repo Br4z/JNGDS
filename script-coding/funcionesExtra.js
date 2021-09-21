@@ -6,14 +6,15 @@ function getRandom(min, max) {
 /*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
 function drawUi() {
   //fill => color de relleno del texto
-  fill(255, 255, 255);
+  fill('#DC970D');
   //stroke => color del borde del texto
-  stroke(50, 150, 50);
+  stroke('#0E0D0D');
   //strokeWeight => anchura del borde del texto
-  // strokeWeight(4);
+  strokeWeight(5);
   //textSize => tamaño de la fuente
-  textSize(50);
+  textSize(55);
   textFont(myFont)
+  textFont(myFont);
   //textAlign => alineacion del texto
   textAlign(LEFT);
   text('SCORE: ' + Mundo.score, 20, 50); //texto en el que se muestra conteo de la puntuacion
