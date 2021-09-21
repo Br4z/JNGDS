@@ -9,6 +9,9 @@ function preload() {
   cabeza_izquierda_normal = loadImage('../Snake_Images/cabeza_izquierda_normal.png')
   cabeza_arriba_normal = loadImage('../Snake_Images/cabeza_arriba_normal.png')
   cabeza_abajo_normal = loadImage('../Snake_Images/cabeza_abajo_normal.png')
+  // cola_normal = loadImage('../Snake_Images/cola_normal_cuadrado')
+  cola_normal = loadImage('../Snake_Images/cola_normal_cuadrado.png')
+
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -167,6 +170,7 @@ function juegoNuevo(){
     scoreMas: 1,
     activosMiniEnemigos: false,
     imagenActualCabeza: cabeza_derecha_normal,
+    imagenActualCola: cola_normal,
   };
   loop()
 }
@@ -297,7 +301,8 @@ function setup() {
     retrasoComodines: 80,
     scoreMas: 1,
     activosMiniEnemigos: false,
-    imagenActualCabeza: cabeza_derecha_normal
+    imagenActualCabeza: cabeza_derecha_normal,
+    imagenActualCola : cola_normal,
   };
 }
 
@@ -365,8 +370,22 @@ function cambiaCabeza(){
 function dibujaCabeza(){
   image(
       Mundo.imagenActualCabeza,
-      Mundo.snake[0].x * 20,
-      Mundo.snake[0].y * 20,
+      Mundo.snake[x].x * 20,
+      Mundo.snake[x].y * 20,
+      lado,
+      lado,
+      0,
+      0,
+      20,
+      20
+    );
+}
+
+function dibujaCola(){
+  image(
+      Mundo.imagenActualCola,
+      Mundo.snake[x].x * 20,
+      Mundo.snake[x].y * 20,
       lado,
       lado,
       0,
@@ -399,19 +418,20 @@ function drawGame(Mundo) {
   forEach(Mundo.snake, (s) => {
     x = lookupx(Mundo.snake, s);
     if(x==0){
-    }else{
-    fill('#EAD04E');
-    stroke('#C2B53E');
-    strokeWeight(4);
-    rect(
-        constrain(s.x,1,columnas-2) * lado,
-        constrain(s.y,4,filas-2 )* lado,
-      lado,
-      lado
-      );
+    dibujaCabeza()
+    }if(x!=0){
+    dibujaCola()
+    // fill('#EAD04E');
+    // stroke('#C2B53E');
+    // strokeWeight(4);
+    // rect(
+    //     constrain(s.x,1,columnas-2) * lado,
+    //     constrain(s.y,4,filas-2 )* lado,
+    //   lado,
+    //   lado
+    //   );
     }
   });
-  dibujaCabeza()
     fill(240, 240, 240);
     //Stroke => color de los bordes
     stroke(10, 10, 10);
