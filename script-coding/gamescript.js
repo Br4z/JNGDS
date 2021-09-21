@@ -271,7 +271,10 @@ function drawGame(Mundo) {
   forEach(Mundo.snake, (s) => {
     x = lookupx(Mundo.snake, s);
     if(x==0){
-    dibujaCabeza()
+      if(Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x]==2){
+      }else{
+        dibujaCabeza()
+      }
     }if(x!=0){
     dibujaCola()
     }
