@@ -384,7 +384,32 @@ function onTic(Mundo) {
   let invencibilidad = true;
   let golpeAccionado = false;
   // console.log(Mundo.snake[0].y,"jswjsj",Mundo.snake[0].x)
-  
+  // if (Mundo.comodines[4].tiempoAccionado > 0){
+  //   abajo = createVector(0, -1);
+  //   arriba = createVector(0, 1);
+  //   izquierda = createVector(1, 0);
+  //   derecha = createVector(-1, 0);
+
+  // } else {
+  //   abajo = createVector(0, 1);
+  //   arriba = createVector(0, -1);
+  //   izquierda = createVector(-1, 0);
+  //   derecha = createVector(1, 0);
+  // }
+
+  // if (Mundo.comodines[4].tiempoAccionado > 0){
+  //   abajo = createVector(0, -1);
+  //   arriba = createVector(0, 1);
+  //   izquierda = createVector(1, 0);
+  //   derecha = createVector(-1, 0);
+
+  // } else {
+  //   abajo = createVector(0, 1);
+  //   arriba = createVector(0, -1);
+  //   izquierda = createVector(-1, 0);
+  //   derecha = createVector(1, 0);
+  // }
+
 
   if (Mundo.retrasoComodines > 0){
     restaRetraso();
