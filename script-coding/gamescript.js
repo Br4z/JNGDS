@@ -9,10 +9,33 @@ function preload() {
   cabeza_izquierda_normal = loadImage('../Snake_Images/cabeza_izquierda_normal.png')
   cabeza_arriba_normal = loadImage('../Snake_Images/cabeza_arriba_normal.png')
   cabeza_abajo_normal = loadImage('../Snake_Images/cabeza_abajo_normal.png')
-  // cola_normal = loadImage('../Snake_Images/cola_normal_cuadrado')
-  cola_normal = loadImage('../Snake_Images/cola_normal_cuadrado.png')
-  cola_normal_opuesto = loadImage('../Snake_Images/cola_normal_cuadrado_opuesto.png');
+  cola_normal = loadImage('../Snake_Images/cola_normal.png')
 
+  cabeza_abajo_nero = loadImage('../Snake_Images/cabeza_abajo_nero.png')
+  cabeza_arriba_nero = loadImage('../Snake_Images/cabeza_arriba_nero.png')
+  cabeza_derecha_nero = loadImage('../Snake_Images/cabeza_derecha_nero.png')
+  cabeza_izquierda_nero = loadImage('../Snake_Images/cabeza_izquierda_nero.png')
+  cola_nero = loadImage('../Snake_Images/cola_nero.png')
+
+    cabeza_abajo_policia = loadImage('../Snake_Images/cabeza_abajo_policia.png')
+  cabeza_arriba_policia = loadImage('../Snake_Images/cabeza_arriba_policia.png')
+  cabeza_derecha_policia = loadImage('../Snake_Images/cabeza_derecha_policia.png')
+  cabeza_izquierda_policia = loadImage('../Snake_Images/cabeza_izquierda_policia.png')
+  cola_policia = loadImage('../Snake_Images/cola_policia.png')
+
+  cabeza_abajo_vendedor = loadImage('../Snake_Images/cabeza_abajo_vendedor.png')
+  cabeza_arriba_vendedor = loadImage('../Snake_Images/cabeza_arriba_vendedor.png')
+  cabeza_derecha_vendedor = loadImage('../Snake_Images/cabeza_derecha_vendedor.png')
+  cabeza_izquierda_vendedor = loadImage('../Snake_Images/cabeza_izquierda_vendedor.png')
+  cola_vendedor = loadImage('../Snake_Images/cola_vendedor.png')
+
+    cabeza_abajo_politico = loadImage('../Snake_Images/cabeza_abajo_politico.png');
+    cabeza_arriba_politico = loadImage('../Snake_Images/cabeza_arriba_politico.png');
+    cabeza_derecha_politico = loadImage('../Snake_Images/cabeza_derecha_politico.png');
+    cabeza_izquierda_politico = loadImage(
+      '../Snake_Images/cabeza_izquierda_politico.png'
+    );
+    cola_politico = loadImage('../Snake_Images/cola_politico.png');
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -193,6 +216,12 @@ function setup() {
     imagenActualCola : cola_normal,
     retrasoCola:3,
     contadorCola: 3,
+    normalActivo: true,
+    vendedorActivo: false,
+    neroActivo:false,
+    policiaActivo: false,
+    politicoActivo:false,
+
   };
 }
 
@@ -312,12 +341,22 @@ function posicionarComida() {
 
 //------------------------------------
 function cambioTablero() {
-  if (Mundo.score == 10) {
+  if (Mundo.score == 2) {
     update(Mundo, (Mundo.escenario = escenario2));
-  }if(Mundo.score == 15){
+    update(Mundo,Mundo.normalActivo=false);
+    update(Mundo,Mundo.vendedorActivo=true);
+  }else if(Mundo.score == 4){
     update(Mundo,(Mundo.escenario = escenario3));
-  }if (Mundo.score == 20) {
+    update(Mundo, (Mundo.vendedorActivo = false));
+    update(Mundo, (Mundo.neroActivo = true));
+  }else if (Mundo.score == 6) {
     update(Mundo, (Mundo.escenario = escenario4));
+    update(Mundo, (Mundo.neroActivo = false));
+    update(Mundo, (Mundo.policiaActivo = true));
+  }else if(Mundo.score==8){
+    update(Mundo, (Mundo.escenario = escenario5));
+    update(Mundo, (Mundo.policiaActivo = false));
+    update(Mundo, (Mundo.politicoActivo = true));
   }
 }
 //------------------------------------
