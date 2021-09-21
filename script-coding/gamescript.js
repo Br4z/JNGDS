@@ -3,6 +3,14 @@
 // Importar Funcional Light
 let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = functionalLight;
 
+//Preload
+function preload() {
+  cabeza_derecha_normal = loadImage('../Snake_Images/cabeza_derecha_normal.png');
+  cabeza_izquierda_normal = loadImage('../Snake_Images/cabeza_izquierda_normal.png')
+  cabeza_arriba_normal = loadImage('../Snake_Images/cabeza_arriba_normal.png')
+  cabeza_abajo_normal = loadImage('../Snake_Images/cabeza_abajo_normal.png')
+}
+
 // Actualiza los atributos del objeto y retorna una copia profunda.
 function update(data, attribute) {
   return Object.assign({}, data, attribute);
@@ -107,10 +115,10 @@ function juegoNuevo(){
       x: int(getRandom(2, 26)), //28
       y: int(getRandom(4, 25)), //26
     },
-    cuadradoFinal: {
-      x: 0,
-      y: 0,
-    },
+    // cuadradoFinal: {
+    //   x: 0,
+    //   y: 0,
+    // },
     //Puntacion Inicial
     score: 0,
 
@@ -158,23 +166,24 @@ function juegoNuevo(){
     retrasoComodines: 80,
     scoreMas: 1,
     activosMiniEnemigos: false,
+    imagenActualCabeza: cabeza_derecha_normal,
   };
   loop()
 }
 //JUEGO TERMINADO
-function cuadradoFinal(){
-    // fill(240, 240, 240);
-    // //Stroke => color de los bordes
-    // stroke(10, 10, 10);
-    // //StrokeWeight => Define el ancho
-    // strokeWeight(4);
-    rect(
-			Mundo.cuadradoFinal.x * lado,
-			Mundo.cuadradoFinal.y * lado,
-			lado,
-			lado
-		);
-}
+// function cuadradoFinal(){
+//     // fill(240, 240, 240);
+//     // //Stroke => color de los bordes
+//     // stroke(10, 10, 10);
+//     // //StrokeWeight => Define el ancho
+//     // strokeWeight(4);
+//     rect(
+// 			Mundo.cuadradoFinal.x * lado,
+// 			Mundo.cuadradoFinal.y * lado,
+// 			lado,
+// 			lado
+// 		);
+// }
 function juegoTerminado(){
     // stroke('none');
     // fill('none');
@@ -237,10 +246,10 @@ function setup() {
       x: int(getRandom(2,26)) ,  //28
       y: int(getRandom(4,25)), //26
     },
-    cuadradoFinal: {
-      x: 0,
-      y: 0,
-    },
+    // cuadradoFinal: {
+    //   x: 0,
+    //   y: 0,
+    // },
     //Puntacion Inicial
     score: 0,
 
@@ -288,6 +297,7 @@ function setup() {
     retrasoComodines: 80,
     scoreMas: 1,
     activosMiniEnemigos: false,
+    imagenActualCabeza: cabeza_derecha_normal
   };
 }
 
@@ -338,6 +348,35 @@ function compruebaTablero(){
   }
 }
 //--------------------------------------------
+function cambiaCabeza(){
+  if(Mundo.dir==abajo){
+    update(Mundo,Mundo.imagenActualCabeza=cabeza_abajo_normal)
+  }else if(Mundo.dir==arriba){
+    update(Mundo,Mundo.imagenActualCabeza=cabeza_arriba_normal)
+  }if(Mundo.dir==derecha){
+    update(Mundo,Mundo.imagenActualCabeza=cabeza_derecha_normal)
+  }if(Mundo.dir==izquierda){
+    update(Mundo,Mundo.imagenActualCabeza=cabeza_izquierda_normal)
+  }else{
+    return null
+  }
+}
+
+function dibujaCabeza(){
+  image(
+      Mundo.imagenActualCabeza,
+      Mundo.snake[0].x * 20,
+      Mundo.snake[0].y * 20,
+      lado,
+      lado,
+      0,
+      0,
+      20,
+      20
+    );
+}
+
+//--------------------------------------------
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 function drawGame(Mundo) {
   //Definir el background del Canvas
@@ -358,14 +397,26 @@ function drawGame(Mundo) {
   drawFood(Mundo.food);
   //Esta funcion dibuja al snake
   forEach(Mundo.snake, (s) => {
+    x = lookupx(Mundo.snake, s);
+    if(x==0){
+    }else{
+    fill('#EAD04E');
+    stroke('#C2B53E');
+    strokeWeight(4);
     rect(
         constrain(s.x,1,columnas-2) * lado,
         constrain(s.y,4,filas-2 )* lado,
       lado,
       lado
       );
+    }
   });
-
+  dibujaCabeza()
+    fill(240, 240, 240);
+    //Stroke => color de los bordes
+    stroke(10, 10, 10);
+    //StrokeWeight => Define el ancho
+    strokeWeight(4);
   //TODO REVISAR ESTE FILL
   fill('white');
   //Dibujar a thief
@@ -439,6 +490,7 @@ function cambioTablero() {
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
   // console.log(Mundo.dir)
+  cambiaCabeza()
   //Tablero
   cambioTablero();
 
@@ -627,10 +679,10 @@ function onTic(Mundo) {
         x: int(getRandom(2, 26)), //28
         y: int(getRandom(4, 25)),
       },
-      cuadradoFinal: {
-        x: 0,
-        y: 0,
-      },
+      // cuadradoFinal: {
+      //   x: 0,
+      //   y: 0,
+      // },
       score: Mundo.score,
       lives: Mundo.lives - 1,
       tipe: 'juego',
@@ -653,7 +705,7 @@ function onTic(Mundo) {
     ((Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2) && (Mundo.lives < 1)) ||
     ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad == true)
   ) {
-    cuadradoFinal();
+    // cuadradoFinal();
     juegoTerminado();
     // return update(Mundo, {});
   } else {
@@ -666,10 +718,10 @@ function onTic(Mundo) {
           x: int(getRandom(2, 26)), //28
           y: int(getRandom(4, 25)), //26
         },
-        cuadradoFinal: {
-          x: 0,
-          y: 0,
-        },
+        // cuadradoFinal: {
+        //   x: 0,
+        //   y: 0,
+        // },
         score: Mundo.score + Mundo.scoreMas,
         timer: int(millis() / 1000),
         Thief: ThiefMove(Mundo.Thief),
@@ -690,10 +742,10 @@ function onTic(Mundo) {
           x: int(getRandom(2, 26)), //28
           y: int(getRandom(4, 25)),
         },
-        cuadradoFinal: {
-          x: 0,
-          y: 0,
-        },
+        // cuadradoFinal: {
+        //   x: 0,
+        //   y: 0,
+        // },
         score: Mundo.score,
         lives: Mundo.lives - 1,
         tipe: "juego",
@@ -724,10 +776,10 @@ function onTic(Mundo) {
         Thief: ThiefMove(Mundo.Thief),
         timer: int(millis() / 1000),
         knife: moveKnife(Mundo.knife),
-        cuadradoFinal: {
-					x: Mundo.snake[Mundo.snake.length - 1].x,
-					y: Mundo.snake[Mundo.snake.length - 1].y,
-				},
+        // cuadradoFinal: {
+				// 	x: Mundo.snake[Mundo.snake.length - 1].x,
+				// 	y: Mundo.snake[Mundo.snake.length - 1].y,
+				// },
       });
     }
     // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
