@@ -24,7 +24,7 @@ body {
 /* Efecto blur */
 #container {
   height: 500px;
-  width: 300px;
+  width: 400px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
   border: 1px solid #ffffff40;
@@ -38,7 +38,8 @@ body {
   background-color: rgba(243, 243, 243, 0.2);
 }
 
-.menu {
-  text-align: center;
-  padding: 40px;
+
+h1 {
+  text-align: left;
+  padding-left: 10px;
 }

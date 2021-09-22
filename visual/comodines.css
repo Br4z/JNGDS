@@ -26,7 +26,7 @@ body {
 
 /* Efecto blur */
 #container {
-  height: 550px;
+  height: 525px;
   width: 950px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
@@ -153,4 +153,46 @@ body {
   letter-spacing: 5px;
   font-style: normal;
   margin-top: 15px;
+}
+
+/* Esta es la animacion del boton */
+
+.btn-neon {
+  margin: 0px 80px;
+  position: relative;
+  display: inline-block;
+  padding: 10px 10px;
+  color: rgb(197, 193, 193);
+  letter-spacing: 4px;
+  font-size: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.2s;
+  font-family: 'ARCADE CLASSIC', 'Arial';
+  top: 10px;
+  right: 5px;
+}
+
+.btn-neon:hover {
+  background: #f6ed9f;
+  box-shadow: 0 0 10px #f6ed9f, 0 0 40px #f6ed9f, 0 0 80px #f6ed9f;
+  transition-delay: 0.4s;
+}
+
+.btn-neon span {
+  position: absolute;
+  display: block;
+}
+
+.span {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #f6ed9f);
+}
+
+.btn-neon:hover .span {
+  right: 100%;
+  transition: 1s;
 }

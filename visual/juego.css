@@ -1,7 +1,8 @@
 @media (max-height: 950px) {
-  /* llamar a la fuente */ @font-face {
-    font-family: 'ARCADE CLASSIC';
-    src: url('../fonts/ARCADECLASSIC.TTF');
+  /* llamar a la fuente */
+  @font-face {
+    font-family: "ARCADE CLASSIC";
+    src: url("../fonts/ARCADECLASSIC.TTF");
   }
 
   /* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
@@ -36,7 +37,7 @@
     text-decoration: none;
     overflow: hidden;
     transition: 0.2s;
-    font-family: 'ARCADE CLASSIC', 'Arial';
+    font-family: "ARCADE CLASSIC", "Arial";
     top: 290px;
     right: 5px;
   }
@@ -70,8 +71,8 @@
   /* llamar a la fuente */
 
   @font-face {
-    font-family: 'ARCADE CLASSIC';
-    src: url('../fonts/ARCADECLASSIC.TTF');
+    font-family: "ARCADE CLASSIC";
+    src: url("../fonts/ARCADECLASSIC.TTF");
   }
 
   /* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
@@ -110,7 +111,7 @@
     text-decoration: none;
     overflow: hidden;
     transition: 0.2s;
-    font-family: 'ARCADE CLASSIC', 'Arial';
+    font-family: "ARCADE CLASSIC", "Arial";
     top: 325px;
     right: 5px;
   }
