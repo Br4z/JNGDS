@@ -2,6 +2,7 @@
 
 //Juego nuevo
 function juegoNuevo(){
+  mortalKombat.play();
   Mundo = {
     //Determinar la  posicion que aparecera el Snake
     snake: [

@@ -4,7 +4,12 @@
 let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = functionalLight;
 
 //Preload
+let mortalKombat;
 function preload() {
+  
+  soundFormats('mp3', 'ogg');
+  mortalKombat = loadSound('../audio/themes/mortal_kombat');
+
   cabeza_derecha_normal = loadImage('../Snake_Images/cabeza_derecha_normal.png');
   cabeza_izquierda_normal = loadImage('../Snake_Images/cabeza_izquierda_normal.png')
   cabeza_arriba_normal = loadImage('../Snake_Images/cabeza_arriba_normal.png')
@@ -48,7 +53,8 @@ function preload() {
   //golpeAccionado = loadImage('../visual/comodines/.png');
   invertir = loadImage('../visual/comodines/invertir_controles.png');
   comodinMasPuntos =  loadImage('../visual/comodines/Multiplicador_de_damage.png');
-  aleatorio = loadImage('../visual/comodines/Comodin_aleatorio.png')
+  aleatorio = loadImage('../visual/comodines/Comodin_aleatorio.png');
+
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -150,10 +156,12 @@ function drawComodin(comodin, color) {
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
 
 function setup() {
+  //mortalKombat.play();
   frameRate(7);
   drawfondo();
   windowRezired();
   direcciones();
+  
 
   //Actualizar el Mundo, colocando lo que va a tener una vez se inicie el Juego
   Mundo = {
