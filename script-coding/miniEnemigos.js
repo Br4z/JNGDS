@@ -39,10 +39,17 @@ function actualizaLista(lista, enemigo) {
 //DIBUJAR AL ENEMICO
 function dibujaEnemigo(lista) {
   forEach(lista, (element) => {
-    strokeWeight(0.5);
-    stroke('blue')
-    fill('blue');
-    rect(element.x * lado, element.y * lado, lado, lado);
+    // strokeWeight(0);
+    // stroke('#7ee841');
+    // fill('#7ee841');
+    // rect(element.x * lado, element.y * lado, lado, lado);
+    image(
+      tombo,
+       element.x * 20,
+       element.y * 20,
+       lado, //weight
+       lado //height
+    );
   });
 }
 //----------------------------------------------

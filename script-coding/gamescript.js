@@ -54,7 +54,9 @@ function preload() {
   invertir = loadImage('../visual/comodines/invertir_controles.png');
   comodinMasPuntos =  loadImage('../visual/comodines/Multiplicador_de_damage.png');
   aleatorio = loadImage('../visual/comodines/Comodin_aleatorio.png');
-  golpeAccionado = loadImage('../visual/comodines/Golpe_accionado.png')
+  golpeAccionado = loadImage('../visual/comodines/Golpe_accionado.png');
+
+  tombo = loadImage('../visual/enemigos/tombo.png');
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -447,7 +449,7 @@ function cambioTablero() {
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
-  console.log(Mundo.snake[0])
+  // console.log(Mundo.snake[0])
   // console.log(Mundo.dir)
   cambiaCabezaCola()
   // cambiaCola()
