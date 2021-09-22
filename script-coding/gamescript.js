@@ -233,6 +233,7 @@ function setup() {
         pos:false,
       },
     ],
+    start:true,
     retrasoComodines: 80,
     scoreMas: 1,
     activosMiniEnemigos: false,
@@ -589,6 +590,13 @@ function onTic(Mundo) {
 
     }
   }
+  if (Mundo.start == false && Mundo.score % 20 == 0) {
+    return update(Mundo, {
+      snake: moveSnake(Mundo.snake.slice(0, 3), Mundo.dir),
+      start: true,
+      lives: Mundo.lives + 1,
+    });
+  }
 
 
   if (   //Cordinas el movimiento de la serpiente.
@@ -664,6 +672,7 @@ function onTic(Mundo) {
         timer: int(millis() / 1000),
         Thief: ThiefMove(Mundo.Thief),
         knife: duplicarKnife(Mundo.knife, Mundo.Thief),
+        start: false,
       });
       //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
       //Movimiento normal del Snake junto al del Thief.
@@ -737,6 +746,7 @@ function onTic(Mundo) {
         // },
         score: Mundo.score + Mundo.scoreMas,
         timer: int(millis() / 1000),
+        start: false,
       });
       //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
       //Movimiento normal del Snake junto al del Thief.
