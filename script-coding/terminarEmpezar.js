@@ -120,19 +120,6 @@ function juegoTerminado(){
   // TODO Movimiento de la serpiente
   // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
 function moveSnake(snake, dir) {
-
-  if (Mundo.comodines[4].tiempoAccionado > 0){
-    if (dir.x == 0 && dir.y == 1){
-      dir = createVector(-1, 0);
-    } else if (dir.x == 0 && dir.y == -1){
-      dir = createVector(1, 0);
-    } else if (dir.x == 1 && dir.y == 0){
-      dir = createVector(0, -1);
-    } else if (dir.x == -1 && dir.y == 0){
-      dir = createVector(0, 1);
-    }
-  }
-
   const head = first(snake);
   return cons(
     { x: head.x + dir.x, y: head.y + dir.y },
