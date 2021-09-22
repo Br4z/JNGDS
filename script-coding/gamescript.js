@@ -216,6 +216,7 @@ function setup() {
       dirx: true,
       diry: true,
     },
+    thiefActivo: false,
     //Ataque de Thief
     knife: [
       {
@@ -302,9 +303,13 @@ function drawGame(Mundo) {
   //TODO REVISAR ESTE FILL
   fill('white');
   //Dibujar a thief
-  drawThief(Mundo.Thief);
+  if(Mundo.thiefActivo==true){
+    drawThief(Mundo.Thief);
+  }
   //Dibujar Knife
-  drawKnife(Mundo.knife);
+  if(Mundo.thiefActivo==true){
+    drawKnife(Mundo.knife);
+  }
 
   frameRate(7);
 
@@ -413,17 +418,19 @@ function posicionarComida() {
 function cambioTablero() {
   if (Mundo.score == 2) {
     update(Mundo, (Mundo.escenario = escenario2));
-    update(Mundo,Mundo.normalActivo=false);
-    update(Mundo,Mundo.vendedorActivo=true);
-  }else if(Mundo.score == 4){
-    update(Mundo,(Mundo.escenario = escenario3));
+    update(Mundo, (Mundo.normalActivo = false));
+    update(Mundo, (Mundo.vendedorActivo = true));
+    update(Mundo, (Mundo.thiefActivo = true));
+  } else if (Mundo.score == 7) {
+    update(Mundo, (Mundo.escenario = escenario3));
     update(Mundo, (Mundo.vendedorActivo = false));
     update(Mundo, (Mundo.neroActivo = true));
-  }else if (Mundo.score == 6) {
+    update(Mundo, (Mundo.thiefActivo = false));
+  } else if (Mundo.score == 36) {
     update(Mundo, (Mundo.escenario = escenario4));
     update(Mundo, (Mundo.neroActivo = false));
     update(Mundo, (Mundo.policiaActivo = true));
-  }else if(Mundo.score==8){
+  } else if (Mundo.score == 46) {
     update(Mundo, (Mundo.escenario = escenario5));
     update(Mundo, (Mundo.policiaActivo = false));
     update(Mundo, (Mundo.politicoActivo = true));
@@ -656,7 +663,9 @@ function onTic(Mundo) {
     // cuadradoFinal();
     juegoTerminado();
     // return update(Mundo, {});
-  } else {
+  } else{
+    if(Mundo.thiefActivo==true)
+    {
     // Saber si la serpiente come
     if (comerItem(Mundo.snake, Mundo.food)) {
       Mundo.snake.push({ x: 5, y: 5 });
@@ -731,6 +740,36 @@ function onTic(Mundo) {
       });
     }
     // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
+  }else{
+    // Saber si la serpiente come
+    if (comerItem(Mundo.snake, Mundo.food)) {
+      Mundo.snake.push({ x: 5, y: 5 });
+      return update(Mundo, {
+        snake: moveSnake(Mundo.snake, Mundo.dir),
+        food: {
+          x: int(getRandom(2, 26)), //28
+          y: int(getRandom(4, 25)), //26
+        },
+        // cuadradoFinal: {
+        //   x: 0,
+        //   y: 0,
+        // },
+        score: Mundo.score + Mundo.scoreMas,
+        timer: int(millis() / 1000),
+      });
+      //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
+      //Movimiento normal del Snake junto al del Thief.
+    }else{
+      return update(Mundo, {
+        snake: moveSnake(Mundo.snake, Mundo.dir),
+        timer: int(millis() / 1000),
+        // cuadradoFinal: {
+				// 	x: Mundo.snake[Mundo.snake.length - 1].x,
+				// 	y: Mundo.snake[Mundo.snake.length - 1].y,
+				// },
+      });
+    }
+    }
   }
 }
 

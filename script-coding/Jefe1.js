@@ -1,5 +1,6 @@
 //Dibuja el arma que utiliza el enemigo 'Thief' en este caso un cuchillo(knife)
 function drawKnife(knife) {
+  // if(Mundo.thiefActivo==true){
   forEach(knife, (k) => {
     fill("green");
     triangle(
@@ -12,15 +13,20 @@ function drawKnife(knife) {
     );
   });
 }
+// }
 
 //Funcion para dibujar a uno de los enemigos, en este caso 'el Thief'
 function drawThief(Thief) {
+  // if(Mundo.thiefActivo==true){
   fill("blue");
   rect(Thief.x * lado, Thief.y * lado, lado, lado);
 }
+// }
 
 /*TODO Funcion del movimiento del Thief*/
 function ThiefMove(Thief) {
+  // if(Mundo.thiefActivo==true){
+  // if(Mundo.thiefActivo==true){
   // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
   //
   if (
@@ -49,10 +55,12 @@ function ThiefMove(Thief) {
   if (Thief.diry == false && Thief.x != 1) {
     return { x: Thief.x + 1, y: 6, dir: true, diry: false };
   }
+// }
 }
-
+// }
 //TODO Funcion que se encarga del movimiento de el cuchillo
 function moveKnife(knife) {
+  // if(Mundo.thiefActivo==true){
   const head = first(knife);
   if (isEmpty(knife)) {
     return [{}]
@@ -78,17 +86,21 @@ function moveKnife(knife) {
     }
   }
 }
+// }
 //TODO Funcion que duplica a knife
 function duplicarKnife(knife, Thief) {
+  // if(Mundo.thiefActivo==true){
   if (Thief?.y == 6) {
     return cons({ x: Thief.x, y: Thief.y, pos: true },knife);
   } else {
     return cons({ x: Thief.x, y: Thief.y, pos: false }, knife);
   }
 }
+// }
 
 //TODO Funcion que se encarga del golpe
 function hitHead(snake, knife) {
+  // if(Mundo.thiefActivo==true){
   const head = first(knife);
   if (isEmpty(knife)) {
     return false
@@ -112,11 +124,12 @@ function hitHead(snake, knife) {
       return hitHead(snake, rest(knife));
     }
   }
-
   }
-}
+  }
+// }
 
 function knifeOut(knife) {
+  // if(Mundo.thiefActivo==true){
   const head = first(knife);
   if (isEmpty(knife)) {
     return false
@@ -135,9 +148,11 @@ function knifeOut(knife) {
       }
     }
   }
-  
-}
+  }
+// }
 
 function despawnKnife(knife) {
+  // if(Mundo.thiefActivo==true){
   return knife.slice(0,length(knife)-1)
 }
+// }
