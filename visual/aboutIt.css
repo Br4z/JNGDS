@@ -30,7 +30,6 @@ body {
   border: 1px solid #ffffff40;
   text-align: center;
   font-family: "Francois One", sans-serif;
-  
 }
 
 .blur {
@@ -53,20 +52,27 @@ h1 {
   margin-top: 20px;
 }
 
-ul{
+ul {
   list-style: square;
   font-size: 20px;
 }
 
-img{
+img {
   width: 125px;
   margin-top: 30px;
-  
 }
 
-#repo{
+#repo {
   text-align: center;
   font-family: "ARCADE CLASSIC", "Arial";
+  display: inline-block;
+  background: url("https://mdn.mozillademos.org/files/12982/external-link-52.png") no-repeat 100% 0;
+  background-size: 16px 16px;
+  padding-right: 19px;
+}
+a:hover {
+  border-bottom: 3px solid;
+  color: rgb(190, 33, 33);
 }
 
 /* Esta es la animacion del boton de volver al menu */
@@ -83,9 +89,8 @@ img{
   text-decoration: none;
   overflow: hidden;
   transition: 0.2s;
-  font-family: 'ARCADE CLASSIC', 'Arial';
+  font-family: "ARCADE CLASSIC", "Arial";
   top: 700px;
-
 }
 
 .btn-neon:hover {
