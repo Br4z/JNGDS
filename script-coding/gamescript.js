@@ -158,7 +158,6 @@ function drawComodin(comodin, color) {
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
 
 function setup() {
-  //mortalKombat.play();
   frameRate(7);
   drawfondo();
   windowRezired();
@@ -409,6 +408,7 @@ function drawGame(Mundo) {
 
 /* TODO DIRECCIONES DEL SNAKE */
 function direcciones() {
+  mortalKombat.play();
   abajo = createVector(0, 1);
   arriba = createVector(0, -1);
   izquierda = createVector(-1, 0);
@@ -660,10 +660,7 @@ function onTic(Mundo) {
       Mundo.snake.push({ x: 5, y: 5 });
       return update(Mundo, {
         snake: moveSnake(Mundo.snake, Mundo.dir),
-        food: {
-          x: int(getRandom(2, 26)), //28
-          y: int(getRandom(4, 25)), //26
-        },
+        food: numeroRandomComida(Mundo.snake),
         // cuadradoFinal: {
         //   x: 0,
         //   y: 0,
@@ -843,8 +840,8 @@ coordenadasComida([{x: 5, y: 4},{x: 5, y: 3},{x: 5, y: 2}, {x: 5, y: 1}], 0, 0) 
 
 function coordenadasComida(snake, coordenadaX, coordenadaY) {
   if (coordenadaX == 0 && coordenadaY == 0) {
-    coordenadaX = Math.floor(Math.random() * (20 - 0) + 0);
-    coordenadaY = Math.floor(Math.random() * (20 - 0) + 0);
+    coordenadaX = Math.floor(Math.random() * (26 - 2) + 2);
+    coordenadaY = Math.floor(Math.random() * (25 - 4) + 4);
   }
   let comida = { x: coordenadaX, y: coordenadaY };
 
