@@ -1,17 +1,16 @@
 @font-face {
-  font-family: myFirstFont;
-  src: url('/fonts/JosefinSans-Italic-VariableFont_wght.ttf');
-  font-family: mySecontFont;
-  src: url('/fonts/ARCADECLASSIC.TTF');
+  font-family: "myFirstFont";
+  src: url("/fonts/JosefinSans-Italic-VariableFont_wght.ttf");
+  font-family: "ARCADE CLASSIC";
+  src: url("/fonts/ARCADECLASSIC.TTF");
 }
-
 
 * {
   margin: 0px;
   padding: 0px;
-  box-sizing:border-box;
+  box-sizing: border-box;
   font-size: 18px;
-  font-family: myFirstFont;
+  font-family: "myFirstFont";
   font-style: italic;
   font-weight: 300;
 }
@@ -28,7 +27,7 @@ body {
 /* Efecto blur */
 #container {
   height: 550px;
-  width:950px;
+  width: 950px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
   border: 1px solid #ffffff40;
@@ -44,17 +43,15 @@ body {
 
 /* Sistema de cartas */
 
-.conteinerCards{
-  position:relative;
-  width:100%;
+.conteinerCards {
+  position: relative;
+  width: 100%;
   /* min-height:100vh; */
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden
+  overflow: hidden;
 }
-
-
 
 .swiper-container {
   width: 100%;
@@ -66,96 +63,94 @@ body {
   background-position: center;
   background-size: cover;
   width: 320px;
-  box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
   filter: blur(4px);
-  background:#2a465f;
+  background: #2a465f;
   /* background:#fff; */
-  border-radius:10px;
+  border-radius: 10px;
 }
 
-.swiper-slide-active{
+.swiper-slide-active {
   filter: blur(0px);
   /* background:#fff; */
-  background:#d3d9dd;
-
+  background: #d3d9dd;
 }
 
-.comodinBox{
-  position:relative;
-  width:100%;
-  padding:18%;
+.comodinBox {
+  position: relative;
+  width: 100%;
+  padding: 18%;
   padding-top: 120px; /* Tamaño de la carta */
-  color:#999;
+  color: #999;
 }
 
-.comodinBox .imageComodin{
+.comodinBox .imageComodin {
   position: absolute;
-  top:20px;
-  right:30px;
-  height:70px;
-  opacity:0.6;
+  top: 20px;
+  right: 30px;
+  height: 70px;
+  opacity: 0.6;
 }
 
-.comodinBox .details{
-  display:flex;
+.comodinBox .details {
+  display: flex;
   align-items: center;
-  margin-top:20px
+  margin-top: 20px;
 }
 
-.comodinBox .details .imgBox{
-  position:relative;
-  width:60px;
-  height:60px;
-  border-radius:50px;
-  overflow:hidden;
+.comodinBox .details .imgBox {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  overflow: hidden;
   margin-right: 10px;
 }
 
-.comodinBox .details .imgBox img{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.comodinBox .details .imgBox img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-
-.comodinBox .details h3{
+.comodinBox .details h3 {
   font-family: myFirstFont;
-  font-size:20px;
+  font-size: 20px;
   font-weight: 700px;
   letter-spacing: 1px;
-  color:#2196f3;
+  color: #2196f3;
   line-height: 1.1em;
 }
 
-.comodinBox .details h3 span{
+.comodinBox .details h3 span {
   font-family: myFirstFont;
   font-weight: 700px;
-  font-size:16px;
-  color:#666;
+  font-size: 16px;
+  color: #666;
 }
 
 .swiper-container-3d .swiper-slide-shawdow-left,
-.swiper-container-3d .swiper-slide-shawdow-right
-{
+.swiper-container-3d .swiper-slide-shawdow-right {
   background-image: none;
 }
 
-.contenedorTextoIndicativo{
-  display:flex;
+.contenedorTextoIndicativo {
+  display: flex;
   justify-content: space-around;
 }
 
-.imgcont{
-  width:60px
+.imgcont {
+  width: 60px;
 }
 
-.textocont{
-  font-family: mySecondFont;
-  font-style: none;
-  color:#2196f3;
-  font-size:40px;
-  /* font-weight:700; */
+.textocont {
+  font-family: "ARCADE CLASSIC", "Arial";
+  color: #22d3cb;
+  font-size: 30px;
+  letter-spacing: 5px;
+  font-style: normal;
+  margin-top: 15px;
 }

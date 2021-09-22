@@ -60,6 +60,7 @@ function juegoNuevo(){
       dirx: true,
       diry: true,
     },
+    thiefActivo:false,
     //Ataque de Thief
     knife: [
       {
