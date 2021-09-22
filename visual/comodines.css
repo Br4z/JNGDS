@@ -159,7 +159,7 @@ body {
   margin-top: 15px;
 }
 
-/* Esta es la animacion del boton */
+/* Esta es la animacion del boton de volver al menu */
 
 .btn-neon {
   margin: 0px 80px;
@@ -173,8 +173,7 @@ body {
   overflow: hidden;
   transition: 0.2s;
   font-family: 'ARCADE CLASSIC', 'Arial';
-  top: 10px;
-  right: 5px;
+
 }
 
 .btn-neon:hover {
