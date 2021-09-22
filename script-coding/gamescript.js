@@ -6,7 +6,7 @@ let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = funct
 //Preload
 let mortalKombat;
 function preload() {
-  
+
   soundFormats('mp3', 'ogg');
   mortalKombat = loadSound('../audio/themes/mortal_kombat');
 
@@ -54,7 +54,7 @@ function preload() {
   invertir = loadImage('../visual/comodines/invertir_controles.png');
   comodinMasPuntos =  loadImage('../visual/comodines/Multiplicador_de_damage.png');
   aleatorio = loadImage('../visual/comodines/Comodin_aleatorio.png');
-
+  golpeAccionado = loadImage('../visual/comodines/Golpe_accionado.png')
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -161,7 +161,7 @@ function setup() {
   drawfondo();
   windowRezired();
   direcciones();
-  
+
 
   //Actualizar el Mundo, colocando lo que va a tener una vez se inicie el Juego
   Mundo = {
@@ -383,14 +383,14 @@ function drawGame(Mundo) {
     )
   }
   if (Mundo.comodines[7].tiempoActivo > 0){
-    /*NO ESTA
+    // NO ESTA
     image(
-      aumentoPuntos,
+      golpeAccionado,
       Mundo.comodines[7].x *20,
       Mundo.comodines[7].y *20,
       lado,
       lado,
-    )*/
+    )
   }
   if (Mundo.comodines[8].tiempoActivo > 0){
     image(
