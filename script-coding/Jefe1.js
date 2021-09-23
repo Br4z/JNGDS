@@ -1,18 +1,18 @@
 //Dibuja el arma que utiliza el enemigo 'Thief' en este caso un cuchillo(knife)
 function drawKnife(knife) {
   // if(Mundo.thiefActivo==true){
-  forEach(knife, (k) => {
-    fill("green");
-    triangle(
-      k.x * lado + 10,
-      k.y * lado,
-      k.x * lado,
-      k.y * lado + 10,
-      k.x * lado + 10,
-      k.y * lado + 20
-    );
-  });
-}
+  
+    forEach(knife, (k) => {
+      if (k.pos== true) {
+        image(knifeUp, k?.x * lado, k?.y * lado, lado , lado );
+      } else {
+        image(knifeSide, k?.x * lado, k?.y * lado, lado, lado );
+      }
+      
+    });
+  }
+
+  
 // }
 
 //Funcion para dibujar a uno de los enemigos, en este caso 'el Thief'

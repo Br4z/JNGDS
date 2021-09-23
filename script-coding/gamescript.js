@@ -54,6 +54,8 @@ function preload() {
   golpeAccionado = loadImage('../visual/comodines/Golpe_accionado.png');
   tombo = loadImage('../visual/enemigos/tombo.png');
   thief = loadImage('../visual/enemigos/nero3.png');
+  knifeUp = loadImage("../visual/enemigos/knife_UP.gif");
+  knifeSide = loadImage("../visual/enemigos/knife_SIDE.gif");
 
   soundFormats('mp3', 'ogg', 'wav');
   mortalKombat = loadSound('../audio/themes/mortal_kombat');
@@ -448,6 +450,7 @@ function cambioTablero() {
   if(Mundo.score<16){
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
+    update(Mundo, (Mundo.thiefActivo = true));
   }
   else if (Mundo.score >= 16 && Mundo.score < 28) {
     update(Mundo, (Mundo.escenario = escenario2));
