@@ -19,88 +19,110 @@ const escenario1 = [
     2, 2, 2,
   ],
   [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // PRIMERA
+    2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 2,
+  ],
+  [
+    //SEGUNDA
+    2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 1, 2,
+  ],
+  //
+  [
+    // TERCER
+    2, 1, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // CUARTA
+    2, 1, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // QUINTA
+    2, 1, 0, 3, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // SEXTA
+    2, 1, 0, 3, 4, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 4, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // SEPTIMA
+    2, 1, 0, 3, 4, 5, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 4, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // OCTAVA
+    2, 1, 0, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 5, 4, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // NOVENA
+    2, 1, 0, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 7, 5, 4, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
+    // DECIMA
+    2, 1, 0, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 9, 8, 7,
+    5, 4, 3, 0, 1, 2,
   ],
   [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // ULTIMA
+    2, 1, 0, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 9, 8, 7,
+    5, 4, 3, 0, 1, 2,
+  ],
+  [
+    // DECIMA
+    2, 1, 0, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 9, 8, 7,
+    5, 4, 3, 0, 1, 2,
+  ],
+  [
+    // NOVENA
+    2, 1, 0, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 7, 5, 4, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // OCTAVA
+    2, 1, 0, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 5, 4, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
-  ],
-  [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // SEPTIMA
+    2, 1, 0, 3, 4, 5, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 4, 3,
     0, 1, 2,
   ],
   [
-    2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
-    1, 0, 2,
+    // Sexta
+    2, 1, 0, 3, 4, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 4, 3,
+    0, 1, 2,
   ],
   [
-    2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+    // Quinta
+    2, 1, 0, 3, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 3,
     0, 1, 2,
+  ],
+  [
+    // CUARTA
+    2, 1, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3,
+    0, 1, 2,
+  ],
+  [
+    // TERCERA
+    2, 1, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+    0, 1, 2,
+  ],
+  [
+    //SEGUNDA
+    2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 1, 2,
+  ],
+  [
+    // PRIMERA
+    2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 2,
   ],
   [
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
@@ -110,26 +132,93 @@ const escenario1 = [
 
 /**COLORES PARA EL ESCENARIO 1 */
 function coloreaTablero1(i, cell, j) {
-  if (cell == 0) {
-    strokeWeight(0.5);
-    stroke('#23D16C');
-    fill('#23D16C');
-    rect(j * lado, i * lado, lado, lado);
-  }
+  switch (cell) {
+    case 0:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#3181AF');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+    case 1:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#2A6F97');
+      rect(j * lado, i * lado, lado, lado);
+      break;
 
-  if (cell == 1) {
-    strokeWeight(0.5);
-    stroke('#1EAE5A');
-    fill('#1EAE5A');
-    rect(j * lado, i * lado, lado, lado);
-    //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
-  }
+    case 2:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#252525');
+      rect(j * lado, i * lado, lado, lado);
+      break;
 
-  if (cell == 2) {
-    strokeWeight(0.5);
-    stroke('#132E32');
-    fill('#132E32');
-    rect(j * lado, i * lado, lado, lado);
+    case 3:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#368DBF');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+
+    case 4:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#4097C9');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+
+    case 5:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#50A0CE');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+
+    case 6:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#60A8D2');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+
+    case 7:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#70B1D7');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+
+    case 8:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#80BADB');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+
+    case 9:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#90C2E0');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+
+    case 10:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#A0CAE4');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+
+    case 11:
+      strokeWeight(0.5);
+      stroke('#252525');
+      fill('#A3CFE1');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+
+    default:
+      return null;
+      break;
   }
 }
 
@@ -243,25 +332,28 @@ const escenario2 = [
 ];
 
 function coloreaTablero2(i, cell, j) {
-  if (cell == 1) {
-    strokeWeight(0.5);
-    stroke('#635B86');
-    fill('#C2C2C2');
-    rect(j * lado, i * lado, lado, lado);
-    //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
-  }
-  if (cell == 0) {
-    strokeWeight(0.5);
-    stroke('#C2C2C2');
-    fill('#C2C2C2');
-    rect(j * lado, i * lado, lado, lado);
-    //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
-  }
-  if (cell == 2) {
-    strokeWeight(0.5);
+  switch (cell) {
+    case 0:
+      strokeWeight(0.5);
+      stroke('#C2C2C2');
+      fill('#C2C2C2');
+       rect(j * lado, i * lado, lado, lado);
+      break;
+    case 1:
+      strokeWeight(0.5);
+      stroke('#635B86');
+      fill('#C2C2C2');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+    case 2:
+      strokeWeight(0.5);
     stroke('#635B86');
     fill('#635B86');
     rect(j * lado, i * lado, lado, lado);
+    break;
+    default:
+      return null;
+      break;
   }
 }
 
@@ -373,25 +465,28 @@ const escenario3 = [
 ];
 
 function coloreaTablero3(i, cell, j) {
-  if (cell == 1) {
-    strokeWeight(0.5);
-    stroke('#AB0E17');
-    fill('#AB0E17');
-    rect(j * lado, i * lado, lado, lado);
-    //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
-  }
-  if (cell == 0) {
-    strokeWeight(0.5);
+  switch (cell) {
+    case 0:
+      strokeWeight(0.5);
     stroke('#870E17');
     fill('#870E17');
     rect(j * lado, i * lado, lado, lado);
-    //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
-  }
-  if (cell == 2) {
-    strokeWeight(0.5);
+      break;
+    case 1:
+      strokeWeight(0.5);
+      stroke('#AB0E17');
+      fill('#AB0E17');
+      rect(j * lado, i * lado, lado, lado);
+      break;
+    case 2:
+      strokeWeight(0.5);
     stroke('#4A0E17');
     fill('#4A0E17');
     rect(j * lado, i * lado, lado, lado);
+    break;
+    default:
+      return null;
+      break;
   }
 }
 
@@ -505,27 +600,29 @@ const escenario4 = [
 ];
 
 function coloreaTablero4(i, cell, j) {
-  if (cell == 0) {
+    switch (cell) {
+      case 0:
     strokeWeight(0.5);
     stroke('#53A2B3');
     fill('#53A2B3');
     rect(j * lado, i * lado, lado, lado);
-  }
-
-  if (cell == 1) {
+        break;
+      case 1:
     strokeWeight(0.5);
     stroke('#1D84B5');
     fill('#1D84B5');
     rect(j * lado, i * lado, lado, lado);
-    //HACER LO MISMO PARA OTROS NUMEROS ADEMAS DE CERO
-  }
-
-  if (cell == 2) {
+        break;
+      case 2:
     strokeWeight(0.5);
     stroke('#176087');
     fill('#176087');
     rect(j * lado, i * lado, lado, lado);
-  }
+      break;
+      default:
+        return null;
+        break;
+    }
 }
 
 

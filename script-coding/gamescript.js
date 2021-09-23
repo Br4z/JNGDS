@@ -317,8 +317,8 @@ function drawGame(Mundo) {
   if(Mundo.thiefActivo==true){
     drawKnife(Mundo.knife);
   }
-  
-  
+
+
   //DIBUJA COMODINES
   if (Mundo.comodines[0].tiempoActivo > 0){
     image(
@@ -422,24 +422,30 @@ function posicionarComida() {
 
 //------------------------------------
 function cambioTablero() {
-  if (Mundo.score == 2) {
+  if(Mundo.score<16){
+    update(Mundo, (Mundo.escenario = escenario1));
+    update(Mundo, (Mundo.normalActivo = true));
+  }
+  else if (Mundo.score >= 16 && Mundo.score < 28) {
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
     update(Mundo, (Mundo.thiefActivo = true));
-  } else if (Mundo.score == 7) {
+  } else if (Mundo.score >= 28 && Mundo.score < 44) {
     update(Mundo, (Mundo.escenario = escenario3));
     update(Mundo, (Mundo.vendedorActivo = false));
     update(Mundo, (Mundo.neroActivo = true));
     update(Mundo, (Mundo.thiefActivo = false));
-  } else if (Mundo.score == 36) {
+  } else if (Mundo.score >= 44 && Mundo.score < 60) {
     update(Mundo, (Mundo.escenario = escenario4));
     update(Mundo, (Mundo.neroActivo = false));
     update(Mundo, (Mundo.policiaActivo = true));
-  } else if (Mundo.score == 46) {
+    update(Mundo, (Mundo.thiefActivo = true));
+  } else if (Mundo.score >= 60) {
     update(Mundo, (Mundo.escenario = escenario5));
     update(Mundo, (Mundo.policiaActivo = false));
     update(Mundo, (Mundo.politicoActivo = true));
+    update(Mundo, (Mundo.thiefActivo = false));
   }
 }
 //------------------------------------
