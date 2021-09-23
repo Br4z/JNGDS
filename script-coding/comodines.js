@@ -75,13 +75,12 @@ const tiempoRetraso = 40;
 
 //ACCIONES DE LOS COMODINES
 
-/*
-Propósito: Mover un cuadrado mas al Snake - 
-Contrato: 
-Prototipo: 
-Ejemplos:
-
-*/
+/**
+ * Realiza la acción del comodín de Velocidad
+ * @example accionVelocidad() => update(Mundo, Mundo.snake = moveSnake(...)),
+ * @example accionVelocidad(), Mundo.comodines[0].tiempoActivo = 0 => Mundo.comodines[0].tiempoActivo = 40
+ * @example accionVelocidad(), Mundo.comodines[0].tiempoActivo = 40 => Mundo.comodines[0].tiempoActivo = 39
+ */
 function accionVelocidad(){
   update(Mundo, Mundo.snake = moveSnake(Mundo.snake, Mundo.dir));
   update(Mundo, Mundo.comodines[0].tiempoActivo = 0)
@@ -95,12 +94,17 @@ function accionVelocidad(){
   }
 }
 
+/**
+ * Realiza la acción del comodín de Invencibilidad
+ * @returns {boolean}
+ * @example accionInvencibilidad(), Mundo.comodines[1].tiempoActivo = 0 => Mundo.comodines[1].tiempoActivo = 40
+ * @example accionInvencibilidad(), Mundo.comodines[1].tiempoActivo = 40 => Mundo.comodines[1].tiempoActivo = 39
+ */
 function accionInvencibilidad(){
   update(Mundo, Mundo.comodines[1].tiempoActivo = 0);
   if (Mundo.comodines[1].tiempoAccionado == 0){
     posicionInactiva(1);
     update(Mundo, Mundo.comodines[1].tiempoAccionado = 40);
-    //nuevosComodines();
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
 
   } else {
@@ -116,9 +120,14 @@ function accionInvencibilidad(){
   }
 }
 
+/**
+ * Realiza la acción del comodín de AumentoPuntos
+ * @example accionAumentoPuntos() => update(Mundo, Mundo.scoreMas = 2)
+ * @example accionAumentoPuntos(), Mundo.comodines[2].tiempoActivo = 0 => Mundo.comodines[2].tiempoActivo = 40
+ * @example accionAumentoPuntos(), Mundo.comodines[2].tiempoActivo = 40 => Mundo.comodines[2].tiempoActivo = 39
+ */
 function accionAumentoPuntos(){
   update(Mundo, Mundo.comodines[2].tiempoActivo = 0);
-  console.log(Mundo.comodines[2].tiempoAccionado);
   if (Mundo.comodines[2].tiempoAccionado == 0){
     posicionInactiva(2);
     update(Mundo, Mundo.comodines[2].tiempoAccionado = 40);
@@ -126,7 +135,6 @@ function accionAumentoPuntos(){
     update(Mundo, Mundo.scoreMas = 2);
 
   } else if (Mundo.comodines[2].tiempoAccionado == 1){
-    console.log("Hola");
     update(Mundo, Mundo.scoreMas = 1);
     update(Mundo, Mundo.comodines[2].tiempoAccionado--);
 
@@ -136,6 +144,12 @@ function accionAumentoPuntos(){
   }
 }
 
+/**
+ * Realiza la acción del comodín de vidaMas
+ * @example accionVidaMas() => update(Mundo, Mundo.lives++)
+ * @example accionVidaMas(), Mundo.comodines[3].tiempoActivo = 0 => Mundo.comodines[3].tiempoActivo = 40
+ * @example accionVidaMas(), Mundo.comodines[3].tiempoActivo = 40 => Mundo.comodines[3].tiempoActivo = 39
+ */
 function accionVidaMas(){
   update(Mundo, Mundo.comodines[3].tiempoActivo = 0);
   posicionInactiva(3);
@@ -144,12 +158,26 @@ function accionVidaMas(){
   update(Mundo, Mundo.lives++);
 }
 
+/**
+ * Realiza la acción del comodín de Inversion
+ * @returns {variable}
+ * @example accionInversion() => update(Mundo, Mundo.dir = direccionInversion(Mundo.snake));
+ * @example accionInversion() => update(Mundo, Mundo.snake = reversedSnake);
+ * @example accionInversion(), Mundo.comodines[4].tiempoActivo = 0 => Mundo.comodines[4].tiempoActivo = 40
+ * @example accionInversion(), Mundo.comodines[4].tiempoActivo = 40 => Mundo.comodines[4].tiempoActivo = 39
+ */
 function accionInversion(){
   update(Mundo, Mundo.comodines[4].tiempoActivo = 0)
   posicionInactiva(4);
   update(Mundo, Mundo.comodines[4].tiempoAccionado = 0);
   update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
 
+  /**
+ * Invierte la dirección que tomara el Snake en su cola
+ * @param {lista} snake 
+ * @returns {variable}
+ * @example direccionInversion([{x:3, y:0}, {x:2, y:0}, {x:1, y:0}, {x:0, y:0}]) => snake[1].x + 1 == snake[0].x => derecha
+ */
   function direccionInversion(snake){
     if(snake[1].x - 1 == snake[0].x){
       return izquierda;
@@ -172,84 +200,107 @@ function accionInversion(){
 
 }
 
-  function accionTombos(){
-    update(Mundo, Mundo.comodines[5].tiempoActivo = 0)
-    if (Mundo.comodines[5].tiempoAccionado == 0){
-      posicionInactiva(5);
-      update(Mundo, Mundo.comodines[5].tiempoAccionado = 40);
-      //nuevosComodines();
-      update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
-    } else {
-      // console.log("Hola");
-      dibujaEnemigo(Mundo.listaEnemigos)
-      console.log(Mundo.activosMiniEnemigos)
-      mueveEnemigo(Mundo.listaEnemigos)
-      compMiniEnemigos(Mundo.listaEnemigos)
-      update(Mundo, Mundo.comodines[5].tiempoAccionado--)
-    }
-  }
-
-  function accionReduccionPuntos(){
-    update(Mundo, Mundo.comodines[6].tiempoActivo = 0);
-    console.log(Mundo.comodines[6].tiempoAccionado);
-    if (Mundo.comodines[6].tiempoAccionado == 0){
-      posicionInactiva(6);
-      update(Mundo, Mundo.comodines[6].tiempoAccionado = 40);
-      update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
-      update(Mundo, Mundo.scoreMas = 0.5);
-
-    } else if (Mundo.comodines[6].tiempoAccionado == 1){
-      console.log("Hola");
-      update(Mundo, Mundo.scoreMas = 1);
-      update(Mundo, Mundo.comodines[6].tiempoAccionado--);
-
-    } else {
-      update(Mundo, Mundo.comodines[6].tiempoAccionado--);
-
-    }
-  }
-
-  function accionGolpeAccionado() {
-    update(Mundo, (Mundo.comodines[7].tiempoActivo = 0));
-    if (Mundo.comodines[7].tiempoAccionado == 0) {
-      window.vidasOficial = Mundo.lives;
-      posicionInactiva(7);
-      update(Mundo, (Mundo.comodines[7].tiempoAccionado = 40));
-      //nuevosComodines();
-      update(Mundo, (Mundo.retrasoComodines = tiempoRetraso));
-    } else {
-      update(Mundo, Mundo.comodines[7].tiempoAccionado--);
-    }
-
-    if (Mundo.comodines[7].tiempoAccionado > 2) {
-      update(Mundo, (Mundo.lives = 0));
-    } else {
-      update(Mundo, (Mundo.lives = window.vidasOficial));
-    }
-  }
-
-   //:D
-  function accionAleatorio(){
-    update(Mundo, Mundo.comodines[8].tiempoActivo = 0);
-    posicionInactiva(8);
-    update(Mundo, Mundo.comodines[8].tiempoAccionado = 0);
+/**
+ * Realiza la acción del comodín de tombos
+ * @example accionVidaMas() => dibujarEnemigo(...), mueveEnemigo(...), compMiniEnemigos(...)
+ * @example accionVidaMas(), Mundo.comodines[5].tiempoActivo = 0 => Mundo.comodines[5].tiempoActivo = 40
+ * @example accionVidaMas(), Mundo.comodines[5].tiempoActivo = 40 => Mundo.comodines[5].tiempoActivo = 39
+ */
+function accionTombos(){
+  update(Mundo, Mundo.comodines[5].tiempoActivo = 0)
+  if (Mundo.comodines[5].tiempoAccionado == 0){
+    posicionInactiva(5);
+    update(Mundo, Mundo.comodines[5].tiempoAccionado = 40);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
-    const listaAleatoriaPuntos = [1,0,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,0,1,0,1,0,1,0,0,1];
-    const ProbabilidadComodines = listaAleatoriaPuntos[getRandom(0,length(listaAleatoriaPuntos))]
-    switch (ProbabilidadComodines) {
-      case 0:
-        if(Mundo.score>20){
-          update(Mundo,Mundo.score = Mundo.score-20);
-        }else{
-          update(Mundo,Mundo.score = 0);
-        }
-        break;
-      case 1:
-          update(Mundo,Mundo.score = Mundo.score+20);
-        break;
-      default:
-        return null;
-        break;
-    }
+  } else {
+    // console.log("Hola");
+    dibujaEnemigo(Mundo.listaEnemigos)
+    console.log(Mundo.activosMiniEnemigos)
+    mueveEnemigo(Mundo.listaEnemigos)
+    compMiniEnemigos(Mundo.listaEnemigos)
+    update(Mundo, Mundo.comodines[5].tiempoAccionado--)
   }
+}
+
+/**
+ * Realiza la acción del comodín de reduccionPuntos
+ * @example accionReduccionPuntos() => update(Mundo, Mundo.scoreMas = -1)
+ * @example accionReduccionPuntos(), Mundo.comodines[6].tiempoActivo = 0 => Mundo.comodines[6].tiempoActivo = 40
+ * @example accionReduccionPuntos(), Mundo.comodines[6].tiempoActivo = 40 => Mundo.comodines[6].tiempoActivo = 39
+ */
+function accionReduccionPuntos(){
+  update(Mundo, Mundo.comodines[6].tiempoActivo = 0);
+  console.log(Mundo.comodines[6].tiempoAccionado);
+  if (Mundo.comodines[6].tiempoAccionado == 0){
+    posicionInactiva(6);
+    update(Mundo, Mundo.comodines[6].tiempoAccionado = 40);
+    update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+    update(Mundo, Mundo.scoreMas = -1);
+
+  } else if (Mundo.comodines[6].tiempoAccionado == 1){
+    console.log("Hola");
+    update(Mundo, Mundo.scoreMas = 1);
+    update(Mundo, Mundo.comodines[6].tiempoAccionado--);
+
+  } else {
+    update(Mundo, Mundo.comodines[6].tiempoAccionado--);
+
+  }
+}
+
+/**
+ * Realiza la acción del comodín de golpeAccionado
+ * @example accionGolpeAccionado() => Mundo.comodines[7].tiempoAccionado > 2 => update(Mundo, (Mundo.lives = 0))
+ * @example accionGolpeAccionado() => Mundo.comodines[7].tiempoAccionado < 2 => update(Mundo, (Mundo.lives = window.vidasOficial))
+ * @example accionGolpeAccionado(), Mundo.comodines[7].tiempoActivo = 0 => Mundo.comodines[7].tiempoActivo = 40
+ * @example accionGolpeAccionado(), Mundo.comodines[7].tiempoActivo = 40 => Mundo.comodines[7].tiempoActivo = 39
+ */
+function accionGolpeAccionado() {
+  update(Mundo, (Mundo.comodines[7].tiempoActivo = 0));
+  if (Mundo.comodines[7].tiempoAccionado == 0) {
+    window.vidasOficial = Mundo.lives;
+    posicionInactiva(7);
+    update(Mundo, (Mundo.comodines[7].tiempoAccionado = 40));
+    update(Mundo, (Mundo.retrasoComodines = tiempoRetraso));
+  } else {
+    update(Mundo, Mundo.comodines[7].tiempoAccionado--);
+  }
+
+  if (Mundo.comodines[7].tiempoAccionado > 2) {
+    update(Mundo, (Mundo.lives = 0));
+  } else {
+    update(Mundo, (Mundo.lives = window.vidasOficial));
+  }
+}
+
+/**
+ * Realiza la accion del comodín Aleatorio
+ * @example accionAleatorio(), ProbabilidadComodines == 0 => Mundo.score > 20 => update(Mundo,Mundo.score = Mundo.score-20)
+ * @example accionAleatorio(), ProbabilidadComodines == 1 => update(Mundo,Mundo.score = Mundo.score+20)
+ * @example accionAleatorio(), Mundo.comodines[8].tiempoActivo = 0 => Mundo.comodines[8].tiempoActivo = 40
+ * @example accionAleatorio(), Mundo.comodines[8].tiempoActivo = 40 => Mundo.comodines[8].tiempoActivo = 39
+ */
+function accionAleatorio(){
+  update(Mundo, Mundo.comodines[8].tiempoActivo = 0);
+  posicionInactiva(8);
+  update(Mundo, Mundo.comodines[8].tiempoAccionado = 0);
+  update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
+  const listaAleatoriaPuntos = [1,0,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,0,1,0,1,0,1,0,0,1];
+  const ProbabilidadComodines = listaAleatoriaPuntos[getRandom(0,length(listaAleatoriaPuntos))]
+  switch (ProbabilidadComodines) {
+    case 0:
+      if(Mundo.score>20){
+        update(Mundo,Mundo.score = Mundo.score-20);
+      }else{
+        update(Mundo,Mundo.score = 0);
+      }
+      break;
+    case 1:
+        update(Mundo,Mundo.score = Mundo.score+20);
+      break;
+    default:
+      return null;
+      break;
+  }
+}
 
