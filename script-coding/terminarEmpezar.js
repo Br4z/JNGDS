@@ -106,12 +106,18 @@ function juegoTerminado(){
   // text(' Has perdido', width / 2, height / 2); //advertencia que se muestra en pantalla en caso de que la serpiente se choque.
   image(gameOverImage, 45, 100, 480, 350);
   // fill => color de relleno del texto
-  fill('#0E0D0D');
+  fill('#723C70');
   //stroke => color del borde del texto
   stroke('#D9D6CF');
   strokeWeight(0.1);
   textFont(myFontTwo);
-  text(Mundo.score, 358, 355);
+  update(Mundo,Mundo.score=99)
+  if(Mundo.score<100){
+    text(Mundo.score, 390, 355);
+  }
+  if(Mundo.score>=100){
+    text(Mundo.score, 410, 355);
+  }
   // textSize(26);
   // text('Pulsa cualquier tecla para continuar', width / 2, height / 1.2);
   // textSize(12);
