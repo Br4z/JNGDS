@@ -18,8 +18,9 @@ function drawKnife(knife) {
 //Funcion para dibujar a uno de los enemigos, en este caso 'el Thief'
 function drawThief(Thief) {
   // if(Mundo.thiefActivo==true){
-  fill("blue");
-  rect(Thief.x * lado, Thief.y * lado, lado, lado);
+  /* fill("blue");
+  rect(Thief.x * lado, Thief.y * lado, lado, lado); */
+  image(thief, Thief?.x * lado, Thief?.y * lado, lado+20, lado+20);
 }
 // }
 

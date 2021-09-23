@@ -55,8 +55,8 @@ function preload() {
   comodinMasPuntos =  loadImage('../visual/comodines/Multiplicador_de_damage.png');
   aleatorio = loadImage('../visual/comodines/Comodin_aleatorio.png');
   golpeAccionado = loadImage('../visual/comodines/Golpe_accionado.png');
-
   tombo = loadImage('../visual/enemigos/tombo.png');
+  thief = loadImage('../visual/enemigos/nero3.png');
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -317,7 +317,8 @@ function drawGame(Mundo) {
   if(Mundo.thiefActivo==true){
     drawKnife(Mundo.knife);
   }
-
+  
+  
   //DIBUJA COMODINES
   if (Mundo.comodines[0].tiempoActivo > 0){
     image(
