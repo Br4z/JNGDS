@@ -617,7 +617,7 @@ function onTic(Mundo) {
 
     }
   }
-  if (Mundo.start == false && Mundo.score % 20 == 0) {
+  if (Mundo.start == false && Mundo.score % 25 == 0) {
     return update(Mundo, {
       snake: moveSnake(Mundo.snake.slice(0, 3), Mundo.dir),
       start: true,

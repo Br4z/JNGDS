@@ -61,7 +61,7 @@ function juegoNuevo(){
       dirx: true,
       diry: true,
     },
-    thiefActivo:false,
+    thiefActivo: false,
     //Ataque de Thief
     knife: [
       {
@@ -70,6 +70,7 @@ function juegoNuevo(){
         pos: false,
       },
     ],
+    start: true,
     retrasoComodines: 80,
     scoreMas: 1,
     activosMiniEnemigos: false,
