@@ -55,10 +55,21 @@ function preload() {
   tombo = loadImage('../visual/enemigos/tombo.png');
   thief = loadImage('../visual/enemigos/nero3.png');
 
-  soundFormats('mp3', 'ogg');
+  soundFormats('mp3', 'ogg', 'wav');
   mortalKombat = loadSound('../audio/themes/mortal_kombat');
 
+  sonidoVelocidad1 = loadSound('../audio/sfx/comodines/velocidad1.mp3');
+  sonidoVelocidad2 = loadSound('../audio/sfx/comodines/velocidad2.mp3');
+  sonidoInvencibilidad1 = loadSound('../audio/sfx/comodines/invencibilidad1.ogg');
+  sonidoInvencibilidad2= loadSound('../audio/sfx/comodines/invencibilidad2.ogg');
+  sonidoPuntos1 = loadSound('../audio/sfx/comodines/puntos1.mp3');
+  sonidoPuntos2 = loadSound('../audio/sfx/comodines/puntos2.mp3');
+  sonidoVidaMas = loadSound('../audio/sfx/comodines/vidaMas.mp3');
   sonidoInvertir = loadSound('../audio/sfx/comodines/inversion.mp3');
+  sonidoTombos1 = loadSound('../audio/sfx/comodines/tombos1.mp3');
+  sonidoTombos2 = loadSound('../audio/sfx/comodines/velocidad2.mp3');
+  sonidoGolpeAccionado1 = loadSound('../audio/sfx/comodines/golpeAccionado1.mp3');
+  sonidoGolpeAccionado2 = loadSound('../audio/sfx/comodines/golpeAccionado2.mp3');
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.

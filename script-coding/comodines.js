@@ -36,9 +36,9 @@ nuevosComodines() -> Mundo.comodines[6] -> {x: 11, y: 21, tiempoActivo: 44, tiem
 */
 function nuevosComodines() {
   //Comodines Aqui
-  const numeroComodin = 4;
-  //const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
-  //const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
+  //const numeroComodin = 4;
+  const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
+  const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
   // const numeroComodin = 5;
   update(
     Mundo,
@@ -85,12 +85,17 @@ function accionVelocidad(){
   update(Mundo, Mundo.snake = moveSnake(Mundo.snake, Mundo.dir));
   update(Mundo, Mundo.comodines[0].tiempoActivo = 0)
   if (Mundo.comodines[0].tiempoAccionado == 0){
+    sonidoVelocidad1.play()
     posicionInactiva(0);
     update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
     //nuevosComodines();
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
   } else {
     update(Mundo, Mundo.comodines[0].tiempoAccionado--)
+  }
+
+  if (Mundo.comodines[0].tiempoAccionado == 1){
+    sonidoVelocidad2.play()
   }
 }
 
@@ -103,6 +108,7 @@ function accionVelocidad(){
 function accionInvencibilidad(){
   update(Mundo, Mundo.comodines[1].tiempoActivo = 0);
   if (Mundo.comodines[1].tiempoAccionado == 0){
+    sonidoInvencibilidad1.play();
     posicionInactiva(1);
     update(Mundo, Mundo.comodines[1].tiempoAccionado = 40);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
@@ -112,10 +118,11 @@ function accionInvencibilidad(){
 
   }
 
-  if (Mundo.comodines[1].tiempoAccionado > 2){
+  if (Mundo.comodines[1].tiempoAccionado > 1){
     return false;
 
   } else {
+    sonidoInvencibilidad2.play();
     return true;
   }
 }
@@ -129,12 +136,14 @@ function accionInvencibilidad(){
 function accionAumentoPuntos(){
   update(Mundo, Mundo.comodines[2].tiempoActivo = 0);
   if (Mundo.comodines[2].tiempoAccionado == 0){
+    sonidoPuntos1.play();
     posicionInactiva(2);
     update(Mundo, Mundo.comodines[2].tiempoAccionado = 40);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
     update(Mundo, Mundo.scoreMas = 2);
 
   } else if (Mundo.comodines[2].tiempoAccionado == 1){
+    sonidoPuntos2.play();
     update(Mundo, Mundo.scoreMas = 1);
     update(Mundo, Mundo.comodines[2].tiempoAccionado--);
 
@@ -151,6 +160,7 @@ function accionAumentoPuntos(){
  * @example accionVidaMas(), Mundo.comodines[3].tiempoActivo = 40 => Mundo.comodines[3].tiempoActivo = 39
  */
 function accionVidaMas(){
+  sonidoVidaMas.play();
   update(Mundo, Mundo.comodines[3].tiempoActivo = 0);
   posicionInactiva(3);
   update(Mundo, Mundo.comodines[3].tiempoAccionado = 0);
@@ -210,6 +220,7 @@ function accionInversion(){
 function accionTombos(){
   update(Mundo, Mundo.comodines[5].tiempoActivo = 0)
   if (Mundo.comodines[5].tiempoAccionado == 0){
+    sonidoTombos1.play();
     posicionInactiva(5);
     update(Mundo, Mundo.comodines[5].tiempoAccionado = 40);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
@@ -220,6 +231,10 @@ function accionTombos(){
     mueveEnemigo(Mundo.listaEnemigos)
     compMiniEnemigos(Mundo.listaEnemigos)
     update(Mundo, Mundo.comodines[5].tiempoAccionado--)
+  }
+
+  if (Mundo.comodines[0].tiempoActivo == 1){
+    sonidoVelocidad2.play();
   }
 }
 
@@ -233,12 +248,14 @@ function accionReduccionPuntos(){
   update(Mundo, Mundo.comodines[6].tiempoActivo = 0);
   console.log(Mundo.comodines[6].tiempoAccionado);
   if (Mundo.comodines[6].tiempoAccionado == 0){
+    sonidoPuntos2.play();
     posicionInactiva(6);
     update(Mundo, Mundo.comodines[6].tiempoAccionado = 40);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
     update(Mundo, Mundo.scoreMas = -1);
 
   } else if (Mundo.comodines[6].tiempoAccionado == 1){
+    sonidoPuntos1.play();
     console.log("Hola");
     update(Mundo, Mundo.scoreMas = 1);
     update(Mundo, Mundo.comodines[6].tiempoAccionado--);
@@ -259,6 +276,7 @@ function accionReduccionPuntos(){
 function accionGolpeAccionado() {
   update(Mundo, (Mundo.comodines[7].tiempoActivo = 0));
   if (Mundo.comodines[7].tiempoAccionado == 0) {
+    sonidoGolpeAccionado1.play();
     window.vidasOficial = Mundo.lives;
     posicionInactiva(7);
     update(Mundo, (Mundo.comodines[7].tiempoAccionado = 40));
@@ -267,9 +285,10 @@ function accionGolpeAccionado() {
     update(Mundo, Mundo.comodines[7].tiempoAccionado--);
   }
 
-  if (Mundo.comodines[7].tiempoAccionado > 2) {
+  if (Mundo.comodines[7].tiempoAccionado > 1) {
     update(Mundo, (Mundo.lives = 0));
   } else {
+    sonidoGolpeAccionado2.play();
     update(Mundo, (Mundo.lives = window.vidasOficial));
   }
 }
