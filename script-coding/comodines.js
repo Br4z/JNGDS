@@ -36,7 +36,7 @@ nuevosComodines() -> Mundo.comodines[6] -> {x: 11, y: 21, tiempoActivo: 44, tiem
 */
 function nuevosComodines() {
   //Comodines Aqui
-  //const numeroComodin = 4;
+  //const numeroComodin = 5;
   const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
   const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
   // const numeroComodin = 5;
@@ -71,7 +71,7 @@ function nuevoRetraso(){
   update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
 }
 
-const tiempoRetraso = 40;
+const tiempoRetraso = 70;
 
 //ACCIONES DE LOS COMODINES
 
@@ -108,7 +108,7 @@ function accionVelocidad(){
 function accionInvencibilidad(){
   update(Mundo, Mundo.comodines[1].tiempoActivo = 0);
   if (Mundo.comodines[1].tiempoAccionado == 0){
-    sonidoInvencibilidad1.play();
+    sonidoInvencibilidad2.play();
     posicionInactiva(1);
     update(Mundo, Mundo.comodines[1].tiempoAccionado = 40);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
@@ -122,7 +122,7 @@ function accionInvencibilidad(){
     return false;
 
   } else {
-    sonidoInvencibilidad2.play();
+    sonidoInvencibilidad1.play();
     return true;
   }
 }
@@ -222,7 +222,7 @@ function accionTombos(){
   if (Mundo.comodines[5].tiempoAccionado == 0){
     sonidoTombos1.play();
     posicionInactiva(5);
-    update(Mundo, Mundo.comodines[5].tiempoAccionado = 40);
+    update(Mundo, Mundo.comodines[5].tiempoAccionado = 55);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
   } else {
     // console.log("Hola");
