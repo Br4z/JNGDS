@@ -422,11 +422,11 @@ function posicionarComida() {
 
 //------------------------------------
 function cambioTablero() {
-  if(Mundo.score<16){
+  if(Mundo.score<1){
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
   }
-  else if (Mundo.score >= 16 && Mundo.score < 28) {
+  else if (Mundo.score >= 1 && Mundo.score < 28) {
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));

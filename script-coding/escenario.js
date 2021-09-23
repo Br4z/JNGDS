@@ -136,13 +136,13 @@ function coloreaTablero1(i, cell, j) {
     case 0:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#3181AF');
+      fill('#014779');
       rect(j * lado, i * lado, lado, lado);
       break;
     case 1:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#2A6F97');
+      fill('#013A63');
       rect(j * lado, i * lado, lado, lado);
       break;
 
@@ -156,63 +156,63 @@ function coloreaTablero1(i, cell, j) {
     case 3:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#368DBF');
+      fill('#01538D');
       rect(j * lado, i * lado, lado, lado);
       break;
 
     case 4:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#4097C9');
+      fill('#015FA2');
       rect(j * lado, i * lado, lado, lado);
       break;
 
     case 5:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#50A0CE');
+      fill('#016BB7');
       rect(j * lado, i * lado, lado, lado);
       break;
 
     case 6:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#60A8D2');
+      fill('#0177CB');
       rect(j * lado, i * lado, lado, lado);
       break;
 
     case 7:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#70B1D7');
+      fill('#0183DF');
       rect(j * lado, i * lado, lado, lado);
       break;
 
     case 8:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#80BADB');
+      fill('#018FF4');
       rect(j * lado, i * lado, lado, lado);
       break;
 
     case 9:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#90C2E0');
+      fill('#0B99FE');
       rect(j * lado, i * lado, lado, lado);
       break;
 
     case 10:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#A0CAE4');
+      fill('#20A1FE');
       rect(j * lado, i * lado, lado, lado);
       break;
 
     case 11:
       strokeWeight(0.5);
       stroke('#252525');
-      fill('#A3CFE1');
+      fill('#34AAFE');
       rect(j * lado, i * lado, lado, lado);
       break;
 
