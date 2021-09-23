@@ -124,8 +124,6 @@ const comodin = function(x,y, tiempoActivo){
 
   this.tiempoActivo = tiempoActivo;
   this.tiempoAccionado = 0;
-  this.tiempoDesactivo = tiempoRandom(30, 50);
-  //this.ordenAleatorio = tiempoRandom(1,8)
 }
 /*
 x: int(getRandom(0,28)) ,  //28
@@ -158,6 +156,7 @@ function drawComodin(comodin, color) {
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
 
 function setup() {
+  //mortalKombat.play();
   frameRate(7);
   drawfondo();
   windowRezired();
@@ -408,7 +407,6 @@ function drawGame(Mundo) {
 
 /* TODO DIRECCIONES DEL SNAKE */
 function direcciones() {
-  mortalKombat.play();
   abajo = createVector(0, 1);
   arriba = createVector(0, -1);
   izquierda = createVector(-1, 0);
@@ -450,7 +448,6 @@ function cambioTablero() {
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
-  // console.log(Mundo.snake[0])
   // console.log(Mundo.dir)
   cambiaCabezaCola()
   // cambiaCola()
@@ -461,7 +458,7 @@ function onTic(Mundo) {
   // mueveEnemigo(Mundo.listaEnemigos);
 
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
-  //console.log(Mundo.snake[0]);
+  console.log(Mundo.comodines[0]);
   let invencibilidad = true;
   let golpeAccionado = false;
 
