@@ -1,14 +1,11 @@
 /*INTRODUCCION*/
-
 // Importar Funcional Light
 let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = functionalLight;
 
 //Preload
 let mortalKombat;
+let sonidoInvertir;
 function preload() {
-
-  soundFormats('mp3', 'ogg');
-  mortalKombat = loadSound('../audio/themes/mortal_kombat');
 
   cabeza_derecha_normal = loadImage('../Snake_Images/cabeza_derecha_normal.png');
   cabeza_izquierda_normal = loadImage('../Snake_Images/cabeza_izquierda_normal.png')
@@ -57,6 +54,11 @@ function preload() {
   golpeAccionado = loadImage('../visual/comodines/Golpe_accionado.png');
   tombo = loadImage('../visual/enemigos/tombo.png');
   thief = loadImage('../visual/enemigos/nero3.png');
+
+  soundFormats('mp3', 'ogg');
+  mortalKombat = loadSound('../audio/themes/mortal_kombat');
+
+  sonidoInvertir = loadSound('../audio/sfx/comodines/inversion.mp3');
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -114,6 +116,7 @@ const velocidad = new comodinVelocidad();
 
 
 
+
 const comodin = function(x,y, tiempoActivo){
   this.x = x;
   this.y = y;
@@ -154,9 +157,15 @@ function drawComodin(comodin, color) {
 }
 
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
-
 function setup() {
-  //mortalKombat.play();
+
+  //----------------------------------------------------------------
+  //CONFIGURACIÓN DE NIVELES DE SONIDO
+  mortalKombat.setVolume(0.1);
+  sonidoInvertir.setVolume(0.8);
+
+  //----------------------------------------------------------------
+  mortalKombat.play();
   frameRate(7);
   drawfondo();
   windowRezired();
@@ -246,7 +255,10 @@ function setup() {
     politicoActivo:false,
 
   };
+
 }
+
+
 
 
 //----------------------------------------------

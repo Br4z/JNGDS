@@ -36,9 +36,9 @@ nuevosComodines() -> Mundo.comodines[6] -> {x: 11, y: 21, tiempoActivo: 44, tiem
 */
 function nuevosComodines() {
   //Comodines Aqui
-  //const numeroComodin = 4;
-  const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
-  const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
+  const numeroComodin = 4;
+  //const listaComodin = [0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3,0,1,2,3,8,4,5,6,7,4,5,6,7,4,5,6,7,0,1,2,3];
+  //const numeroComodin = listaComodin[getRandom(0,length(listaComodin))];
   // const numeroComodin = 5;
   update(
     Mundo,
@@ -167,6 +167,7 @@ function accionVidaMas(){
  * @example accionInversion(), Mundo.comodines[4].tiempoActivo = 40 => Mundo.comodines[4].tiempoActivo = 39
  */
 function accionInversion(){
+  sonidoInvertir.play();
   update(Mundo, Mundo.comodines[4].tiempoActivo = 0)
   posicionInactiva(4);
   update(Mundo, Mundo.comodines[4].tiempoAccionado = 0);
