@@ -49,15 +49,23 @@ function nuevosComodines() {
 }
 
 /*
-Propósito: 
-Contrato: 
-Prototipo: 
+Propósito: Restar el retraso de los comodines
+Contrato: null -> number
+Prototipo: restaRetraso()
 Ejemplos:
-
+restaRetraso() -> Mundo.retrasoComodines--
 */
 function restaRetraso(){
   update(Mundo, Mundo.retrasoComodines--);
 }
+
+/*
+Propósito: Darle un nuevo valor al retraso de los comodines
+Contrato: null -> number
+Prototipo: nuevoRetraso()
+Ejemplos:
+nuevoRetraso() -> tiempoRetraso
+*/
 
 function nuevoRetraso(){
   update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
@@ -66,6 +74,14 @@ function nuevoRetraso(){
 const tiempoRetraso = 40;
 
 //ACCIONES DE LOS COMODINES
+
+/*
+Propósito: Mover un cuadrado mas al Snake - 
+Contrato: 
+Prototipo: 
+Ejemplos:
+
+*/
 function accionVelocidad(){
   update(Mundo, Mundo.snake = moveSnake(Mundo.snake, Mundo.dir));
   update(Mundo, Mundo.comodines[0].tiempoActivo = 0)
