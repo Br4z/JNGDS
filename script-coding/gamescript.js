@@ -7,6 +7,7 @@ let mortalKombat;
 let sonidoInvertir;
 //Musica dos
 let music;
+let music2;
 function preload() {
 
   cabeza_derecha_normal = loadImage('../Snake_Images/cabeza_derecha_normal.png');
@@ -61,6 +62,7 @@ function preload() {
 
   soundFormats('mp3', 'ogg', 'wav');
   mortalKombat = loadSound('../audio/themes/mortal_kombat');
+  music2 = loadSound('../audio/themes/8-Bit_Adventure');
   //Musica Dos
   music = loadSound('../audio/themes/init');
 
@@ -181,6 +183,7 @@ function setup() {
   //CONFIGURACIÓN DE NIVELES DE SONIDO
   mortalKombat.setVolume(0.1);
   music.setVolume(0.5);
+  music2.setVolume(0.5);
 
   sonidoVelocidad1.setVolume(0.8);
   sonidoVelocidad2.setVolume(0.8);
@@ -479,6 +482,7 @@ function cambioTablero() {
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
   } else if (Mundo.score >= 28 && Mundo.score < 44) {
+    reproducirMusica(2);
     update(Mundo, (Mundo.escenario = escenario3));
     update(Mundo, (Mundo.vendedorActivo = false));
     update(Mundo, (Mundo.neroActivo = true));
@@ -984,6 +988,7 @@ function reproducirMusica(numMusica){
   if (numMusica == 0){
     if (mortalKombat.isPlaying() == false) {
       console.log("Hola");
+      music2.stop();
       mortalKombat.play();
       music.stop();
 
@@ -991,7 +996,18 @@ function reproducirMusica(numMusica){
   } else if (numMusica == 1){
     if (music.isPlaying() == false){
       mortalKombat.stop();
+      music2.stop();
       music.play();
+
+    } 
+
+      
+    
+  } else if (numMusica == 2){
+    if (music2.isPlaying() == false){
+      mortalKombat.stop();
+      music.stop();
+      music2.play();
     }
   }
 }
