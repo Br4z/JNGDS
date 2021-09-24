@@ -43,13 +43,7 @@ function dibujaEnemigo(lista) {
     // stroke('#7ee841');
     // fill('#7ee841');
     // rect(element.x * lado, element.y * lado, lado, lado);
-    image(
-      tombo,
-       element.x * 20,
-       element.y * 20,
-       lado, //weight
-       lado //height
-    );
+    image(tombo, element.x * lado, element.y * lado, lado + 40, lado + 40);
   });
 }
 //----------------------------------------------

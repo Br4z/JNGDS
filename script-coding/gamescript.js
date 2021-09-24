@@ -496,7 +496,7 @@ function onTic(Mundo) {
   // mueveEnemigo(Mundo.listaEnemigos);
 
   //Cada condicional representa una respectiva situación, por lo que actualiza el Mundo de una cierta manera.
-  console.log(Mundo.comodines[0]);
+  // console.log(Mundo.comodines[0]);
   let invencibilidad = true;
   let golpeAccionado = false;
 
