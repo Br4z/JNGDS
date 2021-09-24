@@ -467,11 +467,16 @@ function cambioTablero() {
     update(Mundo, (Mundo.neroActivo = false));
     update(Mundo, (Mundo.policiaActivo = true));
     update(Mundo, (Mundo.thiefActivo = true));
-  } else if (Mundo.score >= 60) {
+  } else if (Mundo.score >= 60 && Mundo.score < 80) {
     update(Mundo, (Mundo.escenario = escenario5));
     update(Mundo, (Mundo.policiaActivo = false));
     update(Mundo, (Mundo.politicoActivo = true));
     update(Mundo, (Mundo.thiefActivo = false));
+  } else if(Mundo.score >= 80){
+    update(Mundo, (Mundo.escenario = escenario5));
+    update(Mundo, (Mundo.policiaActivo = true));
+    update(Mundo, (Mundo.politicoActivo = false));
+    update(Mundo, (Mundo.thiefActivo = true));
   }
 }
 //------------------------------------
