@@ -812,6 +812,14 @@ function onMouseEvent(Mundo, event) {
 
 function keyPressed() {
     // jugarDeNuevo();
+    if (!isLooping() && Mundo.lives>=0){
+      switch (keyCode) {
+        case 66:
+          loop();
+        default:
+          return update(Mundo, {});
+      }
+    }
     if (isLooping()) {
 
     switch (keyCode) {
@@ -839,6 +847,10 @@ function keyPressed() {
         }
         if ((Mundo.dir = izquierda));
         break;
+      case 66:
+        noLoop()
+      default:
+        return update(Mundo, {});
     }
   }
 }

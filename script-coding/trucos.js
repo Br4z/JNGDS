@@ -1,3 +1,17 @@
+// PERSISTENCIA DE DATOS
+
+
+
+
+
+
+
+
+
+
+
+
+// LIBRERIA KEYPRESS
 //Variable de configuracion
 const configTeclado = { prevent_repeat : true };
 //True significa que debemos ir pulsando cada vez, por ejemplo es util para un juego de disparos
@@ -14,6 +28,9 @@ function jugarDeNuevo() {
     juegoNuevo();
   }
 }
+
 //Eventos si cumples la funcion
 eventoTeclado.sequence_combo('up down down left right up up', SubeScore);
 eventoTeclado.simple_combo('enter', jugarDeNuevo);
+// eventoTeclado.simple_combo(66, pausarJuego);
+
