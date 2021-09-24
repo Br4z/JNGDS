@@ -57,8 +57,8 @@ function preload() {
   golpeAccionado = loadImage('../visual/comodines/Golpe_accionado.png');
   tombo = loadImage('../visual/enemigos/tombo.png');
   thief = loadImage('../visual/enemigos/nero3.png');
-  knifeUp = loadImage("../visual/enemigos/knife_UP.gif");
-  knifeSide = loadImage("../visual/enemigos/knife_SIDE.gif");
+  knifeUp = loadImage("../visual/enemigos/cuchilloArriba.png");
+  knifeSide = loadImage("../visual/enemigos/cuchilloDerecha.png");
 
   soundFormats('mp3', 'ogg', 'wav');
   mortalKombat = loadSound('../audio/themes/mortal_kombat');
@@ -474,6 +474,7 @@ function cambioTablero() {
     reproducirMusica(0);
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
+    
   }
   else if (Mundo.score >= 2 && Mundo.score < 28) {
     // Musica dos
@@ -481,6 +482,7 @@ function cambioTablero() {
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
+    update(Mundo, (Mundo.thiefActivo = true));
   } else if (Mundo.score >= 28 && Mundo.score < 44) {
     reproducirMusica(2);
     update(Mundo, (Mundo.escenario = escenario3));
@@ -704,118 +706,122 @@ function onTic(Mundo) {
         },
       ],
     });
-  } else if ( // Comprobar si la serpiente esta tiesa.
-    ((Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2) && (Mundo.lives < 1)) ||
-    ((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true && Mundo.lives < 1) && invencibilidad == true)
+  } else if (
+    // Comprobar si la serpiente esta tiesa.
+    (Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 &&
+      Mundo.lives < 1) ||
+    (choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true &&
+      Mundo.lives < 1 &&
+      invencibilidad == true) ||
+    Mundo.lives < 0
   ) {
     // cuadradoFinal();
     juegoTerminado();
     // return update(Mundo, {});
-  } else{
-    if(Mundo.thiefActivo==true)
-    {
-    // Saber si la serpiente come
-    if (comerItem(Mundo.snake, Mundo.food)) {
-      Mundo.snake.push({ x: 5, y: 5 });
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        food: numeroRandomComida(Mundo.snake),
-        // cuadradoFinal: {
-        //   x: 0,
-        //   y: 0,
-        // },
-        score: Mundo.score + Mundo.scoreMas,
-        timer: int(millis() / 1000),
-        Thief: ThiefMove(Mundo.Thief),
-        knife: duplicarKnife(Mundo.knife, Mundo.Thief),
-        start: false,
-      });
-      //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
-      //Movimiento normal del Snake junto al del Thief.
-    } else if (hitHead(Mundo.snake, Mundo.knife)) {
-      countLives = Mundo.lives - 1;
-      return update(Mundo, {
-        snake: [
-          { x: columnas / 2, y: filas / 2 },
-          { x: columnas / 2 - 1, y: filas / 2 },
-          { x: columnas / 2 - 2, y: filas / 2 },
-        ],
-        dir: derecha,
-        food: {
-          x: int(getRandom(2, 26)), //28
-          y: int(getRandom(4, 25)),
-        },
-        // cuadradoFinal: {
-        //   x: 0,
-        //   y: 0,
-        // },
-        score: Mundo.score,
-        lives: Mundo.lives - 1,
-        tipe: "juego",
-        timer: int(millis() / 1000),
-        Thief: {
-          x: 26,
-          y: 13,
-          dirx: true,
-          diry: true,
-        },
-        knife: [
-          {
-            x: 18,
-            y: 10,
-            pos: false,
+  } else {
+    if (Mundo.thiefActivo == true) {
+      // Saber si la serpiente come
+      if (comerItem(Mundo.snake, Mundo.food)) {
+        Mundo.snake.push({ x: 5, y: 5 });
+        return update(Mundo, {
+          snake: moveSnake(Mundo.snake, Mundo.dir),
+          food: numeroRandomComida(Mundo.snake),
+          // cuadradoFinal: {
+          //   x: 0,
+          //   y: 0,
+          // },
+          score: Mundo.score + Mundo.scoreMas,
+          timer: int(millis() / 1000),
+          Thief: ThiefMove(Mundo.Thief),
+          knife: duplicarKnife(Mundo.knife, Mundo.Thief),
+          start: false,
+        });
+        //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
+        //Movimiento normal del Snake junto al del Thief.
+      } else if (hitHead(Mundo.snake, Mundo.knife)) {
+        countLives = Mundo.lives - 1;
+        return update(Mundo, {
+          snake: [
+            { x: columnas / 2, y: filas / 2 },
+            { x: columnas / 2 - 1, y: filas / 2 },
+            { x: columnas / 2 - 2, y: filas / 2 },
+          ],
+          dir: derecha,
+          food: {
+            x: int(getRandom(2, 26)), //28
+            y: int(getRandom(4, 25)),
           },
-        ],
-      });
-    } else if (knifeOut(Mundo.knife)) {
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        knife: despawnKnife(Mundo.knife),
-        timer: int(millis() / 1000),
-      });
-    }else{
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        Thief: ThiefMove(Mundo.Thief),
-        timer: int(millis() / 1000),
-        knife: moveKnife(Mundo.knife),
-        // cuadradoFinal: {
-				// 	x: Mundo.snake[Mundo.snake.length - 1].x,
-				// 	y: Mundo.snake[Mundo.snake.length - 1].y,
-				// },
-      });
-    }
-    // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
-  }else{
-    // Saber si la serpiente come
-    if (comerItem(Mundo.snake, Mundo.food)) {
-      Mundo.snake.push({ x: 5, y: 5 });
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        food: {
-          x: int(getRandom(2, 26)), //28
-          y: int(getRandom(4, 25)), //26
-        },
-        // cuadradoFinal: {
-        //   x: 0,
-        //   y: 0,
-        // },
-        score: Mundo.score + Mundo.scoreMas,
-        timer: int(millis() / 1000),
-        start: false,
-      });
-      //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
-      //Movimiento normal del Snake junto al del Thief.
-    }else{
-      return update(Mundo, {
-        snake: moveSnake(Mundo.snake, Mundo.dir),
-        timer: int(millis() / 1000),
-        // cuadradoFinal: {
-				// 	x: Mundo.snake[Mundo.snake.length - 1].x,
-				// 	y: Mundo.snake[Mundo.snake.length - 1].y,
-				// },
-      });
-    }
+          // cuadradoFinal: {
+          //   x: 0,
+          //   y: 0,
+          // },
+          score: Mundo.score,
+          lives: Mundo.lives - 1,
+          tipe: "juego",
+          timer: int(millis() / 1000),
+          Thief: {
+            x: 26,
+            y: 13,
+            dirx: true,
+            diry: true,
+          },
+          knife: [
+            {
+              x: 18,
+              y: 10,
+              pos: false,
+            },
+          ],
+        });
+      } else if (knifeOut(Mundo.knife)) {
+        return update(Mundo, {
+          snake: moveSnake(Mundo.snake, Mundo.dir),
+          knife: despawnKnife(Mundo.knife),
+          timer: int(millis() / 1000),
+        });
+      } else {
+        return update(Mundo, {
+          snake: moveSnake(Mundo.snake, Mundo.dir),
+          Thief: ThiefMove(Mundo.Thief),
+          timer: int(millis() / 1000),
+          knife: moveKnife(Mundo.knife),
+          // cuadradoFinal: {
+          // 	x: Mundo.snake[Mundo.snake.length - 1].x,
+          // 	y: Mundo.snake[Mundo.snake.length - 1].y,
+          // },
+        });
+      }
+      // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
+    } else {
+      // Saber si la serpiente come
+      if (comerItem(Mundo.snake, Mundo.food)) {
+        Mundo.snake.push({ x: 5, y: 5 });
+        return update(Mundo, {
+          snake: moveSnake(Mundo.snake, Mundo.dir),
+          food: {
+            x: int(getRandom(2, 26)), //28
+            y: int(getRandom(4, 25)), //26
+          },
+          // cuadradoFinal: {
+          //   x: 0,
+          //   y: 0,
+          // },
+          score: Mundo.score + Mundo.scoreMas,
+          timer: int(millis() / 1000),
+          start: false,
+        });
+        //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
+        //Movimiento normal del Snake junto al del Thief.
+      } else {
+        return update(Mundo, {
+          snake: moveSnake(Mundo.snake, Mundo.dir),
+          timer: int(millis() / 1000),
+          // cuadradoFinal: {
+          // 	x: Mundo.snake[Mundo.snake.length - 1].x,
+          // 	y: Mundo.snake[Mundo.snake.length - 1].y,
+          // },
+        });
+      }
     }
   }
 }
