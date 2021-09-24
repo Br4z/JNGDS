@@ -1,16 +1,3 @@
-// PERSISTENCIA DE DATOS
-
-
-
-
-
-
-
-
-
-
-
-
 // LIBRERIA KEYPRESS
 //Variable de configuracion
 const configTeclado = { prevent_repeat : true };

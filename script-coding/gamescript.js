@@ -837,9 +837,9 @@ function onMouseEvent(Mundo, event) {
 
 function keyPressed() {
     // jugarDeNuevo();
-    if (!isLooping() && Mundo.lives>=0){
+    if (!isLooping() ){
       switch (keyCode) {
-        case 66:
+        case 86:
           loop();
           break;
         default:
