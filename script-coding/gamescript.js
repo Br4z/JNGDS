@@ -306,7 +306,9 @@ function drawGame(Mundo) {
   //Stroke => color de los bordes
 
   //StrokeWeight => Define el ancho
-  strokeWeight(4);
+  stroke('#332b2b');
+  fill('#db271a');
+  strokeWeight(0.3);
   //Dibuja la comida en una posicion random
   drawFood(Mundo.food);
   //Esta funcion dibuja al snake
@@ -450,18 +452,15 @@ function cambioTablero() {
   if(Mundo.score<16){
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
-    update(Mundo, (Mundo.thiefActivo = true));
   }
   else if (Mundo.score >= 16 && Mundo.score < 28) {
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
-    update(Mundo, (Mundo.thiefActivo = true));
   } else if (Mundo.score >= 28 && Mundo.score < 44) {
     update(Mundo, (Mundo.escenario = escenario3));
     update(Mundo, (Mundo.vendedorActivo = false));
     update(Mundo, (Mundo.neroActivo = true));
-    update(Mundo, (Mundo.thiefActivo = false));
   } else if (Mundo.score >= 44 && Mundo.score < 60) {
     update(Mundo, (Mundo.escenario = escenario4));
     update(Mundo, (Mundo.neroActivo = false));
@@ -600,7 +599,7 @@ function onTic(Mundo) {
     restaTiempo(6);
 
     if (Mundo.comodines[6].tiempoActivo == 1){
-      console.log("Hola");
+      // console.log("Hola");
       posicionInactiva(6);
 
     }
@@ -803,13 +802,18 @@ function onMouseEvent(Mundo, event) {
   return update(Mundo, {});
 }
 
+// function jugarDeNuevo(){
+//   if(!isLooping()){
+//     juegoNuevo()
+//   }
+// }
 
 // Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo estado del mundo.
 
 function keyPressed() {
-  if(!isLooping()){
-    juegoNuevo()
-  }
+    // jugarDeNuevo();
+    if (isLooping()) {
+
     switch (keyCode) {
       case UP_ARROW:
         if (Mundo.dir == abajo) {
@@ -836,6 +840,7 @@ function keyPressed() {
         if ((Mundo.dir = izquierda));
         break;
     }
+  }
 }
 ///TODO Registra las teclas precionadas
 function onKeyEvent(Mundo, keyCode) {

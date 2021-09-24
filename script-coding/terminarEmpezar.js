@@ -112,7 +112,6 @@ function juegoTerminado(){
   stroke('#D9D6CF');
   strokeWeight(0.1);
   textFont(myFontTwo);
-  update(Mundo,Mundo.score=99)
   if(Mundo.score<100){
     text(Mundo.score, 390, 355);
   }
