@@ -180,10 +180,23 @@ function setup() {
   //----------------------------------------------------------------
   //CONFIGURACIÓN DE NIVELES DE SONIDO
   mortalKombat.setVolume(0.1);
+  music.setVolume(0.5);
+
+  sonidoVelocidad1.setVolume(0.8);
+  sonidoVelocidad2.setVolume(0.8);
+  sonidoInvencibilidad1.setVolume(0.8);
+  sonidoInvencibilidad2.setVolume(0.8);
+  sonidoPuntos1.setVolume(0.8);
+  sonidoPuntos2.setVolume(0.8);
+  sonidoVidaMas.setVolume(0.8);  
   sonidoInvertir.setVolume(0.8);
+  sonidoTombos1.setVolume(0.8);
+  sonidoTombos2.setVolume(0.8);
+  sonidoGolpeAccionado1.setVolume(0.8);
+  sonidoGolpeAccionado2.setVolume(0.8);
 
   //----------------------------------------------------------------
-  mortalKombat.play();
+  //mortalKombat.play();
   frameRate(7);
   drawfondo();
   windowRezired();
@@ -455,13 +468,13 @@ function posicionarComida() {
 //------------------------------------
 function cambioTablero() {
   if(Mundo.score<2){
+    reproducirMusica(0);
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
   }
   else if (Mundo.score >= 2 && Mundo.score < 28) {
     // Musica dos
-    // mortalKombat.stop();
-    // music.play();
+    reproducirMusica(1);
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
@@ -964,5 +977,21 @@ function comerItem(snake, item) {
     return true;
   } else {
     return false;
+  }
+}
+
+function reproducirMusica(numMusica){
+  if (numMusica == 0){
+    if (mortalKombat.isPlaying() == false) {
+      console.log("Hola");
+      mortalKombat.play();
+      music.stop();
+
+    }
+  } else if (numMusica == 1){
+    if (music.isPlaying() == false){
+      mortalKombat.stop();
+      music.play();
+    }
   }
 }
