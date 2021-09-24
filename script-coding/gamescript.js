@@ -191,7 +191,7 @@ function setup() {
   sonidoInvencibilidad2.setVolume(0.8);
   sonidoPuntos1.setVolume(0.8);
   sonidoPuntos2.setVolume(0.8);
-  sonidoVidaMas.setVolume(0.8);  
+  sonidoVidaMas.setVolume(0.8);
   sonidoInvertir.setVolume(0.8);
   sonidoTombos1.setVolume(0.8);
   sonidoTombos2.setVolume(0.8);
@@ -873,11 +873,9 @@ function keyPressed() {
         }
         if ((Mundo.dir = izquierda));
         break;
-      case 66:
+      case 66://B
         noLoop()
         break;
-      case 71:
-
       default:
         return update(Mundo, {});
     }
@@ -999,10 +997,10 @@ function reproducirMusica(numMusica){
       music2.stop();
       music.play();
 
-    } 
+    }
 
-      
-    
+
+
   } else if (numMusica == 2){
     if (music2.isPlaying() == false){
       mortalKombat.stop();
