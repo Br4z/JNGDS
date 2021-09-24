@@ -6,7 +6,7 @@ function getRandom(min, max) {
 /*DRAW UI : Dibujar lo que esta en la parte superior, el texto*/
 function drawUi() {
   //fill => color de relleno del texto
-  fill('#DC970D');
+  fill('#ffff');
   //stroke => color del borde del texto
   stroke('#0E0D0D');
   //strokeWeight => anchura del borde del texto

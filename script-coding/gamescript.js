@@ -470,38 +470,33 @@ function posicionarComida() {
 
 //------------------------------------
 function cambioTablero() {
-  if(Mundo.score<2){
+  if(Mundo.score<25){
     reproducirMusica(0);
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
     
   }
-  else if (Mundo.score >= 2 && Mundo.score < 28) {
+  else if (Mundo.score >= 30 && Mundo.score < 80) {
     // Musica dos
     reproducirMusica(1);
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
-    update(Mundo, (Mundo.thiefActivo = true));
-  } else if (Mundo.score >= 28 && Mundo.score < 44) {
+  } else if (Mundo.score >= 80 && Mundo.score < 125) {
     reproducirMusica(2);
     update(Mundo, (Mundo.escenario = escenario3));
     update(Mundo, (Mundo.vendedorActivo = false));
-    update(Mundo, (Mundo.neroActivo = true));
-  } else if (Mundo.score >= 44 && Mundo.score < 60) {
+    update(Mundo, (Mundo.politicoActivo = true));
+    update(Mundo, (Mundo.thiefActivo = true));
+  } else if (Mundo.score >= 125 && Mundo.score < 175) {
     update(Mundo, (Mundo.escenario = escenario4));
+    update(Mundo, (Mundo.politicoActivo = false));
+    update(Mundo, (Mundo.neroActivo = true));
+    update(Mundo, (Mundo.thiefActivo = false));
+  } else if (Mundo.score >= 175) {
+    update(Mundo, (Mundo.escenario = escenario5));
     update(Mundo, (Mundo.neroActivo = false));
     update(Mundo, (Mundo.policiaActivo = true));
-    update(Mundo, (Mundo.thiefActivo = true));
-  } else if (Mundo.score >= 60 && Mundo.score < 80) {
-    update(Mundo, (Mundo.escenario = escenario5));
-    update(Mundo, (Mundo.policiaActivo = false));
-    update(Mundo, (Mundo.politicoActivo = true));
-    update(Mundo, (Mundo.thiefActivo = false));
-  } else if(Mundo.score >= 80){
-    update(Mundo, (Mundo.escenario = escenario6));
-    update(Mundo, (Mundo.policiaActivo = true));
-    update(Mundo, (Mundo.politicoActivo = false));
     update(Mundo, (Mundo.thiefActivo = true));
   }
 }
