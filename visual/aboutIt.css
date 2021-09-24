@@ -70,7 +70,7 @@ img {
   background-size: 16px 16px;
   padding-right: 19px;
 }
-a:hover {
+a:hover #repo{
   border-bottom: 3px solid;
   color: rgb(190, 33, 33);
 }
