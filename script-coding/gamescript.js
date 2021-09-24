@@ -179,7 +179,7 @@ function setup() {
 
   //----------------------------------------------------------------
   mortalKombat.play();
-  frameRate(40);
+  frameRate(7);
   drawfondo();
   windowRezired();
   direcciones();
