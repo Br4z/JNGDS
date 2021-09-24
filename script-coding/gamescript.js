@@ -5,6 +5,8 @@ let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = funct
 //Preload
 let mortalKombat;
 let sonidoInvertir;
+//Musica dos
+let music;
 function preload() {
 
   cabeza_derecha_normal = loadImage('../Snake_Images/cabeza_derecha_normal.png');
@@ -59,6 +61,9 @@ function preload() {
 
   soundFormats('mp3', 'ogg', 'wav');
   mortalKombat = loadSound('../audio/themes/mortal_kombat');
+  //Musica Dos
+  music = loadSound('../audio/themes/init');
+
 
   sonidoVelocidad1 = loadSound('../audio/sfx/comodines/velocidad1.mp3');
   sonidoVelocidad2 = loadSound('../audio/sfx/comodines/velocidad2.mp3');
@@ -454,6 +459,9 @@ function cambioTablero() {
     update(Mundo, (Mundo.normalActivo = true));
   }
   else if (Mundo.score >= 2 && Mundo.score < 28) {
+    // Musica dos
+    // mortalKombat.stop();
+    // music.play();
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
@@ -816,6 +824,7 @@ function keyPressed() {
       switch (keyCode) {
         case 66:
           loop();
+          break;
         default:
           return update(Mundo, {});
       }
@@ -849,6 +858,9 @@ function keyPressed() {
         break;
       case 66:
         noLoop()
+        break;
+      case 71:
+
       default:
         return update(Mundo, {});
     }
