@@ -59,6 +59,7 @@ function preload() {
 
   soundFormats('mp3', 'ogg', 'wav');
   mortalKombat = loadSound('../audio/themes/mortal_kombat');
+  secondMusic = loadSound('../audio/themes/init.mp3');
 
   sonidoVelocidad1 = loadSound('../audio/sfx/comodines/velocidad1.mp3');
   sonidoVelocidad2 = loadSound('../audio/sfx/comodines/velocidad2.mp3');
@@ -449,11 +450,13 @@ function posicionarComida() {
 
 //------------------------------------
 function cambioTablero() {
-  if(Mundo.score<16){
+  if(Mundo.score<2){
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
   }
-  else if (Mundo.score >= 16 && Mundo.score < 28) {
+  else if (Mundo.score >= 2 && Mundo.score < 28) {
+    mortalKombat.stop();
+    secondMusic.play();
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
