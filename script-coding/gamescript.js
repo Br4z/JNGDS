@@ -713,7 +713,7 @@ function onTic(Mundo) {
     (choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true &&
       Mundo.lives < 1 &&
       invencibilidad == true) ||
-    Mundo.lives < 0
+      (hitHead(Mundo.snake, Mundo.knife) && Mundo.lives < 1)
   ) {
     // cuadradoFinal();
     juegoTerminado();
