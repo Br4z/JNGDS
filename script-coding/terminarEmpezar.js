@@ -115,6 +115,8 @@ function paraMusica() {
     music.stop();
   } else if (Mundo.escenario == escenario3) {
     music2.stop();
+  } else if (Mundo.escenario == escenario5) {
+    spider.stop();
   }
 }
 
