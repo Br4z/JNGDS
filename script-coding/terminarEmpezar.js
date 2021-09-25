@@ -101,6 +101,7 @@ function juegoNuevo(){
 // 		);
 // }
 function juegoTerminado(){
+  caminos.play();
   // window.vidasOficial = 0;
   // textAlign(CENTER, CENTER);
   // textSize(50);

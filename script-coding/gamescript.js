@@ -65,7 +65,8 @@ function preload() {
   music2 = loadSound('../audio/themes/8-Bit_Adventure');
   //Musica Dos
   music = loadSound('../audio/themes/init');
-
+  //los caminos de la vida
+  caminos = loadSound('../audio/themes/los caminos de la vida_128k.mp3')
 
   sonidoVelocidad1 = loadSound('../audio/sfx/comodines/velocidad1.mp3');
   sonidoVelocidad2 = loadSound('../audio/sfx/comodines/velocidad2.mp3');
@@ -181,6 +182,7 @@ function setup() {
 
   //----------------------------------------------------------------
   //CONFIGURACIÓN DE NIVELES DE SONIDO
+  caminos.setVolume(0.5);
   mortalKombat.setVolume(0.1);
   music.setVolume(0.5);
   music2.setVolume(0.5);
@@ -986,7 +988,7 @@ function comerItem(snake, item) {
 function reproducirMusica(numMusica){
   if (numMusica == 0){
     if (mortalKombat.isPlaying() == false) {
-      console.log("Hola");
+      //console.log("Hola");
       music2.stop();
       mortalKombat.play();
       music.stop();
@@ -1007,6 +1009,6 @@ function reproducirMusica(numMusica){
       mortalKombat.stop();
       music.stop();
       music2.play();
-    }
+  }
   }
 }
