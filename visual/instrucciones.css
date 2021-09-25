@@ -18,13 +18,15 @@ body {
   background-size: cover;
 
 }
+
 /* Efecto blur */
 #container {
   width: 400px;
-  height: 20%;
+  height: 0%;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
-  margin: 320px auto;
+  /* ES POR ESTO */
+  margin: 240px auto 0px auto;
   border: 1px solid #ffffff40;
   text-align: center;
 }
@@ -102,7 +104,8 @@ body {
 #blanco{
   bottom: 320px;
   color: rgb(197, 193, 193);
-  left: 825px;
+  /* margin: 20px 0px 0px 0px; */
+  left: 545px;
 }
 
 #blanco:hover {
@@ -112,4 +115,48 @@ body {
 
 #spanBlanco {
   background: linear-gradient(270deg, transparent, #f6ed9f);
+}
+
+
+.mainCont{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#pixelBut{
+  position: relative;
+  width: 180px;
+  height: 60px;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 60px;
+  letter-spacing: 2px;
+  margin: 20px;
+  /* margin-left: 86vh; */
+  transition: 0.5s;
+  display: inline-block;
+  font-family: "ARCADE CLASSIC", "Arial";
+}
+
+#pixelBut:hover{
+  /* background: #ec0b36 url(../backgrounds/pixel.png); */
+  background: #730bec url(../backgrounds/pixel2.png);
+  transition-delay: 0.8s;
+  background-size: 180px;
+  animation: animate 0.8s steps(8) forwards;
+}
+
+@keyframes animate{
+  0%
+  {
+    background-position-y:0;
+  }
+  100%
+  {
+    background-position-y:-480px;
+  }
 }
