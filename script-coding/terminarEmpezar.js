@@ -1,8 +1,9 @@
-
-
-//Juego nuevo
-function juegoNuevo(){
-  //mortalKombat.play();
+/*
+Contrato: none => Mundo (No recibe nada, pero al llamarla me retorna un Mundo)
+Propósito: Esta funcion va de la mano de juegoTerinado, pues se llama despues de esta función, y lo que hace es retornarme un Mundo con todo lo que tenía incialmente para así reiniciar el juego. Y finalmente me hace un loop(). Pues juego temrinado me hace un noLoop(). Así me permite vovler a iniciar el juego
+Prototipo: juegoNuevo(){}
+*/
+function juegoNuevo() {
   Mundo = {
     //Determinar la  posicion que aparecera el Snake
     snake: [
@@ -21,13 +22,8 @@ function juegoNuevo(){
       x: int(getRandom(2, 26)), //28
       y: int(getRandom(4, 25)), //26
     },
-    // cuadradoFinal: {
-    //   x: 0,
-    //   y: 0,
-    // },
     //Puntacion Inicial
     score: 0,
-
     /* FUNCIONAMIENTO DE COMODIN
       nombreComodin: {
         x: PosX;
@@ -37,7 +33,6 @@ function juegoNuevo(){
         TiempoDesactivo: Tiempo en el cual no esta en el mapa
       }
      */
-
     comodines: [
       comodinVelocidad,
       comodinInvencibilidad,
@@ -49,7 +44,6 @@ function juegoNuevo(){
       comodinGolpeAccionado,
       comodinAleatorio,
     ],
-
     //Numero de vidas inicial
     lives: 3,
     //El tiempo
@@ -84,56 +78,69 @@ function juegoNuevo(){
     policiaActivo: false,
     politicoActivo: false,
   };
-  loop()
+  loop();
 }
-
-
+//----------------------------------------------
 /*
   SISTEMA DE CANCIONES
   => Escenario1 = 0 = mortalKombat
   => Escenario2 = 1 = music
   => Escenario3 = 2 = music2
 */
-
-function paraMusica(){
-if (Mundo.escenario == escenario1) {
-  mortalKombat.stop();
-} else if (Mundo.escenario == escenario2) {
-  music.stop();
-} else if (Mundo.escenario == escenario3) {
-  music2.stop();
+/*
+Contrato: none=>function (No recibe nada como parametro pero me retorna una funcion)
+Propósito: Parar la música dependiendo del escenario actual en que se encuentre, el sistema de canciones se encuentra arriba
+Prototipo: paraMusica(){}
+*/
+function paraMusica() {
+  if (Mundo.escenario == escenario1) {
+    mortalKombat.stop();
+  } else if (Mundo.escenario == escenario2) {
+    music.stop();
+  } else if (Mundo.escenario == escenario3) {
+    music2.stop();
+  }
 }
-}
 
-function juegoTerminado(){
-  paraMusica()
+/*
+Contrato: None => Funciton (No recibe nada como parametro pero me retorna funciones)
+Propósito: Terminar el Juego cuando se llame en el gamescript. Esta funcion hace lo siguiente:
+=> Llamar a la funcon paraMusica()
+=>Empezar la musica llamada caminos
+=> Colocar la imagen de game over
+Prototipo:
+Ejemplos:
+*/
+function juegoTerminado() {
+  paraMusica();
   caminos.play();
-  // window.vidasOficial = 0;
-  // textAlign(CENTER, CENTER);
-  // textSize(50);
-  // text(' Has perdido', width / 2, height / 2); //advertencia que se muestra en pantalla en caso de que la serpiente se choque.
   image(gameOverImage, 45, 100, 480, 350);
   // fill => color de relleno del texto
   fill('#723C70');
   //stroke => color del borde del texto
   stroke('#D9D6CF');
+  //strokeWeight => Anchura del borde del texto
   strokeWeight(0.1);
+  //textFont => Fuente que se usara
   textFont(myFontTwo);
-  if(Mundo.score<100){
+  //Colocar el score en diferente posicion dependiedno si es un numero de dos digitos o de tres digitos, teniendo en cuenta que el score siempre sera un numero entero. Esto se hace debido a mejoras visuales.
+  if (Mundo.score < 100) {
     text(Mundo.score, 390, 355);
   }
-  if(Mundo.score>=100){
+  if (Mundo.score >= 100) {
     text(Mundo.score, 410, 355);
   }
-  // textSize(26);
-  // text('Pulsa cualquier tecla para continuar', width / 2, height / 1.2);
-  // textSize(12);
+  //Hacer un noLoop() de todo el juego para que no me corra y es como si el juego haya terminado
   noLoop();
 }
 
-  /*COSAS DEL SNAKE*/
-  // TODO Movimiento de la serpiente
-  // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
+/*COSAS DEL SNAKE*/
+/*
+Contrato: snake,dir => function() ( Recibe una snake y la direccion de esta para retornarme una funcion de cons() )
+Propósito: Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
+  Me guarda en una constante la cabeza del snake y me hace un 
+Prototipo: moveSnake(snake,dir)
+*/
 function moveSnake(snake, dir) {
   const head = first(snake);
   return cons(
