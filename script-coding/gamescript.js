@@ -472,11 +472,11 @@ function posicionarComida() {
 
 //------------------------------------
 function cambioTablero() {
-  if(Mundo.score<25){
+  if(Mundo.score<30){
     reproducirMusica(0);
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
-    
+
   }
   else if (Mundo.score >= 30 && Mundo.score < 80) {
     // Musica dos
@@ -840,7 +840,7 @@ function onMouseEvent(Mundo, event) {
 
 function keyPressed() {
     // jugarDeNuevo();
-    if (!isLooping() ){
+    if (!isLooping() && Mundo.lives>=0){
       switch (keyCode) {
         case 86:
           loop();
@@ -877,7 +877,8 @@ function keyPressed() {
         if ((Mundo.dir = izquierda));
         break;
       case 66://B
-        noLoop()
+        noLoop();
+        // paraMusica()
         break;
       default:
         return update(Mundo, {});
@@ -992,6 +993,7 @@ function reproducirMusica(numMusica){
       music2.stop();
       mortalKombat.play();
       music.stop();
+      caminos.stop();
 
     }
   } else if (numMusica == 1){
@@ -999,6 +1001,7 @@ function reproducirMusica(numMusica){
       mortalKombat.stop();
       music2.stop();
       music.play();
+      caminos.stop();
 
     }
 
@@ -1009,6 +1012,7 @@ function reproducirMusica(numMusica){
       mortalKombat.stop();
       music.stop();
       music2.play();
+      caminos.stop();
   }
   }
 }

@@ -86,21 +86,27 @@ function juegoNuevo(){
   };
   loop()
 }
-//JUEGO TERMINADO
-// function cuadradoFinal(){
-//     // fill(240, 240, 240);
-//     // //Stroke => color de los bordes
-//     // stroke(10, 10, 10);
-//     // //StrokeWeight => Define el ancho
-//     // strokeWeight(4);
-//     rect(
-// 			Mundo.cuadradoFinal.x * lado,
-// 			Mundo.cuadradoFinal.y * lado,
-// 			lado,
-// 			lado
-// 		);
-// }
+
+
+/*
+  SISTEMA DE CANCIONES
+  => Escenario1 = 0 = mortalKombat
+  => Escenario2 = 1 = music
+  => Escenario3 = 2 = music2
+*/
+
+function paraMusica(){
+if (Mundo.escenario == escenario1) {
+  mortalKombat.stop();
+} else if (Mundo.escenario == escenario2) {
+  music.stop();
+} else if (Mundo.escenario == escenario3) {
+  music2.stop();
+}
+}
+
 function juegoTerminado(){
+  paraMusica()
   caminos.play();
   // window.vidasOficial = 0;
   // textAlign(CENTER, CENTER);
