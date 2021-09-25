@@ -74,7 +74,9 @@ function preload() {
   //Musica Dos
   music = loadSound('../audio/themes/init');
   //los caminos de la vida
-  caminos = loadSound('../audio/themes/los caminos de la vida_128k.mp3')
+  caminos = loadSound('../audio/themes/los caminos de la vida_128k.mp3');
+  //golden Age - Spiderman
+  spider = loadSound('../audio/themes/goldenAge.mp3')
 
   sonidoVelocidad1 = loadSound('../audio/sfx/comodines/velocidad1.mp3');
   sonidoVelocidad2 = loadSound('../audio/sfx/comodines/velocidad2.mp3');
@@ -544,7 +546,7 @@ function cambioTablero() {
     reproducirMusica(0);
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
-    update(Mundo, (Mundo.thiefActivo = true));
+    update(Mundo, (Mundo.thiefActivo = false));
   }
   else if (Mundo.score >= 30 && Mundo.score < 80) {
     // Musica dos
@@ -564,6 +566,7 @@ function cambioTablero() {
     update(Mundo, (Mundo.neroActivo = true));
     update(Mundo, (Mundo.thiefActivo = false));
   } else if (Mundo.score >= 175) {
+    reproducirMusica(3);
     update(Mundo, (Mundo.escenario = escenario5));
     update(Mundo, (Mundo.neroActivo = false));
     update(Mundo, (Mundo.policiaActivo = true));
@@ -1153,6 +1156,7 @@ function reproducirMusica(numMusica){
       mortalKombat.play();
       music.stop();
       caminos.stop();
+      spider.stop();
 
     }
   } else if (numMusica == 1){
@@ -1161,18 +1165,24 @@ function reproducirMusica(numMusica){
       music2.stop();
       music.play();
       caminos.stop();
-
+      spider.stop();
     }
-
-
-
   } else if (numMusica == 2){
     if (music2.isPlaying() == false){
       mortalKombat.stop();
       music.stop();
       music2.play();
       caminos.stop();
-  }
+      spider.stop();
+    }
+  } else if (numMusica == 3){
+    if (spider.isPlaying() == false){
+      mortalKombat.stop();
+      music.stop();
+      music2.stop();
+      caminos.stop();
+      spider.play();
+    }
   }
 }
 
