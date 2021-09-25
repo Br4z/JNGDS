@@ -131,9 +131,12 @@ function juegoTerminado(){
   noLoop();
 }
 
-  /*COSAS DEL SNAKE*/
-  // TODO Movimiento de la serpiente
-  // TODO Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
+/**MOVIMIENTO DEL SNAKE
+list,vector->list
+Se encarga del movimiento del snake
+* @example [{x:15, y:15}]
+
+*/
 function moveSnake(snake, dir) {
   const head = first(snake);
   return cons(

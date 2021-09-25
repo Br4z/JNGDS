@@ -482,7 +482,7 @@ function cambioTablero() {
     reproducirMusica(0);
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
-
+    update(Mundo, (Mundo.thiefActivo = true));
   }
   else if (Mundo.score >= 30 && Mundo.score < 80) {
     // Musica dos
@@ -779,6 +779,17 @@ function onTic(Mundo) {
             },
           ],
         });
+      } else if (hitBody(Mundo.knife)) {
+        return update(Mundo, {
+          score: Mundo.score - 1,
+        });
+        /* if (Mundo.score == 0) {
+          return update(Mundo, {
+            lives: Mundo.lives - 1,
+          });
+        } else {
+          
+        } */
       } else if (knifeOut(Mundo.knife)) {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
