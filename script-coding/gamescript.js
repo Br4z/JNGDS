@@ -920,24 +920,7 @@ function onTic(Mundo) {
           timer: int(millis() / 1000),
         });
 
-      }  else if (Mundo.timer % 10 == 0) {
-        if (Mundo.escenario == escenario5){
-          update(Mundo, Mundo.knife = moveKnife(Mundo.knife));
-        }
-        console.log(Mundo.timer)
-        return update(Mundo, {
-          snake: moveSnake(Mundo.snake, Mundo.dir),
-          // cuadradoFinal: {
-          //   x: 0,
-          //   y: 0,
-          // },
-          timer: int(millis() / 1000),
-          Thief: ThiefMove(Mundo.Thief),
-          knife: duplicarKnife(Mundo.knife, Mundo.Thief),
-          start: false,
-        });
-
-      } else {
+      }   else {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           Thief: ThiefMove(Mundo.Thief),
@@ -957,10 +940,7 @@ function onTic(Mundo) {
         Mundo.snake.push({ x: 5, y: 5 });
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
-          food: {
-            x: int(getRandom(2, 26)), //28
-            y: int(getRandom(4, 25)), //26
-          },
+          food: numeroRandomComida(Mundo.snake),
           // cuadradoFinal: {
           //   x: 0,
           //   y: 0,
@@ -1213,8 +1193,8 @@ function nuevasComidas(){
     Mundo,
     (Mundo.comidas[numeroComida].tiempoActivo = getRandom(40, 60))
   );
-  update(Mundo, (Mundo.comidas[numeroComida].x = getRandom(4, 26)));
-  update(Mundo, (Mundo.comidas[numeroComida].y = getRandom(4, 26)));
+  update(Mundo, (Mundo.comidas[numeroComida].x = getRandom(4, 24)));
+  update(Mundo, (Mundo.comidas[numeroComida].y = getRandom(4, 24)));
 }
 
 function nuevoRetrasoComidas(){
