@@ -58,7 +58,7 @@
     right: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg, transparent, #f6ed9f);
+    background: linear-gradient(270deg, transparent, #ffffff);
   }
 
   .btn-neon:hover .span {
@@ -131,7 +131,7 @@
     right: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg, transparent, #f6ed9f);
+    background: linear-gradient(270deg, transparent, #ffffff);
   }
 
   .btn-neon:hover .span {

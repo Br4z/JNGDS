@@ -23,7 +23,7 @@ body {
 
 /* Efecto blur */
 #container {
-  height: 470px;
+  height: 410px;
   width: 500px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
@@ -52,15 +52,23 @@ p {
   font-weight: 500px;
   font-size: larger;
 }
-
+audio{
+  position: relative;
+  left: 175px;
+  bottom: 60px;
+}
 img {
-  width: 50%;
+  width: 30%;
+  position: relative;
+  top: 30px;
+  right: 300px;
 }
 
-a {
-  margin: 150px 0px 20px 80px ;
+a  {
   position: absolute;
 }
+
+
 
 /* Boton */
 
@@ -89,6 +97,9 @@ a {
   background-color: #007bff;
   color: #fff;
   transition: background-color 0.15s ease-in-out;
+  margin-top: 150px;
+  right: 190px;
+  position: relative;
 }
 
 .btn-bootstrap:hover,
@@ -105,7 +116,6 @@ a {
 .btn-neon {
   display: inline-block;
   margin: 0px 80px;
-  display: inline-block;
   padding: 10px 10px;
   color: rgb(197, 193, 193);
   letter-spacing: 4px;
@@ -114,7 +124,7 @@ a {
   overflow: hidden;
   transition: 0.2s;
   font-family: "ARCADE CLASSIC", "Arial";
-  top: 720px;
+  top: 660px;
 
 }
 
