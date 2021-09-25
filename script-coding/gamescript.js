@@ -80,6 +80,9 @@ function preload() {
   sonidoTombos2 = loadSound('../audio/sfx/comodines/velocidad2.mp3');
   sonidoGolpeAccionado1 = loadSound('../audio/sfx/comodines/golpeAccionado1.mp3');
   sonidoGolpeAccionado2 = loadSound('../audio/sfx/comodines/golpeAccionado2.mp3');
+
+  golpe = loadSound('../audio/sfx/general/golpePared.mp3');
+  comida1 = loadSound('../audio/sfx/general/comida1.mp3')
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -187,18 +190,21 @@ function setup() {
   music.setVolume(0.5);
   music2.setVolume(0.5);
 
-  sonidoVelocidad1.setVolume(0.8);
-  sonidoVelocidad2.setVolume(0.8);
-  sonidoInvencibilidad1.setVolume(0.8);
-  sonidoInvencibilidad2.setVolume(0.8);
-  sonidoPuntos1.setVolume(0.8);
-  sonidoPuntos2.setVolume(0.8);
-  sonidoVidaMas.setVolume(0.8);
-  sonidoInvertir.setVolume(0.8);
-  sonidoTombos1.setVolume(0.8);
-  sonidoTombos2.setVolume(0.8);
-  sonidoGolpeAccionado1.setVolume(0.8);
-  sonidoGolpeAccionado2.setVolume(0.8);
+  sonidoVelocidad1.setVolume(0.7);
+  sonidoVelocidad2.setVolume(0.7);
+  sonidoInvencibilidad1.setVolume(0.7);
+  sonidoInvencibilidad2.setVolume(0.7);
+  sonidoPuntos1.setVolume(0.7);
+  sonidoPuntos2.setVolume(0.7);
+  sonidoVidaMas.setVolume(0.7);
+  sonidoInvertir.setVolume(0.7);
+  sonidoTombos1.setVolume(0.7);
+  sonidoTombos2.setVolume(0.7);
+  sonidoGolpeAccionado1.setVolume(0.7);
+  sonidoGolpeAccionado2.setVolume(0.7);
+
+  golpe.setVolume(0.3);
+  comida1.setVolume(0.9);
 
   //----------------------------------------------------------------
   //mortalKombat.play();
@@ -669,6 +675,7 @@ function onTic(Mundo) {
     //margenes(Mundo.snake[0].x,Mundo.sanke[0].y)==true
     // escenario[Mundo.snake[0].y][0] == 2 ||
   ) {
+    golpe.play();
     countLives = Mundo.lives - 1;
     return update(Mundo, {
       snake: [
@@ -719,6 +726,7 @@ function onTic(Mundo) {
     if (Mundo.thiefActivo == true) {
       // Saber si la serpiente come
       if (comerItem(Mundo.snake, Mundo.food)) {
+        comida1.play();
         Mundo.snake.push({ x: 5, y: 5 });
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -736,6 +744,7 @@ function onTic(Mundo) {
         //Comprueba si el tiempoActivo de velocidad es diferente de cero para restarle
         //Movimiento normal del Snake junto al del Thief.
       } else if (hitHead(Mundo.snake, Mundo.knife)) {
+        golpe.play();
         countLives = Mundo.lives - 1;
         return update(Mundo, {
           snake: [
@@ -792,6 +801,7 @@ function onTic(Mundo) {
     } else {
       // Saber si la serpiente come
       if (comerItem(Mundo.snake, Mundo.food)) {
+        comida1.play();
         Mundo.snake.push({ x: 5, y: 5 });
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),

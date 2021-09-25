@@ -85,6 +85,7 @@ function accionVelocidad(){
   update(Mundo, Mundo.snake = moveSnake(Mundo.snake, Mundo.dir));
   update(Mundo, Mundo.comodines[0].tiempoActivo = 0)
   if (Mundo.comodines[0].tiempoAccionado == 0){
+    update(Mundo, Mundo.score++);
     sonidoVelocidad1.play()
     posicionInactiva(0);
     update(Mundo, Mundo.comodines[0].tiempoAccionado = 40);
@@ -220,6 +221,7 @@ function accionInversion(){
 function accionTombos(){
   update(Mundo, Mundo.comodines[5].tiempoActivo = 0)
   if (Mundo.comodines[5].tiempoAccionado == 0){
+    update(Mundo, Mundo.score = Mundo.score + 3);
     sonidoTombos1.play();
     posicionInactiva(5);
     update(Mundo, Mundo.comodines[5].tiempoAccionado = 55);
@@ -248,6 +250,7 @@ function accionReduccionPuntos(){
   update(Mundo, Mundo.comodines[6].tiempoActivo = 0);
   console.log(Mundo.comodines[6].tiempoAccionado);
   if (Mundo.comodines[6].tiempoAccionado == 0){
+    update(Mundo, Mundo.score = Mundo.score + 3);
     sonidoPuntos2.play();
     posicionInactiva(6);
     update(Mundo, Mundo.comodines[6].tiempoAccionado = 40);
@@ -276,6 +279,7 @@ function accionReduccionPuntos(){
 function accionGolpeAccionado() {
   update(Mundo, (Mundo.comodines[7].tiempoActivo = 0));
   if (Mundo.comodines[7].tiempoAccionado == 0) {
+    update(Mundo, Mundo.score = Mundo.score + 4);
     sonidoGolpeAccionado1.play();
     window.vidasOficial = Mundo.lives;
     posicionInactiva(7);
