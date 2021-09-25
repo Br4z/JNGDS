@@ -1,0 +1,35 @@
+/* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-image: url(/backgrounds/FondoPblur.jpg); /* Fondo principal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+}
+
+/* Efecto blur */
+#container {
+  height: 400px;
+  width: 400px;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px #000;
+  margin: 50px auto;
+  border: 1px solid #ffffff40;
+  text-align: center;
+  font-family: "Francois One", sans-serif;
+}
+
+.blur {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(243, 243, 243, 0.2);
+}
+
+
