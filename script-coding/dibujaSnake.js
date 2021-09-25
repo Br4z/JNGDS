@@ -1,34 +1,64 @@
+/*
+Contrato: none=>function (No recibe ningun parametro pero retorna una funcion)
+Propósito: dibujar la cabeza del Snake a traves de la funcion propia de P5.JS image()
+Prototipo: dibujaCabeza()
+*/
 
-
-
-function dibujaCabeza(){
+function dibujaCabeza() {
   image(
-      Mundo.imagenActualCabeza,
-      Mundo.snake[x].x * 20,//posicion multiplicar por 20 porque si XD
-      Mundo.snake[x].y * 20,
-      lado,
-      lado,
-      0,
-      0,
-      20,
-      20
-    );
+    //Imagen a Dibujar
+    Mundo.imagenActualCabeza,
+    //Posicion actual del snake con indice[x]. Se multiplica por veinte (tamaño de lados) para que se adequea al tablero
+    Mundo.snake[x].x * 20,
+    Mundo.snake[x].y * 20,
+    //Tamaño de lado
+    lado,
+    //Tamaño de lado
+    lado,
+    //Posicion x donde empezara a cortar la imagen definida
+    0,
+    //Posicion y donde empezara a cortar la imagen definida
+    0,
+    //Ancho de la Imagen
+    20,
+    //Alto de la Imagen
+    20
+  );
 }
 
-function dibujaCola(){
+/*
+Contrato: none=>function (No recibe ningun parametro pero retorna una funcion)
+Propósito: dibujar la cola del Snake a traves de la funcion propia de P5.JS image()
+Prototipo: dibujaCola()
+*/
+function dibujaCola() {
   image(
-      Mundo.imagenActualCola,
-      Mundo.snake[x].x * 20,
-      Mundo.snake[x].y * 20,
-      lado,
-      lado,
-      0,
-      0,
-      20,
-      20
-    );
+    //Imagen a Dibujar
+    Mundo.imagenActualCola,
+    //Posicion actual del snake con indice[x]. Se multiplica por veinte (tamaño de lados) para que se adequea al tablero
+    Mundo.snake[x].x * 20,
+    Mundo.snake[x].y * 20,
+    //Tamaño de lado
+    lado,
+    //Tamaño de lado
+    lado,
+    //Posicion x donde empezara a cortar la imagen definida
+    0,
+    //Posicion y donde empezara a cortar la imagen definida
+    0,
+    //Ancho de la Imagen
+    20,
+    //Alto de la Imagen
+    20
+  );
 }
 //--------------------------------------------
+/*
+Contrato: none => function (No recibe ningun parametro pero retorna una funcion)
+Propósito: Cambiar la imagen de la Cabeza y la imagen de la cola dependiendo del personaje que este activo actualmente. En la funcion los nombres estan bien relacionados entonces seria facil entenderlo.
+Hay que tener en cuenta que la cabeza cambia en funcion de la direccion, entonces una vez verifica cual es la skin de snake activo, me verifica la direccion de la snake, y dependiendo de la direccion me cambia la orientacion de la cabeza. La cola no cambia de direccion pues siempre es la misma.
+Prototipo: cambiaCabezaCola()
+*/
 function cambiaCabezaCola() {
   if (Mundo.normalActivo == true) {
     if (Mundo.dir == abajo) {
