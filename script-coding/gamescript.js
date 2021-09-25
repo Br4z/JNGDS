@@ -60,6 +60,14 @@ function preload() {
   knifeUp = loadImage("../visual/enemigos/cuchilloArriba.png");
   knifeSide = loadImage("../visual/enemigos/cuchilloDerecha.png");
 
+  aspirina = loadImage('../visual/comida/aspirina.png');
+  chontaduros = loadImage('../visual/comida/chontaduros.png');
+  gaseosa = loadImage('../visual/comida/gaseosa.png');
+  lean = loadImage('../visual/comida/lean.png');
+  pegantes = loadImage('../visual/comida/pegante.png');
+  zumo = loadImage('../visual/comida/zumo.png');
+
+
   soundFormats('mp3', 'ogg', 'wav');
   mortalKombat = loadSound('../audio/themes/mortal_kombat');
   music2 = loadSound('../audio/themes/8-Bit_Adventure');
@@ -157,6 +165,7 @@ x: int(getRandom(0,28)) ,  //28
 y: int(getRandom(4,26)), //26
 */
 
+//CREACION DE COMODINES
 const comodinVelocidad = new comodin(getRandom(2,26),getRandom(4,25),40);
 const comodinInvencibilidad = new comodin(-1, -1);
 const comodinRegeneracion = new comodin(-1, -1);
@@ -166,6 +175,13 @@ const comodinTombos = new comodin(-1, -1);
 const comodinReduccionPuntos = new comodin(-1, -1);
 const comodinGolpeAccionado = new comodin(-1, -1);
 const comodinAleatorio = new comodin(-1, -1);
+
+//CREACION DE COMIDAS
+const zumito = new comodin(getRandom(2,26),getRandom(4,25),40);
+const pegante = new comodin(getRandom(2,26),getRandom(4,25),40);
+const moradito = new comodin(-1, -1);
+const chontaduro = new comodin(-1, -1);
+const cocaCola = new comodin(-1, -1);
 
 
 // TODO Dibujar la comida
@@ -187,8 +203,8 @@ function setup() {
   //CONFIGURACIÓN DE NIVELES DE SONIDO
   caminos.setVolume(0.5);
   mortalKombat.setVolume(0.1);
-  music.setVolume(0.5);
-  music2.setVolume(0.5);
+  music.setVolume(0.4);
+  music2.setVolume(0.1);
 
   sonidoVelocidad1.setVolume(0.7);
   sonidoVelocidad2.setVolume(0.7);
@@ -262,6 +278,13 @@ function setup() {
       comodinAleatorio,
     ],
 
+    comidas: [
+      pegante,
+      moradito,
+      chontaduro,
+      cocaCola,
+    ],
+
     //Numero de vidas inicial
     lives: 3,
     //El tiempo
@@ -284,6 +307,7 @@ function setup() {
     ],
     start:true,
     retrasoComodines: 80,
+    retrasoComidas: 80,
     scoreMas: 1,
     activosMiniEnemigos: false,
     imagenActualCabeza: cabeza_derecha_normal,
@@ -455,8 +479,46 @@ function drawGame(Mundo) {
       aleatorio,
       Mundo.comodines[8].x *20,
       Mundo.comodines[8].y *20,
-      lado,//wei
-      lado,//hei
+      lado,
+      lado,
+    )
+  }
+
+  //DIBUJA COMIDAS 
+  if (Mundo.comidas[0].tiempoActivo > 0){
+    image(
+      pegantes,
+      Mundo.comidas[0].x * 20,
+      Mundo.comidas[0].y * 20,
+      lado,
+      lado,
+    )
+  }
+  if (Mundo.comidas[1].tiempoActivo > 0){
+    image(
+      lean,
+      Mundo.comidas[1].x * 20,
+      Mundo.comidas[1].y * 20,
+      lado,
+      lado,
+    )
+  }
+  if (Mundo.comidas[2].tiempoActivo > 0){
+    image(
+      chontaduros,
+      Mundo.comidas[2].x * 20,
+      Mundo.comidas[2].y * 20,
+      lado,
+      lado,
+    )
+  }
+  if (Mundo.comidas[3].tiempoActivo > 0){
+    image(
+      gaseosa,
+      Mundo.comidas[3].x * 20,
+      Mundo.comidas[3].y * 20,
+      lado,
+      lado,
     )
   }
 
@@ -539,6 +601,14 @@ function onTic(Mundo) {
 
   }
 
+  if (Mundo.retrasoComidas > 0){
+    restaRetrasoComidas();
+
+  } else if (Mundo.retrasoComidas == 0){
+    nuevasComidas();
+    nuevoRetrasoComidas();
+  }
+
   countLives = Mundo.lives;
   drawUi();
   if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){ //Bueno (yellow)
@@ -564,7 +634,55 @@ function onTic(Mundo) {
     accionAleatorio();
   }
 
-  //[4,5,7,0,1,2,3,0,1,2,3,4,5,7,4,5,7,4,5,7,4,5,7]
+  if (comerItem(Mundo.snake, Mundo.comidas[0])){
+    Mundo.snake.push({ x: 5, y: 5 });
+    puntajeComida(1, 0);
+  } else if (comerItem(Mundo.snake, Mundo.comidas[1])){
+    Mundo.snake.push({ x: 5, y: 5 });
+    puntajeComida(3, 1);
+  } else if (comerItem(Mundo.snake, Mundo.comidas[2])){
+    Mundo.snake.push({ x: 5, y: 5 });
+    puntajeComida(5, 2);
+  } else if (comerItem(Mundo.snake, Mundo.comidas[3])){
+    Mundo.snake.push({ x: 5, y: 5 });
+    puntajeComida(10, 3);
+  }
+
+  if (Mundo.comidas[0].tiempoActivo > 0){
+    update(Mundo, Mundo.comidas[0].tiempoActivo--);
+    
+    if (Mundo.comodines[0].tiempoActivo == 1){
+      posicionInactivaComida(0);
+
+    }
+  }
+
+  if (Mundo.comidas[1].tiempoActivo > 0){
+    update(Mundo, Mundo.comidas[1].tiempoActivo--);
+    
+    if (Mundo.comodines[1].tiempoActivo == 1){
+      posicionInactivaComida(1);
+      
+    }
+  }
+
+  if (Mundo.comidas[2].tiempoActivo > 0){
+    update(Mundo, Mundo.comidas[2].tiempoActivo--);
+    
+    if (Mundo.comodines[2].tiempoActivo == 1){
+      posicionInactivaComida(2);
+      
+    }
+  }
+
+  if (Mundo.comidas[3].tiempoActivo > 0){
+    update(Mundo, Mundo.comidas[3].tiempoActivo--);
+    
+    if (Mundo.comodines[3].tiempoActivo == 1){
+      posicionInactivaComida(3);
+      
+    }
+  }
 
   if (Mundo.comodines[0].tiempoActivo > 0){
     restaTiempo(0);
@@ -780,11 +898,31 @@ function onTic(Mundo) {
           ],
         });
       } else if (knifeOut(Mundo.knife)) {
+        update(Mundo, Mundo.knife = moveKnife(Mundo.knife));
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
+          Thief: ThiefMove(Mundo.Thief),
           knife: despawnKnife(Mundo.knife),
           timer: int(millis() / 1000),
         });
+
+      }  else if (Mundo.timer % 10 == 0) {
+        if (Mundo.escenario == escenario5){
+          update(Mundo, Mundo.knife = moveKnife(Mundo.knife));
+        }
+        console.log(Mundo.timer)
+        return update(Mundo, {
+          snake: moveSnake(Mundo.snake, Mundo.dir),
+          // cuadradoFinal: {
+          //   x: 0,
+          //   y: 0,
+          // },
+          timer: int(millis() / 1000),
+          Thief: ThiefMove(Mundo.Thief),
+          knife: duplicarKnife(Mundo.knife, Mundo.Thief),
+          start: false,
+        });
+
       } else {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
@@ -1025,4 +1163,39 @@ function reproducirMusica(numMusica){
       caminos.stop();
   }
   }
+}
+
+const tiempoRetrasoComidas = 80;
+
+function puntajeComida(puntaje, comodin){
+  comida1.play();
+  update(Mundo, Mundo.score = Mundo.score + puntaje);
+  posicionInactivaComida(comodin);
+  update(Mundo, Mundo.comidas[comodin].tiempoAccionado = 0);
+  update(Mundo, Mundo.retrasoComidas = tiempoRetrasoComidas);
+}
+
+function posicionInactivaComida(nComida){
+  update(Mundo, Mundo.comidas[nComida].x = -1);
+  update(Mundo, Mundo.comidas[nComida].y = -1);
+  update(Mundo, Mundo.retrasoComidas = tiempoRetrasoComidas)
+}
+function restaRetrasoComidas(){
+  update(Mundo, Mundo.retrasoComidas--);
+}
+
+function nuevasComidas(){
+  const listaComidas = [0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 3];
+  const numeroComida = listaComidas[getRandom(0, length(listaComidas))];
+
+  update(
+    Mundo,
+    (Mundo.comidas[numeroComida].tiempoActivo = getRandom(40, 60))
+  );
+  update(Mundo, (Mundo.comidas[numeroComida].x = getRandom(4, 26)));
+  update(Mundo, (Mundo.comidas[numeroComida].y = getRandom(4, 26)));
+}
+
+function nuevoRetrasoComidas(){
+  update(Mundo, Mundo.retrasoComidas = tiempoRetrasoComidas);
 }

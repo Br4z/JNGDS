@@ -71,7 +71,7 @@ function nuevoRetraso(){
   update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
 }
 
-const tiempoRetraso = 70;
+const tiempoRetraso = 80;
 
 //ACCIONES DE LOS COMODINES
 
@@ -111,7 +111,7 @@ function accionInvencibilidad(){
   if (Mundo.comodines[1].tiempoAccionado == 0){
     sonidoInvencibilidad2.play();
     posicionInactiva(1);
-    update(Mundo, Mundo.comodines[1].tiempoAccionado = 40);
+    update(Mundo, Mundo.comodines[1].tiempoAccionado = 60);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
 
   } else {
@@ -139,7 +139,7 @@ function accionAumentoPuntos(){
   if (Mundo.comodines[2].tiempoAccionado == 0){
     sonidoPuntos1.play();
     posicionInactiva(2);
-    update(Mundo, Mundo.comodines[2].tiempoAccionado = 40);
+    update(Mundo, Mundo.comodines[2].tiempoAccionado = 60);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
     update(Mundo, Mundo.scoreMas = 2);
 
@@ -224,7 +224,7 @@ function accionTombos(){
     update(Mundo, Mundo.score = Mundo.score + 3);
     sonidoTombos1.play();
     posicionInactiva(5);
-    update(Mundo, Mundo.comodines[5].tiempoAccionado = 55);
+    update(Mundo, Mundo.comodines[5].tiempoAccionado = 60);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
   } else {
     // console.log("Hola");
@@ -253,7 +253,7 @@ function accionReduccionPuntos(){
     update(Mundo, Mundo.score = Mundo.score + 3);
     sonidoPuntos2.play();
     posicionInactiva(6);
-    update(Mundo, Mundo.comodines[6].tiempoAccionado = 40);
+    update(Mundo, Mundo.comodines[6].tiempoAccionado = 60);
     update(Mundo, Mundo.retrasoComodines = tiempoRetraso);
     update(Mundo, Mundo.scoreMas = -1);
 
@@ -283,13 +283,13 @@ function accionGolpeAccionado() {
     sonidoGolpeAccionado1.play();
     window.vidasOficial = Mundo.lives;
     posicionInactiva(7);
-    update(Mundo, (Mundo.comodines[7].tiempoAccionado = 40));
+    update(Mundo, (Mundo.comodines[7].tiempoAccionado = 60));
     update(Mundo, (Mundo.retrasoComodines = tiempoRetraso));
   } else {
     update(Mundo, Mundo.comodines[7].tiempoAccionado--);
   }
 
-  if (Mundo.comodines[7].tiempoAccionado > 1) {
+  if (Mundo.comodines[7].tiempoAccionado > 0) {
     update(Mundo, (Mundo.lives = 0));
   } else {
     sonidoGolpeAccionado2.play();

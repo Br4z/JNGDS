@@ -99,6 +99,10 @@ function duplicarKnife(knife, Thief) {
 }
 // }
 
+function hacerDosCosas(knife, Thief) {
+
+}
+
 //TODO Funcion que se encarga del golpe
 function hitHead(snake, knife) {
   // if(Mundo.thiefActivo==true){
