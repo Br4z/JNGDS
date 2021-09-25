@@ -161,3 +161,39 @@ function despawnKnife(knife) {
   return knife.slice(0,length(knife)-1)
 }
 // }
+
+function hitBody(lista) {
+  forEach(lista, (element) => {
+    forEach(Mundo.snake, (elementD) => {
+      x = lookupx(Mundo.snake, elementD);
+      if (element.x == elementD.x && element.y == elementD.y && x != 0) {
+        update(Mundo, (Mundo.score = Mundo.score - 1));
+      }
+    });
+  });
+}
+/*
+function hitBody(snake,knife) {
+  const head = first(knife);
+  const body =first(snake)
+  if (isEmpty(knife)) {
+    return false;
+  } else {
+    if (isEmpty(rest(knife))) {
+      if (
+        (body.x == head.x && body.y == head.y)        
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (body.x == head.x && body.y == head.y) {
+        return true;
+      } else {
+        return hitBody(rest(snake), rest(knife));
+      }
+    }
+  }
+}
+*/
