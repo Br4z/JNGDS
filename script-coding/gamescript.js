@@ -309,7 +309,7 @@ function setup() {
     ],
     start:true,
     retrasoComodines: 80,
-    retrasoComidas: 80,
+    retrasoComidas: 50,
     scoreMas: 1,
     activosMiniEnemigos: false,
     imagenActualCabeza: cabeza_derecha_normal,
@@ -486,7 +486,7 @@ function drawGame(Mundo) {
     )
   }
 
-  //DIBUJA COMIDAS 
+  //DIBUJA COMIDAS
   if (Mundo.comidas[0].tiempoActivo > 0){
     image(
       pegantes,
@@ -653,7 +653,7 @@ function onTic(Mundo) {
 
   if (Mundo.comidas[0].tiempoActivo > 0){
     update(Mundo, Mundo.comidas[0].tiempoActivo--);
-    
+
     if (Mundo.comodines[0].tiempoActivo == 1){
       posicionInactivaComida(0);
 
@@ -662,28 +662,28 @@ function onTic(Mundo) {
 
   if (Mundo.comidas[1].tiempoActivo > 0){
     update(Mundo, Mundo.comidas[1].tiempoActivo--);
-    
+
     if (Mundo.comodines[1].tiempoActivo == 1){
       posicionInactivaComida(1);
-      
+
     }
   }
 
   if (Mundo.comidas[2].tiempoActivo > 0){
     update(Mundo, Mundo.comidas[2].tiempoActivo--);
-    
+
     if (Mundo.comodines[2].tiempoActivo == 1){
       posicionInactivaComida(2);
-      
+
     }
   }
 
   if (Mundo.comidas[3].tiempoActivo > 0){
     update(Mundo, Mundo.comidas[3].tiempoActivo--);
-    
+
     if (Mundo.comodines[3].tiempoActivo == 1){
       posicionInactivaComida(3);
-      
+
     }
   }
 
@@ -909,7 +909,7 @@ function onTic(Mundo) {
             lives: Mundo.lives - 1,
           });
         } else {
-          
+
         } */
       } else if (knifeOut(Mundo.knife)) {
         update(Mundo, Mundo.knife = moveKnife(Mundo.knife));
@@ -1186,7 +1186,10 @@ function restaRetrasoComidas(){
 }
 
 function nuevasComidas(){
-  const listaComidas = [0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 3];
+  const listaComidas = [
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 3, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2,
+    0 , 2, 0, 0, 0, 1, 1
+  ];
   const numeroComida = listaComidas[getRandom(0, length(listaComidas))];
 
   update(
