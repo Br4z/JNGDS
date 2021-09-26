@@ -3,11 +3,13 @@
 let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = functionalLight;
 
 //Preload
-let mortalKombat;
+let theLastOfUs;
 let sonidoInvertir;
 //Musica dos
-let music;
-let music2;
+let azur;
+let spider;
+let himno;
+let within;
 function preload() {
 
   cabeza_derecha_normal = loadImage('../Snake_Images/cabeza_derecha_normal.png');
@@ -69,12 +71,12 @@ function preload() {
 
 
   soundFormats('mp3', 'ogg', 'wav');
-  mortalKombat = loadSound('../audio/themes/mortal_kombat');
-  music2 = loadSound('../audio/themes/8-Bit_Adventure');
-  //Musica Dos
-  music = loadSound('../audio/themes/init');
+  theLastOfUs = loadSound('../audio/themes/theLastOfUs.mp3');
+  himno = loadSound('../audio/themes/himno.mp3');
+  azur = loadSound('../audio/themes/azur.mp3');
+  within = loadSound('../audio/themes/within.mp3');
   //los caminos de la vida
-  caminos = loadSound('../audio/themes/los caminos de la vida_128k.mp3');
+  caminos = loadSound('../audio/themes/Caminos.mp3');
   //golden Age - Spiderman
   spider = loadSound('../audio/themes/goldenAge.mp3')
 
@@ -204,9 +206,11 @@ function setup() {
   //----------------------------------------------------------------
   //CONFIGURACIÓN DE NIVELES DE SONIDO
   caminos.setVolume(0.5);
-  mortalKombat.setVolume(0.1);
-  music.setVolume(0.4);
-  music2.setVolume(0.1);
+  theLastOfUs.setVolume(0.2);
+  within.setVolume(0.2);
+  himno.setVolume(0.2)
+  azur.setVolume(0.2)
+  spider.setVolume(0.2)
 
   sonidoVelocidad1.setVolume(0.7);
   sonidoVelocidad2.setVolume(0.7);
@@ -225,7 +229,7 @@ function setup() {
   comida1.setVolume(0.9);
 
   //----------------------------------------------------------------
-  //mortalKombat.play();
+  //theLastOfUs.play();
   frameRate(7);
   drawfondo();
   windowRezired();
@@ -561,12 +565,13 @@ function cambioTablero() {
     update(Mundo, (Mundo.politicoActivo = true));
     update(Mundo, (Mundo.thiefActivo = true));
   } else if (Mundo.score >= 125 && Mundo.score < 175) {
+    reproducirMusica(3);
     update(Mundo, (Mundo.escenario = escenario4));
     update(Mundo, (Mundo.politicoActivo = false));
     update(Mundo, (Mundo.neroActivo = true));
     update(Mundo, (Mundo.thiefActivo = false));
   } else if (Mundo.score >= 175) {
-    reproducirMusica(3);
+    reproducirMusica(4);
     update(Mundo, (Mundo.escenario = escenario5));
     update(Mundo, (Mundo.neroActivo = false));
     update(Mundo, (Mundo.policiaActivo = true));
@@ -1128,40 +1133,62 @@ function comerItem(snake, item) {
   }
 }
 
-function reproducirMusica(numMusica){
-  if (numMusica == 0){
-    if (mortalKombat.isPlaying() == false) {
-      //console.log("Hola");
-      music2.stop();
-      mortalKombat.play();
-      music.stop();
-      caminos.stop();
-      spider.stop();
 
-    }
-  } else if (numMusica == 1){
-    if (music.isPlaying() == false){
-      mortalKombat.stop();
-      music2.stop();
-      music.play();
+/**
+  SISTEMA DE CANCIONES:
+  *Escenario1 => 0 => theLastOfUs
+  *Escenario2 => 1 => within
+  *Escenario3 => 2 => azure
+  *Escenario4 => 3 => himno
+  *Escenario5 => 4 => spider
+*/
+
+function reproducirMusica(numMusica){
+  if (numMusica == 0) {
+    if (theLastOfUs.isPlaying() == false) {
+      //console.log("Hola");
+      within.stop();
+      theLastOfUs.play();
+      himno.stop();
       caminos.stop();
       spider.stop();
+      azur.stop();
     }
-  } else if (numMusica == 2){
-    if (music2.isPlaying() == false){
-      mortalKombat.stop();
-      music.stop();
-      music2.play();
+  } else if (numMusica == 1) {
+    if (within.isPlaying() == false) {
+      theLastOfUs.stop();
+      azur.stop();
+      within.play();
       caminos.stop();
       spider.stop();
+      himno.stop();
     }
-  } else if (numMusica == 3){
-    if (spider.isPlaying() == false){
-      mortalKombat.stop();
-      music.stop();
-      music2.stop();
+  } else if (numMusica == 2) {
+    if (himno.isPlaying() == false) {
+      theLastOfUs.stop();
+      within.stop();
+      himno.stop();
+      caminos.stop();
+      spider.stop();
+      azur.play();
+    }
+  } else if (numMusica == 3) {
+    if (azur.isPlaying() == false) {
+      theLastOfUs.stop();
+      within.stop();
+      himno.play();
+      caminos.stop();
+      spider.stop();
+      azur.stop();
+    }
+  } else if (numMusica == 4) {
+    if (spider.isPlaying() == false) {
+      theLastOfUs.stop();
+      within.stop();
+      himno.stop();
       caminos.stop();
       spider.play();
+      azur.stop();
     }
   }
 }
