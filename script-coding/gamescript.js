@@ -1,6 +1,7 @@
 /*INTRODUCCION*/
 // Importar Funcional Light
-let { append, cons, first, isEmpty, isList, length, rest, map, forEach } = functionalLight;
+let { append, cons, first, isEmpty, isList, length, rest, map, forEach } =
+  functionalLight;
 
 //Preload
 let theLastOfUs;
@@ -11,90 +12,127 @@ let spider;
 let himno;
 let within;
 function preload() {
+  cabeza_derecha_normal = loadImage(
+    "../Snake_Images/cabeza_derecha_normal.png"
+  );
+  cabeza_izquierda_normal = loadImage(
+    "../Snake_Images/cabeza_izquierda_normal.png"
+  );
+  cabeza_arriba_normal = loadImage("../Snake_Images/cabeza_arriba_normal.png");
+  cabeza_abajo_normal = loadImage("../Snake_Images/cabeza_abajo_normal.png");
+  cola_normal = loadImage("../Snake_Images/cola_normal.png");
 
-  cabeza_derecha_normal = loadImage('../Snake_Images/cabeza_derecha_normal.png');
-  cabeza_izquierda_normal = loadImage('../Snake_Images/cabeza_izquierda_normal.png')
-  cabeza_arriba_normal = loadImage('../Snake_Images/cabeza_arriba_normal.png')
-  cabeza_abajo_normal = loadImage('../Snake_Images/cabeza_abajo_normal.png')
-  cola_normal = loadImage('../Snake_Images/cola_normal.png')
+  cabeza_abajo_nero = loadImage("../Snake_Images/cabeza_abajo_nero.png");
+  cabeza_arriba_nero = loadImage("../Snake_Images/cabeza_arriba_nero.png");
+  cabeza_derecha_nero = loadImage("../Snake_Images/cabeza_derecha_nero.png");
+  cabeza_izquierda_nero = loadImage(
+    "../Snake_Images/cabeza_izquierda_nero.png"
+  );
+  cola_nero = loadImage("../Snake_Images/cola_nero.png");
 
-  cabeza_abajo_nero = loadImage('../Snake_Images/cabeza_abajo_nero.png')
-  cabeza_arriba_nero = loadImage('../Snake_Images/cabeza_arriba_nero.png')
-  cabeza_derecha_nero = loadImage('../Snake_Images/cabeza_derecha_nero.png')
-  cabeza_izquierda_nero = loadImage('../Snake_Images/cabeza_izquierda_nero.png')
-  cola_nero = loadImage('../Snake_Images/cola_nero.png')
+  cabeza_abajo_policia = loadImage("../Snake_Images/cabeza_abajo_policia.png");
+  cabeza_arriba_policia = loadImage(
+    "../Snake_Images/cabeza_arriba_policia.png"
+  );
+  cabeza_derecha_policia = loadImage(
+    "../Snake_Images/cabeza_derecha_policia.png"
+  );
+  cabeza_izquierda_policia = loadImage(
+    "../Snake_Images/cabeza_izquierda_policia.png"
+  );
+  cola_policia = loadImage("../Snake_Images/cola_policia.png");
 
-    cabeza_abajo_policia = loadImage('../Snake_Images/cabeza_abajo_policia.png')
-  cabeza_arriba_policia = loadImage('../Snake_Images/cabeza_arriba_policia.png')
-  cabeza_derecha_policia = loadImage('../Snake_Images/cabeza_derecha_policia.png')
-  cabeza_izquierda_policia = loadImage('../Snake_Images/cabeza_izquierda_policia.png')
-  cola_policia = loadImage('../Snake_Images/cola_policia.png')
+  cabeza_abajo_vendedor = loadImage(
+    "../Snake_Images/cabeza_abajo_vendedor.png"
+  );
+  cabeza_arriba_vendedor = loadImage(
+    "../Snake_Images/cabeza_arriba_vendedor.png"
+  );
+  cabeza_derecha_vendedor = loadImage(
+    "../Snake_Images/cabeza_derecha_vendedor.png"
+  );
+  cabeza_izquierda_vendedor = loadImage(
+    "../Snake_Images/cabeza_izquierda_vendedor.png"
+  );
+  cola_vendedor = loadImage("../Snake_Images/cola_vendedor.png");
 
-  cabeza_abajo_vendedor = loadImage('../Snake_Images/cabeza_abajo_vendedor.png')
-  cabeza_arriba_vendedor = loadImage('../Snake_Images/cabeza_arriba_vendedor.png')
-  cabeza_derecha_vendedor = loadImage('../Snake_Images/cabeza_derecha_vendedor.png')
-  cabeza_izquierda_vendedor = loadImage('../Snake_Images/cabeza_izquierda_vendedor.png')
-  cola_vendedor = loadImage('../Snake_Images/cola_vendedor.png')
+  cabeza_abajo_politico = loadImage(
+    "../Snake_Images/cabeza_abajo_politico.png"
+  );
+  cabeza_arriba_politico = loadImage(
+    "../Snake_Images/cabeza_arriba_politico.png"
+  );
+  cabeza_derecha_politico = loadImage(
+    "../Snake_Images/cabeza_derecha_politico.png"
+  );
+  cabeza_izquierda_politico = loadImage(
+    "../Snake_Images/cabeza_izquierda_politico.png"
+  );
+  cola_politico = loadImage("../Snake_Images/cola_politico.png");
 
-    cabeza_abajo_politico = loadImage('../Snake_Images/cabeza_abajo_politico.png');
-    cabeza_arriba_politico = loadImage('../Snake_Images/cabeza_arriba_politico.png');
-    cabeza_derecha_politico = loadImage('../Snake_Images/cabeza_derecha_politico.png');
-    cabeza_izquierda_politico = loadImage('../Snake_Images/cabeza_izquierda_politico.png');
-    cola_politico = loadImage('../Snake_Images/cola_politico.png');
+  myFont = loadFont("../fonts/ARCADE.TTF");
+  myFontTwo = loadFont("../fonts/ARCADECLASSIC.TTF");
+  gameOverImage = loadImage("../backgrounds/gameOver.png");
 
-  myFont = loadFont('../fonts/ARCADE.TTF');
-  myFontTwo = loadFont('../fonts/ARCADECLASSIC.TTF');
-  gameOverImage = loadImage('../backgrounds/gameOver.png');
-
-  velocidad = loadImage('../visual/comodines/Potenciador_velocidad.png');
-  invencibilidad = loadImage('../visual/comodines/Invencibilidad.png');
-  aumentoPuntos =loadImage('../visual/comodines/Multiplicador_de_damage.png');
-  aumentoVida = loadImage('../visual/comodines/Vida.png');
-  tombos = loadImage('../visual/comodines/Aparecen_enemigos.png');
-  reduccionPuntos = loadImage('../visual/comodines/Reductor_de_puntos.png');
+  velocidad = loadImage("../visual/comodines/Potenciador_velocidad.png");
+  invencibilidad = loadImage("../visual/comodines/Invencibilidad.png");
+  aumentoPuntos = loadImage("../visual/comodines/Multiplicador_de_damage.png");
+  aumentoVida = loadImage("../visual/comodines/Vida.png");
+  tombos = loadImage("../visual/comodines/Aparecen_enemigos.png");
+  reduccionPuntos = loadImage("../visual/comodines/Reductor_de_puntos.png");
   //golpeAccionado = loadImage('../visual/comodines/.png');
-  invertir = loadImage('../visual/comodines/invertir_controles.png');
-  comodinMasPuntos =  loadImage('../visual/comodines/Multiplicador_de_damage.png');
-  aleatorio = loadImage('../visual/comodines/Comodin_aleatorio.png');
-  golpeAccionado = loadImage('../visual/comodines/Golpe_accionado.png');
-  tombo = loadImage('../visual/enemigos/tombo.png');
-  thief = loadImage('../visual/enemigos/nero3.png');
+  invertir = loadImage("../visual/comodines/invertir_controles.png");
+  comodinMasPuntos = loadImage(
+    "../visual/comodines/Multiplicador_de_damage.png"
+  );
+  aleatorio = loadImage("../visual/comodines/Comodin_aleatorio.png");
+  golpeAccionado = loadImage("../visual/comodines/Golpe_accionado.png");
+  tombo = loadImage("../visual/enemigos/tombo.png");
+  thief = loadImage("../visual/enemigos/nero3.png");
   knifeUp = loadImage("../visual/enemigos/cuchilloArriba.png");
   knifeSide = loadImage("../visual/enemigos/cuchilloDerecha.png");
 
-  aspirina = loadImage('../visual/comida/aspirina.png');
-  chontaduros = loadImage('../visual/comida/chontaduros.png');
-  gaseosa = loadImage('../visual/comida/gaseosa.png');
-  lean = loadImage('../visual/comida/lean.png');
-  pegantes = loadImage('../visual/comida/pegante.png');
-  zumo = loadImage('../visual/comida/zumo.png');
+  aspirina = loadImage("../visual/comida/aspirina.png");
+  chontaduros = loadImage("../visual/comida/chontaduros.png");
+  gaseosa = loadImage("../visual/comida/gaseosa.png");
+  lean = loadImage("../visual/comida/lean.png");
+  pegantes = loadImage("../visual/comida/pegante.png");
+  zumo = loadImage("../visual/comida/zumo.png");
 
-
-  soundFormats('mp3', 'ogg', 'wav');
-  theLastOfUs = loadSound('../audio/themes/theLastOfUs.mp3');
-  himno = loadSound('../audio/themes/himno.mp3');
-  azur = loadSound('../audio/themes/azur.mp3');
-  within = loadSound('../audio/themes/within.mp3');
+  soundFormats("mp3", "ogg", "wav");
+  theLastOfUs = loadSound("../audio/themes/theLastOfUs.mp3");
+  himno = loadSound("../audio/themes/himno.mp3");
+  azur = loadSound("../audio/themes/azur.mp3");
+  within = loadSound("../audio/themes/within.mp3");
   //los caminos de la vida
-  caminos = loadSound('../audio/themes/Caminos.mp3');
+  caminos = loadSound("../audio/themes/Caminos.mp3");
   //golden Age - Spiderman
-  spider = loadSound('../audio/themes/goldenAge.mp3')
+  spider = loadSound("../audio/themes/goldenAge.mp3");
 
-  sonidoVelocidad1 = loadSound('../audio/sfx/comodines/velocidad1.mp3');
-  sonidoVelocidad2 = loadSound('../audio/sfx/comodines/velocidad2.mp3');
-  sonidoInvencibilidad1 = loadSound('../audio/sfx/comodines/invencibilidad1.ogg');
-  sonidoInvencibilidad2= loadSound('../audio/sfx/comodines/invencibilidad2.ogg');
-  sonidoPuntos1 = loadSound('../audio/sfx/comodines/puntos1.mp3');
-  sonidoPuntos2 = loadSound('../audio/sfx/comodines/puntos2.mp3');
-  sonidoVidaMas = loadSound('../audio/sfx/comodines/vidaMas.mp3');
-  sonidoInvertir = loadSound('../audio/sfx/comodines/inversion.mp3');
-  sonidoTombos1 = loadSound('../audio/sfx/comodines/tombos1.mp3');
-  sonidoTombos2 = loadSound('../audio/sfx/comodines/velocidad2.mp3');
-  sonidoGolpeAccionado1 = loadSound('../audio/sfx/comodines/golpeAccionado1.mp3');
-  sonidoGolpeAccionado2 = loadSound('../audio/sfx/comodines/golpeAccionado2.mp3');
+  sonidoVelocidad1 = loadSound("../audio/sfx/comodines/velocidad1.mp3");
+  sonidoVelocidad2 = loadSound("../audio/sfx/comodines/velocidad2.mp3");
+  sonidoInvencibilidad1 = loadSound(
+    "../audio/sfx/comodines/invencibilidad1.ogg"
+  );
+  sonidoInvencibilidad2 = loadSound(
+    "../audio/sfx/comodines/invencibilidad2.ogg"
+  );
+  sonidoPuntos1 = loadSound("../audio/sfx/comodines/puntos1.mp3");
+  sonidoPuntos2 = loadSound("../audio/sfx/comodines/puntos2.mp3");
+  sonidoVidaMas = loadSound("../audio/sfx/comodines/vidaMas.mp3");
+  sonidoInvertir = loadSound("../audio/sfx/comodines/inversion.mp3");
+  sonidoTombos1 = loadSound("../audio/sfx/comodines/tombos1.mp3");
+  sonidoTombos2 = loadSound("../audio/sfx/comodines/velocidad2.mp3");
+  sonidoGolpeAccionado1 = loadSound(
+    "../audio/sfx/comodines/golpeAccionado1.mp3"
+  );
+  sonidoGolpeAccionado2 = loadSound(
+    "../audio/sfx/comodines/golpeAccionado2.mp3"
+  );
+  thiefSpawn = loadSound("../audio/sfx/general/Thief.mp3");
 
-  golpe = loadSound('../audio/sfx/general/golpePared.mp3');
-  comida1 = loadSound('../audio/sfx/general/comida1.mp3')
+  golpe = loadSound("../audio/sfx/general/golpePared.mp3");
+  comida1 = loadSound("../audio/sfx/general/comida1.mp3");
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
@@ -130,7 +168,6 @@ let countLives = 3;
 //Imagen de fondo del canvas:
 let fondo;
 
-
 /**COSAS DE COMODINES
  *
  */
@@ -138,7 +175,6 @@ let fondo;
 // const comodinVelocidad = function(x,y){
 //   this.x = x;
 //   this.y = y;
-
 
 //   this.nombreFuncion = function(){
 //     return 0;
@@ -150,27 +186,24 @@ let fondo;
 const velocidad = new comodinVelocidad();
 */
 
-
-
-
-const comodin = function(x,y, tiempoActivo){
+const comodin = function (x, y, tiempoActivo) {
   this.x = x;
   this.y = y;
 
-  if (tiempoActivo == null){
+  if (tiempoActivo == null) {
     tiempoActivo == 0;
   }
 
   this.tiempoActivo = tiempoActivo;
   this.tiempoAccionado = 0;
-}
+};
 /*
 x: int(getRandom(0,28)) ,  //28
 y: int(getRandom(4,26)), //26
 */
 
 //CREACION DE COMODINES
-const comodinVelocidad = new comodin(getRandom(2,26),getRandom(4,25),40);
+const comodinVelocidad = new comodin(getRandom(2, 26), getRandom(4, 25), 40);
 const comodinInvencibilidad = new comodin(-1, -1);
 const comodinRegeneracion = new comodin(-1, -1);
 const comodinVidaMas = new comodin(-1, -1);
@@ -181,16 +214,15 @@ const comodinGolpeAccionado = new comodin(-1, -1);
 const comodinAleatorio = new comodin(-1, -1);
 
 //CREACION DE COMIDAS
-const zumito = new comodin(getRandom(2,26),getRandom(4,25),40);
-const pegante = new comodin(getRandom(2,26),getRandom(4,25),40);
+const zumito = new comodin(getRandom(2, 26), getRandom(4, 25), 40);
+const pegante = new comodin(getRandom(2, 26), getRandom(4, 25), 40);
 const moradito = new comodin(-1, -1);
 const chontaduro = new comodin(-1, -1);
 const cocaCola = new comodin(-1, -1);
 
-
 // TODO Dibujar la comida
 function drawFood(food) {
-  fill('crimson');
+  fill("crimson");
   rect(food.x * lado, food.y * lado, lado, lado);
 }
 
@@ -202,15 +234,14 @@ function drawComodin(comodin, color) {
 
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
 function setup() {
-
   //----------------------------------------------------------------
   //CONFIGURACIÓN DE NIVELES DE SONIDO
   caminos.setVolume(0.5);
   theLastOfUs.setVolume(0.2);
   within.setVolume(0.2);
-  himno.setVolume(0.2)
-  azur.setVolume(0.2)
-  spider.setVolume(0.2)
+  himno.setVolume(0.2);
+  azur.setVolume(0.2);
+  spider.setVolume(0.2);
 
   sonidoVelocidad1.setVolume(0.7);
   sonidoVelocidad2.setVolume(0.7);
@@ -235,7 +266,6 @@ function setup() {
   windowRezired();
   direcciones();
 
-
   //Actualizar el Mundo, colocando lo que va a tener una vez se inicie el Juego
   Mundo = {
     //Determinar la  posicion que aparecera el Snake
@@ -245,15 +275,15 @@ function setup() {
       { x: columnas / 2 - 2, y: filas / 2 },
     ],
     //Escenario
-    escenario : escenario1,
+    escenario: escenario1,
     //Direccion por la que empieza el Snake
     dir: derecha,
     //Enermigos
     listaEnemigos,
     //Posicion de la Comida (Será Random)
     food: {
-      x: int(getRandom(2,26)) ,  //28
-      y: int(getRandom(4,25)), //26
+      x: int(getRandom(2, 26)), //28
+      y: int(getRandom(4, 25)), //26
     },
     // cuadradoFinal: {
     //   x: 0,
@@ -284,12 +314,7 @@ function setup() {
       comodinAleatorio,
     ],
 
-    comidas: [
-      pegante,
-      moradito,
-      chontaduro,
-      cocaCola,
-    ],
+    comidas: [pegante, moradito, chontaduro, cocaCola],
 
     //Numero de vidas inicial
     lives: 3,
@@ -308,46 +333,42 @@ function setup() {
       {
         x: 18,
         y: 10,
-        pos:false,
+        pos: false,
       },
     ],
-    start:true,
+    start: true,
+    spawnThief: true,
     retrasoComodines: 80,
     retrasoComidas: 50,
     scoreMas: 1,
     activosMiniEnemigos: false,
     imagenActualCabeza: cabeza_derecha_normal,
-    imagenActualCola : cola_normal,
-    retrasoCola:3,
+    imagenActualCola: cola_normal,
+    retrasoCola: 3,
     contadorCola: 3,
     normalActivo: true,
     vendedorActivo: false,
-    neroActivo:false,
+    neroActivo: false,
     policiaActivo: false,
-    politicoActivo:false,
-
+    politicoActivo: false,
   };
-
 }
-
-
-
 
 //----------------------------------------------
 //LISTA DE MINIENEMIGOS
-const enemigo1 = new enemigo(getRandom(2,26),getRandom(5,25));
-const enemigo2 = new enemigo(getRandom(2,26),getRandom(5,25));
-const enemigo3 = new enemigo(getRandom(2,26),getRandom(5,25));
-const enemigo4 = new enemigo(getRandom(2,26),getRandom(5,25));
-const enemigo5 = new enemigo(getRandom(2,26),getRandom(5,25));
-const enemigo6 = new enemigo(getRandom(2,26),getRandom(5,25));
+const enemigo1 = new enemigo(getRandom(2, 26), getRandom(5, 25));
+const enemigo2 = new enemigo(getRandom(2, 26), getRandom(5, 25));
+const enemigo3 = new enemigo(getRandom(2, 26), getRandom(5, 25));
+const enemigo4 = new enemigo(getRandom(2, 26), getRandom(5, 25));
+const enemigo5 = new enemigo(getRandom(2, 26), getRandom(5, 25));
+const enemigo6 = new enemigo(getRandom(2, 26), getRandom(5, 25));
 listaEnemigos = [];
-listaEnemigos = actualizaLista(listaEnemigos,enemigo1);
-listaEnemigos = actualizaLista(listaEnemigos,enemigo2);
-listaEnemigos = actualizaLista(listaEnemigos,enemigo3);
-listaEnemigos = actualizaLista(listaEnemigos,enemigo4);
-listaEnemigos = actualizaLista(listaEnemigos,enemigo5);
-listaEnemigos = actualizaLista(listaEnemigos,enemigo6);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo1);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo2);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo3);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo4);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo5);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo6);
 
 //--------------------------------------------
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
@@ -361,12 +382,11 @@ function drawGame(Mundo) {
   //Enemigos
   // dibujaEnemigo(Mundo.listaEnemigos)
 
-
   //Stroke => color de los bordes
 
   //StrokeWeight => Define el ancho
-  stroke('#332b2b');
-  fill('#db271a');
+  stroke("#332b2b");
+  fill("#db271a");
   strokeWeight(0.3);
   //Dibuja la comida en una posicion random
   drawFood(Mundo.food);
@@ -379,155 +399,148 @@ function drawGame(Mundo) {
   //     );
   forEach(Mundo.snake, (s) => {
     x = lookupx(Mundo.snake, s);
-    if(x==0){
-      if(Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x]==2){
-      }else{
-        dibujaCabeza()
+    if (x == 0) {
+      if (Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2) {
+      } else {
+        dibujaCabeza();
       }
-    }if(x!=0){
-    dibujaCola()
+    }
+    if (x != 0) {
+      dibujaCola();
     }
   });
-    fill(240, 240, 240);
-    //Stroke => color de los bordes
-    stroke(10, 10, 10);
-    //StrokeWeight => Define el ancho
-    strokeWeight(4);
+  fill(240, 240, 240);
+  //Stroke => color de los bordes
+  stroke(10, 10, 10);
+  //StrokeWeight => Define el ancho
+  strokeWeight(4);
   //TODO REVISAR ESTE FILL
-  fill('white');
+  fill("white");
   //Dibujar a thief
-  if(Mundo.thiefActivo==true){
+  if (Mundo.thiefActivo == true) {
     drawThief(Mundo.Thief);
   }
   //Dibujar Knife
-  if(Mundo.thiefActivo==true){
+  if (Mundo.thiefActivo == true) {
     drawKnife(Mundo.knife);
   }
 
-
   //DIBUJA COMODINES
-  if (Mundo.comodines[0].tiempoActivo > 0){
+  if (Mundo.comodines[0].tiempoActivo > 0) {
     image(
       velocidad,
-      Mundo.comodines[0].x *20,
-      Mundo.comodines[0].y *20,
-      lado,//weight
-      lado,//height
-    )
+      Mundo.comodines[0].x * 20,
+      Mundo.comodines[0].y * 20,
+      lado, //weight
+      lado //height
+    );
   }
-  if (Mundo.comodines[1].tiempoActivo > 0){
+  if (Mundo.comodines[1].tiempoActivo > 0) {
     image(
       invencibilidad,
-      Mundo.comodines[1].x *20,
-      Mundo.comodines[1].y *20,
+      Mundo.comodines[1].x * 20,
+      Mundo.comodines[1].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
 
-  if (Mundo.comodines[2].tiempoActivo > 0){
+  if (Mundo.comodines[2].tiempoActivo > 0) {
     image(
       aumentoPuntos,
-      Mundo.comodines[2].x *20,
-      Mundo.comodines[2].y *20,
+      Mundo.comodines[2].x * 20,
+      Mundo.comodines[2].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
-  if (Mundo.comodines[3].tiempoActivo > 0){
+  if (Mundo.comodines[3].tiempoActivo > 0) {
     image(
       aumentoVida,
-      Mundo.comodines[3].x *20,
-      Mundo.comodines[3].y *20,
+      Mundo.comodines[3].x * 20,
+      Mundo.comodines[3].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
-  if (Mundo.comodines[4].tiempoActivo > 0){
+  if (Mundo.comodines[4].tiempoActivo > 0) {
     image(
       invertir,
-      Mundo.comodines[4].x *20,
-      Mundo.comodines[4].y *20,
+      Mundo.comodines[4].x * 20,
+      Mundo.comodines[4].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
-  if (Mundo.comodines[5].tiempoActivo > 0){
+  if (Mundo.comodines[5].tiempoActivo > 0) {
     image(
       tombos,
-      Mundo.comodines[5].x *20,
-      Mundo.comodines[5].y *20,
+      Mundo.comodines[5].x * 20,
+      Mundo.comodines[5].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
-  if (Mundo.comodines[6].tiempoActivo > 0){
+  if (Mundo.comodines[6].tiempoActivo > 0) {
     image(
       reduccionPuntos,
-      Mundo.comodines[6].x *20,
-      Mundo.comodines[6].y *20,
+      Mundo.comodines[6].x * 20,
+      Mundo.comodines[6].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
-  if (Mundo.comodines[7].tiempoActivo > 0){
+  if (Mundo.comodines[7].tiempoActivo > 0) {
     // NO ESTA
     image(
       golpeAccionado,
-      Mundo.comodines[7].x *20,
-      Mundo.comodines[7].y *20,
+      Mundo.comodines[7].x * 20,
+      Mundo.comodines[7].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
-  if (Mundo.comodines[8].tiempoActivo > 0){
+  if (Mundo.comodines[8].tiempoActivo > 0) {
     image(
       aleatorio,
-      Mundo.comodines[8].x *20,
-      Mundo.comodines[8].y *20,
+      Mundo.comodines[8].x * 20,
+      Mundo.comodines[8].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
 
   //DIBUJA COMIDAS
-  if (Mundo.comidas[0].tiempoActivo > 0){
+  if (Mundo.comidas[0].tiempoActivo > 0) {
     image(
       pegantes,
       Mundo.comidas[0].x * 20,
       Mundo.comidas[0].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
-  if (Mundo.comidas[1].tiempoActivo > 0){
-    image(
-      lean,
-      Mundo.comidas[1].x * 20,
-      Mundo.comidas[1].y * 20,
-      lado,
-      lado,
-    )
+  if (Mundo.comidas[1].tiempoActivo > 0) {
+    image(lean, Mundo.comidas[1].x * 20, Mundo.comidas[1].y * 20, lado, lado);
   }
-  if (Mundo.comidas[2].tiempoActivo > 0){
+  if (Mundo.comidas[2].tiempoActivo > 0) {
     image(
       chontaduros,
       Mundo.comidas[2].x * 20,
       Mundo.comidas[2].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
-  if (Mundo.comidas[3].tiempoActivo > 0){
+  if (Mundo.comidas[3].tiempoActivo > 0) {
     image(
       gaseosa,
       Mundo.comidas[3].x * 20,
       Mundo.comidas[3].y * 20,
       lado,
-      lado,
-    )
+      lado
+    );
   }
-
 }
 
 /* TODO DIRECCIONES DEL SNAKE */
@@ -538,7 +551,6 @@ function direcciones() {
   derecha = createVector(1, 0);
 }
 
-
 /* POSICIONAR LA COMIDA DE FORMA ALEATORIA */
 function posicionarComida() {
   comida = createVector(int(random(columnas)), int(random(filas)));
@@ -546,13 +558,12 @@ function posicionarComida() {
 
 //------------------------------------
 function cambioTablero() {
-  if(Mundo.score<30){
+  if (Mundo.score < 30) {
     reproducirMusica(0);
     update(Mundo, (Mundo.escenario = escenario1));
     update(Mundo, (Mundo.normalActivo = true));
     update(Mundo, (Mundo.thiefActivo = false));
-  }
-  else if (Mundo.score >= 30 && Mundo.score < 80) {
+  } else if (Mundo.score >= 30 && Mundo.score < 80) {
     // Musica dos
     // reproducirMusica(1);
     update(Mundo, (Mundo.escenario = escenario2));
@@ -566,6 +577,7 @@ function cambioTablero() {
     update(Mundo, (Mundo.thiefActivo = true));
   } else if (Mundo.score >= 125 && Mundo.score < 175) {
     // reproducirMusica(3);
+    update(Mundo, Mundo.spawnThief = true);
     update(Mundo, (Mundo.escenario = escenario4));
     update(Mundo, (Mundo.politicoActivo = false));
     update(Mundo, (Mundo.neroActivo = true));
@@ -580,13 +592,11 @@ function cambioTablero() {
 }
 //------------------------------------
 
-
-
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
   // console.log(Mundo.dir)
-  cambiaCabezaCola()
+  cambiaCabezaCola();
   // cambiaCola()
   //Tablero
   cambioTablero();
@@ -599,185 +609,201 @@ function onTic(Mundo) {
   let invencibilidad = true;
   let golpeAccionado = false;
 
-
-  if (Mundo.retrasoComodines > 0){
+  if (Mundo.retrasoComodines > 0) {
     restaRetraso();
-
-  } else if (Mundo.retrasoComodines == 0){
+  } else if (Mundo.retrasoComodines == 0) {
     nuevosComodines();
     nuevoRetraso();
-
   }
 
-  if (Mundo.retrasoComidas > 0){
+  if (Mundo.retrasoComidas > 0) {
     restaRetrasoComidas();
-
-  } else if (Mundo.retrasoComidas == 0){
+  } else if (Mundo.retrasoComidas == 0) {
     nuevasComidas();
     nuevoRetrasoComidas();
   }
 
   countLives = Mundo.lives;
   drawUi();
-  if (comerItem(Mundo.snake, Mundo.comodines[0]) || Mundo.comodines[0].tiempoAccionado > 0){ //Bueno (yellow)
+  if (
+    comerItem(Mundo.snake, Mundo.comodines[0]) ||
+    Mundo.comodines[0].tiempoAccionado > 0
+  ) {
+    //Bueno (yellow)
     accionVelocidad();
-
-  } else if (comerItem(Mundo.snake, Mundo.comodines[1]) || Mundo.comodines[1].tiempoAccionado > 0){ //Bueno (purple)
+  } else if (
+    comerItem(Mundo.snake, Mundo.comodines[1]) ||
+    Mundo.comodines[1].tiempoAccionado > 0
+  ) {
+    //Bueno (purple)
     invencibilidad = accionInvencibilidad();
-
-  } else if (comerItem(Mundo.snake, Mundo.comodines[2]) || Mundo.comodines[2].tiempoAccionado > 0){ //Bueno (orange)
+  } else if (
+    comerItem(Mundo.snake, Mundo.comodines[2]) ||
+    Mundo.comodines[2].tiempoAccionado > 0
+  ) {
+    //Bueno (orange)
     accionAumentoPuntos();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[3]) || Mundo.comodines[3].tiempoAccionado > 0){ //bueno (black)
+  } else if (
+    comerItem(Mundo.snake, Mundo.comodines[3]) ||
+    Mundo.comodines[3].tiempoAccionado > 0
+  ) {
+    //bueno (black)
     accionVidaMas();
-
-  } else if (comerItem(Mundo.snake, Mundo.comodines[4]) || Mundo.comodines[4].tiempoAccionado > 0){ // (white)
+  } else if (
+    comerItem(Mundo.snake, Mundo.comodines[4]) ||
+    Mundo.comodines[4].tiempoAccionado > 0
+  ) {
+    // (white)
     accionInversion();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[5]) || Mundo.comodines[5].tiempoAccionado > 0){ // (browm)
+  } else if (
+    comerItem(Mundo.snake, Mundo.comodines[5]) ||
+    Mundo.comodines[5].tiempoAccionado > 0
+  ) {
+    // (browm)
     accionTombos();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[6]) || Mundo.comodines[6].tiempoAccionado > 0){ // (pink)
+  } else if (
+    comerItem(Mundo.snake, Mundo.comodines[6]) ||
+    Mundo.comodines[6].tiempoAccionado > 0
+  ) {
+    // (pink)
     accionReduccionPuntos();
-  } else if (comerItem(Mundo.snake, Mundo.comodines[7]) || Mundo.comodines[7].tiempoAccionado > 0){ //(gray)
+  } else if (
+    comerItem(Mundo.snake, Mundo.comodines[7]) ||
+    Mundo.comodines[7].tiempoAccionado > 0
+  ) {
+    //(gray)
     golpeAccionado = accionGolpeAccionado();
-  } else if ((comerItem(Mundo.snake, Mundo.comodines[8]) || Mundo.comodines[8].tiempoAccionado > 0)){ //(Hexadecimal xd)
+  } else if (
+    comerItem(Mundo.snake, Mundo.comodines[8]) ||
+    Mundo.comodines[8].tiempoAccionado > 0
+  ) {
+    //(Hexadecimal xd)
     accionAleatorio();
   }
 
-  if (comerItem(Mundo.snake, Mundo.comidas[0])){
+  if (comerItem(Mundo.snake, Mundo.comidas[0])) {
     Mundo.snake.push({ x: 5, y: 5 });
     puntajeComida(1, 0);
-  } else if (comerItem(Mundo.snake, Mundo.comidas[1])){
+  } else if (comerItem(Mundo.snake, Mundo.comidas[1])) {
     Mundo.snake.push({ x: 5, y: 5 });
     puntajeComida(3, 1);
-  } else if (comerItem(Mundo.snake, Mundo.comidas[2])){
+  } else if (comerItem(Mundo.snake, Mundo.comidas[2])) {
     Mundo.snake.push({ x: 5, y: 5 });
     puntajeComida(5, 2);
-  } else if (comerItem(Mundo.snake, Mundo.comidas[3])){
+  } else if (comerItem(Mundo.snake, Mundo.comidas[3])) {
     Mundo.snake.push({ x: 5, y: 5 });
     puntajeComida(10, 3);
   }
 
-  if (Mundo.comidas[0].tiempoActivo > 0){
+  if (Mundo.comidas[0].tiempoActivo > 0) {
     update(Mundo, Mundo.comidas[0].tiempoActivo--);
 
-    if (Mundo.comodines[0].tiempoActivo == 1){
+    if (Mundo.comodines[0].tiempoActivo == 1) {
       posicionInactivaComida(0);
-
     }
   }
 
-  if (Mundo.comidas[1].tiempoActivo > 0){
+  if (Mundo.comidas[1].tiempoActivo > 0) {
     update(Mundo, Mundo.comidas[1].tiempoActivo--);
 
-    if (Mundo.comodines[1].tiempoActivo == 1){
+    if (Mundo.comodines[1].tiempoActivo == 1) {
       posicionInactivaComida(1);
-
     }
   }
 
-  if (Mundo.comidas[2].tiempoActivo > 0){
+  if (Mundo.comidas[2].tiempoActivo > 0) {
     update(Mundo, Mundo.comidas[2].tiempoActivo--);
 
-    if (Mundo.comodines[2].tiempoActivo == 1){
+    if (Mundo.comodines[2].tiempoActivo == 1) {
       posicionInactivaComida(2);
-
     }
   }
 
-  if (Mundo.comidas[3].tiempoActivo > 0){
+  if (Mundo.comidas[3].tiempoActivo > 0) {
     update(Mundo, Mundo.comidas[3].tiempoActivo--);
 
-    if (Mundo.comodines[3].tiempoActivo == 1){
+    if (Mundo.comodines[3].tiempoActivo == 1) {
       posicionInactivaComida(3);
-
     }
   }
 
-  if (Mundo.comodines[0].tiempoActivo > 0){
+  if (Mundo.comodines[0].tiempoActivo > 0) {
     restaTiempo(0);
 
-    if (Mundo.comodines[0].tiempoActivo == 1){
+    if (Mundo.comodines[0].tiempoActivo == 1) {
       posicionInactiva(0);
-
     }
   }
 
-  if (Mundo.comodines[1].tiempoActivo > 0){
+  if (Mundo.comodines[1].tiempoActivo > 0) {
     restaTiempo(1);
 
-    if (Mundo.comodines[1].tiempoActivo == 1){
+    if (Mundo.comodines[1].tiempoActivo == 1) {
       //console.log("Hola");
       posicionInactiva(1);
-
     }
   }
 
-  if (Mundo.comodines[2].tiempoActivo > 0){
+  if (Mundo.comodines[2].tiempoActivo > 0) {
     restaTiempo(2);
 
-    if (Mundo.comodines[2].tiempoActivo == 1){
+    if (Mundo.comodines[2].tiempoActivo == 1) {
       //console.log("Hola");
       posicionInactiva(2);
-
     }
   }
 
-  if (Mundo.comodines[3].tiempoActivo > 0){
+  if (Mundo.comodines[3].tiempoActivo > 0) {
     restaTiempo(3);
 
-    if (Mundo.comodines[3].tiempoActivo == 1){
+    if (Mundo.comodines[3].tiempoActivo == 1) {
       //console.log("Hola");
       posicionInactiva(3);
-
     }
   }
 
-  if (Mundo.comodines[4].tiempoActivo > 0){
+  if (Mundo.comodines[4].tiempoActivo > 0) {
     restaTiempo(4);
 
-    if (Mundo.comodines[4].tiempoActivo == 1){
+    if (Mundo.comodines[4].tiempoActivo == 1) {
       //console.log("Hola");
       posicionInactiva(4);
-
     }
   }
 
-  if (Mundo.comodines[5].tiempoActivo > 0){
+  if (Mundo.comodines[5].tiempoActivo > 0) {
     restaTiempo(5);
 
-    if (Mundo.comodines[5].tiempoActivo == 1){
+    if (Mundo.comodines[5].tiempoActivo == 1) {
       //console.log("Hola");
       posicionInactiva(5);
-
     }
   }
 
-  if (Mundo.comodines[6].tiempoActivo > 0){
+  if (Mundo.comodines[6].tiempoActivo > 0) {
     restaTiempo(6);
 
-    if (Mundo.comodines[6].tiempoActivo == 1){
+    if (Mundo.comodines[6].tiempoActivo == 1) {
       // console.log("Hola");
       posicionInactiva(6);
-
     }
   }
 
-  if (Mundo.comodines[7].tiempoActivo > 0){
+  if (Mundo.comodines[7].tiempoActivo > 0) {
     restaTiempo(7);
 
-    if (Mundo.comodines[7].tiempoActivo == 1){
+    if (Mundo.comodines[7].tiempoActivo == 1) {
       //console.log("Hola");
       posicionInactiva(7);
-
     }
   }
 
-  if (Mundo.comodines[8].tiempoActivo > 0){
+  if (Mundo.comodines[8].tiempoActivo > 0) {
     restaTiempo(8);
 
-    if (Mundo.comodines[8].tiempoActivo == 1){
+    if (Mundo.comodines[8].tiempoActivo == 1) {
       //console.log("Hola");
       posicionInactiva(8);
-
     }
   }
   if (Mundo.start == false && Mundo.score % 25 == 0) {
@@ -788,16 +814,18 @@ function onTic(Mundo) {
     });
   }
 
-
-  if (   //Cordinas el movimiento de la serpiente.
+  if (
+    //Cordinas el movimiento de la serpiente.
     // (Mundo.snake[0].x > columnas - 1 ||
     //   Mundo.snake[0].y > filas - 1 ||
     //   Mundo.snake[0].x < 0 ||
     //   Mundo.snake[0].y < 0 ||
     // escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 1 ||
-    ((Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2) && (Mundo.lives >= 1)) /*|| (compMiniEnemigos(Mundo.listaEnemigos))==0 */||
-    (((choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true) && invencibilidad == true) &&
-  Mundo.lives >= 1)
+    (Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 &&
+      Mundo.lives >= 1) /*|| (compMiniEnemigos(Mundo.listaEnemigos))==0 */ ||
+    (choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true &&
+      invencibilidad == true &&
+      Mundo.lives >= 1)
     //margenes(Mundo.snake[0].x,Mundo.sanke[0].y)==true
     // escenario[Mundo.snake[0].y][0] == 2 ||
   ) {
@@ -820,7 +848,7 @@ function onTic(Mundo) {
       // },
       score: Mundo.score,
       lives: Mundo.lives - 1,
-      tipe: 'juego',
+      tipe: "juego",
       timer: int(millis() / 1000),
       Thief: {
         x: 26,
@@ -843,7 +871,7 @@ function onTic(Mundo) {
     (choqueSnake(rest(Mundo.snake), Mundo.snake[0]) == true &&
       Mundo.lives < 1 &&
       invencibilidad == true) ||
-      (hitHead(Mundo.snake, Mundo.knife) && Mundo.lives < 1)
+    (hitHead(Mundo.snake, Mundo.knife) && Mundo.lives < 1)
   ) {
     // cuadradoFinal();
     juegoTerminado();
@@ -851,6 +879,14 @@ function onTic(Mundo) {
   } else {
     if (Mundo.thiefActivo == true) {
       // Saber si la serpiente come
+      if (Mundo.spawnThief == true) {
+        console.log(Mundo.spawnThief);
+        thiefSpawn.play();
+        return update(Mundo, {
+          spawnThief: false,
+        });
+      }
+
       if (comerItem(Mundo.snake, Mundo.food)) {
         comida1.play();
         Mundo.snake.push({ x: 5, y: 5 });
@@ -917,15 +953,14 @@ function onTic(Mundo) {
 
         } */
       } else if (knifeOut(Mundo.knife)) {
-        update(Mundo, Mundo.knife = moveKnife(Mundo.knife));
+        update(Mundo, (Mundo.knife = moveKnife(Mundo.knife)));
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           Thief: ThiefMove(Mundo.Thief),
           knife: despawnKnife(Mundo.knife),
           timer: int(millis() / 1000),
         });
-
-      }   else {
+      } else {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           Thief: ThiefMove(Mundo.Thief),
@@ -970,8 +1005,6 @@ function onTic(Mundo) {
   }
 }
 
-
-
 //Implemente esta función si quiere que su programa reaccione a eventos del mouse
 function onMouseEvent(Mundo, event) {
   return update(Mundo, {});
@@ -986,18 +1019,17 @@ function onMouseEvent(Mundo, event) {
 // Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo estado del mundo.
 
 function keyPressed() {
-    // jugarDeNuevo();
-    if (!isLooping() && Mundo.lives>=0){
-      switch (keyCode) {
-        case 86:
-          loop();
-          break;
-        default:
-          return update(Mundo, {});
-      }
+  // jugarDeNuevo();
+  if (!isLooping() && Mundo.lives >= 0) {
+    switch (keyCode) {
+      case 86:
+        loop();
+        break;
+      default:
+        return update(Mundo, {});
     }
-    if (isLooping()) {
-
+  }
+  if (isLooping()) {
     switch (keyCode) {
       case UP_ARROW:
         if (Mundo.dir == abajo) {
@@ -1023,7 +1055,7 @@ function keyPressed() {
         }
         if ((Mundo.dir = izquierda));
         break;
-      case 80://P
+      case 80: //P
         noLoop();
         // paraMusica()
         break;
@@ -1126,13 +1158,15 @@ comerItem(([5,5], [5,4], [5,3], [5,2]), [0,1]) -> false
 */
 
 function comerItem(snake, item) {
-  if (snake[0].x == item.x && snake[0].y == item.y || snake[1].x == item.x && snake[1].y == item.y) {
+  if (
+    (snake[0].x == item.x && snake[0].y == item.y) ||
+    (snake[1].x == item.x && snake[1].y == item.y)
+  ) {
     return true;
   } else {
     return false;
   }
 }
-
 
 /**
   SISTEMA DE CANCIONES:
@@ -1143,7 +1177,7 @@ function comerItem(snake, item) {
   *Escenario5 => 4 => spider
 */
 
-function reproducirMusica(numMusica){
+function reproducirMusica(numMusica) {
   if (numMusica == 0) {
     if (theLastOfUs.isPlaying() == false) {
       //console.log("Hola");
@@ -1195,38 +1229,35 @@ function reproducirMusica(numMusica){
 
 const tiempoRetrasoComidas = 80;
 
-function puntajeComida(puntaje, comodin){
+function puntajeComida(puntaje, comodin) {
   comida1.play();
-  update(Mundo, Mundo.score = Mundo.score + puntaje);
+  update(Mundo, (Mundo.score = Mundo.score + puntaje));
   posicionInactivaComida(comodin);
-  update(Mundo, Mundo.comidas[comodin].tiempoAccionado = 0);
-  update(Mundo, Mundo.retrasoComidas = tiempoRetrasoComidas);
+  update(Mundo, (Mundo.comidas[comodin].tiempoAccionado = 0));
+  update(Mundo, (Mundo.retrasoComidas = tiempoRetrasoComidas));
 }
 
-function posicionInactivaComida(nComida){
-  update(Mundo, Mundo.comidas[nComida].x = -1);
-  update(Mundo, Mundo.comidas[nComida].y = -1);
-  update(Mundo, Mundo.retrasoComidas = tiempoRetrasoComidas)
+function posicionInactivaComida(nComida) {
+  update(Mundo, (Mundo.comidas[nComida].x = -1));
+  update(Mundo, (Mundo.comidas[nComida].y = -1));
+  update(Mundo, (Mundo.retrasoComidas = tiempoRetrasoComidas));
 }
-function restaRetrasoComidas(){
+function restaRetrasoComidas() {
   update(Mundo, Mundo.retrasoComidas--);
 }
 
-function nuevasComidas(){
+function nuevasComidas() {
   const listaComidas = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 3, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2,
-    0 , 2, 0, 0, 0, 1, 1
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 3, 0, 0, 0, 0, 1, 1, 1, 2,
+    2, 2, 0, 2, 0, 0, 0, 1, 1,
   ];
   const numeroComida = listaComidas[getRandom(0, length(listaComidas))];
 
-  update(
-    Mundo,
-    (Mundo.comidas[numeroComida].tiempoActivo = getRandom(40, 60))
-  );
+  update(Mundo, (Mundo.comidas[numeroComida].tiempoActivo = getRandom(40, 60)));
   update(Mundo, (Mundo.comidas[numeroComida].x = getRandom(4, 24)));
   update(Mundo, (Mundo.comidas[numeroComida].y = getRandom(4, 24)));
 }
 
-function nuevoRetrasoComidas(){
-  update(Mundo, Mundo.retrasoComidas = tiempoRetrasoComidas);
+function nuevoRetrasoComidas() {
+  update(Mundo, (Mundo.retrasoComidas = tiempoRetrasoComidas));
 }
