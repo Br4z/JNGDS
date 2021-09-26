@@ -68,5 +68,43 @@ a  {
   position: absolute;
 }
 
+/* Boton jugar */
 
+.btn {
+  /* Para <button> */
+  font-size: inherit;
+  border: none;
+  cursor: pointer;
+  font-family: "ARCADE CLASSIC", "Arial";
 
+}
+
+.btn-bootstrap:hover,
+.btn-bootstrap:focus {
+  background-color: #0069d9;
+}
+
+.btn-bootstrap:active {
+  background-color: #0062cc;
+}
+
+.btn-bootstrap {
+  padding: 10px 20px 10px 20px;
+  border-radius: 0.25rem;
+  letter-spacing: 4px;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.15s ease-in-out;
+  margin-top: 150px;
+  right: 190px;
+  position: relative;
+}
+
+.btn-bootstrap:hover,
+.btn-bootstrap:focus {
+  background-color: #0069d9;
+}
+
+.btn-bootstrap:active {
+  background-color: #0062cc;
+}
