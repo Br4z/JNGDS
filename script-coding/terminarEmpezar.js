@@ -12,18 +12,23 @@ function juegoNuevo() {
       { x: columnas / 2 - 2, y: filas / 2 },
     ],
     //Escenario
-    escenario: escenario1,
+    escenario : escenario1,
     //Direccion por la que empieza el Snake
     dir: derecha,
     //Enermigos
     listaEnemigos,
     //Posicion de la Comida (Será Random)
     food: {
-      x: int(getRandom(2, 26)), //28
-      y: int(getRandom(4, 25)), //26
+      x: int(getRandom(2,26)) ,  //28
+      y: int(getRandom(4,25)), //26
     },
+    // cuadradoFinal: {
+    //   x: 0,
+    //   y: 0,
+    // },
     //Puntacion Inicial
     score: 0,
+
     /* FUNCIONAMIENTO DE COMODIN
       nombreComodin: {
         x: PosX;
@@ -33,6 +38,7 @@ function juegoNuevo() {
         TiempoDesactivo: Tiempo en el cual no esta en el mapa
       }
      */
+
     comodines: [
       comodinVelocidad,
       comodinInvencibilidad,
@@ -44,6 +50,14 @@ function juegoNuevo() {
       comodinGolpeAccionado,
       comodinAleatorio,
     ],
+
+    comidas: [
+      pegante,
+      moradito,
+      chontaduro,
+      cocaCola,
+    ],
+
     //Numero de vidas inicial
     lives: 3,
     //El tiempo
@@ -61,22 +75,24 @@ function juegoNuevo() {
       {
         x: 18,
         y: 10,
-        pos: false,
+        pos:false,
       },
     ],
-    start: true,
+    start:true,
     retrasoComodines: 80,
+    retrasoComidas: 80,
     scoreMas: 1,
     activosMiniEnemigos: false,
     imagenActualCabeza: cabeza_derecha_normal,
-    imagenActualCola: cola_normal,
-    retrasoCola: 3,
+    imagenActualCola : cola_normal,
+    retrasoCola:3,
     contadorCola: 3,
     normalActivo: true,
     vendedorActivo: false,
-    neroActivo: false,
+    neroActivo:false,
     policiaActivo: false,
-    politicoActivo: false,
+    politicoActivo:false,
+
   };
   loop();
 }
@@ -99,6 +115,8 @@ function paraMusica() {
     music.stop();
   } else if (Mundo.escenario == escenario3) {
     music2.stop();
+  } else if (Mundo.escenario == escenario5) {
+    spider.stop();
   }
 }
 
