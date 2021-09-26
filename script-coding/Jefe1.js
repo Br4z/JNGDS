@@ -1,18 +1,18 @@
 /**Dibuja el arma que utiliza el enemigo 'Thief' en este caso un cuchillo(knife)
- * Toma cada lista dentro de knife y accede a los valores de su posicion 'x','y', esto permite dibujar varios knife. 
+ * Toma cada lista dentro de knife y accede a los valores de su posicion 'x','y', esto permite dibujar varios knife.
 */
-function drawKnife(knife) {  
+function drawKnife(knife) {
     forEach(knife, (k) => {
       if (k.pos== true) {
         image(knifeUp, k?.x * lado, k?.y * lado, lado , lado );
       } else {
         image(knifeSide, k?.x * lado, k?.y * lado, lado, lado );
       }
-      
+
     });
   }
 
-  
+
 // }
 
 /**Funcion para dibujar a uno de los enemigos, en este caso 'el Thief'
@@ -28,9 +28,9 @@ function drawThief(Thief) {
  * @param dirx Si el valor de 'y' esta aumentando (baja) sera true de lo contrario cuando 'y' disminuya (sube) pasando a ser false
  * @param diry: Si el valor de 'x' esta deciende (se mueve a la izquierda) sera true de lo contrario si aumenta (se mueve a la derecha) sera false
  * @condition Cuando se encuentra en el punto de cambio de 'x' e 'y' (esquina superior derecha) se evaluan los valores de la direccion tanto de dirx como diry para definir si cambia la posicion de 'x' o 'y'
- * 
- * @example {x:26,y:6, dirx: false , diry: true}-> Se movera hacia la izquierda 
- * @example{x:26,y:6, dirx: true, diry: true}->  Se movera hacia abajo ya que volvio al caso inicial 
+ *
+ * @example {x:26,y:6, dirx: false , diry: true}-> Se movera hacia la izquierda
+ * @example{x:26,y:6, dirx: true, diry: true}->  Se movera hacia abajo ya que volvio al caso inicial
  * @example{x:10,y:6, dirx:false, diry: false}-> Error  por que si se mueve a la izquierda se cambia dirx: true ya que se esta preparando para bajar
  * @example{x:26,y:6, dirx: true, diry:false}-> se movera hacia abajo ya que llego al punto de cambio por la izquierda
  * @
@@ -72,7 +72,7 @@ function ThiefMove(Thief) {
  * @param pos: Define si el cuchillo fue creado cuando Thief se encontraba moviendose por 'x' o por 'y', si es true fue creado arriba de lo contrario fue creado de lado
  * @example {x:10,y:8, pos:true}-> Se movera hacia abajo
  * @example {x:10,y:8, pos:false}-> Se movera hacia la izquierda
- * 
+ *
 */
 function moveKnife(knife) {
   const head = first(knife);
@@ -119,9 +119,9 @@ function duplicarKnife(knife, Thief) {
 
 
 /**Funcion que se encarga del golpe
- * lsit,list->boolean 
+ * lsit,list->boolean
  * Cuando knife golpea la "cabeza o cuello" del snake se reducen sus vidas en 1 punto, se evalua si la posicion del knife es igual a la de los 2 primeros sectores del snake (cadros originalmente de 20*20)
- * @example([{x:20,y:15}{x:20,y:14}],{x:10,y:15,pos:true})->false 
+ * @example([{x:20,y:15}{x:20,y:14}],{x:10,y:15,pos:true})->false
  * @example([{x:20,y:15}{x:20,y:14}],{x:20,y:15,pos:true})->true
 */
 function hitHead(snake, knife) {
@@ -153,7 +153,7 @@ function hitHead(snake, knife) {
 
 /**Funcion que se encarga de saber si el knife esta fuera del tablero
  * list->boolean
- * Cuando la posicion de knife tanto en 'x' como en 'y' se sale de los bordes del tablero retorna un booleano 
+ * Cuando la posicion de knife tanto en 'x' como en 'y' se sale de los bordes del tablero retorna un booleano
  * @example {x:-5,y:15,pos:false}->true
  * @example {}->false
  */
@@ -188,14 +188,14 @@ function despawnKnife(knife) {
   return knife.slice(0,length(knife)-1)
 }
 /**Funcion que mira si el knife golpeo alguna parte del snake reduciendo el score en 1
- * 
+ *
  */
 
 function hitBody(lista) {
   forEach(lista, (element) => {
     forEach(Mundo.snake, (elementD) => {
       x = lookupx(Mundo.snake, elementD);
-      if (element.x == elementD.x && element.y == elementD.y && x != 0) {
+      if (element.x == elementD.x && element.y == elementD.y && x != 0 && x!=1) {
         update(Mundo, (Mundo.score = Mundo.score - 1));
       }
     });
