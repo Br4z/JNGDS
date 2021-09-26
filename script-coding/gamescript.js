@@ -554,18 +554,18 @@ function cambioTablero() {
   }
   else if (Mundo.score >= 30 && Mundo.score < 80) {
     // Musica dos
-    reproducirMusica(1);
+    // reproducirMusica(1);
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
   } else if (Mundo.score >= 80 && Mundo.score < 125) {
-    reproducirMusica(2);
+    // reproducirMusica(2);
     update(Mundo, (Mundo.escenario = escenario3));
     update(Mundo, (Mundo.vendedorActivo = false));
     update(Mundo, (Mundo.politicoActivo = true));
     update(Mundo, (Mundo.thiefActivo = true));
   } else if (Mundo.score >= 125 && Mundo.score < 175) {
-    reproducirMusica(3);
+    // reproducirMusica(3);
     update(Mundo, (Mundo.escenario = escenario4));
     update(Mundo, (Mundo.politicoActivo = false));
     update(Mundo, (Mundo.neroActivo = true));
@@ -1147,48 +1147,48 @@ function reproducirMusica(numMusica){
   if (numMusica == 0) {
     if (theLastOfUs.isPlaying() == false) {
       //console.log("Hola");
-      within.stop();
+      // within.stop();
       theLastOfUs.play();
-      himno.stop();
+      // himno.stop();
       caminos.stop();
       spider.stop();
-      azur.stop();
+      // azur.stop();
     }
   } else if (numMusica == 1) {
     if (within.isPlaying() == false) {
-      theLastOfUs.stop();
-      azur.stop();
-      within.play();
-      caminos.stop();
-      spider.stop();
-      himno.stop();
+      // theLastOfUs.stop();
+      // azur.stop();
+      // within.play();
+      // caminos.stop();
+      // spider.stop();
+      // himno.stop();
     }
   } else if (numMusica == 2) {
     if (himno.isPlaying() == false) {
-      theLastOfUs.stop();
-      within.stop();
-      himno.stop();
-      caminos.stop();
-      spider.stop();
-      azur.play();
+      // theLastOfUs.stop();
+      // within.stop();
+      // himno.stop();
+      // caminos.stop();
+      // spider.stop();
+      // azur.play();
     }
   } else if (numMusica == 3) {
     if (azur.isPlaying() == false) {
-      theLastOfUs.stop();
-      within.stop();
-      himno.play();
-      caminos.stop();
-      spider.stop();
-      azur.stop();
+      // theLastOfUs.stop();
+      // within.stop();
+      // himno.play();
+      // caminos.stop();
+      // spider.stop();
+      // azur.stop();
     }
   } else if (numMusica == 4) {
     if (spider.isPlaying() == false) {
       theLastOfUs.stop();
-      within.stop();
-      himno.stop();
+      // within.stop();
+      // himno.stop();
       caminos.stop();
       spider.play();
-      azur.stop();
+      // azur.stop();
     }
   }
 }
