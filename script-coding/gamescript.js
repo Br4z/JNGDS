@@ -226,8 +226,8 @@ function drawFood(food) {
     zumo,
     Mundo.food.x * 20,
     Mundo.food.y * 20,
-    lado, 
-    lado 
+    lado,
+    lado
   );
 }
 
@@ -361,12 +361,19 @@ function setup() {
 
 //----------------------------------------------
 //LISTA DE MINIENEMIGOS
-const enemigo1 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo2 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo3 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo4 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo5 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo6 = new enemigo(getRandom(2, 26), getRandom(5, 25));
+const enemigo1 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo2 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo3 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo4 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo5 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo6 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo7 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo8 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo9 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo10 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo11 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo12 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+
 listaEnemigos = [];
 listaEnemigos = actualizaLista(listaEnemigos, enemigo1);
 listaEnemigos = actualizaLista(listaEnemigos, enemigo2);
@@ -374,7 +381,12 @@ listaEnemigos = actualizaLista(listaEnemigos, enemigo3);
 listaEnemigos = actualizaLista(listaEnemigos, enemigo4);
 listaEnemigos = actualizaLista(listaEnemigos, enemigo5);
 listaEnemigos = actualizaLista(listaEnemigos, enemigo6);
-
+listaEnemigos = actualizaLista(listaEnemigos, enemigo7);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo8);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo9);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo10);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo11);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo12);
 //--------------------------------------------
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 function drawGame(Mundo) {
