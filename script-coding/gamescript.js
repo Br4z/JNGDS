@@ -1190,7 +1190,7 @@ function reproducirMusica(numMusica) {
     }
   } else if (numMusica == 1) {
     if (within.isPlaying() == false) {
-      theLastOfUs.stoadp();
+      theLastOfUs.stoad();
       // azur.stop();
       within.play();
       // caminos.stop();
