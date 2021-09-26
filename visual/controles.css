@@ -23,11 +23,12 @@ body {
 
 /* Efecto blur */
 #container {
-  height: 400px;
+  height: 375px;
   width: 700px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
-  margin: 50px auto;
+  position: absolute;
+  top: 100px;
   border: 1px solid #ffffff40;
   text-align: center;
   font-family: "Francois One", sans-serif;
@@ -42,7 +43,7 @@ body {
 /* Esta es la animacion del boton de volver atras */
 
 .btn-neon {
-  top: 680px;
+  top: 485px;
   position: absolute;
   display: inline-block;
   padding: 10px 10px;
@@ -79,28 +80,19 @@ body {
   transition: 1s;
 }
 
-
-.funcionalidad{
-  margin: 10px 10px 20px 10px;
-  display: flex;
-  justify-content: flex-start;
+h1{
+  color: azure;
+  text-align: left;
+  margin-left: 15px;
 }
 
-.funcionalidad img{
-  margin: 10px;
-  width: 40px;
+p{
+  margin-left: 15px;
+  text-align: left;
 }
 
-.funcionalidad p{
-  margin: 10px;
+img {
+  height: 230px;
+  border:rgb(197, 193, 193);
 }
 
-.cont_fun{
-  display: flex;
-  justify-content: space-around;
-}
-
-span{
-  margin-left: 25px;
-  margin-right: 25px;
-}

@@ -222,8 +222,13 @@ const cocaCola = new comodin(-1, -1);
 
 // TODO Dibujar la comida
 function drawFood(food) {
-  fill("crimson");
-  rect(food.x * lado, food.y * lado, lado, lado);
+  image(
+    zumo,
+    Mundo.food.x * 20,
+    Mundo.food.y * 20,
+    lado,
+    lado
+  );
 }
 
 // TODO Dibujar el Comodin #1
@@ -356,12 +361,19 @@ function setup() {
 
 //----------------------------------------------
 //LISTA DE MINIENEMIGOS
-const enemigo1 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo2 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo3 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo4 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo5 = new enemigo(getRandom(2, 26), getRandom(5, 25));
-const enemigo6 = new enemigo(getRandom(2, 26), getRandom(5, 25));
+const enemigo1 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo2 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo3 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo4 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo5 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo6 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo7 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo8 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo9 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo10 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo11 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+const enemigo12 = new enemigo(getRandom(5, 22), getRandom(7, 21));
+
 listaEnemigos = [];
 listaEnemigos = actualizaLista(listaEnemigos, enemigo1);
 listaEnemigos = actualizaLista(listaEnemigos, enemigo2);
@@ -369,7 +381,12 @@ listaEnemigos = actualizaLista(listaEnemigos, enemigo3);
 listaEnemigos = actualizaLista(listaEnemigos, enemigo4);
 listaEnemigos = actualizaLista(listaEnemigos, enemigo5);
 listaEnemigos = actualizaLista(listaEnemigos, enemigo6);
-
+listaEnemigos = actualizaLista(listaEnemigos, enemigo7);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo8);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo9);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo10);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo11);
+listaEnemigos = actualizaLista(listaEnemigos, enemigo12);
 //--------------------------------------------
 /* DRAWGAME : DIBUJAR EN EL CANVAS LO QUE QUIERAS HACER*/
 function drawGame(Mundo) {
@@ -816,10 +833,10 @@ function onTic(Mundo) {
 
   if (
     //Cordinas el movimiento de la serpiente.
-    // (Mundo.snake[0].x > columnas - 1 ||
-    //   Mundo.snake[0].y > filas - 1 ||
-    //   Mundo.snake[0].x < 0 ||
-    //   Mundo.snake[0].y < 0 ||
+    Mundo.snake[0].x > columnas - 1 ||
+    Mundo.snake[0].y > filas - 1 ||
+    Mundo.snake[0].x < 0 ||
+    Mundo.snake[0].y < 0 ||
     // escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 1 ||
     (Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 &&
       Mundo.lives >= 1) /*|| (compMiniEnemigos(Mundo.listaEnemigos))==0 */ ||
