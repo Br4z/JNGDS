@@ -1226,38 +1226,3 @@ function reproducirMusica(numMusica) {
     }
   }
 }
-
-const tiempoRetrasoComidas = 80;
-
-function puntajeComida(puntaje, comodin) {
-  comida1.play();
-  update(Mundo, (Mundo.score = Mundo.score + puntaje));
-  posicionInactivaComida(comodin);
-  update(Mundo, (Mundo.comidas[comodin].tiempoAccionado = 0));
-  update(Mundo, (Mundo.retrasoComidas = tiempoRetrasoComidas));
-}
-
-function posicionInactivaComida(nComida) {
-  update(Mundo, (Mundo.comidas[nComida].x = -1));
-  update(Mundo, (Mundo.comidas[nComida].y = -1));
-  update(Mundo, (Mundo.retrasoComidas = tiempoRetrasoComidas));
-}
-function restaRetrasoComidas() {
-  update(Mundo, Mundo.retrasoComidas--);
-}
-
-function nuevasComidas() {
-  const listaComidas = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 3, 0, 0, 0, 0, 1, 1, 1, 2,
-    2, 2, 0, 2, 0, 0, 0, 1, 1,
-  ];
-  const numeroComida = listaComidas[getRandom(0, length(listaComidas))];
-
-  update(Mundo, (Mundo.comidas[numeroComida].tiempoActivo = getRandom(40, 60)));
-  update(Mundo, (Mundo.comidas[numeroComida].x = getRandom(4, 24)));
-  update(Mundo, (Mundo.comidas[numeroComida].y = getRandom(4, 24)));
-}
-
-function nuevoRetrasoComidas() {
-  update(Mundo, (Mundo.retrasoComidas = tiempoRetrasoComidas));
-}
