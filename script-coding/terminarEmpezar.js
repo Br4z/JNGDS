@@ -12,15 +12,15 @@ function juegoNuevo() {
       { x: columnas / 2 - 2, y: filas / 2 },
     ],
     //Escenario
-    escenario : escenario1,
+    escenario: escenario1,
     //Direccion por la que empieza el Snake
     dir: derecha,
     //Enermigos
     listaEnemigos,
     //Posicion de la Comida (Será Random)
     food: {
-      x: int(getRandom(2,26)) ,  //28
-      y: int(getRandom(4,25)), //26
+      x: int(getRandom(2, 26)), //28
+      y: int(getRandom(4, 25)), //26
     },
     // cuadradoFinal: {
     //   x: 0,
@@ -51,12 +51,7 @@ function juegoNuevo() {
       comodinAleatorio,
     ],
 
-    comidas: [
-      pegante,
-      moradito,
-      chontaduro,
-      cocaCola,
-    ],
+    comidas: [pegante, moradito, chontaduro, cocaCola],
 
     //Numero de vidas inicial
     lives: 3,
@@ -75,34 +70,37 @@ function juegoNuevo() {
       {
         x: 18,
         y: 10,
-        pos:false,
+        pos: false,
       },
     ],
-    start:true,
+    start: true,
     retrasoComodines: 80,
-    retrasoComidas: 80,
+    retrasoComidas: 50,
     scoreMas: 1,
     activosMiniEnemigos: false,
     imagenActualCabeza: cabeza_derecha_normal,
-    imagenActualCola : cola_normal,
-    retrasoCola:3,
+    imagenActualCola: cola_normal,
+    retrasoCola: 3,
     contadorCola: 3,
     normalActivo: true,
     vendedorActivo: false,
-    neroActivo:false,
+    neroActivo: false,
     policiaActivo: false,
-    politicoActivo:false,
-
+    politicoActivo: false,
   };
   loop();
 }
 //----------------------------------------------
-/*
-  SISTEMA DE CANCIONES
-  => Escenario1 = 0 = mortalKombat
-  => Escenario2 = 1 = music
-  => Escenario3 = 2 = music2
+
+/**
+  SISTEMA DE CANCIONES:
+  *Escenario1 => 0 => theLastOfUs
+  *Escenario2 => 1 => within
+  *Escenario3 => 2 => azure
+  *Escenario4 => 3 => himno
+  *Escenario5 => 4 => spider
 */
+
 /*
 Contrato: none=>function (No recibe nada como parametro pero me retorna una funcion)
 Propósito: Parar la música dependiendo del escenario actual en que se encuentre, el sistema de canciones se encuentra arriba
@@ -156,7 +154,7 @@ function juegoTerminado() {
 /*
 Contrato: snake,dir => function() ( Recibe una snake y la direccion de esta para retornarme una funcion de cons() )
 Propósito: Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
-  Me guarda en una constante la cabeza del snake y me hace un 
+  Me guarda en una constante la cabeza del snake y me hace un
 Prototipo: moveSnake(snake,dir)
 */
 function moveSnake(snake, dir) {
