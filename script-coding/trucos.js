@@ -53,7 +53,7 @@ function SubeScoreSencillo(){
 /*
 Contrato: none=>function (No recibe ningun parametro pero retorna una funcion)
 Propósito: sumar 2 al score
-Prototipo: ()
+Prototipo: acortador()
 */
 function acortador(){
   update(Mundo,Mundo.score = Mundo.score + 15);
@@ -64,7 +64,7 @@ function acortador(){
 eventoTeclado.sequence_combo('up down down left right up up', SubeScore);
 eventoTeclado.simple_combo('enter', jugarDeNuevo);
 eventoTeclado.sequence_combo('up up down l', comboVida);
-eventoTeclado.sequence_combo('down left right', SubeScoreSencillo);
+eventoTeclado.sequence_combo('down left right right', SubeScoreSencillo);
 eventoTeclado.sequence_combo('a d', acortador);
 
 

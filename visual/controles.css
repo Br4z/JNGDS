@@ -24,7 +24,7 @@ body {
 /* Efecto blur */
 #container {
   height: 400px;
-  width: 400px;
+  width: 700px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
   margin: 50px auto;
@@ -79,3 +79,28 @@ body {
   transition: 1s;
 }
 
+
+.funcionalidad{
+  margin: 10px 10px 20px 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.funcionalidad img{
+  margin: 10px;
+  width: 40px;
+}
+
+.funcionalidad p{
+  margin: 10px;
+}
+
+.cont_fun{
+  display: flex;
+  justify-content: space-around;
+}
+
+span{
+  margin-left: 25px;
+  margin-right: 25px;
+}

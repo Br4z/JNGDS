@@ -1023,7 +1023,7 @@ function keyPressed() {
         }
         if ((Mundo.dir = izquierda));
         break;
-      case 66://B
+      case 80://P
         noLoop();
         // paraMusica()
         break;
