@@ -47,8 +47,16 @@ Propósito: sumar 2 al score
 Prototipo: SubeScoreSencillo()
 */
 function SubeScoreSencillo(){
-  console.log('funciona');
   update(Mundo,(Mundo.score = Mundo.score + 2));
+}
+
+/*
+Contrato: none=>function (No recibe ningun parametro pero retorna una funcion)
+Propósito: sumar 2 al score
+Prototipo: ()
+*/
+function acortador(){
+  update(Mundo,Mundo.score = Mundo.score + 15);
 }
 
 //Eventos si cumples la funcion
@@ -57,4 +65,6 @@ eventoTeclado.sequence_combo('up down down left right up up', SubeScore);
 eventoTeclado.simple_combo('enter', jugarDeNuevo);
 eventoTeclado.sequence_combo('up up down l', comboVida);
 eventoTeclado.sequence_combo('down left right', SubeScoreSencillo);
+eventoTeclado.sequence_combo('a d', acortador);
+
 
