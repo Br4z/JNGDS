@@ -188,7 +188,10 @@ function despawnKnife(knife) {
   return knife.slice(0,length(knife)-1)
 }
 /**Funcion que mira si el knife golpeo alguna parte del snake reduciendo el score en 1
- *
+ *list,function-> update(Mundo)
+ *Cuando un knife se encuentra en la misma posicion que alguna parte del cuerpo del snake a excepcion de la cabeza y cuello se crea una actualizacion de mundo donde el score re reduce en 1
+ * @example [{x:20,y:14},{x:20,y:15}],[{x:20,y:14},{x:10,y:20}],} -> update(Mundo, Mundo.score-1)
+ * 
  */
 
 function hitBody(lista) {

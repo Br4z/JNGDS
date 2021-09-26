@@ -152,12 +152,10 @@ function juegoTerminado() {
   noLoop();
 }
 
-/*COSAS DEL SNAKE*/
-/*
-Contrato: snake,dir => function() ( Recibe una snake y la direccion de esta para retornarme una funcion de cons() )
-Propósito: Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
-  Me guarda en una constante la cabeza del snake y me hace un
-Prototipo: moveSnake(snake,dir)
+/**COSAS DEL SNAKE
+ * Contrato: snake,dir => function() ( Recibe una snake y la direccion de esta para retornarme una funcion de cons() )
+ * Propósito: Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
+ * @example [{x:20,y:14},{x:20,y:15}], (0,-1) -> [{x:20,y:13},{x:20,y:14}]
 */
 function moveSnake(snake, dir) {
   const head = first(snake);
