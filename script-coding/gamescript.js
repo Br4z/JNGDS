@@ -222,8 +222,13 @@ const cocaCola = new comodin(-1, -1);
 
 // TODO Dibujar la comida
 function drawFood(food) {
-  fill("crimson");
-  rect(food.x * lado, food.y * lado, lado, lado);
+  image(
+    zumo,
+    Mundo.food.x * 20,
+    Mundo.food.y * 20,
+    lado, 
+    lado 
+  );
 }
 
 // TODO Dibujar el Comodin #1
