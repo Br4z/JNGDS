@@ -22,23 +22,7 @@ function juegoNuevo() {
       x: int(getRandom(2, 26)), //28
       y: int(getRandom(4, 25)), //26
     },
-    // cuadradoFinal: {
-    //   x: 0,
-    //   y: 0,
-    // },
-    //Puntacion Inicial
     score: 0,
-
-    /* FUNCIONAMIENTO DE COMODIN
-      nombreComodin: {
-        x: PosX;
-        y: PosY;
-        tiempoAccionado: Tiempo que dibujar
-        tiempoActivo: Tiempo que dura en el mapa
-        TiempoDesactivo: Tiempo en el cual no esta en el mapa
-      }
-     */
-
     comodines: [
       comodinVelocidad,
       comodinInvencibilidad,
@@ -50,9 +34,7 @@ function juegoNuevo() {
       comodinGolpeAccionado,
       comodinAleatorio,
     ],
-
     comidas: [pegante, moradito, chontaduro, cocaCola],
-
     //Numero de vidas inicial
     lives: 3,
     //El tiempo
@@ -74,6 +56,7 @@ function juegoNuevo() {
       },
     ],
     start: true,
+    spawnThief: true,
     retrasoComodines: 80,
     retrasoComidas: 50,
     scoreMas: 1,

@@ -126,6 +126,10 @@ body {
   line-height: 1.1em;
 }
 
+.comodinBox .content p{
+  color: #252525;
+}
+
 .comodinBox .details h3 span {
   font-family: myFirstFont;
   font-weight: 700px;

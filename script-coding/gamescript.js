@@ -3,14 +3,16 @@
 let { append, cons, first, isEmpty, isList, length, rest, map, forEach } =
   functionalLight;
 
-//Preload
+//PARA LA MUSICA
 let theLastOfUs;
 let sonidoInvertir;
-//Musica dos
 let azur;
 let spider;
 let himno;
 let within;
+/**
+  Funcion preload propia de P5.JS sirve para poder cargar todas las imagenes y/o canciones/sonidos los cuales seran utilizados posteriormente
+*/
 function preload() {
   cabeza_derecha_normal = loadImage(
     "../Snake_Images/cabeza_derecha_normal.png"
@@ -168,26 +170,14 @@ let countLives = 3;
 //Imagen de fondo del canvas:
 let fondo;
 
-/**COSAS DE COMODINES
- *
- */
-
-// const comodinVelocidad = function(x,y){
-//   this.x = x;
-//   this.y = y;
-
-//   this.nombreFuncion = function(){
-//     return 0;
-//   }
-//   //ejemplo para llamarla al onTic
-//   //Mundo.comodinVelocidad.nombreFuncion()
-// }
-/* INICIALIZARLA
-const velocidad = new comodinVelocidad();
+/**COSAS DE COMODINES*/
+/**
+  A continuacion veras una clase comodin la cual recibe tres parametro, un x un y, finalmente un tiempoActivo. Esta clase sirve para poder inicializar varios comodines del mismo tipo sin necesidad de crear una funcion aparte para cada uno de ellos
 */
-
 const comodin = function (x, y, tiempoActivo) {
+  //Posicion x del comodin
   this.x = x;
+  //Posicion y del Comodin
   this.y = y;
 
   if (tiempoActivo == null) {
@@ -197,10 +187,7 @@ const comodin = function (x, y, tiempoActivo) {
   this.tiempoActivo = tiempoActivo;
   this.tiempoAccionado = 0;
 };
-/*
-x: int(getRandom(0,28)) ,  //28
-y: int(getRandom(4,26)), //26
-*/
+
 
 //CREACION DE COMODINES
 const comodinVelocidad = new comodin(getRandom(2, 26), getRandom(4, 25), 40);
@@ -220,33 +207,37 @@ const moradito = new comodin(-1, -1);
 const chontaduro = new comodin(-1, -1);
 const cocaCola = new comodin(-1, -1);
 
-// TODO Dibujar la comida
+/*
+Contrato: food => function (recibe un elemento comida y retorna una funcion usando ese elemento)
+Propósito: Dibujar la comida principal mediante una imagen con la funcion propia de P5.JS image()
+Prototipo: drawFod(food){}
+*/
 function drawFood(food) {
   image(
+    //Nombre Imagen
     zumo,
+    //Posicion x (Se multiplica por 20 para adecuarse a la escala, 20 es tamaño del lado de cada cuadro)
     Mundo.food.x * 20,
+    //Posicion y (Se multiplica por 20 para adecuarse a la escala, 20 es tamaño del lado de cada cuadro)
     Mundo.food.y * 20,
+    //Ancho Imagen
     lado,
+    //Alto Imagen
     lado
   );
 }
 
-// TODO Dibujar el Comodin #1
-function drawComodin(comodin, color) {
-  fill(color);
-  rect(comodin.x * lado, comodin.y * lado, lado, lado);
-}
 
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
 function setup() {
   //----------------------------------------------------------------
   //CONFIGURACIÓN DE NIVELES DE SONIDO
   caminos.setVolume(0.5);
-  theLastOfUs.setVolume(0.2);
-  within.setVolume(0.2);
-  himno.setVolume(0.2);
-  azur.setVolume(0.2);
-  spider.setVolume(0.2);
+  theLastOfUs.setVolume(0.1);
+  within.setVolume(0.1);
+  himno.setVolume(0.1);
+  azur.setVolume(0.1);
+  spider.setVolume(0.1);
 
   sonidoVelocidad1.setVolume(0.7);
   sonidoVelocidad2.setVolume(0.7);
@@ -265,12 +256,11 @@ function setup() {
   comida1.setVolume(0.9);
 
   //----------------------------------------------------------------
-  //theLastOfUs.play();
   frameRate(7);
   drawfondo();
   windowRezired();
   direcciones();
-
+  //----------------------------------------------------------------
   //Actualizar el Mundo, colocando lo que va a tener una vez se inicie el Juego
   Mundo = {
     //Determinar la  posicion que aparecera el Snake
@@ -290,23 +280,7 @@ function setup() {
       x: int(getRandom(2, 26)), //28
       y: int(getRandom(4, 25)), //26
     },
-    // cuadradoFinal: {
-    //   x: 0,
-    //   y: 0,
-    // },
-    //Puntacion Inicial
     score: 0,
-
-    /* FUNCIONAMIENTO DE COMODIN
-      nombreComodin: {
-        x: PosX;
-        y: PosY;
-        tiempoAccionado: Tiempo que dibujar
-        tiempoActivo: Tiempo que dura en el mapa
-        TiempoDesactivo: Tiempo en el cual no esta en el mapa
-      }
-     */
-
     comodines: [
       comodinVelocidad,
       comodinInvencibilidad,
@@ -318,9 +292,7 @@ function setup() {
       comodinGolpeAccionado,
       comodinAleatorio,
     ],
-
     comidas: [pegante, moradito, chontaduro, cocaCola],
-
     //Numero de vidas inicial
     lives: 3,
     //El tiempo
@@ -395,12 +367,7 @@ function drawGame(Mundo) {
   //Llamar a drawUi
   drawUi();
   compruebaTablero();
-
-  //Enemigos
-  // dibujaEnemigo(Mundo.listaEnemigos)
-
   //Stroke => color de los bordes
-
   //StrokeWeight => Define el ancho
   stroke("#332b2b");
   fill("#db271a");
@@ -408,12 +375,6 @@ function drawGame(Mundo) {
   //Dibuja la comida en una posicion random
   drawFood(Mundo.food);
   //Esta funcion dibuja al snake
-  // //rect(
-  //       constrain(s.x,1,columnas-2) * lado,
-  //       constrain(s.y,4,filas-2 )* lado,
-  //     lado,
-  //     lado
-  //     );
   forEach(Mundo.snake, (s) => {
     x = lookupx(Mundo.snake, s);
     if (x == 0) {
@@ -574,6 +535,11 @@ function posicionarComida() {
 }
 
 //------------------------------------
+/*
+Contrato: none => function (No recibe ningun parametro pero retorna una funcion)
+Propósito: Cambiar el diseño del tablero, la skin del snake y la musica dependiendo de los puntos que halla alcanzado el jugador
+Prototipo: cambioTablero
+*/
 function cambioTablero() {
   if (Mundo.score < 30) {
     reproducirMusica(0);
@@ -983,10 +949,6 @@ function onTic(Mundo) {
           Thief: ThiefMove(Mundo.Thief),
           timer: int(millis() / 1000),
           knife: moveKnife(Mundo.knife),
-          // cuadradoFinal: {
-          // 	x: Mundo.snake[Mundo.snake.length - 1].x,
-          // 	y: Mundo.snake[Mundo.snake.length - 1].y,
-          // },
         });
       }
       // return update(Mundo, { snake: moveSnake(Mundo.snake, Mundo.dir) });
@@ -998,10 +960,6 @@ function onTic(Mundo) {
         return update(Mundo, {
           snake: moveSnake(Mundo.snake, Mundo.dir),
           food: numeroRandomComida(Mundo.snake),
-          // cuadradoFinal: {
-          //   x: 0,
-          //   y: 0,
-          // },
           score: Mundo.score + Mundo.scoreMas,
           timer: int(millis() / 1000),
           start: false,
@@ -1027,19 +985,13 @@ function onMouseEvent(Mundo, event) {
   return update(Mundo, {});
 }
 
-// function jugarDeNuevo(){
-//   if(!isLooping()){
-//     juegoNuevo()
-//   }
-// }
-
 // Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo estado del mundo.
 
 function keyPressed() {
   // jugarDeNuevo();
   if (!isLooping() && Mundo.lives >= 0) {
     switch (keyCode) {
-      case 86:
+      case 67:
         loop();
         break;
       default:

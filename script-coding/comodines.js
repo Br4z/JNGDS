@@ -3,7 +3,7 @@
 /*
 Propósito: Realizar un update de el tiempo activo de un comodín, restandole 1
 Contrato: JSON -> number
-Prototipo: restaTiempo(nComodin) 
+Prototipo: restaTiempo(nComodin)
 Ejemplos:
 restaTiempo({x: 7, y: 14, tiempoActivo: 20, tiempoAccionado: 0}) -> 19
 {x: 0, y: 1, tiempoActivo: 1, tiempoAccionado: 0} -> 0
@@ -186,7 +186,7 @@ function accionInversion(){
 
   /**
  * Invierte la dirección que tomara el Snake en su cola
- * @param {lista} snake 
+ * @param {lista} snake
  * @returns {variable}
  * @example direccionInversion([{x:3, y:0}, {x:2, y:0}, {x:1, y:0}, {x:0, y:0}]) => snake[1].x + 1 == snake[0].x => derecha
  */

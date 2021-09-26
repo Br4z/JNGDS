@@ -77,6 +77,10 @@ body {
   background: #d3d9dd;
 }
 
+.comodinBox .content p{
+  color: #252525;
+}
+
 .comodinBox {
   position: relative;
   width: 100%;
