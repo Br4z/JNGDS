@@ -108,11 +108,13 @@ Prototipo: paraMusica(){}
 */
 function paraMusica() {
   if (Mundo.escenario == escenario1) {
-    mortalKombat.stop();
+    theLastOfUs.stop();
   } else if (Mundo.escenario == escenario2) {
-    music.stop();
+    within.stop();
   } else if (Mundo.escenario == escenario3) {
-    music2.stop();
+    azur.stop();
+  } else if (Mundo.escenario == escenario4) {
+    himno.stop();
   } else if (Mundo.escenario == escenario5) {
     spider.stop();
   }
