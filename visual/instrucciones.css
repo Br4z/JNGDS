@@ -10,13 +10,13 @@
 * {
   margin: 0px;
   padding: 0px;
+  font-family: "ARCADE CLASSIC", "Arial";
 }
 
 body {
   background-image: url(/backgrounds/FondoPblur.jpg); /* Fondo principal */
   background-attachment: fixed;
   background-size: cover;
-
 }
 
 /* Efecto blur */
@@ -50,7 +50,6 @@ body {
   text-decoration: none;
   overflow: hidden;
   transition: 0.2s;
-  font-family: "ARCADE CLASSIC", "Arial";
 }
 
 .btn-neon:hover {
@@ -101,7 +100,7 @@ body {
 }
 
 /* Boton volver al menu */
-#blanco{
+#blanco {
   bottom: 320px;
   color: rgb(197, 193, 193);
   /* margin: 20px 0px 0px 0px; */
@@ -117,46 +116,110 @@ body {
   background: linear-gradient(270deg, transparent, #f6ed9f);
 }
 
-
-.mainCont{
+.mainCont {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+ 
+/* Boton volver al menu */
 
-#pixelBut{
+.boton a {
   position: relative;
-  width: 180px;
-  height: 60px;
-  color: #fff;
+  top: 20px;
+  padding: 10px 30px;
   text-decoration: none;
   text-transform: uppercase;
-  text-align: center;
-  line-height: 60px;
-  letter-spacing: 2px;
-  margin: 20px;
-  /* margin-left: 86vh; */
+  color: rgba(255, 255, 255, 0.4);
+  background: #262c37;
+  letter-spacing: 3px;
+  font-size: 20px;
   transition: 0.5s;
-  display: inline-block;
-  font-family: "ARCADE CLASSIC", "Arial";
 }
 
-#pixelBut:hover{
-  /* background: #ec0b36 url(../backgrounds/pixel.png); */
-  background: #730bec url(../backgrounds/pixel2.png);
-  transition-delay: 0.8s;
-  background-size: 180px;
-  animation: animate 0.8s steps(8) forwards;
+.boton a:hover{
+  color: rgba(255, 255, 255, 1);
 }
 
-@keyframes animate{
-  0%
-  {
-    background-position-y:0;
-  }
-  100%
-  {
-    background-position-y:-480px;
-  }
+.boton a span{
+  display: block;
+  position: absolute;
+  background: #2894ff;
+}
+
+/* Animacion lado derecho */
+
+.boton a span:nth-child(1){
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin:top;
+  transition: transform 0.5s;
+}
+
+.boton a:hover span:nth-child(1){
+  transform: scaleY(1);
+  transform-origin:bottom;
+  transition: transform 0.5s;
+}
+
+/* Animacion lado de abajo */
+
+.boton a span:nth-child(2){
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin:right;
+  transition: transform 0.5s;
+}
+
+.boton a:hover span:nth-child(2){
+  transform: scaleX(1);
+  transform-origin:left;
+  transition: transform 0.5s;
+}
+
+/* Animacion lado derecho */
+
+.boton a span:nth-child(3){
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin:top;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
+/* Animacion lado de arriba */
+
+.boton a:hover span:nth-child(3){
+  transform: scaleY(1);
+  transform-origin:bottom;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
+.boton a span:nth-child(4){
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin:right;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
+.boton a:hover span:nth-child(4){
+  transform: scaleX(1);
+  transform-origin:left;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
 }

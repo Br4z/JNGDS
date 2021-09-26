@@ -10,6 +10,7 @@
   * {
     margin: 0px;
     padding: 0px;
+    font-family: "ARCADE CLASSIC", "Arial";
   }
 
   body {
@@ -25,47 +26,106 @@
     position: absolute;
   }
 
-  /* Esta es la animacion del boton */
+  /* Boton volver al menu */
 
-  .btn-neon {
+  a {
     position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    color: rgb(193, 197, 197);
-    letter-spacing: 4px;
-    font-size: 20px;
-    text-decoration: none;
-    overflow: hidden;
-    transition: 0.2s;
-    font-family: "ARCADE CLASSIC", "Arial";
     top: 290px;
-    right: 5px;
+    padding: 10px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    background: #262c37;
+    letter-spacing: 3px;
+    font-size: 20px;
+    transition: 0.5s;
   }
 
-  .btn-neon:hover {
-    background: #b41b16;
-    box-shadow: 0 0 10px #b41b16, 0 0 40px #b41b16, 0 0 80px #b41b16;
-    transition-delay: 0.4s;
+  a:hover {
+    color: rgba(255, 255, 255, 1);
   }
 
-  .btn-neon span {
-    position: absolute;
+  a span {
     display: block;
+    position: absolute;
+    background: #2894ff;
   }
 
-  .span {
+  /* Animacion lado derecho */
+
+  a span:nth-child(1) {
+    left: 0;
     bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(270deg, transparent, #ffffff);
+    width: 1px;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s;
   }
 
-  .btn-neon:hover .span {
-    right: 100%;
-    transition: 1s;
+  a:hover span:nth-child(1) {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    transition: transform 0.5s;
   }
-}
+
+  /* Animacion lado de abajo */
+
+  a span:nth-child(2) {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s;
+  }
+
+  a:hover span:nth-child(2) {
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.5s;
+  }
+
+  /* Animacion lado derecho */
+
+  a span:nth-child(3) {
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s;
+    transition-delay: 0.5s;
+  }
+
+  /* Animacion lado de arriba */
+
+  a:hover span:nth-child(3) {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    transition: transform 0.5s;
+    transition-delay: 0.5s;
+  }
+
+  a span:nth-child(4) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s;
+    transition-delay: 0.5s;
+  }
+
+  a:hover span:nth-child(4) {
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.5s;
+    transition-delay: 0.5s;
+  }
 
 @media (min-height: 951px) {
   /* llamar a la fuente */
@@ -81,6 +141,7 @@
     margin: 0px;
     padding: 0px;
     max-height: 100vh;
+    font-family: "ARCADE CLASSIC", "Arial";
   }
 
   body {
@@ -97,49 +158,102 @@
     position: absolute;
   }
 
-  /* Esta es la animacion del boton */
+  /* Boton volver al menu */
 
-  .btn-neon {
-    margin: 0px 80px;
+  a {
     position: relative;
-    display: inline-block;
-    padding: 15px 30px;
-    color: rgb(197, 193, 193);
-    letter-spacing: 4px;
-    font-size: 20px;
+    top: 20px;
+    padding: 10px 30px;
     text-decoration: none;
-    overflow: hidden;
-    transition: 0.2s;
-    font-family: "ARCADE CLASSIC", "Arial";
-    top: 325px;
-    right: 5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    background: #262c37;
+    letter-spacing: 3px;
+    font-size: 20px;
+    transition: 0.5s;
   }
 
-  .btn-neon:hover {
-    background: #f6ed9f;
-    box-shadow: 0 0 10px #f6ed9f, 0 0 40px #f6ed9f, 0 0 80px #f6ed9f;
-    transition-delay: 0.4s;
+  a:hover {
+    color: rgba(255, 255, 255, 1);
   }
 
-  .btn-neon span {
-    position: absolute;
+  a span {
     display: block;
+    position: absolute;
+    background: #2894ff;
   }
 
-  .span {
+  /* Animacion lado derecho */
+
+  a span:nth-child(1) {
+    left: 0;
     bottom: 0;
-    right: -100%;
+    width: 1px;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s;
+  }
+
+  a:hover span:nth-child(1) {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    transition: transform 0.5s;
+  }
+
+  /* Animacion lado de abajo */
+
+  a span:nth-child(2) {
+    left: 0;
+    bottom: 0;
     width: 100%;
-    height: 2px;
-    background: linear-gradient(270deg, transparent, #ffffff);
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s;
   }
 
-  .btn-neon:hover .span {
-    right: 100%;
-    transition: 1s;
+  a:hover span:nth-child(2) {
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.5s;
   }
 
-  .canvas {
-    margin-top: 10px;
+  /* Animacion lado derecho */
+
+  a span:nth-child(3) {
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s;
+    transition-delay: 0.5s;
   }
-}
+
+  /* Animacion lado de arriba */
+
+  a:hover span:nth-child(3) {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    transition: transform 0.5s;
+    transition-delay: 0.5s;
+  }
+
+  a span:nth-child(4) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s;
+    transition-delay: 0.5s;
+  }
+  a:hover span:nth-child(4) {
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.5s;
+    transition-delay: 0.5s;
+  }

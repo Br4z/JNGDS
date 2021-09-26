@@ -15,7 +15,6 @@
 
 body {
   background-image: url(/backgrounds/FondoPblur.jpg); /* Fondo principal */
-  background-repeat: no-repeat;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -25,7 +24,7 @@ body {
 
 /* Efecto blur */
 #container {
-  height: 430px;
+  height: 380px;
   width: 400px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
@@ -79,41 +78,105 @@ a:hover #repo{
 
 /* Esta es la animacion del boton de volver al menu */
 
-.btn-neon {
-  display: inline-block;
-  margin: 20px 80px 0px;
-  /* position: absolute; */
-  padding: 10px 10px;
-  color: rgb(197, 193, 193);
-  letter-spacing: 4px;
-  font-size: 20px;
+/* Boton volver al menu */
+
+.boton a {
+  position: relative;
+  top: 20px;
+  left: 70px;
+  padding: 10px 30px;
   text-decoration: none;
-  overflow: hidden;
-  transition: 0.2s;
-  font-family: "ARCADE CLASSIC", "Arial";
-  /* top: 700px; */
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  background: #262c37;
+  letter-spacing: 3px;
+  font-size: 20px;
+  transition: 0.5s;
 }
 
-.btn-neon:hover {
-  background: #99240f;
-  box-shadow: 0 0 10px #99240f, 0 0 40px #99240f, 0 0 80px #99240f;
-  transition-delay: 0.4s;
+.boton a:hover{
+  color: rgba(255, 255, 255, 1);
 }
 
-.btn-neon span {
-  position: absolute;
+.boton a span{
   display: block;
+  position: absolute;
+  background: #2894ff;
 }
 
-.span {
+/* Animacion lado derecho */
+
+.boton a span:nth-child(1){
+  left: 0;
   bottom: 0;
-  right: -100%;
-  /* width: 100%; */
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #f6b89f);
+  width: 1px;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin:top;
+  transition: transform 0.5s;
 }
 
-.btn-neon:hover .span {
-  right: 100%;
-  transition: 1s;
+.boton a:hover span:nth-child(1){
+  transform: scaleY(1);
+  transform-origin:bottom;
+  transition: transform 0.5s;
 }
+
+/* Animacion lado de abajo */
+
+.boton a span:nth-child(2){
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin:right;
+  transition: transform 0.5s;
+}
+
+.boton a:hover span:nth-child(2){
+  transform: scaleX(1);
+  transform-origin:left;
+  transition: transform 0.5s;
+}
+
+/* Animacion lado derecho */
+
+.boton a span:nth-child(3){
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin:top;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
+/* Animacion lado de arriba */
+
+.boton a:hover span:nth-child(3){
+  transform: scaleY(1);
+  transform-origin:bottom;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
+.boton a span:nth-child(4){
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin:right;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
+.boton a:hover span:nth-child(4){
+  transform: scaleX(1);
+  transform-origin:left;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+

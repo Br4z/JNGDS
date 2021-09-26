@@ -26,7 +26,7 @@ body {
 
 /* Efecto blur */
 #container {
-  height: 525px;
+  height: 450px;
   width: 950px;
   border-radius: 6px;
   box-shadow: 0 10px 30px #000;
@@ -157,11 +157,11 @@ body {
   margin-top: 15px;
 }
 
-/* Esta es la animacion del boton de volver al menu */
+/* Esta es la animacion del boton de volver atras */
 
 .btn-neon {
   margin: 0px 80px;
-  position: relative;
+  position: absolute;
   display: inline-block;
   padding: 10px 10px;
   color: rgb(197, 193, 193);
@@ -171,6 +171,7 @@ body {
   overflow: hidden;
   transition: 0.2s;
   font-family: "ARCADE CLASSIC", "Arial";
+  margin-top: 500px;
 }
 
 .btn-neon:hover {
