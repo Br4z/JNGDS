@@ -833,10 +833,10 @@ function onTic(Mundo) {
 
   if (
     //Cordinas el movimiento de la serpiente.
-    // (Mundo.snake[0].x > columnas - 1 ||
-    //   Mundo.snake[0].y > filas - 1 ||
-    //   Mundo.snake[0].x < 0 ||
-    //   Mundo.snake[0].y < 0 ||
+    Mundo.snake[0].x > columnas - 1 ||
+    Mundo.snake[0].y > filas - 1 ||
+    Mundo.snake[0].x < 0 ||
+    Mundo.snake[0].y < 0 ||
     // escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 1 ||
     (Mundo.escenario[Mundo.snake[0].y][Mundo.snake[0].x] == 2 &&
       Mundo.lives >= 1) /*|| (compMiniEnemigos(Mundo.listaEnemigos))==0 */ ||
