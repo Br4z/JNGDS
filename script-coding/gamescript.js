@@ -554,23 +554,27 @@ function cambioTablero() {
   } else if (Mundo.score >= 30 && Mundo.score < 80) {
     // Musica dos
     reproducirMusica(1);
+    theLastOfUs.stop()
     update(Mundo, (Mundo.escenario = escenario2));
     update(Mundo, (Mundo.normalActivo = false));
     update(Mundo, (Mundo.vendedorActivo = true));
   } else if (Mundo.score >= 80 && Mundo.score < 125) {
     reproducirMusica(2);
+    within.stop()
     update(Mundo, (Mundo.escenario = escenario3));
     update(Mundo, (Mundo.vendedorActivo = false));
     update(Mundo, (Mundo.politicoActivo = true));
     update(Mundo, (Mundo.thiefActivo = true));
   } else if (Mundo.score >= 125 && Mundo.score < 175) {
     reproducirMusica(3);
+    azure.stop()
     update(Mundo, Mundo.spawnThief = true);
     update(Mundo, (Mundo.escenario = escenario4));
     update(Mundo, (Mundo.politicoActivo = false));
     update(Mundo, (Mundo.neroActivo = true));
     update(Mundo, (Mundo.thiefActivo = false));
   } else if (Mundo.score >= 175) {
+    tranqui.stop()
     reproducirMusica(4);
     update(Mundo, (Mundo.escenario = escenario5));
     update(Mundo, (Mundo.neroActivo = false));
@@ -590,6 +594,10 @@ function Funwin() {
     image(win, 45, 100, 480, 350);
     paraMusica();
     spider.stop();
+    theLastOfUs.stop();
+    within.stop();
+    azur.stop();
+    tranqui.stop();
     himno.play();
     noLoop();
   }
