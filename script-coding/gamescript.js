@@ -1171,7 +1171,7 @@ function comerItem(snake, item) {
   SISTEMA DE CANCIONES:
   *Escenario1 => 0 => theLastOfUs
   *Escenario2 => 1 => within
-  *Escenario3 => 2 => azure
+  *Escenario3 => 2 => azur
   *Escenario4 => 3 => tranqui
   *Escenario5 => 4 => spider
 */
@@ -1215,6 +1215,7 @@ function reproducirMusica(numMusica) {
       azur.stop();
     }
   } else if (numMusica == 4) {
+    if(Mundo.score<250){
     if (spider.isPlaying() == false) {
       theLastOfUs.stop();
       // within.stop();
@@ -1224,4 +1225,5 @@ function reproducirMusica(numMusica) {
       // azur.stop();
     }
   }
+}
 }
