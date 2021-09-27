@@ -819,7 +819,7 @@ function onTic(Mundo) {
       posicionInactiva(8);
     }
   }
-  if (Mundo.start == false && Mundo.score % 25 == 0 ||Mundo.score%26==0 ||Mundo.score%27==0) {
+  if (Mundo.start == false && Mundo.score % 25 == 0 ) {
     return update(Mundo, {
       snake: moveSnake(Mundo.snake.slice(0, 3), Mundo.dir),
       start: true,
