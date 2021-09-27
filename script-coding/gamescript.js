@@ -234,6 +234,7 @@ function drawFood(food) {
 
 /* SETUP  ==> SE LLAMA ANTES DE INICIALIZAR EL JUEGO*/
 function setup() {
+
   //----------------------------------------------------------------
   //CONFIGURACIÓN DE NIVELES DE SONIDO
   caminos.setVolume(0.5);
@@ -607,6 +608,14 @@ function Funwin() {
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
+    // --------------------------------------------------------------
+  //APARECER TOMBOS EN ESCENARIO 4
+  if(Mundo.escenario==escenario4){
+    if(Mundo.score%10==0){
+      console.log("sss")
+      accionTombos();
+    }
+  }
   // console.log(Mundo.dir)
   Funwin();
   cambiaCabezaCola();
@@ -819,7 +828,7 @@ function onTic(Mundo) {
       posicionInactiva(8);
     }
   }
-  if (Mundo.start == false && Mundo.score % 25 == 0) {
+  if (Mundo.start == false && Mundo.score % 25 == 0 ) {
     return update(Mundo, {
       snake: moveSnake(Mundo.snake.slice(0, 3), Mundo.dir),
       start: true,
