@@ -1,0 +1,145 @@
+/* llamar a la fuente */
+
+@font-face {
+  font-family: "ARCADE CLASSIC";
+  src: url("../fonts/ARCADECLASSIC.TTF");
+}
+
+/* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-image: url(/backgrounds/FondoPblur.jpg); /* Fondo principal */
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: hidden;
+}
+/* Efecto blur */
+#container {
+  width: 400px;
+  height: 20%;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px #000;
+  margin: 50px auto;
+  border: 1px solid #ffffff40;
+  text-align: center;
+  font-family: "ARCADE CLASSIC", "Arial";
+}
+
+.blur {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(73, 72, 72, 0.2);
+}
+
+/* Esta es la animacion del boton base */
+
+.btn-neon {
+  margin: 10px;
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  color: #fff;
+  letter-spacing: 4px;
+  font-size: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.btn-neon:hover {
+  background: rgb(187, 187, 8);
+  box-shadow: 0 0 10px rgb(187, 187, 8), 0 0 40px rgb(187, 187, 8), 0 0 80px rgb(187, 187, 8);
+  transition-delay: 0.4s;
+}
+
+.btn-neon span {
+  position: absolute;
+  display: block;
+}
+
+.span {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, rgb(187, 187, 8));
+}
+
+.btn-neon:hover .span {
+  right: 100%;
+  transition: 1s;
+}
+
+/* Con la ayuda de id's y clases logro reciclar la animacion anterior, pero con diferentes colores */
+
+/* Boton azul */
+#azul:hover {
+  background: rgb(7, 31, 161);
+  box-shadow: 0 0 10px rgb(7, 31, 161), 0 0 40px rgb(7, 31, 161), 0 0 80px rgb(7, 31, 161);
+}
+
+#spanAzul {
+  background: linear-gradient(270deg, transparent, rgb(7, 31, 161));
+}
+
+/* Boton rojo */
+
+#rojo:hover {
+  background: rgb(156, 20, 20);
+  box-shadow: 0 0 10px rgb(156, 20, 20), 0 0 40px rgb(156, 20, 20), 0 0 80px rgb(156, 20, 20);
+}
+
+#spanRojo {
+  background: linear-gradient(270deg, transparent, rgb(156, 20, 20));
+}
+
+/* Logo animado */
+
+.circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 150px auto 0px auto;
+}
+
+.logo {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: url(/visual/LogoJNGS.png);
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: rotateText 10s linear infinite;
+}
+@keyframes rotateText {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.text span {
+  position: absolute;
+  left: 50%;
+  font-size: 1.4em;
+  transform-origin: 0 100px;
+  font-family: "mister-pixel", "Arial";
+  color: #fff;
+}

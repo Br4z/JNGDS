@@ -1,0 +1,110 @@
+/* llamar a la fuente */
+
+@font-face {
+  font-family: "ARCADE CLASSIC";
+  src: url("../fonts/ARCADECLASSIC.TTF");
+}
+
+/* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-image: url(/backgrounds/FondoPblur.jpg); /* Fondo principal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+}
+
+/* Efecto blur */
+#container {
+  height: 410px;
+  width: 500px;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px #000;
+  border: 1px solid #ffffff40;
+}
+
+.blur {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(243, 243, 243, 0.2);
+}
+
+h1 {
+  text-align: left;
+  padding-left: 10px;
+  color: #e2e2e2;
+  font-family: "Francois One", sans-serif;
+}
+
+p {
+  padding-left: 10px;
+  padding-right: 5px;
+  padding-top: 5px;
+  color: white;
+  font-family: 'Ropa Sans', sans-serif;
+  font-weight: 500px;
+  font-size: larger;
+}
+audio{
+  position: relative;
+  left: 175px;
+  bottom: 60px;
+}
+img {
+  width: 30%;
+  position: relative;
+  top: 30px;
+  right: 300px;
+}
+
+a  {
+  position: absolute;
+}
+
+/* Boton jugar */
+
+.btn {
+  /* Para <button> */
+  font-size: inherit;
+  border: none;
+  cursor: pointer;
+  font-family: "ARCADE CLASSIC", "Arial";
+
+}
+
+.btn-bootstrap:hover,
+.btn-bootstrap:focus {
+  background-color: #0069d9;
+}
+
+.btn-bootstrap:active {
+  background-color: #0062cc;
+}
+
+.btn-bootstrap {
+  padding: 10px 20px 10px 20px;
+  border-radius: 0.25rem;
+  letter-spacing: 4px;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.15s ease-in-out;
+  margin-top: 150px;
+  right: 190px;
+  position: relative;
+}
+
+.btn-bootstrap:hover,
+.btn-bootstrap:focus {
+  background-color: #0069d9;
+}
+
+.btn-bootstrap:active {
+  background-color: #0062cc;
+}

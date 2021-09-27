@@ -1,0 +1,98 @@
+/* llamar a la fuente */
+
+@font-face {
+  font-family: "ARCADE CLASSIC";
+  src: url("../fonts/ARCADECLASSIC.TTF");
+}
+
+/* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-image: url(/backgrounds/FondoPblur.jpg); /* Fondo principal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+}
+
+/* Efecto blur */
+#container {
+  height: 375px;
+  width: 700px;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px #000;
+  position: absolute;
+  top: 100px;
+  border: 1px solid #ffffff40;
+  text-align: center;
+  font-family: "Francois One", sans-serif;
+}
+
+.blur {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(243, 243, 243, 0.2);
+}
+
+/* Esta es la animacion del boton de volver atras */
+
+.btn-neon {
+  top: 485px;
+  position: absolute;
+  display: inline-block;
+  padding: 10px 10px;
+  color: rgb(197, 193, 193);
+  letter-spacing: 4px;
+  font-size: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.2s;
+  font-family: "ARCADE CLASSIC", "Arial";
+}
+
+.btn-neon:hover {
+  background: #f6ed9f;
+  box-shadow: 0 0 10px #f6ed9f, 0 0 40px #f6ed9f, 0 0 80px #f6ed9f;
+  transition-delay: 0.4s;
+}
+
+.btn-neon span {
+  position: absolute;
+  display: block;
+}
+
+.span {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #f6ed9f);
+}
+
+.btn-neon:hover .span {
+  right: 100%;
+  transition: 1s;
+}
+
+h1{
+  color: azure;
+  text-align: left;
+  margin-left: 15px;
+}
+
+p{
+  margin-left: 15px;
+  text-align: left;
+}
+
+img {
+  height: 230px;
+  border:rgb(197, 193, 193);
+}
+

@@ -1,0 +1,182 @@
+/* llamar a la fuente */
+
+@font-face {
+  font-family: "ARCADE CLASSIC";
+  src: url("../fonts/ARCADECLASSIC.TTF");
+}
+
+/* Lo unico que necesitamos del normalize (para lo que vamos a hacer) */
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+
+body {
+  background-image: url(/backgrounds/FondoPblur.jpg); /* Fondo principal */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  display: flex;
+}
+
+/* Efecto blur */
+#container {
+  height: 380px;
+  width: 400px;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px #000;
+  border: 1px solid #ffffff40;
+  text-align: center;
+  font-family: "Francois One", sans-serif;
+}
+
+.blur {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(243, 243, 243, 0.2);
+}
+
+h1 {
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 10px;
+  color: #e2e2e2;
+}
+
+.lista {
+  list-style-position: inside;
+  text-align: left;
+  padding-left: 30px;
+  margin-top: 20px;
+}
+
+ul {
+  list-style: square;
+  font-size: 20px;
+}
+
+img {
+  width: 125px;
+  margin-top: 30px;
+}
+
+#repo {
+  text-align: center;
+  font-family: "ARCADE CLASSIC", "Arial";
+  display: inline-block;
+  background: url("https://mdn.mozillademos.org/files/12982/external-link-52.png") no-repeat 100% 0;
+  background-size: 16px 16px;
+  padding-right: 19px;
+}
+a:hover #repo{
+  border-bottom: 3px solid;
+  color: rgb(190, 33, 33);
+}
+
+/* Esta es la animacion del boton de volver al menu */
+
+/* Boton volver al menu */
+
+.boton a {
+  position: relative;
+  top: 20px;
+  left: 70px;
+  padding: 10px 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  background: #262c37;
+  letter-spacing: 3px;
+  font-size: 20px;
+  transition: 0.5s;
+}
+
+.boton a:hover{
+  color: rgba(255, 255, 255, 1);
+}
+
+.boton a span{
+  display: block;
+  position: absolute;
+  background: #2894ff;
+}
+
+/* Animacion lado derecho */
+
+.boton a span:nth-child(1){
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin:top;
+  transition: transform 0.5s;
+}
+
+.boton a:hover span:nth-child(1){
+  transform: scaleY(1);
+  transform-origin:bottom;
+  transition: transform 0.5s;
+}
+
+/* Animacion lado de abajo */
+
+.boton a span:nth-child(2){
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin:right;
+  transition: transform 0.5s;
+}
+
+.boton a:hover span:nth-child(2){
+  transform: scaleX(1);
+  transform-origin:left;
+  transition: transform 0.5s;
+}
+
+/* Animacion lado derecho */
+
+.boton a span:nth-child(3){
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin:top;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
+/* Animacion lado de arriba */
+
+.boton a:hover span:nth-child(3){
+  transform: scaleY(1);
+  transform-origin:bottom;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
+.boton a span:nth-child(4){
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin:right;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
+.boton a:hover span:nth-child(4){
+  transform: scaleX(1);
+  transform-origin:left;
+  transition: transform 0.5s;
+  transition-delay: 0.5s;
+}
+
