@@ -608,11 +608,15 @@ function Funwin() {
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
-    // --------------------------------------------------------------
+  // ----------------------------------------------------------------
+  if(Mundo.lives<0){
+    juegoTerminado();
+  }
+  // --------------------------------------------------------------
   //APARECER TOMBOS EN ESCENARIO 4
   if(Mundo.escenario==escenario4){
     if(Mundo.score%10==0){
-      console.log("sss")
+      // console.log("sss")
       accionTombos();
     }
   }
