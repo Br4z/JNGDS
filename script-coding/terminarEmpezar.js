@@ -80,7 +80,7 @@ function juegoNuevo() {
   *Escenario1 => 0 => theLastOfUs
   *Escenario2 => 1 => within
   *Escenario3 => 2 => azure
-  *Escenario4 => 3 => himno
+  *Escenario4 => 3 => tranqui
   *Escenario5 => 4 => spider
 */
 
@@ -97,14 +97,14 @@ function paraMusica() {
   } else if (Mundo.escenario == escenario3) {
     azur.stop();
   } else if (Mundo.escenario == escenario4) {
-    himno.stop();
+    tranqui.stop();
   } else if (Mundo.escenario == escenario5) {
     spider.stop();
   }
 }
 
 /*
-Contrato: None => Funciton (No recibe nada como parametro pero me retorna funciones)
+Contrato: None => Function (No recibe nada como parametro pero me retorna funciones)
 Propósito: Terminar el Juego cuando se llame en el gamescript. Esta funcion hace lo siguiente:
 => Llamar a la funcon paraMusica()
 =>Empezar la musica llamada caminos
@@ -139,7 +139,7 @@ function juegoTerminado() {
  * Contrato: snake,dir => function() ( Recibe una snake y la direccion de esta para retornarme una funcion de cons() )
  * Propósito: Actualiza la serpiente. Creando una nuevo cabeza y removiendo la cola.
  * @example [{x:20,y:14},{x:20,y:15}], (0,-1) -> [{x:20,y:13},{x:20,y:14}]
-*/
+ */
 function moveSnake(snake, dir) {
   const head = first(snake);
   return cons(
@@ -147,3 +147,5 @@ function moveSnake(snake, dir) {
     snake.slice(0, length(snake) - 1)
   );
 }
+
+

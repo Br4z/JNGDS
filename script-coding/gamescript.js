@@ -10,6 +10,7 @@ let azur;
 let spider;
 let himno;
 let within;
+let tranqui;
 /**
   Funcion preload propia de P5.JS sirve para poder cargar todas las imagenes y/o canciones/sonidos los cuales seran utilizados posteriormente
 */
@@ -101,6 +102,8 @@ function preload() {
   pegantes = loadImage("../visual/comida/pegante.png");
   zumo = loadImage("../visual/comida/zumo.png");
 
+    win = loadImage("../backgrounds/Win.png");
+
   soundFormats("mp3", "ogg", "wav");
   theLastOfUs = loadSound("../audio/themes/theLastOfUs.mp3");
   himno = loadSound("../audio/themes/himno.mp3");
@@ -110,6 +113,7 @@ function preload() {
   caminos = loadSound("../audio/themes/Caminos.mp3");
   //golden Age - Spiderman
   spider = loadSound("../audio/themes/goldenAge.mp3");
+  tranqui = loadSound('../audio/themes/tranqui.mp3');
 
   sonidoVelocidad1 = loadSound("../audio/sfx/comodines/velocidad1.mp3");
   sonidoVelocidad2 = loadSound("../audio/sfx/comodines/velocidad2.mp3");
@@ -235,7 +239,7 @@ function setup() {
   caminos.setVolume(0.5);
   theLastOfUs.setVolume(0.1);
   within.setVolume(0.1);
-  himno.setVolume(0.1);
+  tranqui.setVolume(0.1);
   azur.setVolume(0.1);
   spider.setVolume(0.1);
 
@@ -574,11 +578,27 @@ function cambioTablero() {
   }
 }
 //------------------------------------
+/*
+Contrato: None => Function (No recibe nada como parametro pero me retorna funciones)
+Propósito: Dar una interfaz cuando hayas ganado el juego, es decir alcanzado 250 puntos
+Prototipo: win(){}
+*/
+
+function Funwin() {
+  if (Mundo.score >= 250) {
+    image(win, 45, 100, 480, 350);
+    paraMusica();
+    himno.play();
+    noLoop();
+  }
+}
+//------------------------------------
 
 /* ONTIC */
 //OnTic: Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones. La velocidad de ejecución del onTic depende del frameRate.
 function onTic(Mundo) {
   // console.log(Mundo.dir)
+  Funwin();
   cambiaCabezaCola();
   // cambiaCola()
   //Tablero
@@ -1142,7 +1162,7 @@ function comerItem(snake, item) {
   *Escenario1 => 0 => theLastOfUs
   *Escenario2 => 1 => within
   *Escenario3 => 2 => azure
-  *Escenario4 => 3 => himno
+  *Escenario4 => 3 => tranqui
   *Escenario5 => 4 => spider
 */
 
@@ -1152,7 +1172,7 @@ function reproducirMusica(numMusica) {
       //console.log("Hola");
       // within.stop();
       theLastOfUs.play();
-      // himno.stop();
+      // tranqui.stop();
       caminos.stop();
       spider.stop();
       // azur.stop();
@@ -1164,22 +1184,22 @@ function reproducirMusica(numMusica) {
       within.play();
       // caminos.stop();
       // spider.stop();
-      // himno.stop();
+      // tranqui.stop();
     }
   } else if (numMusica == 2) {
     if (azur.isPlaying() == false) {
       // theLastOfUs.stop();
       within.stop();
-      // himno.stop();
+      // tranqui.stop();
       // caminos.stop();
       // spider.stop();
       azur.play();
     }
   } else if (numMusica == 3) {
-    if (himno.isPlaying() == false) {
+    if (tranqui.isPlaying() == false) {
       // theLastOfUs.stop();
       // within.stop();
-      himno.play();
+      tranqui.play();
       // caminos.stop();
       // spider.stop();
       azur.stop();
@@ -1188,7 +1208,7 @@ function reproducirMusica(numMusica) {
     if (spider.isPlaying() == false) {
       theLastOfUs.stop();
       // within.stop();
-      himno.stop();
+      tranqui.stop();
       caminos.stop();
       spider.play();
       // azur.stop();
