@@ -4,6 +4,7 @@ Propósito: Esta funcion va de la mano de juegoTerinado, pues se llama despues d
 Prototipo: juegoNuevo(){}
 */
 function juegoNuevo() {
+  himno.stop()
   Mundo = {
     //Determinar la  posicion que aparecera el Snake
     snake: [
