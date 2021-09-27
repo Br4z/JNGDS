@@ -248,7 +248,7 @@ function accionTombos(){
  */
 function accionReduccionPuntos(){
   update(Mundo, Mundo.comodines[6].tiempoActivo = 0);
-  console.log(Mundo.comodines[6].tiempoAccionado);
+  // console.log(Mundo.comodines[6].tiempoAccionado);
   if (Mundo.comodines[6].tiempoAccionado == 0){
     update(Mundo, Mundo.score = Mundo.score + 3);
     sonidoPuntos2.play();
@@ -259,7 +259,7 @@ function accionReduccionPuntos(){
 
   } else if (Mundo.comodines[6].tiempoAccionado == 1){
     sonidoPuntos1.play();
-    console.log("Hola");
+    // console.log("Hola");
     update(Mundo, Mundo.scoreMas = 1);
     update(Mundo, Mundo.comodines[6].tiempoAccionado--);
 
