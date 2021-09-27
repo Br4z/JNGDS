@@ -589,6 +589,7 @@ function Funwin() {
   if (Mundo.score >= 250) {
     image(win, 45, 100, 480, 350);
     paraMusica();
+    spider.stop();
     himno.play();
     noLoop();
   }
