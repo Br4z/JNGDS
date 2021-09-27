@@ -567,7 +567,7 @@ function cambioTablero() {
     update(Mundo, (Mundo.thiefActivo = true));
   } else if (Mundo.score >= 125 && Mundo.score < 175) {
     reproducirMusica(3);
-    azure.stop()
+    azur.stop()
     update(Mundo, Mundo.spawnThief = true);
     update(Mundo, (Mundo.escenario = escenario4));
     update(Mundo, (Mundo.politicoActivo = false));
