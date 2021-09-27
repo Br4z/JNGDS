@@ -237,11 +237,12 @@ function setup() {
   //----------------------------------------------------------------
   //CONFIGURACIÓN DE NIVELES DE SONIDO
   caminos.setVolume(0.5);
-  theLastOfUs.setVolume(0.1);
-  within.setVolume(0.1);
-  tranqui.setVolume(0.1);
-  azur.setVolume(0.1);
-  spider.setVolume(0.1);
+  theLastOfUs.setVolume(0.3);
+  within.setVolume(0.3);
+  tranqui.setVolume(0.3);
+  azur.setVolume(0.3);
+  spider.setVolume(0.3);
+  himno.setVolume(0.3)
 
   sonidoVelocidad1.setVolume(0.7);
   sonidoVelocidad2.setVolume(0.7);
