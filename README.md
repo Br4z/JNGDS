@@ -5,11 +5,11 @@
 
 ## Integrantes del grupo:
 
-- Brandon Calderon prieto
-- Jose Luis Hincapie Bucheli (kri)
+- Brandon Calderón Prieto
+- Jose Luis Hincapie Bucheli 
 - Sebastián Idrobo Avirama
 - Carlos Andrés Hernández
-- Jose Manuel Palma Oquendo (El solo miyos)
+- Jose Manuel Palma Oquendo
 
 ---
 
