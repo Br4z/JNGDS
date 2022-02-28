@@ -14,92 +14,92 @@ let tranqui;
   Funcion preload propia de P5.JS sirve para poder cargar todas las imagenes y/o canciones/sonidos los cuales seran utilizados posteriormente
 */
 function preload() {
-    cabeza_derecha_normal = loadImage("../Snake_Images/cabeza_derecha_normal.png");
-    cabeza_izquierda_normal = loadImage("../Snake_Images/cabeza_izquierda_normal.png");
-    cabeza_arriba_normal = loadImage("../Snake_Images/cabeza_arriba_normal.png");
-    cabeza_abajo_normal = loadImage("../Snake_Images/cabeza_abajo_normal.png");
-    cola_normal = loadImage("../Snake_Images/cola_normal.png");
+    cabeza_derecha_normal = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_derecha_normal.png");
+    cabeza_izquierda_normal = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_izquierda_normal.png");
+    cabeza_arriba_normal = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_arriba_normal.png");
+    cabeza_abajo_normal = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_abajo_normal.png");
+    cola_normal = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cola_normal.png");
 
-    cabeza_abajo_nero = loadImage("../Snake_Images/cabeza_abajo_nero.png");
-    cabeza_arriba_nero = loadImage("../Snake_Images/cabeza_arriba_nero.png");
-    cabeza_derecha_nero = loadImage("../Snake_Images/cabeza_derecha_nero.png");
-    cabeza_izquierda_nero = loadImage("../Snake_Images/cabeza_izquierda_nero.png");
-    cola_nero = loadImage("../Snake_Images/cola_nero.png");
+    cabeza_abajo_nero = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_abajo_nero.png");
+    cabeza_arriba_nero = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_arriba_nero.png");
+    cabeza_derecha_nero = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_derecha_nero.png");
+    cabeza_izquierda_nero = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_izquierda_nero.png");
+    cola_nero = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cola_nero.png");
 
-    cabeza_abajo_policia = loadImage("../Snake_Images/cabeza_abajo_policia.png");
-    cabeza_arriba_policia = loadImage("../Snake_Images/cabeza_arriba_policia.png");
-    cabeza_derecha_policia = loadImage("../Snake_Images/cabeza_derecha_policia.png");
-    cabeza_izquierda_policia = loadImage("../Snake_Images/cabeza_izquierda_policia.png");
-    cola_policia = loadImage("../Snake_Images/cola_policia.png");
+    cabeza_abajo_policia = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_abajo_policia.png");
+    cabeza_arriba_policia = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_arriba_policia.png");
+    cabeza_derecha_policia = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_derecha_policia.png");
+    cabeza_izquierda_policia = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_izquierda_policia.png");
+    cola_policia = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cola_policia.png");
 
-    cabeza_abajo_vendedor = loadImage("../Snake_Images/cabeza_abajo_vendedor.png");
-    cabeza_arriba_vendedor = loadImage("../Snake_Images/cabeza_arriba_vendedor.png");
-    cabeza_derecha_vendedor = loadImage("../Snake_Images/cabeza_derecha_vendedor.png");
-    cabeza_izquierda_vendedor = loadImage("../Snake_Images/cabeza_izquierda_vendedor.png");
-    cola_vendedor = loadImage("../Snake_Images/cola_vendedor.png");
+    cabeza_abajo_vendedor = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_abajo_vendedor.png");
+    cabeza_arriba_vendedor = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_arriba_vendedor.png");
+    cabeza_derecha_vendedor = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_derecha_vendedor.png");
+    cabeza_izquierda_vendedor = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_izquierda_vendedor.png");
+    cola_vendedor = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cola_vendedor.png");
 
-    cabeza_abajo_politico = loadImage("../Snake_Images/cabeza_abajo_politico.png");
-    cabeza_arriba_politico = loadImage("../Snake_Images/cabeza_arriba_politico.png");
-    cabeza_derecha_politico = loadImage("../Snake_Images/cabeza_derecha_politico.png");
-    cabeza_izquierda_politico = loadImage("../Snake_Images/cabeza_izquierda_politico.png");
-    cola_politico = loadImage("../Snake_Images/cola_politico.png");
+    cabeza_abajo_politico = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_abajo_politico.png");
+    cabeza_arriba_politico = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_arriba_politico.png");
+    cabeza_derecha_politico = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_derecha_politico.png");
+    cabeza_izquierda_politico = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cabeza_izquierda_politico.png");
+    cola_politico = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/Snake_Images/cola_politico.png");
 
-    myFont = loadFont("../fonts/ARCADE.TTF");
-    myFontTwo = loadFont("../fonts/ARCADECLASSIC.TTF");
-    gameOverImage = loadImage("../backgrounds/gameOver.png");
+    myFont = loadFont("https://raw.githubusercontent.com/Br4z/JNGDS/master/fonts/ARCADE.TTF");
+    myFontTwo = loadFont("https://raw.githubusercontent.com/Br4z/JNGDS/master/fonts/ARCADECLASSIC.TTF");
+    gameOverImage = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/backgrounds/gameOver.png");
 
-    velocidad = loadImage("../visual/comodines/Potenciador_velocidad.png");
-    invencibilidad = loadImage("../visual/comodines/Invencibilidad.png");
-    aumentoPuntos = loadImage("../visual/comodines/Multiplicador_de_damage.png");
-    aumentoVida = loadImage("../visual/comodines/Vida.png");
-    tombos = loadImage("../visual/comodines/Aparecen_enemigos.png");
-    reduccionPuntos = loadImage("../visual/comodines/Reductor_de_puntos.png");
-    //golpeAccionado = loadImage('../visual/comodines/.png');
-    invertir = loadImage("../visual/comodines/invertir_controles.png");
-    comodinMasPuntos = loadImage("../visual/comodines/Multiplicador_de_damage.png");
-    aleatorio = loadImage("../visual/comodines/Comodin_aleatorio.png");
-    golpeAccionado = loadImage("../visual/comodines/Golpe_accionado.png");
-    tombo = loadImage("../visual/enemigos/tombo.png");
-    thief = loadImage("../visual/enemigos/nero3.png");
-    knifeUp = loadImage("../visual/enemigos/cuchilloArriba.png");
-    knifeSide = loadImage("../visual/enemigos/cuchilloDerecha.png");
+    velocidad = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/Potenciador_velocidad.png");
+    invencibilidad = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/Invencibilidad.png");
+    aumentoPuntos = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/Multiplicador_de_damage.png");
+    aumentoVida = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/Vida.png");
+    tombos = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/Aparecen_enemigos.png");
+    reduccionPuntos = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/Reductor_de_puntos.png");
+    //golpeAccionado = loadImage('https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/.png');
+    invertir = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/invertir_controles.png");
+    comodinMasPuntos = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/Multiplicador_de_damage.png");
+    aleatorio = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/Comodin_aleatorio.png");
+    golpeAccionado = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comodines/Golpe_accionado.png");
+    tombo = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/enemigos/tombo.png");
+    thief = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/enemigos/nero3.png");
+    knifeUp = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/enemigos/cuchilloArriba.png");
+    knifeSide = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/enemigos/cuchilloDerecha.png");
 
-    aspirina = loadImage("../visual/comida/aspirina.png");
-    chontaduros = loadImage("../visual/comida/chontaduros.png");
-    gaseosa = loadImage("../visual/comida/gaseosa.png");
-    lean = loadImage("../visual/comida/lean.png");
-    pegantes = loadImage("../visual/comida/pegante.png");
-    zumo = loadImage("../visual/comida/zumo.png");
+    aspirina = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comida/aspirina.png");
+    chontaduros = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comida/chontaduros.png");
+    gaseosa = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comida/gaseosa.png");
+    lean = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comida/lean.png");
+    pegantes = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comida/pegante.png");
+    zumo = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/visual/comida/zumo.png");
 
-    win = loadImage("../backgrounds/Win.png");
+    win = loadImage("https://raw.githubusercontent.com/Br4z/JNGDS/master/backgrounds/Win.png");
 
     soundFormats("mp3", "ogg", "wav");
-    theLastOfUs = loadSound("../audio/themes/theLastOfUs.mp3");
-    himno = loadSound("../audio/themes/himno.mp3");
-    azur = loadSound("../audio/themes/azur.mp3");
-    within = loadSound("../audio/themes/within.mp3");
+    theLastOfUs = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/themes/theLastOfUs.mp3");
+    himno = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/themes/himno.mp3");
+    azur = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/themes/azur.mp3");
+    within = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/themes/within.mp3");
     //los caminos de la vida
-    caminos = loadSound("../audio/themes/Caminos.mp3");
+    caminos = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/themes/Caminos.mp3");
     //golden Age - Spiderman
-    spider = loadSound("../audio/themes/goldenAge.mp3");
-    tranqui = loadSound("../audio/themes/tranqui.mp3");
+    spider = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/themes/goldenAge.mp3");
+    tranqui = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/themes/tranqui.mp3");
 
-    sonidoVelocidad1 = loadSound("../audio/sfx/comodines/velocidad1.mp3");
-    sonidoVelocidad2 = loadSound("../audio/sfx/comodines/velocidad2.mp3");
-    sonidoInvencibilidad1 = loadSound("../audio/sfx/comodines/invencibilidad1.ogg");
-    sonidoInvencibilidad2 = loadSound("../audio/sfx/comodines/invencibilidad2.ogg");
-    sonidoPuntos1 = loadSound("../audio/sfx/comodines/puntos1.mp3");
-    sonidoPuntos2 = loadSound("../audio/sfx/comodines/puntos2.mp3");
-    sonidoVidaMas = loadSound("../audio/sfx/comodines/vidaMas.mp3");
-    sonidoInvertir = loadSound("../audio/sfx/comodines/inversion.mp3");
-    sonidoTombos1 = loadSound("../audio/sfx/comodines/tombos1.mp3");
-    sonidoTombos2 = loadSound("../audio/sfx/comodines/velocidad2.mp3");
-    sonidoGolpeAccionado1 = loadSound("../audio/sfx/comodines/golpeAccionado1.mp3");
-    sonidoGolpeAccionado2 = loadSound("../audio/sfx/comodines/golpeAccionado2.mp3");
-    thiefSpawn = loadSound("../audio/sfx/general/Thief.mp3");
+    sonidoVelocidad1 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/velocidad1.mp3");
+    sonidoVelocidad2 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/velocidad2.mp3");
+    sonidoInvencibilidad1 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/invencibilidad1.ogg");
+    sonidoInvencibilidad2 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/invencibilidad2.ogg");
+    sonidoPuntos1 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/puntos1.mp3");
+    sonidoPuntos2 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/puntos2.mp3");
+    sonidoVidaMas = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/vidaMas.mp3");
+    sonidoInvertir = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/inversion.mp3");
+    sonidoTombos1 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/tombos1.mp3");
+    sonidoTombos2 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/velocidad2.mp3");
+    sonidoGolpeAccionado1 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/golpeAccionado1.mp3");
+    sonidoGolpeAccionado2 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/comodines/golpeAccionado2.mp3");
+    thiefSpawn = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/general/Thief.mp3");
 
-    golpe = loadSound("../audio/sfx/general/golpePared.mp3");
-    comida1 = loadSound("../audio/sfx/general/comida1.mp3");
+    golpe = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/general/golpePared.mp3");
+    comida1 = loadSound("https://raw.githubusercontent.com/Br4z/JNGDS/master/audio/sfx/general/comida1.mp3");
 }
 
 // Actualiza los atributos del objeto y retorna una copia profunda.
