@@ -4,75 +4,65 @@ Propósito: Esta funcion va de la mano de juegoTerinado, pues se llama despues d
 Prototipo: juegoNuevo(){}
 */
 function juegoNuevo() {
-  himno.stop()
-  Mundo = {
-    //Determinar la  posicion que aparecera el Snake
-    snake: [
-      { x: columnas / 2, y: filas / 2 },
-      { x: columnas / 2 - 1, y: filas / 2 },
-      { x: columnas / 2 - 2, y: filas / 2 },
-    ],
-    //Escenario
-    escenario: escenario1,
-    //Direccion por la que empieza el Snake
-    dir: derecha,
-    //Enermigos
-    listaEnemigos,
-    //Posicion de la Comida (Será Random)
-    food: {
-      x: int(getRandom(2, 26)), //28
-      y: int(getRandom(4, 25)), //26
-    },
-    score: 0,
-    comodines: [
-      comodinVelocidad,
-      comodinInvencibilidad,
-      comodinRegeneracion,
-      comodinVidaMas,
-      comodinInversion,
-      comodinTombos,
-      comodinReduccionPuntos,
-      comodinGolpeAccionado,
-      comodinAleatorio,
-    ],
-    comidas: [pegante, moradito, chontaduro, cocaCola],
-    //Numero de vidas inicial
-    lives: 3,
-    //El tiempo
-    timer: int(millis() / 1000),
-    //Jefe Thief
-    Thief: {
-      x: 26,
-      y: 13,
-      dirx: true,
-      diry: true,
-    },
-    thiefActivo: false,
-    //Ataque de Thief
-    knife: [
-      {
-        x: 18,
-        y: 10,
-        pos: false,
-      },
-    ],
-    start: true,
-    spawnThief: true,
-    retrasoComodines: 80,
-    retrasoComidas: 50,
-    scoreMas: 1,
-    activosMiniEnemigos: false,
-    imagenActualCabeza: cabeza_derecha_normal,
-    imagenActualCola: cola_normal,
-    retrasoCola: 3,
-    contadorCola: 3,
-    normalActivo: true,
-    vendedorActivo: false,
-    neroActivo: false,
-    policiaActivo: false,
-    politicoActivo: false,
-  };
-  loop();
+    himno.stop();
+    Mundo = {
+        //Determinar la  posicion que aparecera el Snake
+        snake: [
+            { x: columnas / 2, y: filas / 2 },
+            { x: columnas / 2 - 1, y: filas / 2 },
+            { x: columnas / 2 - 2, y: filas / 2 },
+        ],
+        //Escenario
+        escenario: escenario1,
+        //Direccion por la que empieza el Snake
+        dir: derecha,
+        //Enermigos
+        listaEnemigos,
+        //Posicion de la Comida (Será Random)
+        food: {
+            x: int(getRandom(2, 26)), //28
+            y: int(getRandom(4, 25)), //26
+        },
+        score: 0,
+        comodines: [comodinVelocidad, comodinInvencibilidad, comodinRegeneracion, comodinVidaMas, comodinInversion, comodinTombos, comodinReduccionPuntos, comodinGolpeAccionado, comodinAleatorio],
+        comidas: [pegante, moradito, chontaduro, cocaCola],
+        //Numero de vidas inicial
+        lives: 3,
+        //El tiempo
+        timer: int(millis() / 1000),
+        //Jefe Thief
+        Thief: {
+            x: 26,
+            y: 13,
+            dirx: true,
+            diry: true,
+        },
+        thiefActivo: false,
+        //Ataque de Thief
+        knife: [
+            {
+                x: 18,
+                y: 10,
+                pos: false,
+            },
+        ],
+        start: true,
+        spawnThief: true,
+        retrasoComodines: 80,
+        retrasoComidas: 50,
+        scoreMas: 1,
+        activosMiniEnemigos: false,
+        imagenActualCabeza: cabeza_derecha_normal,
+        imagenActualCola: cola_normal,
+        retrasoCola: 3,
+        contadorCola: 3,
+        normalActivo: true,
+        vendedorActivo: false,
+        neroActivo: false,
+        policiaActivo: false,
+        politicoActivo: false,
+    };
+    loop();
 }
 //----------------------------------------------
 
@@ -91,17 +81,17 @@ Propósito: Parar la música dependiendo del escenario actual en que se encuentr
 Prototipo: paraMusica(){}
 */
 function paraMusica() {
-  if (Mundo.escenario == escenario1) {
-    theLastOfUs.stop();
-  } else if (Mundo.escenario == escenario2) {
-    within.stop();
-  } else if (Mundo.escenario == escenario3) {
-    azur.stop();
-  } else if (Mundo.escenario == escenario4) {
-    tranqui.stop();
-  } else if (Mundo.escenario == escenario5) {
-    spider.stop();
-  }
+    if (Mundo.escenario == escenario1) {
+        theLastOfUs.stop();
+    } else if (Mundo.escenario == escenario2) {
+        within.stop();
+    } else if (Mundo.escenario == escenario3) {
+        azur.stop();
+    } else if (Mundo.escenario == escenario4) {
+        tranqui.stop();
+    } else if (Mundo.escenario == escenario5) {
+        spider.stop();
+    }
 }
 
 /*
@@ -114,26 +104,26 @@ Prototipo:
 Ejemplos:
 */
 function juegoTerminado() {
-  paraMusica();
-  caminos.play();
-  image(gameOverImage, 45, 100, 480, 350);
-  // fill => color de relleno del texto
-  fill('#723C70');
-  //stroke => color del borde del texto
-  stroke('#D9D6CF');
-  //strokeWeight => Anchura del borde del texto
-  strokeWeight(0.1);
-  //textFont => Fuente que se usara
-  textFont(myFontTwo);
-  //Colocar el score en diferente posicion dependiedno si es un numero de dos digitos o de tres digitos, teniendo en cuenta que el score siempre sera un numero entero. Esto se hace debido a mejoras visuales.
-  if (Mundo.score < 100) {
-    text(Mundo.score, 390, 355);
-  }
-  if (Mundo.score >= 100) {
-    text(Mundo.score, 410, 355);
-  }
-  //Hacer un noLoop() de todo el juego para que no me corra y es como si el juego haya terminado
-  noLoop();
+    paraMusica();
+    caminos.play();
+    image(gameOverImage, 45, 100, 480, 350);
+    // fill => color de relleno del texto
+    fill("#723C70");
+    //stroke => color del borde del texto
+    stroke("#D9D6CF");
+    //strokeWeight => Anchura del borde del texto
+    strokeWeight(0.1);
+    //textFont => Fuente que se usara
+    textFont(myFontTwo);
+    //Colocar el score en diferente posicion dependiedno si es un numero de dos digitos o de tres digitos, teniendo en cuenta que el score siempre sera un numero entero. Esto se hace debido a mejoras visuales.
+    if (Mundo.score < 100) {
+        text(Mundo.score, 390, 355);
+    }
+    if (Mundo.score >= 100) {
+        text(Mundo.score, 410, 355);
+    }
+    //Hacer un noLoop() de todo el juego para que no me corra y es como si el juego haya terminado
+    noLoop();
 }
 
 /**COSAS DEL SNAKE
@@ -142,11 +132,6 @@ function juegoTerminado() {
  * @example [{x:20,y:14},{x:20,y:15}], (0,-1) -> [{x:20,y:13},{x:20,y:14}]
  */
 function moveSnake(snake, dir) {
-  const head = first(snake);
-  return cons(
-    { x: head.x + dir.x, y: head.y + dir.y },
-    snake.slice(0, length(snake) - 1)
-  );
+    const head = first(snake);
+    return cons({ x: head.x + dir.x, y: head.y + dir.y }, snake.slice(0, length(snake) - 1));
 }
-
-

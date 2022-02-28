@@ -1,4 +1,3 @@
-
 /**INDICE */
 /*
 Contrato: list-->number
@@ -11,8 +10,8 @@ longitud([1,2])-->2
 
 */
 function longitud(lista) {
-	if (isEmpty(lista)) return 0;
-	return 1 + longitud(rest(lista));
+    if (isEmpty(lista)) return 0;
+    return 1 + longitud(rest(lista));
 }
 /*
 Contrato: list,number,number-->number
@@ -24,13 +23,13 @@ aux([1,2],1,0)-->0
 aux([1,2],5,0)-->[]
 */
 function aux(list, x, contador) {
-	if (isEmpty(list)) {
-		return [];
-	} else if (first(list) == x) {
-		return contador;
-	} else {
-		return aux(rest(list), x, contador + 1);
-	}
+    if (isEmpty(list)) {
+        return [];
+    } else if (first(list) == x) {
+        return contador;
+    } else {
+        return aux(rest(list), x, contador + 1);
+    }
 }
 /*
 Contrato: list,number-->number
@@ -42,7 +41,7 @@ aux([1,2],1)-->0
 aux([1,2],5)-->[]
 */
 function lookupxindice(list, x) {
-	return aux(list, x, 0);
+    return aux(list, x, 0);
 }
 /*
 Contrato: list, number-->boolean
@@ -55,14 +54,14 @@ verificar([3,9,7],4)-->false
 
 */
 function verificar(list, n) {
-	if (longitud(list) == 0) {
-		return false;
-	}
-	if (first(list) == n) {
-		return true;
-	} else {
-		return verificar(rest(list), n);
-	}
+    if (longitud(list) == 0) {
+        return false;
+    }
+    if (first(list) == n) {
+        return true;
+    } else {
+        return verificar(rest(list), n);
+    }
 }
 /*
 Contrato: list, number-->number
@@ -75,17 +74,15 @@ lookupx([1, 2, 3, 4], 1)-->0
 */
 
 function lookupx(list, x) {
-	if (verificar(list, x) == true) {
-		return lookupxindice(list, x);
-	} else {
-		if (longitud(list) == 0) {
-			return -1;
-		} else if (first(rest(list)) > x) {
-			return -2;
-		} else {
-			return -1 + lookupx(rest(list), x);
-		}
-	}
+    if (verificar(list, x) == true) {
+        return lookupxindice(list, x);
+    } else {
+        if (longitud(list) == 0) {
+            return -1;
+        } else if (first(rest(list)) > x) {
+            return -2;
+        } else {
+            return -1 + lookupx(rest(list), x);
+        }
+    }
 }
-
-

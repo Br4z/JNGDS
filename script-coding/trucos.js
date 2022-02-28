@@ -18,7 +18,7 @@ Prototipo: SubeScore()
 */
 
 function SubeScore() {
-  update(Mundo, (Mundo.score = Mundo.score + 10));
+    update(Mundo, (Mundo.score = Mundo.score + 10));
 }
 /*
 Contrato: none=>function (No recibe ningun parametro pero retorna una funcion)
@@ -27,9 +27,9 @@ Prototipo: jugarDeNuevo()
 */
 
 function jugarDeNuevo() {
-  if (!isLooping()) {
-    juegoNuevo();
-  }
+    if (!isLooping()) {
+        juegoNuevo();
+    }
 }
 
 /*
@@ -37,8 +37,8 @@ Contrato: none=>function (No recibe ningun parametro pero retorna una funcion)
 Propósito: subir las vidas mas uno
 Prototipo: comboVida()
 */
-function comboVida(){
-  update(Mundo,(Mundo.lives = Mundo.lives + 1));
+function comboVida() {
+    update(Mundo, (Mundo.lives = Mundo.lives + 1));
 }
 
 /*
@@ -46,8 +46,8 @@ Contrato: none=>function (No recibe ningun parametro pero retorna una funcion)
 Propósito: sumar 2 al score
 Prototipo: SubeScoreSencillo()
 */
-function SubeScoreSencillo(){
-  update(Mundo,(Mundo.score = Mundo.score + 2));
+function SubeScoreSencillo() {
+    update(Mundo, (Mundo.score = Mundo.score + 2));
 }
 
 /*
@@ -55,16 +55,14 @@ Contrato: none=>function (No recibe ningun parametro pero retorna una funcion)
 Propósito: sumar 2 al score
 Prototipo: acortador()
 */
-function acortador(){
-  update(Mundo,Mundo.score = Mundo.score + 15);
+function acortador() {
+    update(Mundo, (Mundo.score = Mundo.score + 15));
 }
 
 //Eventos si cumples la funcion
 //Esta funcion recibe dos parametros : La secuencia a realizar (si es un sequence_combo) o la tecla a presionar (si es un simple_combo) y la funcion a retornar cuando realice la secuencia u oprima la tecla requerida
-eventoTeclado.sequence_combo('up down down left right up up', SubeScore);
-eventoTeclado.simple_combo('enter', jugarDeNuevo);
-eventoTeclado.sequence_combo('up up down l', comboVida);
-eventoTeclado.sequence_combo('down left right right', SubeScoreSencillo);
-eventoTeclado.sequence_combo('a d', acortador);
-
-
+eventoTeclado.sequence_combo("up down down left right up up", SubeScore);
+eventoTeclado.simple_combo("enter", jugarDeNuevo);
+eventoTeclado.sequence_combo("up up down l", comboVida);
+eventoTeclado.sequence_combo("down left right right", SubeScoreSencillo);
+eventoTeclado.sequence_combo("a d", acortador);

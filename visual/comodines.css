@@ -1,8 +1,8 @@
 @font-face {
   font-family: "myFirstFont";
-  src: url("/fonts/JosefinSans-Italic-VariableFont_wght.ttf");
+  src: url("../fonts/JosefinSans-Italic-VariableFont_wght.ttf");
   font-family: "ARCADE CLASSIC";
-  src: url("/fonts/ARCADECLASSIC.TTF");
+  src: url("../fonts/ARCADECLASSIC.TTF");
 }
 
 * {
@@ -16,7 +16,7 @@
 }
 
 body {
-  background-image: url(/backgrounds/FondoPblur.jpg); /* Fondo principal */
+  background-image: url(../backgrounds/FondoPblur.jpg); /* Fondo principal */
   display: flex;
   justify-content: center;
   align-items: center;

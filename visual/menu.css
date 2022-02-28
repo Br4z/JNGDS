@@ -13,7 +13,7 @@
 }
 
 body {
-  background-image: url(/backgrounds/FondoPblur.jpg); /* Fondo principal */
+  background-image: url(../backgrounds/FondoPblur.jpg); /* Fondo principal */
   display: flex;
   justify-content: center;
   align-items: center;

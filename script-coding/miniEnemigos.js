@@ -8,7 +8,7 @@ getRandom(2,3) => 2
 getRandom(0,5) => 3
 */
 function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
 //----------------------------------------------
@@ -16,26 +16,26 @@ function getRandom(min, max) {
 //CLASE ENEMIGO
 //Esta es una clase enemigo, con ciertos atributos especificos para está. Esta implementación nos sirve para crear varios enemigos con los mismos atributos a partir de una sola clase. Lo que este dentro de esta clase debera llamarse a traves del this.<nombre>  para especificarlo que es un atributo especifico a las clase
 const enemigo = function (x, y) {
-  //Posicion x en el canvas
-  this.x = x;
-  //Posicion y en el canvas
-  this.y = y;
-  //Contador y Retraso(Lo que servira para el retraso en el movimiento)
-  this.contador = 0;
-  this.retraso = 5;
-  //Contador y Retraso para Enemigos ( Lo que servira para el retraso al bajar el score)
-  this.contadorEne = 0;
-  this.retrasoEne = 3;
-  // Un numero aleatorio entre 0 y 3 (Las direcciones posibles que puede tener el enemigo)
-  /*
+    //Posicion x en el canvas
+    this.x = x;
+    //Posicion y en el canvas
+    this.y = y;
+    //Contador y Retraso(Lo que servira para el retraso en el movimiento)
+    this.contador = 0;
+    this.retraso = 5;
+    //Contador y Retraso para Enemigos ( Lo que servira para el retraso al bajar el score)
+    this.contadorEne = 0;
+    this.retrasoEne = 3;
+    // Un numero aleatorio entre 0 y 3 (Las direcciones posibles que puede tener el enemigo)
+    /*
   0=>Arriba
   1=>Abajo
   2=>Izquierda
   3=>Derecha
   */
-  this.direccion = getRandom(0, 4);
+    this.direccion = getRandom(0, 4);
 
-  /*
+    /*
   x: posicion en el eje x del objeto (Numero entre 0 y 28 => Numero de columnas)
   y: posicion en el eje y del objeto (Numero entre 0 y 26 => Numero de filas)
   colision: llegar al borde
@@ -48,13 +48,13 @@ const enemigo = function (x, y) {
   compruebaColision(4,9) => false
   compruebaColision(8,2) => false
   */
-  this.compruebaColision = function (x, y) {
-    colisiona = false;
-    if (Mundo.escenario[y][x] == 2) {
-      colisiona = true;
-    }
-    return colisiona;
-  };
+    this.compruebaColision = function (x, y) {
+        colisiona = false;
+        if (Mundo.escenario[y][x] == 2) {
+            colisiona = true;
+        }
+        return colisiona;
+    };
 };
 //----------------------------------------------
 /*
@@ -72,7 +72,7 @@ actualizaLista([],enemigo1) => append([],enemigo1) => [enemigo1]
 actualizaLista([enemigo1],enemigo2) => append([enemigo1],enemigo2) => [enemigo1,enemigo2]
 */
 function actualizaLista(lista, enemigo) {
-  return append(lista, enemigo);
+    return append(lista, enemigo);
 }
 //----------------------------------------------
 /*
@@ -87,9 +87,9 @@ dibujaEnemigo([enemigo1]) => image(tombo,enemigo1.x*lado,enemigo1.y*lado,lado+40
 dibujaEnemigo([enemigo1,enemigo2]) => image(tombo,enemigo1.x*lado,enemigo1.y*lado,lado+40,lado+40) , image(tombo,enemigo1.x*lado,enemigo1.y*lado,lado+40,lado+40)
 */
 function dibujaEnemigo(lista) {
-  forEach(lista, (element) => {
-    image(tombo, element.x * lado, element.y * lado, lado + 40, lado + 40);
-  });
+    forEach(lista, (element) => {
+        image(tombo, element.x * lado, element.y * lado, lado + 40, lado + 40);
+    });
 }
 //----------------------------------------------
 /*
@@ -113,76 +113,53 @@ Explicación Textual del Funcionamineto:
       }
 */
 function mueveEnemigo(lista) {
-  forEach(lista, (element) => {
-    x = lookupx(Mundo.listaEnemigos, element);
-    if (Mundo.listaEnemigos[x].contador < Mundo.listaEnemigos[x].retraso) {
-      update(
-        Mundo,
-        (listaEnemigos[x].contador = listaEnemigos[x].contador + 1)
-      );
-    } else {
-      update(Mundo, (listaEnemigos[x].contador = 0));
-      //ARRIBA
-      if (Mundo.listaEnemigos[x].direccion == 0) {
-        if (
-          Mundo.listaEnemigos[x].compruebaColision(
-            Mundo.listaEnemigos[x].x,
-            Mundo.listaEnemigos[x].y - 1
-          ) == false
-        ) {
-          update(Mundo, (listaEnemigos[x].y = listaEnemigos[x].y - 1));
-          update(Mundo, (listaEnemigos[x].direccion = getRandom(0, 4)));
+    forEach(lista, (element) => {
+        x = lookupx(Mundo.listaEnemigos, element);
+        if (Mundo.listaEnemigos[x].contador < Mundo.listaEnemigos[x].retraso) {
+            update(Mundo, (listaEnemigos[x].contador = listaEnemigos[x].contador + 1));
         } else {
-          Mundo.listaEnemigos[x].direccion = getRandom(0, 4);
-        }
-      }
+            update(Mundo, (listaEnemigos[x].contador = 0));
+            //ARRIBA
+            if (Mundo.listaEnemigos[x].direccion == 0) {
+                if (Mundo.listaEnemigos[x].compruebaColision(Mundo.listaEnemigos[x].x, Mundo.listaEnemigos[x].y - 1) == false) {
+                    update(Mundo, (listaEnemigos[x].y = listaEnemigos[x].y - 1));
+                    update(Mundo, (listaEnemigos[x].direccion = getRandom(0, 4)));
+                } else {
+                    Mundo.listaEnemigos[x].direccion = getRandom(0, 4);
+                }
+            }
 
-      //ABAJO
-      if (Mundo.listaEnemigos[x].direccion == 1) {
-        if (
-          Mundo.listaEnemigos[x].compruebaColision(
-            Mundo.listaEnemigos[x].x,
-            Mundo.listaEnemigos[x].y + 1
-          ) == false
-        ) {
-          update(Mundo, (listaEnemigos[x].y = listaEnemigos[x].y + 1));
-          update(Mundo, (listaEnemigos[x].direccion = getRandom(0, 4)));
-        } else {
-          Mundo.listaEnemigos[x].direccion = getRandom(0, 4);
-        }
-      }
+            //ABAJO
+            if (Mundo.listaEnemigos[x].direccion == 1) {
+                if (Mundo.listaEnemigos[x].compruebaColision(Mundo.listaEnemigos[x].x, Mundo.listaEnemigos[x].y + 1) == false) {
+                    update(Mundo, (listaEnemigos[x].y = listaEnemigos[x].y + 1));
+                    update(Mundo, (listaEnemigos[x].direccion = getRandom(0, 4)));
+                } else {
+                    Mundo.listaEnemigos[x].direccion = getRandom(0, 4);
+                }
+            }
 
-      //IZQUIERDA
-      if (Mundo.listaEnemigos[x].direccion == 2) {
-        if (
-          Mundo.listaEnemigos[x].compruebaColision(
-            Mundo.listaEnemigos[x].x - 1,
-            Mundo.listaEnemigos[x].y
-          ) == false
-        ) {
-          update(Mundo, (listaEnemigos[x].x = listaEnemigos[x].x - 1));
-          update(Mundo, (listaEnemigos[x].direccion = getRandom(0, 4)));
-        } else {
-          Mundo.listaEnemigos[x].direccion = getRandom(0, 4);
-        }
-      }
+            //IZQUIERDA
+            if (Mundo.listaEnemigos[x].direccion == 2) {
+                if (Mundo.listaEnemigos[x].compruebaColision(Mundo.listaEnemigos[x].x - 1, Mundo.listaEnemigos[x].y) == false) {
+                    update(Mundo, (listaEnemigos[x].x = listaEnemigos[x].x - 1));
+                    update(Mundo, (listaEnemigos[x].direccion = getRandom(0, 4)));
+                } else {
+                    Mundo.listaEnemigos[x].direccion = getRandom(0, 4);
+                }
+            }
 
-      //IZQUIERDA
-      if (Mundo.listaEnemigos[x].direccion == 3) {
-        if (
-          Mundo.listaEnemigos[x].compruebaColision(
-            Mundo.listaEnemigos[x].x + 1,
-            Mundo.listaEnemigos[x].y
-          ) == false
-        ) {
-          update(Mundo, (listaEnemigos[x].x = listaEnemigos[x].x + 1));
-          update(Mundo, (listaEnemigos[x].direccion = getRandom(0, 4)));
-        } else {
-          Mundo.listaEnemigos[x].direccion = getRandom(0, 4);
+            //IZQUIERDA
+            if (Mundo.listaEnemigos[x].direccion == 3) {
+                if (Mundo.listaEnemigos[x].compruebaColision(Mundo.listaEnemigos[x].x + 1, Mundo.listaEnemigos[x].y) == false) {
+                    update(Mundo, (listaEnemigos[x].x = listaEnemigos[x].x + 1));
+                    update(Mundo, (listaEnemigos[x].direccion = getRandom(0, 4)));
+                } else {
+                    Mundo.listaEnemigos[x].direccion = getRandom(0, 4);
+                }
+            }
         }
-      }
-    }
-  });
+    });
 }
 
 /*
@@ -204,20 +181,17 @@ Explicacion textual del Funcionamiento:
 */
 
 function compMiniEnemigos(lista) {
-  forEach(lista, (element) => {
-    forEach(Mundo.snake, (elementD) => {
-      x = lookupx(Mundo.listaEnemigos, element);
-      if (element.x == elementD.x && element.y == elementD.y) {
-        if (element.contadorEne < element.retrasoEne) {
-          update(
-            Mundo,
-            (listaEnemigos[x].contadorEne = listaEnemigos[x].contadorEne + 1)
-          );
-        } else {
-          update(Mundo, (listaEnemigos[x].contadorEne = 0));
-          update(Mundo, (Mundo.score = Mundo.score - 1));
-        }
-      }
+    forEach(lista, (element) => {
+        forEach(Mundo.snake, (elementD) => {
+            x = lookupx(Mundo.listaEnemigos, element);
+            if (element.x == elementD.x && element.y == elementD.y) {
+                if (element.contadorEne < element.retrasoEne) {
+                    update(Mundo, (listaEnemigos[x].contadorEne = listaEnemigos[x].contadorEne + 1));
+                } else {
+                    update(Mundo, (listaEnemigos[x].contadorEne = 0));
+                    update(Mundo, (Mundo.score = Mundo.score - 1));
+                }
+            }
+        });
     });
-  });
 }
